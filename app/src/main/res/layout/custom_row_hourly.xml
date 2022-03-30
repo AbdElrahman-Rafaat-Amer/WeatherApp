@@ -1,0 +1,42 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="wrap_content"
+    android:layout_height="wrap_content"
+    android:background="@drawable/hourly_custom_row_background"
+    android:padding="@dimen/_30sdp">
+
+    <TextView
+        android:id="@+id/hour_hourlyCustomRow"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="125"
+        android:textColor="@color/black"
+        android:textSize="@dimen/_35sdp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <de.hdodenhof.circleimageview.CircleImageView
+        android:id="@+id/status_image_hourlyCustomRow"
+        android:layout_width="@dimen/_100sdp"
+        android:layout_height="@dimen/_100sdp"
+        android:layout_marginTop="@dimen/_10sdp"
+        android:src="@drawable/ic_sunny"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/hour_hourlyCustomRow" />
+
+    <TextView
+        android:id="@+id/temperature_hourlyCustomRow"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="@dimen/_10sdp"
+        android:text="125"
+        android:textColor="@color/black"
+        android:textSize="@dimen/_35sdp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/status_image_hourlyCustomRow" />
+</androidx.constraintlayout.widget.ConstraintLayout>

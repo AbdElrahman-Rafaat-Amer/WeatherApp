@@ -1,0 +1,48 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent">
+
+    <TextView
+        android:id="@+id/location_name_textView"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Cairo"
+        android:textColor="@color/black"
+        android:textSize="@dimen/_35sdp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <TextView
+        android:id="@+id/current_date_textView"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="@dimen/_4sdp"
+        android:fontFamily="casual"
+        android:text="Fri, 26Feb"
+        android:textColor="@color/black"
+        android:textSize="@dimen/_17sdp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/location_name_textView" />
+
+
+    <androidx.recyclerview.widget.RecyclerView
+        android:id="@+id/hourly_recyclerView"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="@dimen/_7sdp"
+        app:layout_constraintTop_toBottomOf="@+id/current_date_textView" />
+
+    <androidx.recyclerview.widget.RecyclerView
+        android:id="@+id/daily_recyclerView"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_gravity="center_horizontal"
+        android:layout_marginTop="@dimen/_7sdp"
+        android:background="@drawable/current_daily_background"
+        app:layout_constraintTop_toBottomOf="@+id/hourly_recyclerView" />
+
+</androidx.constraintlayout.widget.ConstraintLayout>
