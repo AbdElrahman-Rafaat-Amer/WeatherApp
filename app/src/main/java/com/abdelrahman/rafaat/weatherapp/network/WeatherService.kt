@@ -10,19 +10,30 @@ interface WeatherService {
 
     @GET("onecall")
     suspend fun getWeatherDataDefault(
-        @Query("lat") lat: String = "31.25654",
-        @Query("lon") lon: String = "32.28411",
+        @Query("lat") lat: String,
+        @Query("lon") lon: String,
+        @Query("lang") lang: String,
         @Query("APPID") app_id: String = "cce64fba5705becc7fbe52b46e9df003"
     ): Response<WeatherResponse>
 
     @GET("onecall")
     suspend fun getWeatherDataArabic(
-        @Query("lat") lat: String = "31.25654",
-        @Query("lon") lon: String = "32.28411",
+        @Query("lat") lat: String,
+        @Query("lon") lon: String,
         @Query("lang") lang: String = "ar",
         @Query("APPID") app_id: String = "cce64fba5705becc7fbe52b46e9df003"
     ): Response<WeatherResponse>
 
+    @GET("onecall")
+    suspend fun getWeatherDataEnglish(
+        @Query("lat") lat: String,
+        @Query("lon") lon: String,
+        @Query("lang") lang: String = "en",
+        @Query("APPID") app_id: String = "cce64fba5705becc7fbe52b46e9df003"
+    ): Response<WeatherResponse>
+
+
+/*
     @GET("onecall")
     suspend fun getWeatherDataUnits(
         @Query("lat") lat: String = "31.25654",
@@ -31,8 +42,7 @@ interface WeatherService {
         @Query("lang") lang: String = "ar",
         @Query("APPID") app_id: String = "cce64fba5705becc7fbe52b46e9df003"
     ): Response<WeatherResponse>
-
-/*    @GET("onecall")
+   @GET("onecall")
     suspend fun getFavData(
         @Query("lat") lat: String = "31.25654",
         @Query("lon") lon: String = "32.28411",

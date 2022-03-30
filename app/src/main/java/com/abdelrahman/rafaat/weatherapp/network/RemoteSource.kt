@@ -1,9 +1,11 @@
 package com.abdelrahman.rafaat.weatherapp.network
 
+import com.abdelrahman.rafaat.weatherapp.model.WeatherResponse
+
 interface RemoteSource {
-    suspend fun getWeatherDataDefault()
+    suspend fun getWeatherData(): WeatherResponse?
 
-    suspend fun getWeatherDataArabic()
+    suspend fun getWeatherDataArabic(): WeatherResponse?
 
-    suspend fun getWeatherDataUnits()
+    suspend fun getWeatherDataEnglish(): WeatherResponse?
 }

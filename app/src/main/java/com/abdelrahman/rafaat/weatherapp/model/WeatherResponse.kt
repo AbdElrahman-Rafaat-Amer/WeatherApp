@@ -1,8 +1,5 @@
 package com.abdelrahman.rafaat.weatherapp.model
 
-import androidx.room.PrimaryKey
-import com.google.gson.annotations.SerializedName
-
 data class WeatherResponse
     (
     var lat: Double,

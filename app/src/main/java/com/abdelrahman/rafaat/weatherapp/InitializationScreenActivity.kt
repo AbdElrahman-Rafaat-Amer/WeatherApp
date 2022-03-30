@@ -14,6 +14,7 @@ import android.provider.Settings
 import android.util.Log
 import android.widget.Toast
 import androidx.core.app.ActivityCompat
+import com.abdelrahman.rafaat.weatherapp.model.ConstantsValue
 import com.google.android.gms.location.*
 import java.io.IOException
 import java.util.*
@@ -41,10 +42,10 @@ class InitializationScreenActivity : AppCompatActivity() {
         } else {
             Log.i(TAG, "getLocationButton: isInternetAvailable + false")
             Toast.makeText(
-                this,
-                "Please turn on Wifi or mobile Data",
-                Toast.LENGTH_SHORT
+                this@InitializationScreenActivity,
+                "Please turn on Wifi or mobile Data", Toast.LENGTH_SHORT
             ).show()
+            goToNextActivity()
         }
     }
 
@@ -77,7 +78,9 @@ class InitializationScreenActivity : AppCompatActivity() {
         var isAvailable = false
         val manager = getSystemService(CONNECTIVITY_SERVICE) as ConnectivityManager
         if (manager.getNetworkInfo(ConnectivityManager.TYPE_WIFI)!!.isConnected || manager.getNetworkInfo(
-                ConnectivityManager.TYPE_MOBILE)!!.isConnected)
+                ConnectivityManager.TYPE_MOBILE
+            )!!.isConnected
+        )
             isAvailable = true
         return isAvailable
     }
@@ -93,12 +96,14 @@ class InitializationScreenActivity : AppCompatActivity() {
                 result.append(address.countryName)
             }
             Log.i(TAG, "getAddress: " + addresses)
-            val intent = Intent(this, MainActivity::class.java)
-            intent.putExtra("ADDRESS", addresses[0].toString())
-            intent.putExtra("LATITUDE", latitude)
-            intent.putExtra("LONGITUDE", longitude)
-            startActivity(intent)
-            finish()
+
+            ConstantsValue.address = addresses[0]
+            ConstantsValue.longitude = longitude
+            ConstantsValue.latitude = latitude
+            //   intent.putExtra("ADDRESS", addresses[0].toString())
+            //  intent.putExtra("LATITUDE", latitude)
+            //  intent.putExtra("LONGITUDE", longitude)
+            goToNextActivity()
         } catch (e: IOException) {
             Log.e("TAG", e.localizedMessage)
         }
@@ -165,5 +170,10 @@ class InitializationScreenActivity : AppCompatActivity() {
         return locationManager.isProviderEnabled(LocationManager.GPS_PROVIDER) || locationManager.isProviderEnabled(
             LocationManager.NETWORK_PROVIDER
         )
+    }
+
+    private fun goToNextActivity() {
+        startActivity(Intent(this, MainActivity::class.java))
+        finish()
     }
 }

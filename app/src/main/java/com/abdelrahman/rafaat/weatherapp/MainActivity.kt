@@ -1,10 +1,17 @@
 package com.abdelrahman.rafaat.weatherapp
 
+import android.location.Address
 import android.os.Bundle
 import android.util.Log
 import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
+import com.abdelrahman.rafaat.weatherapp.alert.view.AlertFragment
+import com.abdelrahman.rafaat.weatherapp.favoriteplaces.view.FavoriteFragment
+import com.abdelrahman.rafaat.weatherapp.homeplaces.view.HomeFragment
+import com.abdelrahman.rafaat.weatherapp.model.ConstantsValue
 import com.abdelrahman.rafaat.weatherapp.network.WeatherClient
+import com.abdelrahman.rafaat.weatherapp.setting.SettingFragment
+import com.abdelrahman.rafaat.weatherapp.timetable.view.TimeTableFragment
 import com.etebarian.meowbottomnavigation.MeowBottomNavigation
 import com.etebarian.meowbottomnavigation.MeowBottomNavigation.Model
 import kotlinx.coroutines.CoroutineScope
@@ -22,7 +29,7 @@ class MainActivity : AppCompatActivity() {
     private val ID_SETTING = 5
 
     private lateinit var meo: MeowBottomNavigation
-    private lateinit var address: String
+    private lateinit var address: Address
     private var longitude: Double = 0.0
     private var latitude: Double = 0.0
 
@@ -32,9 +39,13 @@ class MainActivity : AppCompatActivity() {
 
         meo = findViewById(R.id.bottom_nav)
 
-        address = intent.getStringExtra("ADDRESS")!!
-        longitude = intent.getDoubleExtra("LONGITUDE", 0.0)
-        latitude = intent.getDoubleExtra("LATITUDE", 0.0)
+        //address = intent.getStringExtra("ADDRESS")!!
+        //longitude = intent.getDoubleExtra("LONGITUDE", 0.0)
+        //latitude = intent.getDoubleExtra("LATITUDE", 0.0)
+
+        address = ConstantsValue.address
+        longitude = ConstantsValue.longitude
+        latitude = ConstantsValue.latitude
 
         Toast.makeText(this, "address" + address, Toast.LENGTH_SHORT).show()
         Toast.makeText(this, "longitude" + longitude, Toast.LENGTH_SHORT).show()
@@ -43,15 +54,12 @@ class MainActivity : AppCompatActivity() {
 
 
         CoroutineScope(Dispatchers.IO).launch {
-            Log.i(TAG, "getWeatherDataDefault: called>")
-            var weatherClient = WeatherClient.getInstance().getWeatherDataDefault()
-
 
             Log.i(TAG, "getWeatherDataArabic: called>")
-            weatherClient = WeatherClient.getInstance().getWeatherDataArabic()
+            var weatherClient = WeatherClient.getInstance().getWeatherDataArabic()
 
             Log.i(TAG, "getWeatherDataUnits: called>")
-            weatherClient = WeatherClient.getInstance().getWeatherDataUnits()
+            weatherClient = WeatherClient.getInstance().getWeatherDataEnglish()
 
         }
 
