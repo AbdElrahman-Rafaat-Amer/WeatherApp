@@ -1,14 +1,420 @@
 <?xml version="1.0" encoding="utf-8"?>
-<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".setting.SettingFragment">
+    tools:context=".setting.view.SettingFragment">
 
-    <!-- TODO: Update blank fragment layout -->
-    <TextView
+    <androidx.constraintlayout.widget.ConstraintLayout
         android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:text="@string/hello_blank_fragment" />
+        android:layout_height="match_parent">
 
-</FrameLayout>
+        <!-- Card View for Language -->
+        <androidx.cardview.widget.CardView
+            android:id="@+id/change_language_cardView"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_margin="@dimen/_20sdp"
+            android:layout_marginTop="@dimen/_15sdp"
+            app:cardBackgroundColor="@color/white"
+            app:layout_constraintTop_toTopOf="parent">
+
+            <!-- To mange view internal -->
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:background="@drawable/bg_gradient"
+                android:orientation="vertical">
+
+                <RelativeLayout
+                    android:id="@+id/show_change_language_View"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content">
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_margin="@dimen/_7sdp"
+                        android:text="@string/language"
+                        android:textColor="@color/black"
+                        android:textSize="@dimen/_20sdp"
+                        android:textStyle="bold"></TextView>
+
+                    <ImageView
+                        android:id="@+id/show_language_options_imageView"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_alignParentEnd="true"
+                        android:layout_centerVertical="true"
+                        android:src="@drawable/ic_down_arrow"></ImageView>
+                </RelativeLayout>
+
+                <!-- To mange Radio Buttons -->
+                <LinearLayout
+                    android:id="@+id/linear_layout_visibility_change_language"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginStart="@dimen/_10sdp"
+                    android:layout_marginTop="@dimen/_5sdp"
+                    android:layout_marginEnd="@dimen/_10sdp"
+                    android:layout_marginBottom="@dimen/_5sdp"
+                    android:orientation="vertical"
+                    android:visibility="gone">
+
+                    <RadioGroup
+                        android:id="@+id/language_radio_group"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content">
+
+                        <RadioButton
+                            android:id="@+id/language_arabic"
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:tag="A"
+                            android:text="@string/language_arabic"
+                            android:textSize="24sp" />
+
+                        <RadioButton
+                            android:id="@+id/language_english"
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:tag="E"
+                            android:text="@string/language_english"
+                            android:textSize="24sp" />
+
+                    </RadioGroup>
+                </LinearLayout>
+            </LinearLayout>
+
+        </androidx.cardview.widget.CardView>
+
+        <!-- Card View for Location -->
+        <androidx.cardview.widget.CardView
+            android:id="@+id/change_location_method_cardView"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_margin="@dimen/_20sdp"
+            android:layout_marginTop="@dimen/_15sdp"
+            app:cardBackgroundColor="@color/white"
+            app:layout_constraintTop_toBottomOf="@+id/change_language_cardView">
+
+            <!-- To mange view internal -->
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:background="@drawable/bg_gradient"
+                android:orientation="vertical">
+
+                <RelativeLayout
+                    android:id="@+id/show_change_location_method_View"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content">
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_margin="@dimen/_7sdp"
+                        android:text="@string/location"
+                        android:textColor="@color/black"
+                        android:textSize="@dimen/_20sdp"
+                        android:textStyle="bold"></TextView>
+
+                    <ImageView
+                        android:id="@+id/show_location_options_imageView"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_alignParentEnd="true"
+                        android:layout_centerVertical="true"
+                        android:src="@drawable/ic_down_arrow"></ImageView>
+                </RelativeLayout>
+
+
+                <LinearLayout
+                    android:id="@+id/linear_layout_visibility_change_location_method"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginStart="@dimen/_10sdp"
+                    android:layout_marginTop="@dimen/_5sdp"
+                    android:layout_marginEnd="@dimen/_10sdp"
+                    android:layout_marginBottom="@dimen/_5sdp"
+                    android:orientation="vertical"
+                    android:visibility="gone">
+
+                    <RadioGroup
+                        android:id="@+id/location_radio_group"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content">
+
+                        <RadioButton
+                            android:id="@+id/location_GPS"
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:tag="G"
+                            android:text="@string/location_gps"
+                            android:textSize="24sp" />
+
+                        <RadioButton
+                            android:id="@+id/location_MAP"
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:tag="M"
+                            android:text="@string/language_map"
+                            android:textSize="24sp" />
+
+                    </RadioGroup>
+                </LinearLayout>
+            </LinearLayout>
+
+        </androidx.cardview.widget.CardView>
+
+        <!-- Card View for Temperature -->
+        <androidx.cardview.widget.CardView
+            android:id="@+id/change_temperature_unit_cardView"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_margin="@dimen/_20sdp"
+            android:layout_marginTop="@dimen/_15sdp"
+            app:cardBackgroundColor="@color/white"
+            app:layout_constraintTop_toBottomOf="@+id/change_location_method_cardView">
+
+            <!-- To mange view internal -->
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:background="@drawable/bg_gradient"
+                android:orientation="vertical">
+
+                <RelativeLayout
+                    android:id="@+id/show_change_temperature_unit_View"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content">
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_margin="@dimen/_7sdp"
+                        android:text="@string/temperature_setting"
+                        android:textColor="@color/black"
+                        android:textSize="@dimen/_20sdp"
+                        android:textStyle="bold"></TextView>
+
+                    <ImageView
+                        android:id="@+id/show_temperature_options_imageView"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_alignParentEnd="true"
+                        android:layout_centerVertical="true"
+                        android:src="@drawable/ic_down_arrow"></ImageView>
+                </RelativeLayout>
+
+
+                <LinearLayout
+                    android:id="@+id/linear_layout_visibility_change_temperature_unit"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginStart="@dimen/_10sdp"
+                    android:layout_marginTop="@dimen/_5sdp"
+                    android:layout_marginEnd="@dimen/_10sdp"
+                    android:layout_marginBottom="@dimen/_5sdp"
+                    android:orientation="vertical"
+                    android:visibility="gone">
+
+                    <RadioGroup
+                        android:id="@+id/temperature_radio_group"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content">
+
+                        <RadioButton
+                            android:id="@+id/temperature_celsius"
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:tag="C"
+                            android:text="@string/temperature_celsius"
+                            android:textSize="24sp" />
+
+                        <RadioButton
+                            android:id="@+id/temperature_kelvin"
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:checked="true"
+                            android:tag="K"
+                            android:text="@string/temperature_kelvin"
+                            android:textSize="24sp" />
+
+                        <RadioButton
+                            android:id="@+id/temperature_fahrenheit"
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:tag="F"
+                            android:text="@string/temperature_fahrenheit"
+                            android:textSize="24sp" />
+
+                    </RadioGroup>
+                </LinearLayout>
+            </LinearLayout>
+
+        </androidx.cardview.widget.CardView>
+
+        <!-- Card View for Wind Speed -->
+        <androidx.cardview.widget.CardView
+            android:id="@+id/change_wind_speed_unit_cardView"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_margin="@dimen/_20sdp"
+            android:layout_marginTop="@dimen/_15sdp"
+            app:cardBackgroundColor="@color/white"
+            app:layout_constraintTop_toBottomOf="@+id/change_temperature_unit_cardView">
+
+            <!-- To mange view internal -->
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:background="@drawable/bg_gradient"
+                android:orientation="vertical">
+
+                <RelativeLayout
+                    android:id="@+id/show_change_wind_speed_unit_View"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content">
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_margin="@dimen/_7sdp"
+                        android:text="@string/wind_speed"
+                        android:textColor="@color/black"
+                        android:textSize="@dimen/_20sdp"
+                        android:textStyle="bold"></TextView>
+
+                    <ImageView
+                        android:id="@+id/show_wind_speed_options_imageView"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_alignParentEnd="true"
+                        android:layout_centerVertical="true"
+                        android:src="@drawable/ic_down_arrow"></ImageView>
+                </RelativeLayout>
+
+
+                <LinearLayout
+                    android:id="@+id/linear_layout_visibility_change_wind_speed_unit"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginStart="@dimen/_10sdp"
+                    android:layout_marginTop="@dimen/_5sdp"
+                    android:layout_marginEnd="@dimen/_10sdp"
+                    android:layout_marginBottom="@dimen/_5sdp"
+                    android:orientation="vertical"
+                    android:visibility="gone">
+
+                    <RadioGroup
+                        android:id="@+id/wind_speed_radio_group"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content">
+
+                        <RadioButton
+                            android:id="@+id/wind_speed_MS"
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:checked="true"
+                            android:tag="S"
+                            android:text="@string/wind_speed_MS"
+                            android:textSize="24sp" />
+
+                        <RadioButton
+                            android:id="@+id/wind_speed_MH"
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:tag="H"
+                            android:text="@string/wind_speed_MH"
+                            android:textSize="24sp" />
+
+                    </RadioGroup>
+                </LinearLayout>
+            </LinearLayout>
+
+        </androidx.cardview.widget.CardView>
+
+        <!-- Card View for Notification -->
+        <androidx.cardview.widget.CardView
+            android:id="@+id/change_Notification_method_cardView"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_margin="@dimen/_20sdp"
+            android:layout_marginTop="@dimen/_15sdp"
+            app:cardBackgroundColor="@color/white"
+            app:layout_constraintTop_toBottomOf="@+id/change_wind_speed_unit_cardView">
+
+            <!-- To mange view internal -->
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:background="@drawable/bg_gradient"
+                android:orientation="vertical">
+
+                <RelativeLayout
+                    android:id="@+id/show_change_Notification_method_View"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content">
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_margin="@dimen/_7sdp"
+                        android:text="@string/notification"
+                        android:textColor="@color/black"
+                        android:textSize="@dimen/_20sdp"
+                        android:textStyle="bold"></TextView>
+
+                    <ImageView
+                        android:id="@+id/show_notification_options_imageView"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_alignParentEnd="true"
+                        android:layout_centerVertical="true"
+                        android:src="@drawable/ic_down_arrow"></ImageView>
+                </RelativeLayout>
+
+
+                <LinearLayout
+                    android:id="@+id/linear_layout_visibility_change_Notification_method"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginStart="@dimen/_10sdp"
+                    android:layout_marginTop="@dimen/_5sdp"
+                    android:layout_marginEnd="@dimen/_10sdp"
+                    android:layout_marginBottom="@dimen/_5sdp"
+                    android:orientation="vertical"
+                    android:visibility="gone">
+
+                    <RadioGroup
+                        android:id="@+id/notification_radio_group"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content">
+
+                        <RadioButton
+                            android:id="@+id/notification_enabled"
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:checked="true"
+                            android:tag="E"
+                            android:text="@string/notification_enabled"
+                            android:textSize="24sp" />
+
+                        <RadioButton
+                            android:id="@+id/notification_disabled"
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:tag="D"
+                            android:text="@string/notification_disabled"
+                            android:textSize="24sp" />
+                    </RadioGroup>
+                </LinearLayout>
+            </LinearLayout>
+
+        </androidx.cardview.widget.CardView>
+    </androidx.constraintlayout.widget.ConstraintLayout>
+
+
+</ScrollView>

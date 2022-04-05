@@ -21,4 +21,6 @@
     <color name="colorBlue">#010D38</color>
     <color name="colorWhite">#E7E8EC</color>
     <color name="colorOffWhite">#B8BCCA</color>
+
+    <color name="sunColor">#FFC107</color>
 </resources>

@@ -13,8 +13,9 @@ interface WeatherService {
         @Query("lat") lat: String,
         @Query("lon") lon: String,
         @Query("lang") lang: String,
+        @Query("exclude") exclude: String ="minutely",
         @Query("APPID") app_id: String = "cce64fba5705becc7fbe52b46e9df003"
-    ): Response<WeatherResponse>
+    ): WeatherResponse
 
     @GET("onecall")
     suspend fun getWeatherDataArabic(

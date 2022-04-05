@@ -1,0 +1,46 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="app_name">الطقس</string>
+    <string name="day_status">صافي</string>
+    <string name="language">اللغة</string>
+    <string name="language_arabic">العربية</string>
+    <string name="language_english">الانجليزية</string>
+    <string name="location">الموقع</string>
+    <string name="location_gps">الموقع الجغرافي</string>
+    <string name="language_map">الخريطة</string>
+    <string name="temperature_celsius">سيلزيوس</string>
+    <string name="temperature_kelvin">كلفين</string>
+    <string name="temperature_fahrenheit">فهرنهايت</string>
+    <string name="temperature_setting">درجة الحرارة</string>
+    <string name="wind_speed">سرعة الرياح</string>
+    <string name="wind_speed_MS">متر / ثانية</string>
+    <string name="wind_speed_MH">ميل / ساعة</string>
+    <string name="notification">الإشعارات</string>
+    <string name="notification_enabled">تفعيل</string>
+    <string name="notification_disabled">إيقاف</string>
+    <string name="sunrise">الشروق</string>
+    <string name="sunset">الغروب</string>
+    <string name="cloud">الغيوم</string>
+    <string name="wind_deg">اتجاه الرياح</string>
+    <string name="humidity_cardView">الرطوبة</string>
+    <string name="pressure">الضغط الجوي</string>
+    <string name="visibility">الرؤية</string>
+    <string name="ultraviolet">الأشعة فوق البنفسجية</string>
+    <string name="temperature_celsius_unit">°م </string>
+    <string name="temperature_kelvin_unit"> K</string>
+    <string name="temperature_fahrenheit_unit"> °F</string>
+    <string name="wind_speed_unit_MS"> م/ث </string>
+    <string name="wind_speed_unit_KH"> ك/س </string>
+    <string name="meter"> م</string>
+    <string name="pressure_unit"> ه.ب.ا </string>
+    <string name="weather_description">حالة الطقس</string>
+    <string name="probability_precipitation">احتمالية المطر</string>
+
+    <string name="moon_phase">حالة القمر</string>
+    <string name="new_moon">قمر جديد</string>
+    <string name="first_quarter">ربع اول</string>
+    <string name="full_moon">قمر كامل</string>
+    <string name="last_quarter">ربع اخير</string>
+    <string name="no_favorite">لم تقم بإضافة أي أماكن بعد</string>
+    <string name="no_alerts">لم تقم بإضافة اي تنبيهات بعد</string>
+</resources>

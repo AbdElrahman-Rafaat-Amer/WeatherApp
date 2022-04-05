@@ -4,83 +4,306 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent">
+    <!--   &lt;!&ndash;
+          <androidx.cardview.widget.CardView
+              android:layout_width="match_parent"
+              android:layout_height="wrap_content"
+              android:layout_margin="@dimen/_10sdp"
+              android:layout_marginTop="@dimen/_15sdp"
+              android:elevation="@dimen/_15sdp"
+              app:cardCornerRadius="@dimen/_30sdp"
+              app:cardElevation="@dimen/_15sdp"
+              app:layout_constraintBottom_toBottomOf="parent"
+              app:layout_constraintTop_toTopOf="parent">
 
-    <androidx.cardview.widget.CardView
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_margin="20dp"
-        android:padding="20dp"
-        app:cardCornerRadius="50dp"
-        app:cardElevation="40dp"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
-        tools:layout_editor_absoluteX="20dp">
+              <GridLayout
+                  android:layout_width="match_parent"
+                  android:layout_height="wrap_content"
+                  android:background="@drawable/current_daily_background"
+                  android:columnCount="3"
+                  android:rowCount="3">
 
-        <androidx.constraintlayout.widget.ConstraintLayout
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_gravity="center"
-            android:background="@color/white"
-            android:padding="10dp">
+                  &lt;!&ndash;  Row 1 &ndash;&gt;
+               &lt;!&ndash;  Column 1&ndash;&gt;
+               <LinearLayout
+                   android:layout_width="wrap_content"
+                   android:layout_height="wrap_content"
+                   android:layout_rowWeight="1"
+                   android:layout_columnWeight="1"
+                   android:gravity="center"
+                   android:orientation="vertical"
+                   android:padding="@dimen/_10sdp">
 
-            <ImageView
-                android:id="@+id/movie_imageView"
-                android:layout_width="match_parent"
-                android:layout_height="250dp"
-                android:scaleType="fitCenter"
-                app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toTopOf="parent"
-                tools:src="@tools:sample/avatars" />
+                   <ImageView
+                       android:layout_width="@dimen/_35sdp"
+                       android:layout_height="@dimen/_35sdp"
+                       android:scaleType="centerCrop"
+                       android:src="@drawable/ic_sunny" />
 
-            <TextView
-                android:id="@+id/movie_title_textview"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_marginTop="20dp"
-                android:text="@string/movie_name"
-                android:textSize="20sp"
-                app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toBottomOf="@+id/movie_imageView" />
+                   <TextView
+                       android:layout_width="wrap_content"
+                       android:layout_height="wrap_content"
+                       android:text="@string/sunrise"
+                       android:textColor="@color/white"
+                       android:textSize="12dp" />
 
-            <TextView
-                android:id="@+id/movie_year_textview"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_marginTop="20dp"
-                android:text="@string/movie_year"
-                android:textSize="20sp"
-                app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintHorizontal_bias="0.498"
-                app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toBottomOf="@+id/movie_title_textview" />
+                   <TextView
+                       android:id="@+id/sun_rise_time_textView"
+                       android:layout_width="wrap_content"
+                       android:layout_height="wrap_content"
+                       android:textColor="@color/white"
+                       android:textSize="14dp" />
+               </LinearLayout>
 
-            <RatingBar
-                android:id="@+id/movie_ratingBar"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_marginTop="20dp"
-                android:background="#FFFFFF"
-                android:isIndicator="true"
-                app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintHorizontal_bias="0.497"
-                app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toBottomOf="@+id/movie_year_textview" />
+               &lt;!&ndash;  Column 2&ndash;&gt;
+               <LinearLayout
+                   android:layout_width="wrap_content"
+                   android:layout_height="wrap_content"
+                   android:layout_rowWeight="1"
+                   android:layout_columnWeight="1"
+                   android:gravity="center"
+                   android:orientation="vertical"
+                   android:padding="@dimen/_10sdp">
 
-            <Button
-                android:id="@+id/add_to_favoirte_button"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_marginTop="20dp"
-                android:layout_marginBottom="20dp"
-                android:text="@string/add_to_favorite"
-                app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toBottomOf="@+id/movie_ratingBar" />
+                   <ImageView
+                       android:layout_width="@dimen/_30sdp"
+                       android:layout_height="@dimen/_30sdp"
+                       android:scaleType="centerCrop"
+                       android:src="@drawable/ic_ocean" />
 
-        </androidx.constraintlayout.widget.ConstraintLayout>
-    </androidx.cardview.widget.CardView>
+                   <TextView
+                       android:layout_width="wrap_content"
+                       android:layout_height="wrap_content"
+                       android:layout_marginTop="@dimen/_7sdp"
+                       android:text="@string/sunset"
+                       android:textColor="@color/white"
+                       android:textSize="12dp" />
+
+                   <TextView
+                       android:id="@+id/sun_set_time_textView"
+                       android:layout_width="wrap_content"
+                       android:layout_height="wrap_content"
+                       android:textColor="@color/white"
+                       android:textSize="14dp" />
+               </LinearLayout>
+
+               &lt;!&ndash;  Column 3&ndash;&gt;
+               <LinearLayout
+                   android:layout_width="wrap_content"
+                   android:layout_height="wrap_content"
+                   android:layout_rowWeight="1"
+                   android:layout_columnWeight="1"
+                   android:gravity="center"
+                   android:orientation="vertical"
+                   android:padding="@dimen/_10sdp">
+
+                   <ImageView
+                       android:layout_width="@dimen/_40sdp"
+                       android:layout_height="@dimen/_40sdp"
+                       android:src="@drawable/ic_humidity" />
+
+                   <TextView
+                       android:layout_width="wrap_content"
+                       android:layout_height="wrap_content"
+                       android:text="@string/humidity_cardView"
+                       android:textColor="@color/white"
+                       android:textSize="12dp" />
+
+                   <TextView
+                       android:id="@+id/humidity_of_textView"
+                       android:layout_width="wrap_content"
+                       android:layout_height="wrap_content"
+                       android:textColor="@color/white"
+                       android:textSize="14dp" />
+               </LinearLayout>
+
+               &lt;!&ndash;  Row 2 &ndash;&gt;
+               &lt;!&ndash;  Column 1&ndash;&gt;
+               <LinearLayout
+                   android:layout_width="wrap_content"
+                   android:layout_height="wrap_content"
+                   android:layout_rowWeight="1"
+                   android:layout_columnWeight="1"
+                   android:gravity="center"
+                   android:orientation="vertical"
+                   android:padding="@dimen/_10sdp">
+
+                   <ImageView
+                       android:layout_width="@dimen/_40sdp"
+                       android:layout_height="@dimen/_40sdp"
+                       android:src="@drawable/ic_wind" />
+
+                   <TextView
+                       android:layout_width="wrap_content"
+                       android:layout_height="wrap_content"
+                       android:text="@string/wind_speed"
+                       android:textColor="@color/white"
+                       android:textSize="12dp" />
+
+                   <TextView
+                       android:id="@+id/wind_speed_textView"
+                       android:layout_width="wrap_content"
+                       android:layout_height="wrap_content"
+                       android:textColor="@color/white"
+                       android:textSize="14dp" />
+               </LinearLayout>
+
+               &lt;!&ndash;  Column 2&ndash;&gt;
+               <LinearLayout
+                   android:layout_width="wrap_content"
+                   android:layout_height="wrap_content"
+                   android:layout_rowWeight="1"
+                   android:layout_columnWeight="1"
+                   android:gravity="center"
+                   android:orientation="vertical"
+                   android:padding="@dimen/_10sdp">
+
+                   <ImageView
+                       android:layout_width="@dimen/_40sdp"
+                       android:layout_height="@dimen/_40sdp"
+                       android:src="@drawable/ic_wind" />
+
+                   <TextView
+                       android:layout_width="wrap_content"
+                       android:layout_height="wrap_content"
+                       android:text="@string/wind_deg"
+                       android:textColor="@color/white"
+                       android:textSize="12dp" />
+
+                   <TextView
+                       android:id="@+id/wind_speed"
+                       android:layout_width="wrap_content"
+                       android:layout_height="wrap_content"
+                       android:textColor="@color/white"
+                       android:textSize="14dp" />
+               </LinearLayout>
+
+               &lt;!&ndash;  Column 3&ndash;&gt;
+               <LinearLayout
+                   android:layout_width="wrap_content"
+                   android:layout_height="wrap_content"
+                   android:layout_rowWeight="1"
+                   android:layout_columnWeight="1"
+                   android:gravity="center"
+                   android:orientation="vertical"
+                   android:padding="@dimen/_10sdp">
+
+                   <ImageView
+                       android:layout_width="@dimen/_40sdp"
+                       android:layout_height="@dimen/_40sdp"
+                       android:src="@drawable/ic_cloud" />
+
+                   <TextView
+                       android:layout_width="wrap_content"
+                       android:layout_height="wrap_content"
+                       android:text="@string/cloud"
+                       android:textColor="@color/white"
+                       android:textSize="12dp" />
+
+                   <TextView
+                       android:id="@+id/cloud_textView"
+                       android:layout_width="wrap_content"
+                       android:layout_height="wrap_content"
+                       android:textColor="@color/white"
+                       android:textSize="14dp" />
+               </LinearLayout>
+
+               &lt;!&ndash;  Row 3 &ndash;&gt;
+               &lt;!&ndash;  Column 1&ndash;&gt;
+               <LinearLayout
+                   android:layout_width="wrap_content"
+                   android:layout_height="wrap_content"
+                   android:layout_rowWeight="1"
+                   android:layout_columnWeight="1"
+                   android:gravity="center"
+                   android:orientation="vertical"
+                   android:padding="@dimen/_10sdp">
+
+                   <ImageView
+                       android:layout_width="@dimen/_40sdp"
+                       android:layout_height="@dimen/_40sdp"
+                       android:scaleType="centerCrop"
+                       android:src="@drawable/ic_pressure" />
+
+                   <TextView
+                       android:layout_width="wrap_content"
+                       android:layout_height="wrap_content"
+                       android:text="@string/pressure"
+                       android:textColor="@color/white"
+                       android:textSize="12dp" />
+
+                   <TextView
+                       android:id="@+id/pressure_textView"
+                       android:layout_width="wrap_content"
+                       android:layout_height="wrap_content"
+                       android:textColor="@color/white"
+                       android:textSize="14dp" />
+               </LinearLayout>
+
+               &lt;!&ndash;  Column 2&ndash;&gt;
+               <LinearLayout
+                   android:layout_width="wrap_content"
+                   android:layout_height="wrap_content"
+                   android:layout_rowWeight="1"
+                   android:layout_columnWeight="1"
+                   android:gravity="center"
+                   android:orientation="vertical"
+                   android:padding="@dimen/_10sdp">
+
+                   <ImageView
+                       android:layout_width="@dimen/_40sdp"
+                       android:layout_height="@dimen/_40sdp"
+                       android:src="@drawable/ic_visibility" />
+
+                   <TextView
+                       android:layout_width="wrap_content"
+                       android:layout_height="wrap_content"
+                       android:text="@string/visibility"
+                       android:textColor="@color/white"
+                       android:textSize="12dp" />
+
+                   <TextView
+                       android:id="@+id/visibility_textView"
+                       android:layout_width="wrap_content"
+                       android:layout_height="wrap_content"
+                       android:textColor="@color/white"
+                       android:textSize="14dp" />
+               </LinearLayout>
+
+               &lt;!&ndash;  Column 3&ndash;&gt;
+               <LinearLayout
+                   android:layout_width="wrap_content"
+                   android:layout_height="wrap_content"
+                   android:layout_rowWeight="1"
+                   android:layout_columnWeight="1"
+                   android:gravity="center"
+                   android:orientation="vertical"
+                   android:padding="@dimen/_10sdp">
+
+                   <ImageView
+                       android:layout_width="@dimen/_40sdp"
+                       android:layout_height="@dimen/_40sdp"
+                       android:src="@drawable/ic_ultraviolet" />
+
+                   <TextView
+                       android:layout_width="wrap_content"
+                       android:layout_height="wrap_content"
+                       android:text="@string/ultraviolet"
+                       android:textColor="@color/white"
+                       android:textSize="12dp" />
+
+                   <TextView
+                       android:id="@+id/ultraviolet_textView"
+                       android:layout_width="wrap_content"
+                       android:layout_height="wrap_content"
+                       android:textColor="@color/white"
+                       android:textSize="14dp" />
+               </LinearLayout>
+
+           </GridLayout>
+       </androidx.cardview.widget.CardView>-->
+
+
     <!--
         <androidx.cardview.widget.CardView
             android:layout_width="match_parent"

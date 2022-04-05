@@ -1,24 +1,31 @@
 package com.abdelrahman.rafaat.weatherapp
 
+import android.content.Context
+import android.content.res.Configuration
+import android.content.res.Resources
 import android.location.Address
+import android.os.Build
 import android.os.Bundle
+import android.util.DisplayMetrics
 import android.util.Log
 import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
+import androidx.fragment.app.Fragment
+import androidx.fragment.app.FragmentManager
+import androidx.fragment.app.FragmentTransaction
 import com.abdelrahman.rafaat.weatherapp.alert.view.AlertFragment
 import com.abdelrahman.rafaat.weatherapp.favoriteplaces.view.FavoriteFragment
 import com.abdelrahman.rafaat.weatherapp.homeplaces.view.HomeFragment
+import com.abdelrahman.rafaat.weatherapp.homeplaces.view.OnDayClickListener
 import com.abdelrahman.rafaat.weatherapp.model.ConstantsValue
-import com.abdelrahman.rafaat.weatherapp.network.WeatherClient
-import com.abdelrahman.rafaat.weatherapp.setting.SettingFragment
+import com.abdelrahman.rafaat.weatherapp.model.Daily
+import com.abdelrahman.rafaat.weatherapp.setting.view.SettingFragment
 import com.abdelrahman.rafaat.weatherapp.timetable.view.TimeTableFragment
 import com.etebarian.meowbottomnavigation.MeowBottomNavigation
 import com.etebarian.meowbottomnavigation.MeowBottomNavigation.Model
-import kotlinx.coroutines.CoroutineScope
-import kotlinx.coroutines.Dispatchers
-import kotlinx.coroutines.launch
+import java.util.*
 
-class MainActivity : AppCompatActivity() {
+class MainActivity : AppCompatActivity(), OnDayClickListener {
 
     private val TAG = "MainActivity"
 
@@ -27,86 +34,111 @@ class MainActivity : AppCompatActivity() {
     private val ID_HOME = 3
     private val ID_TIMETABLE = 4
     private val ID_SETTING = 5
+    private var fragmentShow: Int = 0
 
     private lateinit var meo: MeowBottomNavigation
-    private lateinit var address: Address
-    private var longitude: Double = 0.0
-    private var latitude: Double = 0.0
 
     override fun onCreate(savedInstanceState: Bundle?) {
+        Log.i(TAG, "onCreate: " + ConstantsValue.language)
+        setAppLocale(ConstantsValue.language)
+        Locale.setDefault(Locale.forLanguageTag(ConstantsValue.language))
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main)
 
         meo = findViewById(R.id.bottom_nav)
 
-        //address = intent.getStringExtra("ADDRESS")!!
-        //longitude = intent.getDoubleExtra("LONGITUDE", 0.0)
-        //latitude = intent.getDoubleExtra("LATITUDE", 0.0)
-
-        address = ConstantsValue.address
-        longitude = ConstantsValue.longitude
-        latitude = ConstantsValue.latitude
-
-        Toast.makeText(this, "address" + address, Toast.LENGTH_SHORT).show()
-        Toast.makeText(this, "longitude" + longitude, Toast.LENGTH_SHORT).show()
-        Toast.makeText(this, "latitude" + latitude, Toast.LENGTH_SHORT).show()
 
 
-
-        CoroutineScope(Dispatchers.IO).launch {
-
-            Log.i(TAG, "getWeatherDataArabic: called>")
-            var weatherClient = WeatherClient.getInstance().getWeatherDataArabic()
-
-            Log.i(TAG, "getWeatherDataUnits: called>")
-            weatherClient = WeatherClient.getInstance().getWeatherDataEnglish()
-
-        }
-
-        //code for bottom nav bar
-        meo.add(Model(1, R.drawable.ic_alert))
-        meo.add(Model(2, R.drawable.ic_favorite))
-        meo.add(Model(3, R.drawable.ic_home))
-        meo.add(Model(4, R.drawable.ic_timetable))
-        meo.add(Model(5, R.drawable.ic_setting))
+        meo.add(Model(ID_ALERT, R.drawable.ic_alert))
+        meo.add(Model(ID_FAVORITES, R.drawable.ic_favorite))
+        meo.add(Model(ID_HOME, R.drawable.ic_home))
+        meo.add(Model(ID_TIMETABLE, R.drawable.ic_timetable))
+        meo.add(Model(ID_SETTING, R.drawable.ic_setting))
 
         meo.setOnClickMenuListener {
-        }
-
-        meo.setOnShowListener { item ->
-            when (item.id) {
+            when (it.id) {
                 ID_HOME -> {
-                    Toast.makeText(this, "ID_HOME", Toast.LENGTH_SHORT).show()
-                    supportFragmentManager.beginTransaction()
-                        .replace(R.id.fragment_container, HomeFragment()).commit()
+                    fragmentShow = ID_HOME
+                    replaceFragment(HomeFragment.newInstance())
                 }
                 ID_FAVORITES -> {
-                    Toast.makeText(this, "ID_FEEDS", Toast.LENGTH_SHORT).show()
-                    supportFragmentManager.beginTransaction()
-                        .replace(R.id.fragment_container, FavoriteFragment()).commit()
+                    fragmentShow = ID_FAVORITES
+                    replaceFragment(FavoriteFragment())
                 }
                 ID_ALERT -> {
-                    Toast.makeText(this, "ID_MESSAGES", Toast.LENGTH_SHORT).show()
-                    supportFragmentManager.beginTransaction()
-                        .replace(R.id.fragment_container, AlertFragment()).commit()
+                    fragmentShow = ID_ALERT
+                    replaceFragment(AlertFragment())
+
                 }
                 ID_SETTING -> {
-                    Toast.makeText(this, "ID_TIMETABLE", Toast.LENGTH_SHORT).show()
-                    supportFragmentManager.beginTransaction()
-                        .replace(R.id.fragment_container, SettingFragment()).commit()
+                    fragmentShow = ID_SETTING
+                    replaceFragment(SettingFragment())
+
                 }
                 ID_TIMETABLE -> {
-                    Toast.makeText(this, "ID_INFORMATION", Toast.LENGTH_SHORT).show()
-                    supportFragmentManager.beginTransaction()
-                        .replace(R.id.fragment_container, TimeTableFragment()).commit()
+                    fragmentShow = ID_TIMETABLE
+                    replaceFragment(TimeTableFragment.newInstance())
+
                 }
             }
         }
-        meo.setOnReselectListener {
-            //this method for solving problem of double click on icon
+
+        meo.setOnShowListener { item ->
+            fragmentShow = item.id
         }
-        meo.show(ID_HOME, true)
+
+        if (savedInstanceState == null) {
+            meo.show(ID_HOME, true)
+            addFragment(HomeFragment())
+            Log.i(TAG, "savedInstanceState == null")
+        } else {
+            val fragmentID: Int = savedInstanceState.get("FRAGMENT_ID") as Int
+            meo.show(fragmentID, true)
+        }
+
+    }
+
+    override fun onSaveInstanceState(outState: Bundle) {
+        super.onSaveInstanceState(outState)
+        outState.putInt("FRAGMENT_ID", fragmentShow)
     }
 
 
+    override fun showDayDetails(dayStatus: Daily) {
+        val fragment: Fragment = TimeTableFragment.newInstance();
+        supportFragmentManager.beginTransaction().replace(R.id.fragment_container, fragment)
+            .commit()
+        meo.show(ID_TIMETABLE, true)
+    }
+
+    private fun replaceFragment(fragment: Fragment) {
+        supportFragmentManager.beginTransaction().replace(R.id.fragment_container, fragment)
+            .commit()
+    }
+
+    private fun addFragment(fragment: Fragment) {
+        supportFragmentManager.beginTransaction().replace(R.id.fragment_container, fragment)
+            .commit()
+    }
+
+    fun restartFragment(currentFragment: Fragment) {
+        supportFragmentManager.beginTransaction()
+            .detach(currentFragment)
+            .commit()
+        supportFragmentManager.beginTransaction()
+            .attach(currentFragment)
+            .commit()
+    }
+
+    private fun setAppLocale(localeCode: String) {
+        val resources: Resources = resources
+        val dm: DisplayMetrics = resources.getDisplayMetrics()
+        val config: Configuration = resources.getConfiguration()
+        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.JELLY_BEAN_MR1) {
+            config.setLocale(Locale(localeCode.toLowerCase()))
+        } else {
+            config.locale = Locale(localeCode.toLowerCase())
+        }
+        resources.updateConfiguration(config, dm)
+    }
 }

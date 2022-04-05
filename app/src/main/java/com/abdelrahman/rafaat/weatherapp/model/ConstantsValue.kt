@@ -1,12 +1,21 @@
 package com.abdelrahman.rafaat.weatherapp.model
 
+
 import android.location.Address
+import com.abdelrahman.rafaat.weatherapp.R
+import java.text.DecimalFormat
+
 
 class ConstantsValue {
     companion object {
-        lateinit var address: Address
-        lateinit var language: String
-        var longitude: Double = 0.0
-        var latitude: Double = 0.0
+        var address: Address? = null
+        var language: String = ""
+        var longitude: String = ""
+        var latitude: String = ""
+        var tempUnit = "k"
+        var windSpeedUnit = "S"
+        var locationMethod = "G"
+        var notificationMethod = "E"
     }
+
 }

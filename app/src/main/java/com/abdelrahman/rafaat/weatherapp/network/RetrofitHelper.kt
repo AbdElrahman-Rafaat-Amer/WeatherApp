@@ -3,21 +3,16 @@ package com.abdelrahman.rafaat.weatherapp.network
 import retrofit2.Retrofit
 import retrofit2.converter.gson.GsonConverterFactory
 
-class RetrofitHelper {
+object RetrofitHelper {
 
-    companion object {
-        private val API_URL = "https://api.openweathermap.org/data/2.5/"
-        private var retrofit: Retrofit? = null
+    private val API_URL = "https://api.openweathermap.org/data/2.5/"
 
-        fun getClient(): Retrofit {
-            if (retrofit == null) {
-                retrofit = Retrofit.Builder()
-                    .baseUrl(API_URL)
-                    .addConverterFactory(GsonConverterFactory.create())
-                    .build()
-            }
-            return retrofit!!
-        }
+    fun getClient(): Retrofit {
+        return Retrofit.Builder()
+            .baseUrl(API_URL)
+            .addConverterFactory(GsonConverterFactory.create())
+            .build()
+
     }
 
 

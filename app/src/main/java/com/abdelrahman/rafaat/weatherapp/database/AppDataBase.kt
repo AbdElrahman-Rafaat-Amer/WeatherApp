@@ -6,7 +6,7 @@ import androidx.room.Room
 import androidx.room.RoomDatabase
 import com.abdelrahman.rafaat.weatherapp.model.WeatherResponse
 
-@Database(entities = [WeatherResponse::class], version = 1)
+//@Database(entities = [WeatherResponse::class], version = 1)
 abstract class AppDataBase : RoomDatabase() {
     abstract fun movieDao(): WeatherDAO
 

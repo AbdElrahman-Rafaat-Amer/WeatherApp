@@ -6,18 +6,18 @@ import android.content.Intent
 import android.content.pm.PackageManager
 import android.location.Geocoder
 import android.location.LocationManager
-import android.net.ConnectivityManager
-import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.os.Looper
 import android.provider.Settings
 import android.util.Log
 import android.widget.Toast
+import androidx.appcompat.app.AppCompatActivity
 import androidx.core.app.ActivityCompat
 import com.abdelrahman.rafaat.weatherapp.model.ConstantsValue
 import com.google.android.gms.location.*
 import java.io.IOException
 import java.util.*
+
 
 class InitializationScreenActivity : AppCompatActivity() {
 
@@ -26,27 +26,22 @@ class InitializationScreenActivity : AppCompatActivity() {
     private val PERMISSION_ID_LOCATION = 0
 
     override fun onCreate(savedInstanceState: Bundle?) {
+        Log.i(TAG, "onCreate: " + ConstantsValue.language)
+        Locale.setDefault(Locale.forLanguageTag(ConstantsValue.language))
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_intializaion_screen)
 
         fusedLocationClient = LocationServices.getFusedLocationProviderClient(this)
-        if (isInternetAvailable()) {
-            Log.i(TAG, "getLocationButton: isInternetAvailable + true")
-            if (checkPermission()) {
-                Log.i(TAG, "getLocationButton: checkPermission + true")
-                getLastLocation()
-            } else {
-                Log.i(TAG, "getLocationButton: requestPermission + false")
-                requestPermission()
-            }
+
+        if (checkPermission()) {
+            Log.i(TAG, "onCreate: checkPermission will get location")
+            getLastLocation()
+            ConstantsValue.locationMethod = "G"
         } else {
-            Log.i(TAG, "getLocationButton: isInternetAvailable + false")
-            Toast.makeText(
-                this@InitializationScreenActivity,
-                "Please turn on Wifi or mobile Data", Toast.LENGTH_SHORT
-            ).show()
-            goToNextActivity()
+            Log.i(TAG, "onCreate: requestPermission  will request permission")
+            requestPermission()
         }
+
     }
 
     private fun checkPermission(): Boolean {
@@ -74,41 +69,6 @@ class InitializationScreenActivity : AppCompatActivity() {
         Log.i("TAG", "requestPermission: ")
     }
 
-    private fun isInternetAvailable(): Boolean {
-        var isAvailable = false
-        val manager = getSystemService(CONNECTIVITY_SERVICE) as ConnectivityManager
-        if (manager.getNetworkInfo(ConnectivityManager.TYPE_WIFI)!!.isConnected || manager.getNetworkInfo(
-                ConnectivityManager.TYPE_MOBILE
-            )!!.isConnected
-        )
-            isAvailable = true
-        return isAvailable
-    }
-
-    private fun getAddress(latitude: Double, longitude: Double) {
-        val result = StringBuilder()
-        try {
-            val geocoder = Geocoder(this, Locale.getDefault())
-            val addresses = geocoder.getFromLocation(latitude, longitude, 1)
-            if (addresses.size > 0) {
-                val address = addresses[0]
-                result.append(address.locality).append("\n")
-                result.append(address.countryName)
-            }
-            Log.i(TAG, "getAddress: " + addresses)
-
-            ConstantsValue.address = addresses[0]
-            ConstantsValue.longitude = longitude
-            ConstantsValue.latitude = latitude
-            //   intent.putExtra("ADDRESS", addresses[0].toString())
-            //  intent.putExtra("LATITUDE", latitude)
-            //  intent.putExtra("LONGITUDE", longitude)
-            goToNextActivity()
-        } catch (e: IOException) {
-            Log.e("TAG", e.localizedMessage)
-        }
-    }
-
     override fun onRequestPermissionsResult(
         requestCode: Int,
         permissions: Array<out String>,
@@ -130,16 +90,26 @@ class InitializationScreenActivity : AppCompatActivity() {
                 if (location == null) {
                     requestNewLocationData()
                 } else {
-                    Log.i(TAG, "getLastLocation: getLatitude---> " + location.getLatitude())
-                    Log.i(TAG, "getLastLocation: getLongitude--> " + location.getLongitude())
-                    getAddress(location.getLatitude(), location.getLongitude())
+                    Log.i(TAG, "getLastLocation: getLatitude---> " + location.latitude)
+                    Log.i(TAG, "getLastLocation: getLongitude--> " + location.longitude)
+                    getAddress(location.latitude, location.longitude)
+
                     // requestNewLocationData()
                 }
             }
         } else {
-            val intent = Intent(Settings.ACTION_LOCATION_SOURCE_SETTINGS)
-            startActivity(intent)
+             val intent = Intent(Settings.ACTION_LOCATION_SOURCE_SETTINGS)
+             startActivity(intent)
+            Toast.makeText(this, "Please enable GPS", Toast.LENGTH_SHORT)
+                .show()
         }
+    }
+
+    private fun isLocationEnabled(): Boolean {
+        val locationManager = getSystemService(LOCATION_SERVICE) as LocationManager
+        return locationManager.isProviderEnabled(LocationManager.GPS_PROVIDER) || locationManager.isProviderEnabled(
+            LocationManager.NETWORK_PROVIDER
+        )
     }
 
     @SuppressLint("MissingPermission")
@@ -158,22 +128,72 @@ class InitializationScreenActivity : AppCompatActivity() {
     private val mLocationCallback: LocationCallback = object : LocationCallback() {
         override fun onLocationResult(locationResult: LocationResult) {
             val mLastLocation = locationResult.lastLocation
-            Log.i(TAG, "mLocationCallback: getLatitude---> " + mLastLocation.getLatitude())
-            Log.i(TAG, "mLocationCallback: getLongitude--> " + mLastLocation.getLongitude())
-            getAddress(mLastLocation.getLatitude(), mLastLocation.getLongitude())
+            Log.i(TAG, "mLocationCallback: getLatitude---> " + mLastLocation.latitude)
+            Log.i(TAG, "mLocationCallback: getLongitude--> " + mLastLocation.longitude)
+            getAddress(mLastLocation.latitude, mLastLocation.longitude)
         }
     }
 
 
-    private fun isLocationEnabled(): Boolean {
-        val locationManager = getSystemService(LOCATION_SERVICE) as LocationManager
-        return locationManager.isProviderEnabled(LocationManager.GPS_PROVIDER) || locationManager.isProviderEnabled(
-            LocationManager.NETWORK_PROVIDER
-        )
+    private fun getAddress(latitude: Double, longitude: Double) {
+        Log.i(TAG, "getAddress: begin of method")
+        val result = StringBuilder()
+        try {
+            val geocoder = Geocoder(this, Locale.getDefault())
+            val addresses = geocoder.getFromLocation(latitude, longitude, 1)
+            if (addresses.size > 0) {
+                val address = addresses[0]
+                result.append(address.locality).append("\n")
+                result.append(address.countryName)
+            }
+            Log.i(TAG, "getAddress: $addresses")
+
+            ConstantsValue.address = addresses[0]
+            ConstantsValue.longitude = longitude.toString()
+            ConstantsValue.latitude = latitude.toString()
+            goToNextActivity()
+        } catch (e: IOException) {
+            Log.e("TAG", e.localizedMessage)
+        }
     }
 
     private fun goToNextActivity() {
         startActivity(Intent(this, MainActivity::class.java))
         finish()
     }
+
+    override fun onRestart() {
+        super.onRestart()
+        Log.i("TAG", "onRestart: ")
+        getLastLocation()
+    }
+/*    private fun isInternetAvailable(): Boolean {
+
+        var isAvailable = false
+        val connectivityManager =
+            getSystemService(Context.CONNECTIVITY_SERVICE) as ConnectivityManager
+        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.M) {
+            val capabilities =
+                connectivityManager.getNetworkCapabilities(connectivityManager.activeNetwork)
+            if (capabilities != null) {
+                isAvailable = when {
+                    capabilities.hasTransport(NetworkCapabilities.TRANSPORT_CELLULAR) -> {
+                        true
+                    }
+                    capabilities.hasTransport(NetworkCapabilities.TRANSPORT_WIFI) -> {
+                        true
+                    }
+                    capabilities.hasTransport(NetworkCapabilities.TRANSPORT_ETHERNET) -> {
+                        true
+                    }
+                    else -> false
+                }
+            }
+        } else {
+            val activeNetworkInfo = connectivityManager.activeNetworkInfo
+            isAvailable = activeNetworkInfo != null && activeNetworkInfo.isConnected
+        }
+        return isAvailable
+
+    }*/
 }

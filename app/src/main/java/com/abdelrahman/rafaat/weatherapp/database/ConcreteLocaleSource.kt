@@ -7,8 +7,8 @@ import com.abdelrahman.rafaat.weatherapp.model.WeatherResponse
 
 class ConcreteLocaleSource (context: Context): LocaleSource {
 
-    private var dataBase= AppDataBase.getInstance(context.applicationContext)
-    private var movieDAO: WeatherDAO? = dataBase.movieDao()
+   // private var dataBase= AppDataBase.getInstance(context.applicationContext)
+   // private var movieDAO: WeatherDAO? = dataBase.movieDao()
    // private var storedMovies: LiveData<List<WeatherResponse>> = movieDAO!!.getStoredMovies()
 
 

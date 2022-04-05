@@ -1,5 +1,47 @@
 <resources>
     <string name="app_name">Weather App</string>
-    <!-- TODO: Remove or change this placeholder text -->
-    <string name="hello_blank_fragment">Hello blank fragment</string>
+
+    <string name="day_status">Clear</string>
+    <string name="language">Language</string>
+    <string name="language_arabic">Arabic</string>
+    <string name="language_english">English</string>
+    <string name="location">Location</string>
+    <string name="location_gps">GPS</string>
+    <string name="language_map">Map</string>
+    <string name="temperature_celsius">Celsius</string>
+    <string name="temperature_kelvin">Kelvin</string>
+    <string name="temperature_fahrenheit">Fahrenheit</string>
+    <string name="temperature_setting">Temperature</string>
+    <string name="wind_speed">Wind Speed</string>
+    <string name="wind_speed_MS">Meter / Second</string>
+    <string name="wind_speed_MH">Mile / Hour</string>
+    <string name="notification">Notification</string>
+    <string name="notification_enabled">Enable</string>
+    <string name="notification_disabled">Disable</string>
+    <string name="sunrise">Sunrise</string>
+    <string name="sunset">Sunset</string>
+    <string name="cloud">Cloud</string>
+    <string name="wind_deg">Wind degree</string>
+    <string name="humidity_cardView">Humidity</string>
+    <string name="pressure">Pressure</string>
+    <string name="visibility">Visibility</string>
+    <string name="ultraviolet">Ultraviolet</string>
+    <string name="temperature_celsius_unit"> °C</string>
+    <string name="temperature_kelvin_unit"> K</string>
+    <string name="temperature_fahrenheit_unit"> °F</string>
+    <string name="wind_speed_unit_MS"> m/s</string>
+    <string name="wind_speed_unit_KH"> k/h</string>
+    <string name="meter"> m</string>
+    <string name="pressure_unit"> hPa</string>
+    <string name="weather_description">Weather</string>
+    <string name="probability_precipitation">Probability Rain</string>
+    <string name="moon_phase">Moon Phase</string>
+    <string name="new_moon">New Moon</string>
+    <string name="first_quarter">First Quarter</string>
+    <string name="full_moon">Full Moon</string>
+    <string name="last_quarter">Last Quarter</string>
+    <string name="title_activity_maps" translatable="false">Map</string>
+    <string name="no_favorite">No Favorite Places yet</string>
+    <string name="no_alerts">No Alerts yet</string>
+
 </resources>
