@@ -1,17 +1,40 @@
 package com.abdelrahman.rafaat.weatherapp.model
 
+import androidx.room.*
+import com.abdelrahman.rafaat.weatherapp.database.DataConverter
+import org.jetbrains.annotations.Nullable
+
+
+@Entity(tableName = "weather")
 data class WeatherResponse
     (
+    @PrimaryKey(autoGenerate = false)
+    var id: Int = 0,
     var lat: Double,
     var lon: Double,
     var timezone: String,
     var timezone_offset: Double,
+
+    @Embedded(prefix = "current_")
     var current: Current,
+
+    @TypeConverters(DataConverter::class)
     var minutely: List<Minutely>,
+
+    @TypeConverters(DataConverter::class)
     var hourly: List<Hourly>,
-    var daily: List<Daily>
+
+    @TypeConverters(DataConverter::class)
+    var daily: List<Daily>,
+
+    @Nullable
+    @TypeConverters(DataConverter::class)
+    var alerts: List<Alerts>?
+
 
 )
+
+@TypeConverters(DataConverter::class)
 
 data class Current(
     var dt: Long,
@@ -31,6 +54,7 @@ data class Current(
     var weather: ArrayList<Weather>
 )
 
+@TypeConverters(DataConverter::class)
 data class Weather(
     var id: Long,
     var main: String,
@@ -38,11 +62,13 @@ data class Weather(
     var icon: String,
 )
 
+@TypeConverters(DataConverter::class)
 data class Minutely(
-    var dt: Double,
-    var precipitation: Double
+    var dt: Long,
+    var precipitation: Long
 )
 
+@TypeConverters(DataConverter::class)
 data class Hourly(
     var dt: Long,
     var temp: Double,
@@ -60,6 +86,7 @@ data class Hourly(
     var pop: Double
 )
 
+@TypeConverters(DataConverter::class)
 data class Daily(
     var dt: Long,
     var sunrise: Long,
@@ -81,6 +108,16 @@ data class Daily(
     var uvi: Double
 )
 
+@TypeConverters(DataConverter::class)
+data class Alerts(
+    var sender_name: String,
+    var event: String,
+    var start: Long,
+    var end: Long,
+    var description: String,
+    var tags: ArrayList<String>
+)
+
 data class FeelsLike(
     var day: Double,
     var night: Double,
@@ -96,7 +133,6 @@ data class Temperature(
     var eve: Double,
     var morn: Double,
 )
-
 
 
 

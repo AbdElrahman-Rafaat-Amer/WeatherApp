@@ -16,8 +16,7 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_margin="@dimen/_20sdp"
-            android:layout_marginTop="@dimen/_15sdp"
-            app:cardBackgroundColor="@color/white"
+            app:cardCornerRadius="@dimen/_40sdp"
             app:layout_constraintTop_toTopOf="parent">
 
             <!-- To mange view internal -->
@@ -25,7 +24,8 @@
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
                 android:background="@drawable/bg_gradient"
-                android:orientation="vertical">
+                android:orientation="vertical"
+                android:padding="@dimen/_7sdp">
 
                 <RelativeLayout
                     android:id="@+id/show_change_language_View"
@@ -95,8 +95,7 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_margin="@dimen/_20sdp"
-            android:layout_marginTop="@dimen/_15sdp"
-            app:cardBackgroundColor="@color/white"
+            app:cardCornerRadius="@dimen/_40sdp"
             app:layout_constraintTop_toBottomOf="@+id/change_language_cardView">
 
             <!-- To mange view internal -->
@@ -104,7 +103,8 @@
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
                 android:background="@drawable/bg_gradient"
-                android:orientation="vertical">
+                android:orientation="vertical"
+                android:padding="@dimen/_7sdp">
 
                 <RelativeLayout
                     android:id="@+id/show_change_location_method_View"
@@ -174,8 +174,7 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_margin="@dimen/_20sdp"
-            android:layout_marginTop="@dimen/_15sdp"
-            app:cardBackgroundColor="@color/white"
+            app:cardCornerRadius="@dimen/_40sdp"
             app:layout_constraintTop_toBottomOf="@+id/change_location_method_cardView">
 
             <!-- To mange view internal -->
@@ -183,7 +182,8 @@
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
                 android:background="@drawable/bg_gradient"
-                android:orientation="vertical">
+                android:orientation="vertical"
+                android:padding="@dimen/_7sdp">
 
                 <RelativeLayout
                     android:id="@+id/show_change_temperature_unit_View"
@@ -262,8 +262,7 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_margin="@dimen/_20sdp"
-            android:layout_marginTop="@dimen/_15sdp"
-            app:cardBackgroundColor="@color/white"
+            app:cardCornerRadius="@dimen/_40sdp"
             app:layout_constraintTop_toBottomOf="@+id/change_temperature_unit_cardView">
 
             <!-- To mange view internal -->
@@ -271,7 +270,8 @@
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
                 android:background="@drawable/bg_gradient"
-                android:orientation="vertical">
+                android:orientation="vertical"
+                android:padding="@dimen/_7sdp">
 
                 <RelativeLayout
                     android:id="@+id/show_change_wind_speed_unit_View"
@@ -342,8 +342,7 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_margin="@dimen/_20sdp"
-            android:layout_marginTop="@dimen/_15sdp"
-            app:cardBackgroundColor="@color/white"
+            app:cardCornerRadius="@dimen/_40sdp"
             app:layout_constraintTop_toBottomOf="@+id/change_wind_speed_unit_cardView">
 
             <!-- To mange view internal -->
@@ -351,7 +350,8 @@
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
                 android:background="@drawable/bg_gradient"
-                android:orientation="vertical">
+                android:orientation="vertical"
+                android:padding="@dimen/_7sdp">
 
                 <RelativeLayout
                     android:id="@+id/show_change_Notification_method_View"

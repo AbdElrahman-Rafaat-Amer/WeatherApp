@@ -2,6 +2,7 @@
 <androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/ConstraintLayout_FavoriteFragment"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:paddingStart="@dimen/_15sdp"
@@ -9,11 +10,24 @@
     android:paddingEnd="@dimen/_15sdp"
     tools:context=".favoriteplaces.view.FavoriteFragment">
 
+    <TextView
+        android:id="@+id/fragment_favorite_textView"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="@string/fragment_favorite"
+        android:textSize="@dimen/_20sdp"
+        android:textStyle="bold"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+
     <ImageView
         android:id="@+id/no_favorite_imageView"
-        android:layout_width="@dimen/_150sdp"
-        android:layout_height="@dimen/_150sdp"
-        android:src="@drawable/ic_home"
+        android:layout_width="wrap_content"
+        android:layout_height="@dimen/_250sdp"
+        android:paddingTop="@dimen/_100sdp"
+        android:scaleType="center"
+        android:src="@drawable/ic_no_favorites"
         app:layout_constraintBottom_toBottomOf="@+id/recyclerView_favorites"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
@@ -23,6 +37,7 @@
         android:id="@+id/no_favorite_textView"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
+        android:layout_marginTop="@dimen/_20sdp"
         android:text="@string/no_favorite"
         android:textSize="@dimen/_20sdp"
         android:textStyle="bold"
@@ -33,16 +48,19 @@
     <androidx.recyclerview.widget.RecyclerView
         android:id="@+id/recyclerView_favorites"
         android:layout_width="match_parent"
-        android:layout_height="match_parent" />
+        android:layout_height="match_parent"
+        android:layout_marginTop="@dimen/_30sdp"
+        app:layout_constraintTop_toBottomOf="@id/fragment_favorite_textView" />
 
     <com.google.android.material.floatingactionbutton.FloatingActionButton
         android:id="@+id/add_favorite_floatingActionButton"
-        android:layout_width="@dimen/_45sdp"
-        android:layout_height="@dimen/_40sdp"
-        android:layout_marginBottom="@dimen/_15sdp"
-        android:backgroundTint="#038DFB"
-        android:padding="@dimen/_150sdp"
-        android:src="@drawable/ic_add_favorite"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_margin="@dimen/_7sdp"
+        android:backgroundTint="#2196F3"
+        android:scaleType="center"
+        app:fabCustomSize="@dimen/_40sdp"
         app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent" />
+        app:layout_constraintEnd_toEndOf="parent"
+        app:srcCompat="@drawable/ic_add_favorite" />
 </androidx.constraintlayout.widget.ConstraintLayout>

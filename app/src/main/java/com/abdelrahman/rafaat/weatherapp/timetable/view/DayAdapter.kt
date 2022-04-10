@@ -7,6 +7,7 @@ import android.view.View
 import android.view.ViewGroup
 import android.widget.ImageView
 import android.widget.TextView
+import androidx.constraintlayout.widget.ConstraintLayout
 import androidx.recyclerview.widget.RecyclerView
 import com.abdelrahman.rafaat.weatherapp.R
 import com.abdelrahman.rafaat.weatherapp.model.ConstantsValue
@@ -31,12 +32,13 @@ class DayAdapter(context: Context) : RecyclerView.Adapter<DayAdapter.ViewHolder>
     }
 
     override fun onBindViewHolder(holder: ViewHolder, position: Int) {
-        Log.i(TAG, "onBindViewHolder: ")
+        Log.i(TAG, "onBindViewHolder: position $position")
+
         var day = days[position]
         holder.dayInformationTextView.text = getNameOfDay(day.dt)
         holder.sunRiseTimeTextView.text = getTimeInHour(day.sunrise)
         holder.sunSetTimeTextView.text = getTimeInHour(day.sunset)
-        holder.moonPhaseTextView.text = getMoonPhase(day)
+
         holder.temperatureTextView.text = getTemperature(day)
         holder.weatherDescriptionTextView.text = day.weather[0].description
         Glide.with(context)
@@ -46,6 +48,8 @@ class DayAdapter(context: Context) : RecyclerView.Adapter<DayAdapter.ViewHolder>
 
         holder.probabilityPrecipitationTextView.text =
             DecimalFormat("#").format((day.pop * 100)) + " %"
+
+        holder.moonPhaseTextView.text = getMoonPhase(day)
         holder.cloudTextView.text = DecimalFormat("#").format(day.clouds) + " %"
         holder.pressureTextView.text =
             DecimalFormat("#").format(day.pressure) + " " + context.getString(R.string.pressure_unit)
@@ -53,20 +57,28 @@ class DayAdapter(context: Context) : RecyclerView.Adapter<DayAdapter.ViewHolder>
         holder.humidityTextView.text = DecimalFormat("#").format(day.humidity) + " %"
         holder.windSpeedTextView.text = getWindSpeed(day.wind_speed)
         holder.windDegreeTextView.text = DecimalFormat("##").format(day.wind_deg)
+        holder.consT.setOnClickListener {
+            Log.i(TAG, "onBindViewHolder:setOnClickListener " + day + "\n\n\n")
+            Log.i(TAG, "onBindViewHolder: " + position)
+        }
     }
 
 
     override fun getItemCount(): Int {
+        // Log.i(TAG, "getItemCount: " + days.size)
         return days.size
     }
 
     fun setList(days: List<Daily>) {
         Log.i(TAG, "setList: days" + days.size)
         Log.i(TAG, "setList: this.days " + this.days.size)
-        this.days = days.subList(1, 8)
+        this.days = days//.subList(1, 8)
+        Log.i(TAG, "after setList: this.days " + this.days.size)
     }
 
     class ViewHolder(itemView: View) : RecyclerView.ViewHolder(itemView) {
+
+        val consT: ConstraintLayout = itemView.findViewById(R.id.const_click)
         val dayInformationTextView: TextView =
             itemView.findViewById(R.id.information_of_currentDay_textView)
         val sunRiseTimeTextView: TextView = itemView.findViewById(R.id.sun_rise_time_textView_day)
@@ -88,13 +100,8 @@ class DayAdapter(context: Context) : RecyclerView.Adapter<DayAdapter.ViewHolder>
 
     private fun getNameOfDay(milliSeconds: Long): String {
         val time = milliSeconds * 1000.toLong()
-        //val format = SimpleDateFormat("yyyy.MM.dd")
-      //  Log.i(TAG, "getNameOfDay: " + format.format(time))
-        //SimpleDateFormat("EEEE yyyy.MM.dd").format(milliSeconds * 1000)
-
         val dateFormat = SimpleDateFormat("EEEE d MMM yyyy", Locale(ConstantsValue.language))
-
-        return  dateFormat.format(time)
+        return dateFormat.format(time)
     }
 
     private fun getTimeInHour(milliSeconds: Long): String {
@@ -151,7 +158,7 @@ class DayAdapter(context: Context) : RecyclerView.Adapter<DayAdapter.ViewHolder>
         return moonPhase
     }
 
-    private fun getWindSpeed(windSpeed : Double): String {
+    private fun getWindSpeed(windSpeed: Double): String {
         var windSpeedFormat = ""
         windSpeedFormat = when (ConstantsValue.windSpeedUnit) {
             "H" -> DecimalFormat("#.##").format(windSpeed * 3.6) + " " + context.getString(

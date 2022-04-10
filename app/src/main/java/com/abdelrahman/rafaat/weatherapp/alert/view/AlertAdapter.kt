@@ -13,6 +13,7 @@ import androidx.recyclerview.widget.RecyclerView
 import com.abdelrahman.rafaat.weatherapp.R
 import com.abdelrahman.rafaat.weatherapp.model.ConstantsValue
 import com.abdelrahman.rafaat.weatherapp.model.Hourly
+import com.abdelrahman.rafaat.weatherapp.model.SavedAlerts
 import com.bumptech.glide.Glide
 import com.bumptech.glide.request.RequestOptions
 import java.text.DecimalFormat
@@ -21,12 +22,12 @@ import java.text.NumberFormat
 import java.text.SimpleDateFormat
 import java.util.*
 
-class AlertAdapter(context: Context) :
+class AlertAdapter(context: Context, var onDeleteAlert: OnAlertDeleteClickListener) :
     RecyclerView.Adapter<AlertAdapter.ViewHolder>() {
 
     private val TAG = "AlertAdapter"
     private var context = context
-    private var alerts: List<Hourly> = ArrayList()
+    private var alerts: List<SavedAlerts> = ArrayList()
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ViewHolder {
         Log.i(TAG, "onCreateViewHolder: ")
@@ -37,24 +38,23 @@ class AlertAdapter(context: Context) :
 
     override fun onBindViewHolder(holder: AlertAdapter.ViewHolder, position: Int) {
         Log.i(TAG, "onBindViewHolder: ")
-        holder.startTime.text = "00:00 AM"
-        holder.startDate.text = "1 Feb 99"
-        holder.endTime.text = "24:24 PM"
-        holder.endDate.text = "30 Dec 99"
+        var alert = alerts[position]
+        holder.startTime.text = alert.startTime
+        holder.startDate.text = alert.startDate
+        holder.endTime.text = alert.endTime
+        holder.endDate.text = alert.endDate
         holder.deleteAlert.setOnClickListener {
-            Toast.makeText(context, "delete alert ", Toast.LENGTH_SHORT).show()
+            onDeleteAlert.delete(alert.id!!)
         }
 
     }
 
     override fun getItemCount(): Int {
-
-        // return alerts.size
-        return 30
+        return alerts.size
     }
 
-    fun setList(alerts: List<Hourly>) {
-
+    fun setList(alerts: List<SavedAlerts>) {
+        this.alerts = alerts
         Log.i(TAG, "setList: after")
         Log.i(TAG, "setList: hours" + alerts.size)
         Log.i(TAG, "setList: this.hours " + this.alerts.size)

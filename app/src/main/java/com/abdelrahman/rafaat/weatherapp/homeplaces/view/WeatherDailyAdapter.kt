@@ -57,7 +57,6 @@ class WeatherDailyAdapter(context: Context, onDayClickListener: OnDayClickListen
     }
 
     fun setList(days: List<Daily>) {
-
         Log.i(TAG, "setList: days" + days.size)
         Log.i(TAG, "setList: this.days " + this.days.size)
         this.days = days.subList(1, 8)
@@ -101,10 +100,6 @@ class WeatherDailyAdapter(context: Context, onDayClickListener: OnDayClickListen
                 temperature = DecimalFormat("#").format(((temp - 273.15) * 1.8) + 32)
                 temperature += " " + context.getString(R.string.temperature_fahrenheit_unit)
             }
-            /*"K" -> {
-                temperature = DecimalFormat("#").format(temp)
-                temperature += " " + context.getString(R.string.temperature_kelvin_unit)
-            }*/
             else -> {
                 temperature = DecimalFormat("#").format(temp)
                 temperature += " " + context.getString(R.string.temperature_kelvin_unit)
@@ -112,6 +107,5 @@ class WeatherDailyAdapter(context: Context, onDayClickListener: OnDayClickListen
         }
         return temperature
     }
-    /*  val time = milliSeconds * 1000.toLong()
-      val format = SimpleDateFormat("h a")*/
+
 }

@@ -2,7 +2,8 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
-    android:layout_height="wrap_content">
+    android:layout_height="wrap_content"
+    android:id="@+id/const_click">
 
 
     <androidx.cardview.widget.CardView
@@ -68,14 +69,14 @@
                         android:layout_height="wrap_content"
                         android:text="@string/sunrise"
                         android:textColor="@color/white"
-                        android:textSize="12dp" />
+                        android:textSize="12sp" />
 
                     <TextView
                         android:id="@+id/sun_rise_time_textView_day"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:textColor="@color/white"
-                        android:textSize="14dp" />
+                        android:textSize="14sp" />
                 </LinearLayout>
 
                 <!--  Column sunset-->
@@ -100,14 +101,14 @@
                         android:layout_marginTop="@dimen/_7sdp"
                         android:text="@string/sunset"
                         android:textColor="@color/white"
-                        android:textSize="12dp" />
+                        android:textSize="12sp" />
 
                     <TextView
                         android:id="@+id/sun_set_time_textView_day"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:textColor="@color/white"
-                        android:textSize="14dp" />
+                        android:textSize="14sp" />
                 </LinearLayout>
 
                 <!--  Column moon phases-->
@@ -130,14 +131,14 @@
                         android:layout_height="wrap_content"
                         android:text="@string/moon_phase"
                         android:textColor="@color/white"
-                        android:textSize="12dp" />
+                        android:textSize="12sp" />
 
                     <TextView
                         android:id="@+id/moon_phase_textView_day"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:textColor="@color/white"
-                        android:textSize="14dp" />
+                        android:textSize="14sp" />
                 </LinearLayout>
 
                 <!--  Row 2 -->
@@ -161,14 +162,14 @@
                         android:layout_height="wrap_content"
                         android:text="@string/temperature_setting"
                         android:textColor="@color/white"
-                        android:textSize="12dp" />
+                        android:textSize="12sp" />
 
                     <TextView
                         android:id="@+id/temperature_textView_day"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:textColor="@color/white"
-                        android:textSize="14dp" />
+                        android:textSize="14sp" />
                 </LinearLayout>
 
                 <!--  weather -->
@@ -191,14 +192,14 @@
                         android:layout_height="wrap_content"
                         android:text="@string/weather_description"
                         android:textColor="@color/white"
-                        android:textSize="12dp" />
+                        android:textSize="14sp" />
 
                     <TextView
                         android:id="@+id/weather_description_textView_day"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:textColor="@color/white"
-                        android:textSize="14dp" />
+                        android:textSize="14sp" />
                 </LinearLayout>
 
                 <!--  rain -->
@@ -221,14 +222,14 @@
                         android:layout_height="wrap_content"
                         android:text="@string/probability_precipitation"
                         android:textColor="@color/white"
-                        android:textSize="12dp" />
+                        android:textSize="14sp" />
 
                     <TextView
                         android:id="@+id/probability_precipitation_textView_day"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:textColor="@color/white"
-                        android:textSize="14dp" />
+                        android:textSize="14sp" />
                 </LinearLayout>
 
                 <!--  Row 3 -->
@@ -252,14 +253,14 @@
                         android:layout_height="wrap_content"
                         android:text="@string/cloud"
                         android:textColor="@color/white"
-                        android:textSize="12dp" />
+                        android:textSize="12sp" />
 
                     <TextView
                         android:id="@+id/cloud_textView_day"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:textColor="@color/white"
-                        android:textSize="14dp" />
+                        android:textSize="14sp" />
                 </LinearLayout>
 
                 <!--  pressure -->
@@ -283,14 +284,14 @@
                         android:layout_height="wrap_content"
                         android:text="@string/pressure"
                         android:textColor="@color/white"
-                        android:textSize="12dp" />
+                        android:textSize="12sp" />
 
                     <TextView
                         android:id="@+id/pressure_textView_day"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:textColor="@color/white"
-                        android:textSize="14dp" />
+                        android:textSize="14sp" />
                 </LinearLayout>
 
                 <!-- ultraviolet -->
@@ -313,14 +314,14 @@
                         android:layout_height="wrap_content"
                         android:text="@string/ultraviolet"
                         android:textColor="@color/white"
-                        android:textSize="12dp" />
+                        android:textSize="12sp" />
 
                     <TextView
                         android:id="@+id/ultraviolet_textView_day"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:textColor="@color/white"
-                        android:textSize="14dp" />
+                        android:textSize="14sp" />
                 </LinearLayout>
 
                 <!--  Row 4 -->
@@ -344,14 +345,14 @@
                         android:layout_height="wrap_content"
                         android:text="@string/humidity_cardView"
                         android:textColor="@color/white"
-                        android:textSize="12dp" />
+                        android:textSize="12sp" />
 
                     <TextView
                         android:id="@+id/humidity_textView_day"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:textColor="@color/white"
-                        android:textSize="14dp" />
+                        android:textSize="14sp" />
                 </LinearLayout>
 
                 <!--  wind speed -->
@@ -374,14 +375,14 @@
                         android:layout_height="wrap_content"
                         android:text="@string/wind_speed"
                         android:textColor="@color/white"
-                        android:textSize="12dp" />
+                        android:textSize="12sp" />
 
                     <TextView
                         android:id="@+id/wind_speed_textView_day"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:textColor="@color/white"
-                        android:textSize="14dp" />
+                        android:textSize="14sp" />
                 </LinearLayout>
 
                 <!--  wind degree -->
@@ -404,14 +405,14 @@
                         android:layout_height="wrap_content"
                         android:text="@string/wind_deg"
                         android:textColor="@color/white"
-                        android:textSize="12dp" />
+                        android:textSize="12sp" />
 
                     <TextView
                         android:id="@+id/wind_degree_textView_day"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:textColor="@color/white"
-                        android:textSize="14dp" />
+                        android:textSize="14sp" />
                 </LinearLayout>
 
             </GridLayout>

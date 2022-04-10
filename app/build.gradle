@@ -60,14 +60,10 @@ dependencies {
     implementation "android.arch.lifecycle:extensions:1.1.0"
     kapt "android.arch.lifecycle:compiler:1.1.0"
 
-    // Room
-    def room_version = "2.3.0" // check latest version from docs
-    implementation "androidx.room:room-ktx:$room_version"
-    kapt "androidx.room:room-compiler:$room_version"
     //Room
-   /* implementation "androidx.room:room-ktx:2.3.0"
+    implementation "androidx.room:room-ktx:2.3.0"
     implementation "androidx.room:room-runtime:2.3.0"
-    kapt "androidx.room:room-compiler:2.3.0"*/
+    kapt "androidx.room:room-compiler:2.3.0"
 
     //Coroutine
     implementation 'org.jetbrains.kotlinx:kotlinx-coroutines-android:1.4.2'
@@ -95,6 +91,23 @@ dependencies {
     def lottieVersion = "5.0.2"
     implementation "com.airbnb.android:lottie:$lottieVersion"
 
-    //implementation 'com.google.android.gms:play-services-maps:11.8.0'
+
+    implementation "android.arch.lifecycle:extensions:1.1.0"
+    kapt "android.arch.lifecycle:compiler:1.1.0"
+    // Room
+    def room_version = "2.3.0" // check latest version from docs
+    implementation "androidx.room:room-ktx:$room_version"
+    kapt "androidx.room:room-compiler:$room_version"
+    implementation "androidx.room:room-ktx:$room_version"
+    kapt "androidx.room:room-compiler:$room_version"
+    //Room
+    implementation "androidx.room:room-ktx:2.3.0"
+    implementation "androidx.room:room-runtime:2.3.0"
+    implementation 'androidx.lifecycle:lifecycle-extensions:2.2.0'
+    implementation 'androidx.lifecycle:lifecycle-viewmodel-ktx:2.4.1'
+    kapt "androidx.room:room-compiler:2.3.0"
+
+    //Worker MAnger
+    implementation 'androidx.work:work-runtime:2.7.1'
 
 }

@@ -35,7 +35,7 @@ class WeatherHourlyAdapter(context: Context) :
     }
 
     override fun onBindViewHolder(holder: WeatherHourlyAdapter.ViewHolder, position: Int) {
-        Log.i(TAG, "onBindViewHolder: ")
+        Log.i(TAG, "onBindViewHolder: "+ position)
         val hour = hours[position]
         holder.timeInHour.text = getTimeInHour(hour.dt)
         holder.temperature.text = getTemperature(hour.temp)
@@ -46,7 +46,7 @@ class WeatherHourlyAdapter(context: Context) :
     }
 
     override fun getItemCount(): Int {
-        Log.i(TAG, "getItemCount: " + hours.size)
+       // Log.i(TAG, "getItemCount: " + hours.size)
         return hours.size
     }
 

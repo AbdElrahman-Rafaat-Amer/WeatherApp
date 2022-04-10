@@ -43,5 +43,18 @@
     <string name="title_activity_maps" translatable="false">Map</string>
     <string name="no_favorite">No Favorite Places yet</string>
     <string name="no_alerts">No Alerts yet</string>
+    <string name="alert_from">From</string>
+    <string name="alert_to">To</string>
+    <string name="alarm">Alarm</string>
+    <string name="alert_save_button">Save</string>
+    <string name="undefined_place">Undefined Place</string>
+    <string name="enable_gps">Please Enable GPS</string>
+    <string name="enable">Enable</string>
+    <string name="waiting_enable_gps">Waiting you to enable GPS to get your location</string>
+    <string name="error_network">No internet Founded</string>
+
+    <string name="fragment_favorite">Favorite Places</string>
+    <string name="PM">PM</string>
+    <string name="AM">AM</string>
 
 </resources>

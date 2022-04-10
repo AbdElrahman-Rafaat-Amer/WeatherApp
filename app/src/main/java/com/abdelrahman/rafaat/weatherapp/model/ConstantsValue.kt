@@ -8,7 +8,6 @@ import java.text.DecimalFormat
 
 class ConstantsValue {
     companion object {
-        var address: Address? = null
         var language: String = ""
         var longitude: String = ""
         var latitude: String = ""

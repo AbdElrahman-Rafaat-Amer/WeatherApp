@@ -4,304 +4,305 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent">
+
     <!--   &lt;!&ndash;
-          <androidx.cardview.widget.CardView
-              android:layout_width="match_parent"
-              android:layout_height="wrap_content"
-              android:layout_margin="@dimen/_10sdp"
-              android:layout_marginTop="@dimen/_15sdp"
-              android:elevation="@dimen/_15sdp"
-              app:cardCornerRadius="@dimen/_30sdp"
-              app:cardElevation="@dimen/_15sdp"
-              app:layout_constraintBottom_toBottomOf="parent"
-              app:layout_constraintTop_toTopOf="parent">
+        <androidx.cardview.widget.CardView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_margin="@dimen/_10sdp"
+            android:layout_marginTop="@dimen/_15sdp"
+            android:elevation="@dimen/_15sdp"
+            app:cardCornerRadius="@dimen/_30sdp"
+            app:cardElevation="@dimen/_15sdp"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintTop_toTopOf="parent">
 
-              <GridLayout
-                  android:layout_width="match_parent"
-                  android:layout_height="wrap_content"
-                  android:background="@drawable/current_daily_background"
-                  android:columnCount="3"
-                  android:rowCount="3">
+            <GridLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:background="@drawable/current_daily_background"
+                android:columnCount="3"
+                android:rowCount="3">
 
-                  &lt;!&ndash;  Row 1 &ndash;&gt;
-               &lt;!&ndash;  Column 1&ndash;&gt;
-               <LinearLayout
-                   android:layout_width="wrap_content"
-                   android:layout_height="wrap_content"
-                   android:layout_rowWeight="1"
-                   android:layout_columnWeight="1"
-                   android:gravity="center"
-                   android:orientation="vertical"
-                   android:padding="@dimen/_10sdp">
+                &lt;!&ndash;  Row 1 &ndash;&gt;
+             &lt;!&ndash;  Column 1&ndash;&gt;
+             <LinearLayout
+                 android:layout_width="wrap_content"
+                 android:layout_height="wrap_content"
+                 android:layout_rowWeight="1"
+                 android:layout_columnWeight="1"
+                 android:gravity="center"
+                 android:orientation="vertical"
+                 android:padding="@dimen/_10sdp">
 
-                   <ImageView
-                       android:layout_width="@dimen/_35sdp"
-                       android:layout_height="@dimen/_35sdp"
-                       android:scaleType="centerCrop"
-                       android:src="@drawable/ic_sunny" />
+                 <ImageView
+                     android:layout_width="@dimen/_35sdp"
+                     android:layout_height="@dimen/_35sdp"
+                     android:scaleType="centerCrop"
+                     android:src="@drawable/ic_sunny" />
 
-                   <TextView
-                       android:layout_width="wrap_content"
-                       android:layout_height="wrap_content"
-                       android:text="@string/sunrise"
-                       android:textColor="@color/white"
-                       android:textSize="12dp" />
+                 <TextView
+                     android:layout_width="wrap_content"
+                     android:layout_height="wrap_content"
+                     android:text="@string/sunrise"
+                     android:textColor="@color/white"
+                     android:textSize="12dp" />
 
-                   <TextView
-                       android:id="@+id/sun_rise_time_textView"
-                       android:layout_width="wrap_content"
-                       android:layout_height="wrap_content"
-                       android:textColor="@color/white"
-                       android:textSize="14dp" />
-               </LinearLayout>
+                 <TextView
+                     android:id="@+id/sun_rise_time_textView"
+                     android:layout_width="wrap_content"
+                     android:layout_height="wrap_content"
+                     android:textColor="@color/white"
+                     android:textSize="14dp" />
+             </LinearLayout>
 
-               &lt;!&ndash;  Column 2&ndash;&gt;
-               <LinearLayout
-                   android:layout_width="wrap_content"
-                   android:layout_height="wrap_content"
-                   android:layout_rowWeight="1"
-                   android:layout_columnWeight="1"
-                   android:gravity="center"
-                   android:orientation="vertical"
-                   android:padding="@dimen/_10sdp">
+             &lt;!&ndash;  Column 2&ndash;&gt;
+             <LinearLayout
+                 android:layout_width="wrap_content"
+                 android:layout_height="wrap_content"
+                 android:layout_rowWeight="1"
+                 android:layout_columnWeight="1"
+                 android:gravity="center"
+                 android:orientation="vertical"
+                 android:padding="@dimen/_10sdp">
 
-                   <ImageView
-                       android:layout_width="@dimen/_30sdp"
-                       android:layout_height="@dimen/_30sdp"
-                       android:scaleType="centerCrop"
-                       android:src="@drawable/ic_ocean" />
+                 <ImageView
+                     android:layout_width="@dimen/_30sdp"
+                     android:layout_height="@dimen/_30sdp"
+                     android:scaleType="centerCrop"
+                     android:src="@drawable/ic_ocean" />
 
-                   <TextView
-                       android:layout_width="wrap_content"
-                       android:layout_height="wrap_content"
-                       android:layout_marginTop="@dimen/_7sdp"
-                       android:text="@string/sunset"
-                       android:textColor="@color/white"
-                       android:textSize="12dp" />
+                 <TextView
+                     android:layout_width="wrap_content"
+                     android:layout_height="wrap_content"
+                     android:layout_marginTop="@dimen/_7sdp"
+                     android:text="@string/sunset"
+                     android:textColor="@color/white"
+                     android:textSize="12dp" />
 
-                   <TextView
-                       android:id="@+id/sun_set_time_textView"
-                       android:layout_width="wrap_content"
-                       android:layout_height="wrap_content"
-                       android:textColor="@color/white"
-                       android:textSize="14dp" />
-               </LinearLayout>
+                 <TextView
+                     android:id="@+id/sun_set_time_textView"
+                     android:layout_width="wrap_content"
+                     android:layout_height="wrap_content"
+                     android:textColor="@color/white"
+                     android:textSize="14dp" />
+             </LinearLayout>
 
-               &lt;!&ndash;  Column 3&ndash;&gt;
-               <LinearLayout
-                   android:layout_width="wrap_content"
-                   android:layout_height="wrap_content"
-                   android:layout_rowWeight="1"
-                   android:layout_columnWeight="1"
-                   android:gravity="center"
-                   android:orientation="vertical"
-                   android:padding="@dimen/_10sdp">
+             &lt;!&ndash;  Column 3&ndash;&gt;
+             <LinearLayout
+                 android:layout_width="wrap_content"
+                 android:layout_height="wrap_content"
+                 android:layout_rowWeight="1"
+                 android:layout_columnWeight="1"
+                 android:gravity="center"
+                 android:orientation="vertical"
+                 android:padding="@dimen/_10sdp">
 
-                   <ImageView
-                       android:layout_width="@dimen/_40sdp"
-                       android:layout_height="@dimen/_40sdp"
-                       android:src="@drawable/ic_humidity" />
+                 <ImageView
+                     android:layout_width="@dimen/_40sdp"
+                     android:layout_height="@dimen/_40sdp"
+                     android:src="@drawable/ic_humidity" />
 
-                   <TextView
-                       android:layout_width="wrap_content"
-                       android:layout_height="wrap_content"
-                       android:text="@string/humidity_cardView"
-                       android:textColor="@color/white"
-                       android:textSize="12dp" />
+                 <TextView
+                     android:layout_width="wrap_content"
+                     android:layout_height="wrap_content"
+                     android:text="@string/humidity_cardView"
+                     android:textColor="@color/white"
+                     android:textSize="12dp" />
 
-                   <TextView
-                       android:id="@+id/humidity_of_textView"
-                       android:layout_width="wrap_content"
-                       android:layout_height="wrap_content"
-                       android:textColor="@color/white"
-                       android:textSize="14dp" />
-               </LinearLayout>
+                 <TextView
+                     android:id="@+id/humidity_of_textView"
+                     android:layout_width="wrap_content"
+                     android:layout_height="wrap_content"
+                     android:textColor="@color/white"
+                     android:textSize="14dp" />
+             </LinearLayout>
 
-               &lt;!&ndash;  Row 2 &ndash;&gt;
-               &lt;!&ndash;  Column 1&ndash;&gt;
-               <LinearLayout
-                   android:layout_width="wrap_content"
-                   android:layout_height="wrap_content"
-                   android:layout_rowWeight="1"
-                   android:layout_columnWeight="1"
-                   android:gravity="center"
-                   android:orientation="vertical"
-                   android:padding="@dimen/_10sdp">
+             &lt;!&ndash;  Row 2 &ndash;&gt;
+             &lt;!&ndash;  Column 1&ndash;&gt;
+             <LinearLayout
+                 android:layout_width="wrap_content"
+                 android:layout_height="wrap_content"
+                 android:layout_rowWeight="1"
+                 android:layout_columnWeight="1"
+                 android:gravity="center"
+                 android:orientation="vertical"
+                 android:padding="@dimen/_10sdp">
 
-                   <ImageView
-                       android:layout_width="@dimen/_40sdp"
-                       android:layout_height="@dimen/_40sdp"
-                       android:src="@drawable/ic_wind" />
+                 <ImageView
+                     android:layout_width="@dimen/_40sdp"
+                     android:layout_height="@dimen/_40sdp"
+                     android:src="@drawable/ic_wind" />
 
-                   <TextView
-                       android:layout_width="wrap_content"
-                       android:layout_height="wrap_content"
-                       android:text="@string/wind_speed"
-                       android:textColor="@color/white"
-                       android:textSize="12dp" />
+                 <TextView
+                     android:layout_width="wrap_content"
+                     android:layout_height="wrap_content"
+                     android:text="@string/wind_speed"
+                     android:textColor="@color/white"
+                     android:textSize="12dp" />
 
-                   <TextView
-                       android:id="@+id/wind_speed_textView"
-                       android:layout_width="wrap_content"
-                       android:layout_height="wrap_content"
-                       android:textColor="@color/white"
-                       android:textSize="14dp" />
-               </LinearLayout>
+                 <TextView
+                     android:id="@+id/wind_speed_textView"
+                     android:layout_width="wrap_content"
+                     android:layout_height="wrap_content"
+                     android:textColor="@color/white"
+                     android:textSize="14dp" />
+             </LinearLayout>
 
-               &lt;!&ndash;  Column 2&ndash;&gt;
-               <LinearLayout
-                   android:layout_width="wrap_content"
-                   android:layout_height="wrap_content"
-                   android:layout_rowWeight="1"
-                   android:layout_columnWeight="1"
-                   android:gravity="center"
-                   android:orientation="vertical"
-                   android:padding="@dimen/_10sdp">
+             &lt;!&ndash;  Column 2&ndash;&gt;
+             <LinearLayout
+                 android:layout_width="wrap_content"
+                 android:layout_height="wrap_content"
+                 android:layout_rowWeight="1"
+                 android:layout_columnWeight="1"
+                 android:gravity="center"
+                 android:orientation="vertical"
+                 android:padding="@dimen/_10sdp">
 
-                   <ImageView
-                       android:layout_width="@dimen/_40sdp"
-                       android:layout_height="@dimen/_40sdp"
-                       android:src="@drawable/ic_wind" />
+                 <ImageView
+                     android:layout_width="@dimen/_40sdp"
+                     android:layout_height="@dimen/_40sdp"
+                     android:src="@drawable/ic_wind" />
 
-                   <TextView
-                       android:layout_width="wrap_content"
-                       android:layout_height="wrap_content"
-                       android:text="@string/wind_deg"
-                       android:textColor="@color/white"
-                       android:textSize="12dp" />
+                 <TextView
+                     android:layout_width="wrap_content"
+                     android:layout_height="wrap_content"
+                     android:text="@string/wind_deg"
+                     android:textColor="@color/white"
+                     android:textSize="12dp" />
 
-                   <TextView
-                       android:id="@+id/wind_speed"
-                       android:layout_width="wrap_content"
-                       android:layout_height="wrap_content"
-                       android:textColor="@color/white"
-                       android:textSize="14dp" />
-               </LinearLayout>
+                 <TextView
+                     android:id="@+id/wind_speed"
+                     android:layout_width="wrap_content"
+                     android:layout_height="wrap_content"
+                     android:textColor="@color/white"
+                     android:textSize="14dp" />
+             </LinearLayout>
 
-               &lt;!&ndash;  Column 3&ndash;&gt;
-               <LinearLayout
-                   android:layout_width="wrap_content"
-                   android:layout_height="wrap_content"
-                   android:layout_rowWeight="1"
-                   android:layout_columnWeight="1"
-                   android:gravity="center"
-                   android:orientation="vertical"
-                   android:padding="@dimen/_10sdp">
+             &lt;!&ndash;  Column 3&ndash;&gt;
+             <LinearLayout
+                 android:layout_width="wrap_content"
+                 android:layout_height="wrap_content"
+                 android:layout_rowWeight="1"
+                 android:layout_columnWeight="1"
+                 android:gravity="center"
+                 android:orientation="vertical"
+                 android:padding="@dimen/_10sdp">
 
-                   <ImageView
-                       android:layout_width="@dimen/_40sdp"
-                       android:layout_height="@dimen/_40sdp"
-                       android:src="@drawable/ic_cloud" />
+                 <ImageView
+                     android:layout_width="@dimen/_40sdp"
+                     android:layout_height="@dimen/_40sdp"
+                     android:src="@drawable/ic_cloud" />
 
-                   <TextView
-                       android:layout_width="wrap_content"
-                       android:layout_height="wrap_content"
-                       android:text="@string/cloud"
-                       android:textColor="@color/white"
-                       android:textSize="12dp" />
+                 <TextView
+                     android:layout_width="wrap_content"
+                     android:layout_height="wrap_content"
+                     android:text="@string/cloud"
+                     android:textColor="@color/white"
+                     android:textSize="12dp" />
 
-                   <TextView
-                       android:id="@+id/cloud_textView"
-                       android:layout_width="wrap_content"
-                       android:layout_height="wrap_content"
-                       android:textColor="@color/white"
-                       android:textSize="14dp" />
-               </LinearLayout>
+                 <TextView
+                     android:id="@+id/cloud_textView"
+                     android:layout_width="wrap_content"
+                     android:layout_height="wrap_content"
+                     android:textColor="@color/white"
+                     android:textSize="14dp" />
+             </LinearLayout>
 
-               &lt;!&ndash;  Row 3 &ndash;&gt;
-               &lt;!&ndash;  Column 1&ndash;&gt;
-               <LinearLayout
-                   android:layout_width="wrap_content"
-                   android:layout_height="wrap_content"
-                   android:layout_rowWeight="1"
-                   android:layout_columnWeight="1"
-                   android:gravity="center"
-                   android:orientation="vertical"
-                   android:padding="@dimen/_10sdp">
+             &lt;!&ndash;  Row 3 &ndash;&gt;
+             &lt;!&ndash;  Column 1&ndash;&gt;
+             <LinearLayout
+                 android:layout_width="wrap_content"
+                 android:layout_height="wrap_content"
+                 android:layout_rowWeight="1"
+                 android:layout_columnWeight="1"
+                 android:gravity="center"
+                 android:orientation="vertical"
+                 android:padding="@dimen/_10sdp">
 
-                   <ImageView
-                       android:layout_width="@dimen/_40sdp"
-                       android:layout_height="@dimen/_40sdp"
-                       android:scaleType="centerCrop"
-                       android:src="@drawable/ic_pressure" />
+                 <ImageView
+                     android:layout_width="@dimen/_40sdp"
+                     android:layout_height="@dimen/_40sdp"
+                     android:scaleType="centerCrop"
+                     android:src="@drawable/ic_pressure" />
 
-                   <TextView
-                       android:layout_width="wrap_content"
-                       android:layout_height="wrap_content"
-                       android:text="@string/pressure"
-                       android:textColor="@color/white"
-                       android:textSize="12dp" />
+                 <TextView
+                     android:layout_width="wrap_content"
+                     android:layout_height="wrap_content"
+                     android:text="@string/pressure"
+                     android:textColor="@color/white"
+                     android:textSize="12dp" />
 
-                   <TextView
-                       android:id="@+id/pressure_textView"
-                       android:layout_width="wrap_content"
-                       android:layout_height="wrap_content"
-                       android:textColor="@color/white"
-                       android:textSize="14dp" />
-               </LinearLayout>
+                 <TextView
+                     android:id="@+id/pressure_textView"
+                     android:layout_width="wrap_content"
+                     android:layout_height="wrap_content"
+                     android:textColor="@color/white"
+                     android:textSize="14dp" />
+             </LinearLayout>
 
-               &lt;!&ndash;  Column 2&ndash;&gt;
-               <LinearLayout
-                   android:layout_width="wrap_content"
-                   android:layout_height="wrap_content"
-                   android:layout_rowWeight="1"
-                   android:layout_columnWeight="1"
-                   android:gravity="center"
-                   android:orientation="vertical"
-                   android:padding="@dimen/_10sdp">
+             &lt;!&ndash;  Column 2&ndash;&gt;
+             <LinearLayout
+                 android:layout_width="wrap_content"
+                 android:layout_height="wrap_content"
+                 android:layout_rowWeight="1"
+                 android:layout_columnWeight="1"
+                 android:gravity="center"
+                 android:orientation="vertical"
+                 android:padding="@dimen/_10sdp">
 
-                   <ImageView
-                       android:layout_width="@dimen/_40sdp"
-                       android:layout_height="@dimen/_40sdp"
-                       android:src="@drawable/ic_visibility" />
+                 <ImageView
+                     android:layout_width="@dimen/_40sdp"
+                     android:layout_height="@dimen/_40sdp"
+                     android:src="@drawable/ic_visibility" />
 
-                   <TextView
-                       android:layout_width="wrap_content"
-                       android:layout_height="wrap_content"
-                       android:text="@string/visibility"
-                       android:textColor="@color/white"
-                       android:textSize="12dp" />
+                 <TextView
+                     android:layout_width="wrap_content"
+                     android:layout_height="wrap_content"
+                     android:text="@string/visibility"
+                     android:textColor="@color/white"
+                     android:textSize="12dp" />
 
-                   <TextView
-                       android:id="@+id/visibility_textView"
-                       android:layout_width="wrap_content"
-                       android:layout_height="wrap_content"
-                       android:textColor="@color/white"
-                       android:textSize="14dp" />
-               </LinearLayout>
+                 <TextView
+                     android:id="@+id/visibility_textView"
+                     android:layout_width="wrap_content"
+                     android:layout_height="wrap_content"
+                     android:textColor="@color/white"
+                     android:textSize="14dp" />
+             </LinearLayout>
 
-               &lt;!&ndash;  Column 3&ndash;&gt;
-               <LinearLayout
-                   android:layout_width="wrap_content"
-                   android:layout_height="wrap_content"
-                   android:layout_rowWeight="1"
-                   android:layout_columnWeight="1"
-                   android:gravity="center"
-                   android:orientation="vertical"
-                   android:padding="@dimen/_10sdp">
+             &lt;!&ndash;  Column 3&ndash;&gt;
+             <LinearLayout
+                 android:layout_width="wrap_content"
+                 android:layout_height="wrap_content"
+                 android:layout_rowWeight="1"
+                 android:layout_columnWeight="1"
+                 android:gravity="center"
+                 android:orientation="vertical"
+                 android:padding="@dimen/_10sdp">
 
-                   <ImageView
-                       android:layout_width="@dimen/_40sdp"
-                       android:layout_height="@dimen/_40sdp"
-                       android:src="@drawable/ic_ultraviolet" />
+                 <ImageView
+                     android:layout_width="@dimen/_40sdp"
+                     android:layout_height="@dimen/_40sdp"
+                     android:src="@drawable/ic_ultraviolet" />
 
-                   <TextView
-                       android:layout_width="wrap_content"
-                       android:layout_height="wrap_content"
-                       android:text="@string/ultraviolet"
-                       android:textColor="@color/white"
-                       android:textSize="12dp" />
+                 <TextView
+                     android:layout_width="wrap_content"
+                     android:layout_height="wrap_content"
+                     android:text="@string/ultraviolet"
+                     android:textColor="@color/white"
+                     android:textSize="12dp" />
 
-                   <TextView
-                       android:id="@+id/ultraviolet_textView"
-                       android:layout_width="wrap_content"
-                       android:layout_height="wrap_content"
-                       android:textColor="@color/white"
-                       android:textSize="14dp" />
-               </LinearLayout>
+                 <TextView
+                     android:id="@+id/ultraviolet_textView"
+                     android:layout_width="wrap_content"
+                     android:layout_height="wrap_content"
+                     android:textColor="@color/white"
+                     android:textSize="14dp" />
+             </LinearLayout>
 
-           </GridLayout>
-       </androidx.cardview.widget.CardView>-->
+         </GridLayout>
+     </androidx.cardview.widget.CardView>-->
 
 
     <!--

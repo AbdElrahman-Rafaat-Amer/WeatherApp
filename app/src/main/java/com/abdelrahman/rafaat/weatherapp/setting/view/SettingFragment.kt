@@ -252,10 +252,10 @@ class SettingFragment : Fragment() {
         super.onResume()
 
         //language
-        if (ConstantsValue.language == "en") {
-            languageRadioGroup.check(R.id.language_english)
-        } else {
+        if (ConstantsValue.language == "ar") {
             languageRadioGroup.check(R.id.language_arabic)
+        } else {
+            languageRadioGroup.check(R.id.language_english)
         }
 
         //Temperature

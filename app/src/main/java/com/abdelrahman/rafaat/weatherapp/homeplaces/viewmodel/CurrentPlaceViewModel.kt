@@ -6,6 +6,7 @@ import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import com.abdelrahman.rafaat.weatherapp.model.RepositoryInterface
+import com.abdelrahman.rafaat.weatherapp.model.SavedAddress
 import com.abdelrahman.rafaat.weatherapp.model.WeatherResponse
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
@@ -17,16 +18,19 @@ class CurrentPlaceViewModel(iRepo: RepositoryInterface) : ViewModel() {
     private var _weatherResponse = MutableLiveData<WeatherResponse>()
     val weatherResponse: LiveData<WeatherResponse> = _weatherResponse
 
+    private var _addressResponse = MutableLiveData<SavedAddress>()
+    val addressResponse: LiveData<SavedAddress> = _addressResponse
 
     init {
         Log.i(TAG, "init: ")
-      //  getWeatherFromNetwork()
     }
 
 
-   /* private fun getWeatherFromNetwork() {
+    fun getWeatherFromNetwork(latitude: String, longitude: String, language: String) {
         viewModelScope.launch {
-            val response = _iRepo.getWeatherFromNetwork()
+            Log.i(TAG, "getWeatherFromNetwork: longitude ---> " + longitude)
+            Log.i(TAG, "getWeatherFromNetwork: latitude ---> " + latitude)
+            val response = _iRepo.getWeatherFromNetwork(latitude, longitude, language)
             withContext(Dispatchers.Main) {
                 Log.i(TAG, "getWeatherFromNetwork: $weatherResponse")
                 _weatherResponse.postValue(response)
@@ -34,15 +38,39 @@ class CurrentPlaceViewModel(iRepo: RepositoryInterface) : ViewModel() {
             }
 
         }
-    }*/
+    }
 
-    fun getWeatherFromNetwork(latitude: String, longitude: String, language : String) {
+    fun getDataFromRoom() {
+        Log.i(TAG, "getDataFromRoom: getFromRoom---------------> ")
         viewModelScope.launch {
-            val response = _iRepo.getWeatherFromNetwork(latitude, longitude, language)
+            val response = _iRepo.getWeatherFromDataBase()
             withContext(Dispatchers.Main) {
-                Log.i(TAG, "getWeatherFromNetwork: $weatherResponse")
-                _weatherResponse.postValue(response)
+                Log.i(TAG, "getWeatherFromNetwork: $response")
+                _weatherResponse.postValue(response!!)
+            }
 
+        }
+    }
+
+    fun getStoredAddressFromRoom() {
+        Log.i(TAG, "getStoredAddressFromRoom: getFromRoom---------------> ")
+        viewModelScope.launch {
+            val response = _iRepo.getStoredPlace()
+            withContext(Dispatchers.Main) {
+                Log.i(TAG, "getStoredAddressFromRoom: $response")
+                _addressResponse.postValue(response)
+
+            }
+
+        }
+    }
+
+
+    fun insertAddressToRoom(address: SavedAddress) {
+        Log.i(TAG, "getStoredAddressFromRoom: getFromRoom---------------> ")
+        viewModelScope.launch {
+            withContext(Dispatchers.IO) {
+               _iRepo.insertAddressToRoom(address)
             }
 
         }

@@ -2,21 +2,29 @@ package com.abdelrahman.rafaat.weatherapp.homeplaces.view
 
 
 import android.content.Context
+import android.content.Intent
+import android.graphics.Color
+import android.location.Address
+import android.location.Geocoder
 import android.net.ConnectivityManager
 import android.net.NetworkCapabilities
 import android.os.Build
 import android.os.Bundle
+import android.provider.Settings
 import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.View.GONE
 import android.view.View.VISIBLE
 import android.view.ViewGroup
+import android.view.animation.Animation
+import android.widget.ImageView
 import android.widget.ProgressBar
 import android.widget.TextView
 import android.widget.Toast
 import androidx.annotation.RequiresApi
 import androidx.constraintlayout.widget.ConstraintLayout
+import androidx.core.content.ContextCompat.getSystemService
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProvider
@@ -27,17 +35,16 @@ import com.abdelrahman.rafaat.weatherapp.R
 import com.abdelrahman.rafaat.weatherapp.database.ConcreteLocaleSource
 import com.abdelrahman.rafaat.weatherapp.homeplaces.viewmodel.CurrentPlaceViewModel
 import com.abdelrahman.rafaat.weatherapp.homeplaces.viewmodel.CurrentPlaceViewModelFactory
-import com.abdelrahman.rafaat.weatherapp.model.ConstantsValue
-import com.abdelrahman.rafaat.weatherapp.model.Repository
-import com.abdelrahman.rafaat.weatherapp.model.WeatherResponse
+import com.abdelrahman.rafaat.weatherapp.model.*
 import com.abdelrahman.rafaat.weatherapp.network.WeatherClient
+import com.abdelrahman.rafaat.weatherapp.timetable.view.DayAdapter
 import com.bumptech.glide.Glide
+import com.google.android.material.snackbar.Snackbar
 import de.hdodenhof.circleimageview.CircleImageView
+import java.io.IOException
 import java.text.DecimalFormat
 import java.text.SimpleDateFormat
 import java.util.*
-import android.view.animation.Animation
-import android.view.animation.AnimationUtils
 
 
 //273.15
@@ -75,8 +82,8 @@ class HomeFragment : Fragment() {
 
     private lateinit var visibilityConstrainLayout: ConstraintLayout
     private lateinit var progressBar: ProgressBar
-
-    private lateinit var  moveAnimation : Animation
+    private lateinit var animatedImageView: ImageView
+    private lateinit var moveAnimation: Animation
 
     override fun onAttach(context: Context) {
         super.onAttach(context)
@@ -102,6 +109,7 @@ class HomeFragment : Fragment() {
         super.onViewCreated(view, savedInstanceState)
         Log.i(TAG, "onViewCreated: ")
         initUI(view)
+        animatedImageView.animate().rotation(360f).setDuration(2000).start()
         viewModelFactory = CurrentPlaceViewModelFactory(
             Repository.getInstance(
                 requireContext(),
@@ -115,18 +123,21 @@ class HomeFragment : Fragment() {
             viewModelFactory
         ).get(CurrentPlaceViewModel::class.java)
 
-        if (isInternetAvailable()) {
+        if (isInternetAvailable(requireContext())) {
+            getAddress()
+            Log.i(TAG, "isInternetAvailable: latitude ---> " + ConstantsValue.latitude)
+            Log.i(TAG, "isInternetAvailable: longitude ---> " + ConstantsValue.longitude)
+            Log.i(TAG, "isInternetAvailable: language ---> " + ConstantsValue.language)
             viewModel.getWeatherFromNetwork(
-                ConstantsValue.latitude,
-                ConstantsValue.longitude,
-                ConstantsValue.language
+                ConstantsValue.latitude, ConstantsValue.longitude, ConstantsValue.language
             )
+
         } else {
             Log.i(TAG, "onViewCreated: error in network")
             progressBar.visibility = GONE
             visibilityConstrainLayout.visibility = VISIBLE
-            Toast.makeText(context, "Data will loaded from room", Toast.LENGTH_SHORT).show()
-
+            viewModel.getDataFromRoom()
+            viewModel.getStoredAddressFromRoom()
         }
 
         viewModel.weatherResponse.observe(viewLifecycleOwner, Observer {
@@ -139,11 +150,22 @@ class HomeFragment : Fragment() {
             }
         })
 
+        viewModel.addressResponse.observe(viewLifecycleOwner, Observer {
+            Log.i(TAG, "onCreateView: observe $it")
+            when (it) {
+                is SavedAddress -> {
+                    assignAddressToView(it)
+                }
+                else -> Toast.makeText(context, "Return is null $it", Toast.LENGTH_SHORT).show()
+            }
+        })
+
 
     }
 
     private fun initUI(view: View) {
         progressBar = view.findViewById(R.id.loading_progressBar)
+        animatedImageView = view.findViewById(R.id.animated_imageView)
         visibilityConstrainLayout = view.findViewById(R.id.visibility_constrainLayout)
         locationNameTextView = view.findViewById(R.id.location_name_textView)
         locationDetailsNameTextView = view.findViewById(R.id.locationDetails_name_textView)
@@ -180,37 +202,11 @@ class HomeFragment : Fragment() {
         visibilityTextView = view.findViewById(R.id.visibility_textView)
         ultravioletTextView = view.findViewById(R.id.ultraviolet_textView)
 
-        moveAnimation = AnimationUtils.loadAnimation(requireContext(),
-            R.anim.move);
-        locationNameTextView.startAnimation(moveAnimation)
-    }
-
-    private fun isInternetAvailable(): Boolean {
-        var isAvailable = false
-        val connectivityManager =
-            requireContext().getSystemService(Context.CONNECTIVITY_SERVICE) as ConnectivityManager
-        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.M) {
-            val capabilities =
-                connectivityManager.getNetworkCapabilities(connectivityManager.activeNetwork)
-            if (capabilities != null) {
-                when {
-                    capabilities.hasTransport(NetworkCapabilities.TRANSPORT_CELLULAR) -> {
-                        isAvailable = true
-                    }
-                    capabilities.hasTransport(NetworkCapabilities.TRANSPORT_WIFI) -> {
-                        isAvailable = true
-                    }
-                    capabilities.hasTransport(NetworkCapabilities.TRANSPORT_ETHERNET) -> {
-                        isAvailable = true
-                    }
-                    else -> isAvailable = false
-                }
-            }
-        } else {
-            val activeNetworkInfo = connectivityManager.activeNetworkInfo
-            isAvailable = activeNetworkInfo != null && activeNetworkInfo.isConnected
-        }
-        return isAvailable
+        /* moveAnimation = AnimationUtils.loadAnimation(
+             requireContext(),
+             R.anim.move
+         );
+         locationNameTextView.startAnimation(moveAnimation)*/
     }
 
 
@@ -219,10 +215,6 @@ class HomeFragment : Fragment() {
         progressBar.visibility = GONE
         visibilityConstrainLayout.visibility = VISIBLE
 
-        locationNameTextView.text = ConstantsValue.address!!.locality
-
-        locationDetailsNameTextView.text =
-            ConstantsValue.address!!.subAdminArea + " - " + ConstantsValue.address!!.adminArea + " - " + ConstantsValue.address!!.countryName
         currentDateTextView.text = formatDate(weatherResponse.current.dt)
         currentDayStatusTextView.text = weatherResponse.current.weather[0].description
         currentDayTemperatureTextView.text = getTemperature(weatherResponse.current.temp)
@@ -252,6 +244,25 @@ class HomeFragment : Fragment() {
         visibilityTextView.text =
             DecimalFormat("#").format(weatherResponse.current.visibility) + " " + getString(R.string.meter)
         ultravioletTextView.text = DecimalFormat("#.##").format(weatherResponse.current.uvi)
+
+    }
+
+    private fun getAddress() {
+        var address = getAddress(
+            ConstantsValue.latitude.toDouble(),
+            ConstantsValue.longitude.toDouble(),
+            requireContext()
+        )
+        assignAddressToView(
+            address
+        )
+        viewModel.insertAddressToRoom(address)
+    }
+
+    private fun assignAddressToView(savedAddress: SavedAddress) {
+        locationNameTextView.text = savedAddress.locality
+        locationDetailsNameTextView.text =
+            savedAddress.subAdminArea + " - " + savedAddress.adminArea + " - " + savedAddress.countryName
     }
 
     private fun getWindSpeed(weatherResponse: WeatherResponse): String {
@@ -312,42 +323,33 @@ class HomeFragment : Fragment() {
         return format.format(date)
     }
 
-    override fun onStart() {
-        super.onStart()
-        Log.i(TAG, "onStart: ")
-    }
 
-    override fun onResume() {
-        super.onResume()
-        Log.i(TAG, "onResume: ")
-    }
+    /* private fun getAddress(latitude: Double, longitude: Double) {
+         Log.i(TAG, "getAddress: begin of method")
+         val result = StringBuilder()
+         try {
+             val geocoder = Geocoder(requireContext(), Locale.getDefault())
+             // val geocoder2 = Geocoder(requireContext(), Locale.getDefault())
+             val addresses = geocoder.getFromLocation(latitude, longitude, 1)
+             if (addresses.size > 0) {
+                 val address = addresses[0]
+                 result.append(address.locality).append("\n")
+                 result.append(address.countryName)
+             }
+             Log.i(TAG, "getAddress: $addresses")
+             Log.i(TAG, "getAddress: " + ConstantsValue.language)
+             val address = SavedAddress(
+                 ConstantsValue.language,
+                 addresses[0].locality, addresses[0].subAdminArea,
+                 addresses[0].adminArea, addresses[0].countryName
+             )
+             assignAddressToView(
+                 address
+             )
+             viewModel.insertAddressToRoom(address)
+         } catch (e: IOException) {
+             Log.e("TAG", e.localizedMessage)
+         }
+     }*/
 
-    override fun onPause() {
-        super.onPause()
-        Log.i(TAG, "onPause: ")
-    }
-
-    override fun onStop() {
-        super.onStop()
-        Log.i(TAG, "onStop: ")
-    }
-
-    override fun onDestroy() {
-        super.onDestroy()
-        Log.i(TAG, "onDestroy: ")
-    }
-
-    override fun onDestroyView() {
-        super.onDestroyView()
-        Log.i(TAG, "onDestroyView: ")
-    }
-
-    override fun onDetach() {
-        super.onDetach()
-        Log.i(TAG, "onDetach: ")
-    }
-
-    companion object {
-        fun newInstance() = HomeFragment()
-    }
 }

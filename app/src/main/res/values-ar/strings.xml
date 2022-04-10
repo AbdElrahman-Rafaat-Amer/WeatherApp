@@ -43,4 +43,18 @@
     <string name="last_quarter">ربع اخير</string>
     <string name="no_favorite">لم تقم بإضافة أي أماكن بعد</string>
     <string name="no_alerts">لم تقم بإضافة اي تنبيهات بعد</string>
+
+    <string name="alert_from"> من </string>
+    <string name="alert_to"> إلي </string>
+    <string name="alarm"> المنبه </string>
+    <string name="alert_save_button"> حفظ </string>
+    <string name="undefined_place"> مكان غير معروف </string>
+    <string name="enable_gps">من فضلك قم بتفعيل خدمات الموقع</string>
+    <string name="enable">تفعيل</string>
+    <string name="waiting_enable_gps">ننتظرك لتقوم بتفعيل خدمات الموقع لكي نحصل علي موقعك</string>
+    <string name="error_network">لا يوجد اتصال بالإنترنت</string>
+
+    <string name="fragment_favorite">الاماكن المفضلة</string>
+    <string name="PM">م</string>
+    <string name="AM">ص</string>
 </resources>

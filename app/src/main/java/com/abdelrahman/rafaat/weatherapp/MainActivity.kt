@@ -59,7 +59,7 @@ class MainActivity : AppCompatActivity(), OnDayClickListener {
             when (it.id) {
                 ID_HOME -> {
                     fragmentShow = ID_HOME
-                    replaceFragment(HomeFragment.newInstance())
+                    replaceFragment(HomeFragment())
                 }
                 ID_FAVORITES -> {
                     fragmentShow = ID_FAVORITES
@@ -77,7 +77,7 @@ class MainActivity : AppCompatActivity(), OnDayClickListener {
                 }
                 ID_TIMETABLE -> {
                     fragmentShow = ID_TIMETABLE
-                    replaceFragment(TimeTableFragment.newInstance())
+                    replaceFragment(TimeTableFragment())
 
                 }
             }
@@ -105,7 +105,7 @@ class MainActivity : AppCompatActivity(), OnDayClickListener {
 
 
     override fun showDayDetails(dayStatus: Daily) {
-        val fragment: Fragment = TimeTableFragment.newInstance();
+        val fragment: Fragment = TimeTableFragment();
         supportFragmentManager.beginTransaction().replace(R.id.fragment_container, fragment)
             .commit()
         meo.show(ID_TIMETABLE, true)
