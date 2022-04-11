@@ -1,10 +1,7 @@
 package com.abdelrahman.rafaat.weatherapp.network
 
 import android.util.Log
-import com.abdelrahman.rafaat.weatherapp.model.Alerts
-import com.abdelrahman.rafaat.weatherapp.model.ConstantsValue
 import com.abdelrahman.rafaat.weatherapp.model.WeatherResponse
-import retrofit2.Response
 
 
 class WeatherClient private constructor() : RemoteSource {
@@ -28,10 +25,10 @@ class WeatherClient private constructor() : RemoteSource {
     ): WeatherResponse {
         Log.i(TAG, "getWeatherData: parameterized")
         val response = retrofitHelper.getWeatherDataDefaultResponse(
-            /*latitude,
-            longitude,*/
-            "45.23",
-            "37.7",
+            latitude,
+            longitude,
+            /* "45.23",
+             "37.7",*/
             language
         )
 

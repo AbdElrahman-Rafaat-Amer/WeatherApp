@@ -1,22 +1,16 @@
 package com.abdelrahman.rafaat.weatherapp
 
-import android.content.Context
 import android.content.res.Configuration
 import android.content.res.Resources
-import android.location.Address
 import android.os.Build
 import android.os.Bundle
 import android.util.DisplayMetrics
 import android.util.Log
-import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
 import androidx.fragment.app.Fragment
-import androidx.fragment.app.FragmentManager
-import androidx.fragment.app.FragmentTransaction
 import com.abdelrahman.rafaat.weatherapp.alert.view.AlertFragment
 import com.abdelrahman.rafaat.weatherapp.favoriteplaces.view.FavoriteFragment
 import com.abdelrahman.rafaat.weatherapp.homeplaces.view.HomeFragment
-import com.abdelrahman.rafaat.weatherapp.homeplaces.view.OnDayClickListener
 import com.abdelrahman.rafaat.weatherapp.model.ConstantsValue
 import com.abdelrahman.rafaat.weatherapp.model.Daily
 import com.abdelrahman.rafaat.weatherapp.setting.view.SettingFragment
@@ -25,7 +19,7 @@ import com.etebarian.meowbottomnavigation.MeowBottomNavigation
 import com.etebarian.meowbottomnavigation.MeowBottomNavigation.Model
 import java.util.*
 
-class MainActivity : AppCompatActivity(), OnDayClickListener {
+class MainActivity : AppCompatActivity() {
 
     private val TAG = "MainActivity"
 
@@ -101,14 +95,6 @@ class MainActivity : AppCompatActivity(), OnDayClickListener {
     override fun onSaveInstanceState(outState: Bundle) {
         super.onSaveInstanceState(outState)
         outState.putInt("FRAGMENT_ID", fragmentShow)
-    }
-
-
-    override fun showDayDetails(dayStatus: Daily) {
-        val fragment: Fragment = TimeTableFragment();
-        supportFragmentManager.beginTransaction().replace(R.id.fragment_container, fragment)
-            .commit()
-        meo.show(ID_TIMETABLE, true)
     }
 
     private fun replaceFragment(fragment: Fragment) {

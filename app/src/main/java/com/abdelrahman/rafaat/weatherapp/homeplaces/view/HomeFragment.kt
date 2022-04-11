@@ -123,7 +123,14 @@ class HomeFragment : Fragment() {
             viewModelFactory
         ).get(CurrentPlaceViewModel::class.java)
 
-        if (isInternetAvailable(requireContext())) {
+        if (!isInternetAvailable(requireContext()) || ConstantsValue.locationMethod.equals("M")) {
+            Log.i(TAG, "onViewCreated: error in network")
+            progressBar.visibility = GONE
+            visibilityConstrainLayout.visibility = VISIBLE
+            viewModel.getDataFromRoom()
+            viewModel.getStoredAddressFromRoom()
+
+        } else {
             getAddress()
             Log.i(TAG, "isInternetAvailable: latitude ---> " + ConstantsValue.latitude)
             Log.i(TAG, "isInternetAvailable: longitude ---> " + ConstantsValue.longitude)
@@ -131,13 +138,6 @@ class HomeFragment : Fragment() {
             viewModel.getWeatherFromNetwork(
                 ConstantsValue.latitude, ConstantsValue.longitude, ConstantsValue.language
             )
-
-        } else {
-            Log.i(TAG, "onViewCreated: error in network")
-            progressBar.visibility = GONE
-            visibilityConstrainLayout.visibility = VISIBLE
-            viewModel.getDataFromRoom()
-            viewModel.getStoredAddressFromRoom()
         }
 
         viewModel.weatherResponse.observe(viewLifecycleOwner, Observer {
@@ -145,6 +145,7 @@ class HomeFragment : Fragment() {
             when (it) {
                 is WeatherResponse -> {
                     assignDataToView(it)
+
                 }
                 else -> Toast.makeText(context, "Return is null $it", Toast.LENGTH_SHORT).show()
             }
@@ -185,7 +186,7 @@ class HomeFragment : Fragment() {
 
 
         dailyRecyclerView = view.findViewById(R.id.daily_recyclerView)
-        weatherDailyAdapter = WeatherDailyAdapter(view.context, mainActivity)
+        weatherDailyAdapter = WeatherDailyAdapter(view.context)
         val dailyManager = LinearLayoutManager(view.context)
         dailyManager.orientation = LinearLayoutManager.VERTICAL
         dailyRecyclerView.layoutManager = dailyManager
@@ -213,7 +214,9 @@ class HomeFragment : Fragment() {
     @RequiresApi(Build.VERSION_CODES.O)
     private fun assignDataToView(weatherResponse: WeatherResponse) {
         progressBar.visibility = GONE
+        animatedImageView.visibility = GONE
         visibilityConstrainLayout.visibility = VISIBLE
+
 
         currentDateTextView.text = formatDate(weatherResponse.current.dt)
         currentDayStatusTextView.text = weatherResponse.current.weather[0].description
@@ -260,9 +263,8 @@ class HomeFragment : Fragment() {
     }
 
     private fun assignAddressToView(savedAddress: SavedAddress) {
-        locationNameTextView.text = savedAddress.locality
-        locationDetailsNameTextView.text =
-            savedAddress.subAdminArea + " - " + savedAddress.adminArea + " - " + savedAddress.countryName
+        locationNameTextView.text = savedAddress.subAdminArea
+        locationDetailsNameTextView.text = savedAddress.adminArea + " - " + savedAddress.countryName
     }
 
     private fun getWindSpeed(weatherResponse: WeatherResponse): String {
@@ -322,34 +324,5 @@ class HomeFragment : Fragment() {
         Log.i(TAG, format.format(date))
         return format.format(date)
     }
-
-
-    /* private fun getAddress(latitude: Double, longitude: Double) {
-         Log.i(TAG, "getAddress: begin of method")
-         val result = StringBuilder()
-         try {
-             val geocoder = Geocoder(requireContext(), Locale.getDefault())
-             // val geocoder2 = Geocoder(requireContext(), Locale.getDefault())
-             val addresses = geocoder.getFromLocation(latitude, longitude, 1)
-             if (addresses.size > 0) {
-                 val address = addresses[0]
-                 result.append(address.locality).append("\n")
-                 result.append(address.countryName)
-             }
-             Log.i(TAG, "getAddress: $addresses")
-             Log.i(TAG, "getAddress: " + ConstantsValue.language)
-             val address = SavedAddress(
-                 ConstantsValue.language,
-                 addresses[0].locality, addresses[0].subAdminArea,
-                 addresses[0].adminArea, addresses[0].countryName
-             )
-             assignAddressToView(
-                 address
-             )
-             viewModel.insertAddressToRoom(address)
-         } catch (e: IOException) {
-             Log.e("TAG", e.localizedMessage)
-         }
-     }*/
 
 }

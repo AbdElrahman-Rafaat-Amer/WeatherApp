@@ -4,7 +4,10 @@ package com.abdelrahman.rafaat.weatherapp.alert.view
 import android.app.AlertDialog
 import android.app.DatePickerDialog
 import android.app.TimePickerDialog
+import android.content.Intent
+import android.graphics.Color
 import android.os.Bundle
+import android.provider.Settings
 import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
@@ -26,6 +29,7 @@ import com.abdelrahman.rafaat.weatherapp.model.SavedAlerts
 import com.abdelrahman.rafaat.weatherapp.network.WeatherClient
 import com.abdelrahman.rafaat.weatherapp.reminder.NotificationAlert
 import com.google.android.material.floatingactionbutton.FloatingActionButton
+import com.google.android.material.snackbar.Snackbar
 import java.text.DecimalFormat
 import java.text.SimpleDateFormat
 import java.util.*
@@ -46,13 +50,19 @@ class AlertFragment : Fragment(), OnAlertDeleteClickListener {
     private lateinit var startDate: TextView
     private lateinit var endHour: TextView
     private lateinit var endDate: TextView
-
+    private var alarmStartYear: Int = 0
+    private var alarmStartMonth: Int = 0
+    private var alarmStartDay: Int = 0
+    private var alarmStartHour: Int = 0
+    private var alarmStartMinute: Int = 0
+    private var initialDelay: Long = 0L
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View? {
         // Inflate the layout for this fragment
+
         return inflater.inflate(R.layout.fragment_alert, container, false)
     }
 
@@ -97,9 +107,13 @@ class AlertFragment : Fragment(), OnAlertDeleteClickListener {
         })
 
         addAlertFloatingActionButton.setOnClickListener {
-            Log.i(TAG, "addAlertButton: ")
             showDialog()
         }
+    }
+
+    override fun delete(id: Int) {
+        viewModel.deleteAlertFromRoom(id)
+        viewModel.getStoredAlerts()
     }
 
     private fun showDialog() {
@@ -113,46 +127,43 @@ class AlertFragment : Fragment(), OnAlertDeleteClickListener {
         startDate = alertView.findViewById(R.id.alert_start_date)
         endHour = alertView.findViewById(R.id.alert_end_hour)
         endDate = alertView.findViewById(R.id.alert_end_date)
-        var startLiner: LinearLayout = alertView.findViewById(R.id.start_date_linerLayout)
-        var endLinear: LinearLayout = alertView.findViewById(R.id.end_date_linerLayout)
+        val startLiner: LinearLayout = alertView.findViewById(R.id.start_date_linerLayout)
+        val endLinear: LinearLayout = alertView.findViewById(R.id.end_date_linerLayout)
 
         startLiner.setOnClickListener {
             Log.i(TAG, "startLiner: ")
-            showDateDialogPicker(startDate, startHour)
+            showDateDialogPicker(startDate, startHour, true)
         }
 
         endLinear.setOnClickListener {
             Log.i(TAG, "endLinear: ")
-            showDateDialogPicker(endDate, endHour)
+            showDateDialogPicker(endDate, endHour, false)
         }
 
         alertDialogBuilder.setView(alertView)
         saveButton.setOnClickListener {
             Log.i(TAG, "addAlertButton: ")
-            var repetitions =
-                calculateDifferenceBetweenDates(startDate.text.toString(), endDate.text.toString())
-            viewModel.insertAlert(
-                SavedAlerts(
-                    startDate.text.toString(),
-                    endDate.text.toString(),
-                    startHour.text.toString(),
-                    endHour.text.toString(),
-                    repetitions
-                )
-            )
-            alertDialogBuilder.dismiss()
-            viewModel.getStoredAlerts()
 
-            val reminderRequest = OneTimeWorkRequest.Builder(
-                NotificationAlert::class.java
-            ).setInitialDelay(4000, TimeUnit.MILLISECONDS).build()
-            WorkManager.getInstance(requireContext()).enqueue(reminderRequest)
+
+            initialDelay = checkDates()
+            Log.i(TAG, "showDialog: initialDelay----> " + initialDelay)
+            if (initialDelay > 0) {
+                updateRoom()
+                setupAlertRequest()
+                alertDialogBuilder.dismiss()
+                viewModel.getStoredAlerts()
+            } else {
+                showSankBar(alertView)
+            }
+
+
         }
         alertDialogBuilder.setCanceledOnTouchOutside(false)
         alertDialogBuilder.show()
     }
 
-    private fun showDateDialogPicker(date: TextView, time: TextView) {
+
+    private fun showDateDialogPicker(date: TextView, time: TextView, isStart: Boolean) {
         Log.i(TAG, "showDateDialogPicker: ")
         val calender = Calendar.getInstance()
         val day: Int = calender.get(Calendar.DAY_OF_MONTH)
@@ -163,21 +174,33 @@ class AlertFragment : Fragment(), OnAlertDeleteClickListener {
             requireContext(),
             { datePicker, year, monthIndex, dayIndex ->
                 Log.i(TAG, "DatePickerDialog: ")
-                var month = monthIndex + 1
+                val month = monthIndex + 1
+                if (isStart) {
+                    alarmStartYear = year
+                    alarmStartMonth = month
+                    alarmStartDay = dayIndex
+                    Log.i(
+                        TAG,
+                        "showDateDialogPicker: start Time$alarmStartYear/$alarmStartMonth/$alarmStartDay"
+                    )
+
+                }
                 date.text = formatDate("$dayIndex/$month/$year")
-                showTimeDialogPicker(time)
+                showTimeDialogPicker(time, isStart)
             }, year, month, day
         ).show()
     }
 
     private fun formatDate(stringDate: String): String {
+        Log.i(TAG, "formatDate: stringDate---------------------------> $stringDate")
         val stringFormat = SimpleDateFormat("dd/MM/yyyy", Locale.getDefault())
 
         val dateFormat = SimpleDateFormat("d MMM yyyy", Locale.getDefault())
+
         return dateFormat.format(stringFormat.parse(stringDate))
     }
 
-    private fun showTimeDialogPicker(time: TextView) {
+    private fun showTimeDialogPicker(time: TextView, isStart: Boolean) {
         Log.i(TAG, "showTimeDialogPicker: ")
         val calender = Calendar.getInstance()
         val hour: Int = calender.get(Calendar.HOUR)
@@ -185,6 +208,10 @@ class AlertFragment : Fragment(), OnAlertDeleteClickListener {
 
         TimePickerDialog(requireContext(), { timePicker: TimePicker, hour: Int, minute: Int ->
             Log.i(TAG, "TimePickerDialog: ")
+            if (isStart) {
+                alarmStartHour = hour
+                alarmStartMinute = minute
+            }
             if (hour >= 12)
                 time.text =
                     DecimalFormat("#").format(hour) + ":" + DecimalFormat("#").format(minute) + requireContext().getString(
@@ -201,16 +228,62 @@ class AlertFragment : Fragment(), OnAlertDeleteClickListener {
     private fun calculateDifferenceBetweenDates(startDate: String, endDate: String): Long {
         val dates = SimpleDateFormat("d MMM yyyy", Locale.getDefault())
         val difference: Long =
-            Math.abs(dates.parse(startDate).getTime() - dates.parse(endDate).getTime())
+            Math.abs(dates.parse(startDate).time - dates.parse(endDate).time)
         val differenceDates = difference / (24 * 60 * 60 * 1000)
         Log.i(TAG, "calculateDifferenceBetweenDates: dayDifference >>>>>> $differenceDates")
         return differenceDates
     }
 
-    override fun delete(id: Int) {
-        viewModel.deleteAlertFromRoom(id)
-        viewModel.getStoredAlerts()
+
+    private fun checkDates(): Long {
+        val dates = SimpleDateFormat("yyyy/MM/dd HH:mm", Locale.getDefault())
+
+        var currentTime = Calendar.getInstance().timeInMillis
+        Log.i(TAG, "checkDates: currentTime-----> $currentTime")
+
+        // var startDate = dates.parse("$alarmStartYear/$alarmStartMonth/$alarmStartDay $alarmStartHour:$alarmStartMinute").getTime()
+        var startTime =
+            dates.parse("$alarmStartYear/$alarmStartMonth/$alarmStartDay $alarmStartHour:$alarmStartMinute")
+                .time
+        Log.i(TAG, "checkDates: startTime-----> $startTime")
+
+        val initialDelay: Long = startTime - currentTime
+        Log.i(TAG, "calculateDifferenceBetweenDates: initialDelay >>>>>> $initialDelay")
+
+        return initialDelay
+
     }
 
+    private fun updateRoom() {
+        val repetitions =
+            calculateDifferenceBetweenDates(startDate.text.toString(), endDate.text.toString())
+        viewModel.insertAlert(
+            SavedAlerts(
+                startDate.text.toString(),
+                endDate.text.toString(),
+                startHour.text.toString(),
+                endHour.text.toString(),
+                repetitions
+            )
+        )
+
+    }
+
+    private fun setupAlertRequest() {
+        val reminderRequest = OneTimeWorkRequest.Builder(
+            NotificationAlert::class.java
+        ).setInitialDelay(initialDelay, TimeUnit.MILLISECONDS).build()
+        WorkManager.getInstance(requireContext()).enqueue(reminderRequest)
+    }
+
+    private fun showSankBar(alertView: View) {
+        var snackBar = Snackbar.make(
+            alertView.findViewById(R.id.alertLayout_ConstraintLayout),
+            getString(R.string.alert_time_error),
+            Snackbar.LENGTH_SHORT
+        ).setActionTextColor(Color.WHITE)
+        snackBar.view.setBackgroundColor(Color.RED)
+        snackBar.show()
+    }
 
 }

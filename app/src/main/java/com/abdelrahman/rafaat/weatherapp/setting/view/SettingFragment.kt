@@ -2,7 +2,9 @@ package com.abdelrahman.rafaat.weatherapp.setting.view
 
 import android.content.Context
 import android.content.Context.MODE_PRIVATE
+import android.content.Intent
 import android.content.SharedPreferences
+import android.graphics.Color
 import android.os.Bundle
 import android.util.Log
 import android.view.LayoutInflater
@@ -16,9 +18,13 @@ import androidx.fragment.app.FragmentTransaction
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.transition.AutoTransition
 import androidx.transition.TransitionManager
+import com.abdelrahman.rafaat.weatherapp.InitializationScreenActivity
 import com.abdelrahman.rafaat.weatherapp.MainActivity
 import com.abdelrahman.rafaat.weatherapp.R
+import com.abdelrahman.rafaat.weatherapp.maps.view.GoogleMapsActivity
 import com.abdelrahman.rafaat.weatherapp.model.ConstantsValue
+import com.abdelrahman.rafaat.weatherapp.model.isInternetAvailable
+import com.google.android.material.snackbar.Snackbar
 import java.util.*
 
 
@@ -70,6 +76,8 @@ class SettingFragment : Fragment() {
     private lateinit var showNotificationOptionImageView: ImageView
 
     private lateinit var radioButtonTag: String
+    private lateinit var currentView: View
+
     override fun onAttach(context: Context) {
         super.onAttach(context)
         sharedPreferences = context.getSharedPreferences("SETTING", MODE_PRIVATE)
@@ -82,7 +90,9 @@ class SettingFragment : Fragment() {
         savedInstanceState: Bundle?
     ): View? {
         val view = inflater.inflate(R.layout.fragment_setting, container, false)
+        currentView = view
         initUI(view)
+
 
         showChangeLanguageView.setOnClickListener(View.OnClickListener {
             Log.i(TAG, "inside setOnClickListener: ")
@@ -197,12 +207,37 @@ class SettingFragment : Fragment() {
                     Log.i(TAG, "radioButtonTag Location: $radioButtonTag")
                     when (radioButtonTag) {
                         "G" -> {
-                            ConstantsValue.locationMethod = "G"
-                            editor.putString("CURRENT_LOCATION", "G").commit()
+
+                            if (isInternetAvailable(requireContext())) {
+                                ConstantsValue.locationMethod = "G"
+                                editor.putString("CURRENT_LOCATION", "G").commit()
+                                startActivity(
+                                    Intent(
+                                        requireContext(),
+                                        InitializationScreenActivity::class.java
+                                    )
+                                )
+                                requireActivity().finish()
+                            } else {
+                                showSnackBar()
+                            }
+
                         }
                         "M" -> {
-                            ConstantsValue.locationMethod = "M"
-                            editor.putString("CURRENT_LOCATION", "M").commit()
+
+                            if (isInternetAvailable(requireContext())) {
+                                ConstantsValue.locationMethod = "M"
+                                editor.putString("CURRENT_LOCATION", "M").commit()
+                                startActivity(
+                                    Intent(
+                                        requireContext(),
+                                        GoogleMapsActivity::class.java
+                                    )
+                                )
+                                requireActivity().finish()
+                            } else {
+                                showSnackBar()
+                            }
                         }
                     }
                     Log.i(TAG, "locationMethod: " + ConstantsValue.locationMethod)
@@ -247,6 +282,19 @@ class SettingFragment : Fragment() {
 
         return view
     }
+
+
+    private fun showSnackBar() {
+        var snackBar = Snackbar.make(
+            currentView.findViewById(R.id.ConstraintLayout_SettingFragment),
+            getString(R.string.error_network_for_update),
+            Snackbar.LENGTH_SHORT
+        ).setActionTextColor(Color.WHITE)
+
+        snackBar.view.setBackgroundColor(Color.RED)
+        snackBar.show()
+    }
+
 
     override fun onResume() {
         super.onResume()

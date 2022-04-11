@@ -27,7 +27,7 @@
     <string name="visibility">Visibility</string>
     <string name="ultraviolet">Ultraviolet</string>
     <string name="temperature_celsius_unit"> °C</string>
-    <string name="temperature_kelvin_unit"> K</string>
+    <string name="temperature_kelvin_unit">" °K"</string>
     <string name="temperature_fahrenheit_unit"> °F</string>
     <string name="wind_speed_unit_MS"> m/s</string>
     <string name="wind_speed_unit_KH"> k/h</string>
@@ -56,5 +56,17 @@
     <string name="fragment_favorite">Favorite Places</string>
     <string name="PM">PM</string>
     <string name="AM">AM</string>
+    <string name="alert_time_error">Start date must be  after current date</string>
+    <string name="error_network_for_update">No internet Founded to update your information</string>
+
+    <string name="no_alert">No Alerts Founded</string>
+    <string name="sky_clear">The sky clear</string>
+
+    <string name="rain_alert">Rain</string>
+    <string name="wind_alert">Wind</string>
+    <string name="avalanches_alert">Avalanches</string>
+    <string name="other_alert">Rain and Wind</string>
+    <string name="forestfire_alert">Fire warning</string>
+
 
 </resources>

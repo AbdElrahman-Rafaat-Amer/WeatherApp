@@ -99,7 +99,14 @@ class FavoriteFragment : Fragment(), OnDeleteFavorite {
         })
         addFavoriteButton.setOnClickListener {
             Log.i(TAG, "addFavoriteButton: ")
-            startActivity(Intent(requireContext(), GoogleMapsActivity::class.java))
+            if (isInternetAvailable(requireContext())) {
+                val intent = Intent(requireContext(), GoogleMapsActivity::class.java)
+                intent.putExtra("FROM", "FAVORITE")
+                startActivity(intent)
+            } else {
+                showSnackBar()
+            }
+
         }
     }
 
@@ -131,7 +138,7 @@ class FavoriteFragment : Fragment(), OnDeleteFavorite {
         var snackBar = Snackbar.make(
             currentView.findViewById(R.id.ConstraintLayout_FavoriteFragment),
             getString(R.string.error_network),
-            Snackbar.LENGTH_INDEFINITE
+            Snackbar.LENGTH_SHORT
         ).setActionTextColor(Color.WHITE)
 
         snackBar.view.setBackgroundColor(Color.RED)

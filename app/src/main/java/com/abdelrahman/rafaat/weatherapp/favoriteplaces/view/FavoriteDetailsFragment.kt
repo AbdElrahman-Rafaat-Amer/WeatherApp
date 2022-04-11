@@ -95,13 +95,13 @@ class FavoriteDetailsFragment(var viewModel: FavoritePlaceViewModel) : Fragment(
         super.onViewCreated(view, savedInstanceState)
         Log.i(TAG, "onViewCreated: ")
         initUI(view)
-        getAddress()
         animatedImageView.animate().rotation(360f).setDuration(2000).start()
         viewModel.selectedFavoritePlaces.observe(viewLifecycleOwner, Observer {
             Log.i(TAG, "onCreateView: observe $it")
             when (it) {
                 is WeatherResponse -> {
                     assignDataToView(it)
+                    getAddress(it)
                 }
                 else -> Toast.makeText(context, "Return is null $it", Toast.LENGTH_SHORT).show()
             }
@@ -131,7 +131,7 @@ class FavoriteDetailsFragment(var viewModel: FavoritePlaceViewModel) : Fragment(
 
 
         dailyRecyclerView = view.findViewById(R.id.daily_recyclerView)
-        weatherDailyAdapter = WeatherDailyAdapter(view.context, mainActivity)
+        weatherDailyAdapter = WeatherDailyAdapter(view.context)
         val dailyManager = LinearLayoutManager(view.context)
         dailyManager.orientation = LinearLayoutManager.VERTICAL
         dailyRecyclerView.layoutManager = dailyManager
@@ -246,10 +246,10 @@ class FavoriteDetailsFragment(var viewModel: FavoritePlaceViewModel) : Fragment(
         return format.format(date)
     }
 
-    private fun getAddress() {
+    private fun getAddress(weatherResponse: WeatherResponse) {
         var address = com.abdelrahman.rafaat.weatherapp.model.getAddress(
-            ConstantsValue.latitude.toDouble(),
-            ConstantsValue.longitude.toDouble(),
+            weatherResponse.lat,
+            weatherResponse.lon,
             requireContext()
         )
         assignAddressToView(
@@ -258,9 +258,8 @@ class FavoriteDetailsFragment(var viewModel: FavoritePlaceViewModel) : Fragment(
     }
 
     private fun assignAddressToView(savedAddress: SavedAddress) {
-        locationNameTextView.text = savedAddress.locality
-        locationDetailsNameTextView.text =
-            savedAddress.subAdminArea + " - " + savedAddress.adminArea + " - " + savedAddress.countryName
+        locationNameTextView.text = savedAddress.subAdminArea
+        locationDetailsNameTextView.text = savedAddress.adminArea + " - " + savedAddress.countryName
     }
 
 

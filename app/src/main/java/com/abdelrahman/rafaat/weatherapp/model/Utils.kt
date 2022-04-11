@@ -12,8 +12,15 @@ fun getAddress(latitude: Double, longitude: Double, context: Context): SavedAddr
     val result = StringBuilder()
     try {
         val geocoder = Geocoder(context, Locale.getDefault())
-        // val geocoder2 = Geocoder(requireContext(), Locale.getDefault())
+
+        val geocoder2 = Geocoder(context, Locale.ENGLISH)
+        val geocoder3 = Geocoder(context, Locale.forLanguageTag("ar"))
+
+
         val addresses = geocoder.getFromLocation(latitude, longitude, 1)
+        val addresses3 = geocoder3.getFromLocation(latitude, longitude, 1)
+        val addresses2 = geocoder2.getFromLocation(latitude, longitude, 1)
+
         if (addresses.size > 0) {
             val address = addresses[0]
             result.append(address.locality).append("\n")
@@ -21,9 +28,10 @@ fun getAddress(latitude: Double, longitude: Double, context: Context): SavedAddr
         }
         address = SavedAddress(
             ConstantsValue.language,
-            addresses[0].locality, addresses[0].subAdminArea,
+            addresses[0].subAdminArea,
             addresses[0].adminArea, addresses[0].countryName
         )
+
     } catch (e: IOException) {
         Log.e("TAG", e.localizedMessage)
     }

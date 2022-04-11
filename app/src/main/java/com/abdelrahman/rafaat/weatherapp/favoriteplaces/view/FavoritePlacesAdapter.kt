@@ -11,6 +11,7 @@ import android.widget.Toast
 import androidx.constraintlayout.widget.ConstraintLayout
 import androidx.recyclerview.widget.RecyclerView
 import com.abdelrahman.rafaat.weatherapp.R
+import com.abdelrahman.rafaat.weatherapp.model.ConstantsValue
 import com.abdelrahman.rafaat.weatherapp.model.FavoritePlaces
 import java.util.*
 
@@ -44,7 +45,7 @@ class FavoritePlacesAdapter(context: Context, fragment: OnDeleteFavorite) :
             fragment.showDetails(
                 favoritePlace.lat.toString(),
                 favoritePlace.lng.toString(),
-                Locale.getDefault().toLanguageTag()
+                ConstantsValue.language
             )
         }
 

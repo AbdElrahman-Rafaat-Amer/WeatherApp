@@ -10,11 +10,9 @@ import org.jetbrains.annotations.Nullable
 @Entity(tableName = "address")
 data class SavedAddress(
 
+    @PrimaryKey
     @ColumnInfo(name = "language")
     var language: String,
-
-    @ColumnInfo(name = "locality")
-    var locality: String,
 
     @ColumnInfo(name = "subAdminArea")
     var subAdminArea: String,
@@ -22,7 +20,6 @@ data class SavedAddress(
     @ColumnInfo(name = "adminArea")
     var adminArea: String,
 
-    @PrimaryKey
     @ColumnInfo(name = "countryName")
     var countryName: String
 

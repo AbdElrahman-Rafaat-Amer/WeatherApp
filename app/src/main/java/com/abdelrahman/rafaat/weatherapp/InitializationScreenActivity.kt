@@ -43,8 +43,12 @@ class InitializationScreenActivity : AppCompatActivity() {
 
         if (checkPermission()) {
             Log.i(TAG, "onCreate: checkPermission will get location")
-            getLastLocation()
-            ConstantsValue.locationMethod = "G"
+            if (ConstantsValue.locationMethod.equals("M")) {
+                goToNextActivity()
+            } else {
+                getLastLocation()
+                ConstantsValue.locationMethod = "G"
+            }
         } else {
             Log.i(TAG, "onCreate: requestPermission  will request permission")
             requestPermission()

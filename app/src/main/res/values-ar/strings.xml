@@ -27,8 +27,8 @@
     <string name="visibility">الرؤية</string>
     <string name="ultraviolet">الأشعة فوق البنفسجية</string>
     <string name="temperature_celsius_unit">°م </string>
-    <string name="temperature_kelvin_unit"> K</string>
-    <string name="temperature_fahrenheit_unit"> °F</string>
+    <string name="temperature_kelvin_unit">" °ك"</string>
+    <string name="temperature_fahrenheit_unit">" °ف"</string>
     <string name="wind_speed_unit_MS"> م/ث </string>
     <string name="wind_speed_unit_KH"> ك/س </string>
     <string name="meter"> م</string>
@@ -57,4 +57,13 @@
     <string name="fragment_favorite">الاماكن المفضلة</string>
     <string name="PM">م</string>
     <string name="AM">ص</string>
+    <string name="alert_time_error">يجب أن يكون تاريخ البدء بعد التاريخ الحالي</string>
+    <string name="error_network_for_update">لا يوجد اتصال بالإنترنت لكي نتمكن من تحديث موقعك</string>
+    <string name="no_alert">لا يوجد تحذيرات</string>
+    <string name="sky_clear">السماء صافية</string>
+    <string name="rain_alert">امطار غزيرة</string>
+    <string name="wind_alert">رياح</string>
+    <string name="avalanches_alert">الانهيارات الثلجية</string>
+    <string name="other_alert">عواصف ورعد وبرق</string>
+    <string name="forestfire_alert">"حريق الغابة "</string>
 </resources>

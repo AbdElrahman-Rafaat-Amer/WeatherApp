@@ -1,5 +1,6 @@
 package com.abdelrahman.rafaat.weatherapp.maps.view
 
+import android.content.Intent
 import android.location.Address
 import android.location.Geocoder
 import android.os.Bundle
@@ -7,12 +8,14 @@ import android.util.Log
 import android.widget.TextView
 import androidx.appcompat.app.AppCompatActivity
 import androidx.lifecycle.ViewModelProvider
+import com.abdelrahman.rafaat.weatherapp.MainActivity
 import com.abdelrahman.rafaat.weatherapp.R
 import com.abdelrahman.rafaat.weatherapp.database.ConcreteLocaleSource
 import com.abdelrahman.rafaat.weatherapp.homeplaces.viewmodel.CurrentPlaceViewModel
 import com.abdelrahman.rafaat.weatherapp.homeplaces.viewmodel.CurrentPlaceViewModelFactory
 import com.abdelrahman.rafaat.weatherapp.maps.viewmodel.MapViewModel
 import com.abdelrahman.rafaat.weatherapp.maps.viewmodel.MapViewModelFactory
+import com.abdelrahman.rafaat.weatherapp.model.ConstantsValue
 import com.abdelrahman.rafaat.weatherapp.model.FavoritePlaces
 import com.abdelrahman.rafaat.weatherapp.model.Repository
 import com.abdelrahman.rafaat.weatherapp.network.WeatherClient
@@ -48,6 +51,8 @@ class GoogleMapsActivity : AppCompatActivity(), OnMapReadyCallback {
         setContentView(R.layout.activity_maps)
         supportActionBar?.hide()
 
+        val destination = intent.getStringExtra("FROM")
+
         val mapFragment = supportFragmentManager
             .findFragmentById(R.id.map) as SupportMapFragment
         mapFragment.getMapAsync(this)
@@ -70,19 +75,30 @@ class GoogleMapsActivity : AppCompatActivity(), OnMapReadyCallback {
         mapDoneFloatingActionButton = findViewById(R.id.map_done_FloatingButton)
 
         mapDoneFloatingActionButton.setOnClickListener {
-            selectedDate = SimpleDateFormat("EE dd-M-yyyy").format(Date())
-            Log.i(TAG, "mapDoneFloatingActionButton: longitude---------------> $longitude")
-            Log.i(TAG, "mapDoneFloatingActionButton: latitude----------------> $latitude")
-            Log.i(TAG, "mapDoneFloatingActionButton: selectedPlace-----------> $selectedPlace")
-            Log.i(TAG, "mapDoneFloatingActionButton: selectedDate------------> $selectedDate")
-            viewModel.insertToFavorite(
-                FavoritePlaces(
-                    latitude.toDouble(),
-                    longitude.toDouble(),
-                    selectedPlace,
-                    selectedDate
+
+            if (destination.equals("FAVORITE")) {
+                //Save to FAVORITE
+                Log.i(TAG, "onCreate: back to favorite")
+                selectedDate = SimpleDateFormat("EE dd-M-yyyy").format(Date())
+                Log.i(TAG, "mapDoneFloatingActionButton: longitude---------------> $longitude")
+                Log.i(TAG, "mapDoneFloatingActionButton: latitude----------------> $latitude")
+                Log.i(TAG, "mapDoneFloatingActionButton: selectedPlace-----------> $selectedPlace")
+                Log.i(TAG, "mapDoneFloatingActionButton: selectedDate------------> $selectedDate")
+                viewModel.insertToFavorite(
+                    FavoritePlaces(
+                        latitude.toDouble(),
+                        longitude.toDouble(),
+                        selectedPlace,
+                        selectedDate
+                    )
                 )
-            )
+            } else {
+                //Save to HOME
+                Log.i(TAG, "onCreate: go to home")
+                ConstantsValue.latitude = latitude
+                ConstantsValue.longitude = longitude
+                startActivity(Intent(this, MainActivity::class.java))
+            }
             finish()
         }
 
@@ -93,7 +109,7 @@ class GoogleMapsActivity : AppCompatActivity(), OnMapReadyCallback {
         mMap = googleMap
 
         // Add a marker in Sydney and move the camera
-        val sydney = LatLng(-34.0, 151.0)
+        val sydney = LatLng(ConstantsValue.latitude.toDouble(), ConstantsValue.longitude.toDouble())
 
         val marker = mMap.addMarker(
             MarkerOptions().position(sydney).draggable(true).title("Marker in Sydney")
@@ -117,15 +133,15 @@ class GoogleMapsActivity : AppCompatActivity(), OnMapReadyCallback {
                     addresses = geocoder.getFromLocation(p0.latitude, p0.longitude, 1)
                     if (!addresses.isNullOrEmpty()) {
                         showSelectedLocation.text = addresses[0].adminArea
-                        marker.title = addresses[0].locality
+                        marker.title = addresses[0].adminArea
 
                         latitude = marker.position.latitude.toString()
                         longitude = marker.position.longitude.toString()
-                        if (addresses[0].locality != null) {
-                            selectedPlace = addresses[0].locality
-                        } else {
-                            selectedPlace = addresses[0].subAdminArea
-                        }
+                        /*  if (addresses[0].locality != null) {
+                              selectedPlace = addresses[0].locality
+                          } else {*/
+                        selectedPlace = addresses[0].adminArea
+                        //   }
 
                         Log.i(
                             TAG,
@@ -170,11 +186,11 @@ class GoogleMapsActivity : AppCompatActivity(), OnMapReadyCallback {
                         1
                     )
                     if (!addresses.isNullOrEmpty()) {
-                        showSelectedLocation.text = addresses[0].locality
-                        marker.title = addresses[0].locality
+                        showSelectedLocation.text = addresses[0].adminArea
+                        marker.title = addresses[0].subAdminArea
                         latitude = marker.position.latitude.toString()
                         longitude = marker.position.longitude.toString()
-                        selectedPlace = addresses[0].locality
+                        selectedPlace = addresses[0].adminArea
                         Log.i(
                             TAG,
                             "mapDoneFloatingActionButton: longitude---------------> $longitude"

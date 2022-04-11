@@ -21,11 +21,10 @@ import java.util.*
 
 import kotlin.collections.ArrayList
 
-class WeatherDailyAdapter(context: Context, onDayClickListener: OnDayClickListener) :
+class WeatherDailyAdapter(context: Context) :
     RecyclerView.Adapter<WeatherDailyAdapter.ViewHolder?>() {
     private var context = context
     private val TAG = "WeatherDailyAdapter"
-    private var onDayClickListener = onDayClickListener
     private var days: List<Daily> = ArrayList()
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ViewHolder {
@@ -45,10 +44,6 @@ class WeatherDailyAdapter(context: Context, onDayClickListener: OnDayClickListen
             .load("https://openweathermap.org/img/wn/" + day.weather[0].icon + "@2x.png")
             .apply(RequestOptions.circleCropTransform())
             .into(holder.statusImage)
-        holder.currentDayConstraintLayout.setOnClickListener {
-            onDayClickListener.showDayDetails(day)
-        }
-
     }
 
     override fun getItemCount(): Int {
