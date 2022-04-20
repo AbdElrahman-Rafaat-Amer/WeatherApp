@@ -1,8 +1,6 @@
 package com.abdelrahman.rafaat.weatherapp.network
 
-import com.abdelrahman.rafaat.weatherapp.model.Alerts
 import com.abdelrahman.rafaat.weatherapp.model.WeatherResponse
-import retrofit2.Call
 import retrofit2.Response
 import retrofit2.http.GET
 import retrofit2.http.Query

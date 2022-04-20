@@ -274,6 +274,8 @@ class AlertFragment : Fragment(), OnAlertDeleteClickListener {
             NotificationAlert::class.java
         ).setInitialDelay(initialDelay, TimeUnit.MILLISECONDS).build()
         WorkManager.getInstance(requireContext()).enqueue(reminderRequest)
+
+       /// WorkManager.getInstance(requireContext()).cancelAllWorkByTag("abdo")
     }
 
     private fun showSankBar(alertView: View) {

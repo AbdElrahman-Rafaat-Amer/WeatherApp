@@ -19,7 +19,7 @@ data class WeatherResponse
     var current: Current,
 
     @TypeConverters(DataConverter::class)
-    var minutely: List<Minutely>,
+    var minutely: List<Minutely>?,
 
     @TypeConverters(DataConverter::class)
     var hourly: List<Hourly>,

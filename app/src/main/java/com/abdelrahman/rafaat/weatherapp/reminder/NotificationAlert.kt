@@ -37,52 +37,64 @@ class NotificationAlert(var mcontext: Context, workerParams: WorkerParameters) :
 
         Handler(Looper.getMainLooper()).post {
 
-            display(checkAlerts())
+        //    Log.i(TAG, "doWork: checkAlerts()--------> " + checkAlerts())
+         //   display(checkAlerts())
+            checkAlerts()
         }
         return Result.success()
     }
 
     private fun checkAlerts(): String {
+
         var keyWord: String = ""
+        Log.i(TAG, "checkAlerts: start--> keyWord--------> $keyWord")
         var repository = Repository.getInstance(
             mcontext,
             WeatherClient.getInstance(),
             ConcreteLocaleSource.getInstance(mcontext)
         )
 
+        Log.i(TAG, "checkAlerts: before coroutineScope--> keyWord--------> $keyWord")
         CoroutineScope(Dispatchers.Main).launch {
             var alerts = repository.localSource.getWeatherFromDataBase()?.alerts
             Log.i(TAG, "onCreate: size-----> ${alerts?.size}")
             Log.i(TAG, "onCreate: size-----> $alerts")
+            Log.i(TAG, "checkAlerts: in coroutineScope--> keyWord--------> $keyWord")
             if (alerts?.size != null) {
-
+                Log.i(TAG, "checkAlerts: if in coroutineScope--> keyWord--------> $keyWord")
                 var alertTag = alerts[0].tags[0]
                 if (alertTag.equals("Rain")) {
                     keyWord = "Rain"
+                    Log.i(TAG, "checkAlerts: if rain in coroutineScope--> keyWord--------> $keyWord")
                 } else {
                     if (alertTag.equals("Wind")) {
-
                         keyWord = "Wind"
+                        Log.i(TAG, "checkAlerts: if wind in coroutineScope--> keyWord--------> $keyWord")
                     } else {
                         if (alertTag.equals("Avalanches")) {
-
                             keyWord = "Avalanches"
+                            Log.i(TAG, "checkAlerts: if Avalanches in coroutineScope--> keyWord--------> $keyWord")
                         } else {
                             if (alertTag.equals("Fire warning")) {
                                 keyWord = "Fire"
+                                Log.i(TAG, "checkAlerts: if Fire in coroutineScope--> keyWord--------> $keyWord")
                             } else {
                                 keyWord = mcontext.getString(R.string.other_alert)
                                 keyWord = "Ohter"
+                                Log.i(TAG, "checkAlerts: if Ohter in coroutineScope--> keyWord--------> $keyWord")
                             }
                         }
                     }
                 }
             } else {
                 keyWord = "No Alert"
+                Log.i(TAG, "checkAlerts: else in coroutineScope--> keyWord--------> $keyWord")
             }
 
-
+           display(keyWord)
         }
+
+        Log.i(TAG, "checkAlerts: after coroutineScope--> keyWord--------> $keyWord")
         return keyWord
     }
 

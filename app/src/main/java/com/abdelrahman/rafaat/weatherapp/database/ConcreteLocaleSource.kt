@@ -48,10 +48,10 @@ class ConcreteLocaleSource(context: Context) : LocaleSource {
     }
 
     override suspend fun insertCurrentDataToRoom(weatherResponse: WeatherResponse) {
-        Log.i(
+      /*  Log.i(
             TAG,
             "insertCurrentDataToRoom: WeatherResponse---------------> ${weatherResponse.minutely[0].precipitation}"
-        )
+        )*/
         Log.i(TAG, "insertCurrentDataToRoom:\n\n\n\n\n ")
         Log.i(TAG, "insertCurrentDataToRoom: weatherResponse")
         var response = weatherDao?.insertCurrentToRoom(weatherResponse)
