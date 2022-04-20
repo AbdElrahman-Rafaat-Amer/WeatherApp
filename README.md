@@ -1,9 +1,11 @@
 # WeatherApp
-Android Mobile Application that displays the weather status and the temperature
-from your location. Also, you can pick a specific location on the map and/or 
-search for it by auto-complete edit text and add it to a list of favorite locations and 
-get all the weather information at this location. In addition you can set an alert for 
-rain, wind, very low or very high temperature, fog, snow … etc
+- Android Mobile Application that displays the weather status and the temperature
+from your location.
+- You can pick a specific location on the map and add it to a list of favorite locations and 
+get all the weather information at this location.
+- In addition you can set an alert for rain, wind, very low or very high temperature, fog, snow … etc
+- You can use the application in both Arabic and English.
+- You can choose between units of temperature and wind speed
 
 
 ![ce92458c-03bc-43dd-a038-70e634439df6](https://user-images.githubusercontent.com/55184522/164233572-a5c6c451-1888-464b-916f-14d8e101f994.jpg)
