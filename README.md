@@ -7,6 +7,13 @@ get all the weather information at this location.
 - You can use the application in both Arabic and English.
 - You can choose between units of temperature and wind speed
 
+# Technologies used
+- Kotlin
+- MVVM
+- kotlin coroutines
+- Retrofit
+- Room
+- Work Manger
 
 ![ce92458c-03bc-43dd-a038-70e634439df6](https://user-images.githubusercontent.com/55184522/164233572-a5c6c451-1888-464b-916f-14d8e101f994.jpg)
 ![40aff0eb-e28b-4faa-add0-1bbafd0b621e](https://user-images.githubusercontent.com/55184522/164233596-7025b040-3f80-4079-abf2-66d6ee070738.jpg)
