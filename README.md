@@ -24,10 +24,3 @@ get all the weather information at this location.
 ![WhatsApp Image 2022-04-20 at 2 35 26 PM (1)](https://user-images.githubusercontent.com/55184522/164233650-cdd473d0-6a2a-4465-b5ed-b20398d2f6e7.jpeg)
 ![WhatsApp Image 2022-04-11 at 11 19 02 PM (1)](https://user-images.githubusercontent.com/55184522/164233653-87c47d44-e3e9-45af-899f-ae6e9923f33e.jpeg)
 ![WhatsApp Image 2022-04-11 at 11 19 03 PM](https://user-images.githubusercontent.com/55184522/164233660-191e8439-9f9e-4398-87ef-cd342f8dfcbc.jpeg)
-
-
-<uses-permission android:name="android.permission.INTERNET" />
-
-//ViewModel
-    implementation 'androidx.lifecycle:lifecycle-extensions:2.2.0'
-    implementation 'androidx.lifecycle:lifecycle-viewmodel-ktx:2.4.1'
