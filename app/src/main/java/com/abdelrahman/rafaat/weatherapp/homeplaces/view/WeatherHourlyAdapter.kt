@@ -1,7 +1,6 @@
 package com.abdelrahman.rafaat.weatherapp.homeplaces.view
 
 import android.content.Context
-import android.text.format.DateFormat
 import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
@@ -15,27 +14,27 @@ import com.abdelrahman.rafaat.weatherapp.model.Hourly
 import com.bumptech.glide.Glide
 import com.bumptech.glide.request.RequestOptions
 import java.text.DecimalFormat
-import java.text.Format
-import java.text.NumberFormat
 import java.text.SimpleDateFormat
 import java.util.*
 
-class WeatherHourlyAdapter(context: Context) :
+private const val TAG = "WeatherHourlyAdapter"
+
+class WeatherHourlyAdapter :
     RecyclerView.Adapter<WeatherHourlyAdapter.ViewHolder>() {
 
-    private var context = context
-    private val TAG = "WeatherHourlyAdapter"
+    private lateinit var context: Context
+
     private var hours: List<Hourly> = ArrayList()
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ViewHolder {
-        Log.i(TAG, "onCreateViewHolder: ")
+        context = parent.context
         val layoutInflater: LayoutInflater = LayoutInflater.from(parent.context)
         val view: View = layoutInflater.inflate(R.layout.custom_row_hourly, parent, false)
         return ViewHolder(view)
     }
 
     override fun onBindViewHolder(holder: WeatherHourlyAdapter.ViewHolder, position: Int) {
-        Log.i(TAG, "onBindViewHolder: "+ position)
+        Log.i(TAG, "onBindViewHolder: $position")
         val hour = hours[position]
         holder.timeInHour.text = getTimeInHour(hour.dt)
         holder.temperature.text = getTemperature(hour.temp)
@@ -46,16 +45,13 @@ class WeatherHourlyAdapter(context: Context) :
     }
 
     override fun getItemCount(): Int {
-       // Log.i(TAG, "getItemCount: " + hours.size)
+        // Log.i(TAG, "getItemCount: " + hours.size)
         return hours.size
     }
 
     fun setList(hours: List<Hourly>) {
-
         this.hours = hours.subList(0, 24)
-        Log.i(TAG, "setList: after")
-        Log.i(TAG, "setList: hours" + hours.size)
-        Log.i(TAG, "setList: this.hours " + this.hours.size)
+        notifyDataSetChanged()
     }
 
     inner class ViewHolder(itemView: View) : RecyclerView.ViewHolder(itemView) {

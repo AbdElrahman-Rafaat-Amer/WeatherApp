@@ -11,11 +11,10 @@ import android.os.Looper
 import android.provider.Settings
 import android.util.Log
 import android.view.View
-import android.widget.ImageView
-import android.widget.TextView
 import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
 import androidx.core.app.ActivityCompat
+import com.abdelrahman.rafaat.weatherapp.databinding.ActivityIntializaionScreenBinding
 import com.abdelrahman.rafaat.weatherapp.model.ConstantsValue
 import com.google.android.gms.location.*
 import com.google.android.material.snackbar.Snackbar
@@ -24,33 +23,27 @@ import java.util.*
 
 class InitializationScreenActivity : AppCompatActivity() {
 
-    private val TAG = "InitializationScreenActivity"
+    private lateinit var binding: ActivityIntializaionScreenBinding
     private lateinit var fusedLocationClient: FusedLocationProviderClient
     private val PERMISSION_ID_LOCATION = 0
-    private lateinit var backGround: ImageView
-    private lateinit var textView: TextView
 
     override fun onCreate(savedInstanceState: Bundle?) {
 
-        Log.i(TAG, "onCreate: " + ConstantsValue.language)
         Locale.setDefault(Locale.forLanguageTag(ConstantsValue.language))
         super.onCreate(savedInstanceState)
-        setContentView(R.layout.activity_intializaion_screen)
+        binding = ActivityIntializaionScreenBinding.inflate(layoutInflater)
+        setContentView(binding.root)
 
-        backGround = findViewById(R.id.background_InitializationScreenActivity)
-        textView = findViewById(R.id.text_InitializationScreenActivity)
         fusedLocationClient = LocationServices.getFusedLocationProviderClient(this)
 
         if (checkPermission()) {
-            Log.i(TAG, "onCreate: checkPermission will get location")
-            if (ConstantsValue.locationMethod.equals("M")) {
+            if (ConstantsValue.locationMethod == "M") {
                 goToNextActivity()
             } else {
                 getLastLocation()
                 ConstantsValue.locationMethod = "G"
             }
         } else {
-            Log.i(TAG, "onCreate: requestPermission  will request permission")
             requestPermission()
         }
 
@@ -64,9 +57,6 @@ class InitializationScreenActivity : AppCompatActivity() {
             == PackageManager.PERMISSION_GRANTED
         ) {
             isGranted = true
-            Log.i("TAG", "checkPermission: true ")
-        } else {
-            Log.i("TAG", "checkPermission: false ")
         }
         return isGranted
     }
@@ -78,7 +68,6 @@ class InitializationScreenActivity : AppCompatActivity() {
                 Manifest.permission.ACCESS_FINE_LOCATION
             ), PERMISSION_ID_LOCATION
         )
-        Log.i("TAG", "requestPermission: ")
     }
 
     override fun onRequestPermissionsResult(
@@ -110,8 +99,6 @@ class InitializationScreenActivity : AppCompatActivity() {
                     Toast.makeText(this, "location " + null, Toast.LENGTH_SHORT).show()
                     requestNewLocationData()
                 } else {
-                    Log.i(TAG, "getLastLocation: " + location.longitude)
-                    Log.i(TAG, "getLastLocation: " + location.latitude)
                     ConstantsValue.longitude = location.longitude.toString()
                     ConstantsValue.latitude = location.latitude.toString()
 
@@ -120,31 +107,28 @@ class InitializationScreenActivity : AppCompatActivity() {
                 }
             }
         } else {
-            backGround.visibility = View.VISIBLE
-            textView.visibility = View.VISIBLE
+            binding.backgroundInitializationScreenActivity.visibility = View.VISIBLE
+            binding.textInitializationScreenActivity.visibility = View.VISIBLE
             showSnackBar()
         }
     }
 
     private fun isLocationEnabled(): Boolean {
         val locationManager = getSystemService(LOCATION_SERVICE) as LocationManager
-        var isEnabled =
-            locationManager.isProviderEnabled(LocationManager.GPS_PROVIDER) || locationManager.isProviderEnabled(
-                LocationManager.NETWORK_PROVIDER
-            )
-        Log.i(TAG, "isLocationEnabled2: isEnabled " + isEnabled)
-        return isEnabled
+        return locationManager.isProviderEnabled(LocationManager.GPS_PROVIDER) || locationManager.isProviderEnabled(
+            LocationManager.NETWORK_PROVIDER
+        )
     }
 
     private fun showSnackBar() {
-        var snackBar = Snackbar.make(
+        val snackBar = Snackbar.make(
             findViewById(R.id.ConstraintLayout_InitializationScreenActivity),
             getString(R.string.enable_gps),
             Snackbar.LENGTH_INDEFINITE
         ).setActionTextColor(Color.WHITE)
 
         snackBar.setAction(getString(R.string.enable)) {
-            startActivity(Intent(Settings.ACTION_LOCATION_SOURCE_SETTINGS));
+            startActivity(Intent(Settings.ACTION_LOCATION_SOURCE_SETTINGS))
         }
         snackBar.view.setBackgroundColor(Color.RED)
         snackBar.show()
@@ -166,10 +150,8 @@ class InitializationScreenActivity : AppCompatActivity() {
     private val mLocationCallback: LocationCallback = object : LocationCallback() {
         override fun onLocationResult(locationResult: LocationResult) {
             val mLastLocation = locationResult.lastLocation
-            Log.i(TAG, "mLocationCallback: getLatitude---> " + mLastLocation.latitude)
-            Log.i(TAG, "mLocationCallback: getLongitude--> " + mLastLocation.longitude)
-            ConstantsValue.longitude = mLastLocation.longitude.toString()
-            ConstantsValue.latitude = mLastLocation.latitude.toString()
+            ConstantsValue.longitude = mLastLocation?.longitude.toString()
+            ConstantsValue.latitude = mLastLocation?.latitude.toString()
             finish()
             goToNextActivity()
         }

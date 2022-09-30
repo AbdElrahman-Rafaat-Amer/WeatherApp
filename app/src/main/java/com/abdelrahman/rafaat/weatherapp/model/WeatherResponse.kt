@@ -35,7 +35,6 @@ data class WeatherResponse
 )
 
 @TypeConverters(DataConverter::class)
-
 data class Current(
     var dt: Long,
     var sunrise: Long,

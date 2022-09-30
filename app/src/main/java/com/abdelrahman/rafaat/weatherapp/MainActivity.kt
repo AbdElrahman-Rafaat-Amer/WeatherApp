@@ -2,26 +2,20 @@ package com.abdelrahman.rafaat.weatherapp
 
 import android.content.res.Configuration
 import android.content.res.Resources
-import android.os.Build
 import android.os.Bundle
 import android.util.DisplayMetrics
-import android.util.Log
 import androidx.appcompat.app.AppCompatActivity
 import androidx.fragment.app.Fragment
 import com.abdelrahman.rafaat.weatherapp.alert.view.AlertFragment
 import com.abdelrahman.rafaat.weatherapp.favoriteplaces.view.FavoriteFragment
 import com.abdelrahman.rafaat.weatherapp.homeplaces.view.HomeFragment
 import com.abdelrahman.rafaat.weatherapp.model.ConstantsValue
-import com.abdelrahman.rafaat.weatherapp.model.Daily
-import com.abdelrahman.rafaat.weatherapp.setting.view.SettingFragment
-import com.abdelrahman.rafaat.weatherapp.timetable.view.TimeTableFragment
+import com.abdelrahman.rafaat.weatherapp.setting.SettingFragment
+import com.abdelrahman.rafaat.weatherapp.timetable.TimeTableFragment
 import com.etebarian.meowbottomnavigation.MeowBottomNavigation
-import com.etebarian.meowbottomnavigation.MeowBottomNavigation.Model
 import java.util.*
 
 class MainActivity : AppCompatActivity() {
-
-    private val TAG = "MainActivity"
 
     private val ID_ALERT = 1
     private val ID_FAVORITES = 2
@@ -33,7 +27,6 @@ class MainActivity : AppCompatActivity() {
     private lateinit var meo: MeowBottomNavigation
 
     override fun onCreate(savedInstanceState: Bundle?) {
-        Log.i(TAG, "onCreate: " + ConstantsValue.language)
         setAppLocale(ConstantsValue.language)
         Locale.setDefault(Locale.forLanguageTag(ConstantsValue.language))
         super.onCreate(savedInstanceState)
@@ -43,11 +36,11 @@ class MainActivity : AppCompatActivity() {
 
 
 
-        meo.add(Model(ID_ALERT, R.drawable.ic_alert))
-        meo.add(Model(ID_FAVORITES, R.drawable.ic_favorite))
-        meo.add(Model(ID_HOME, R.drawable.ic_home))
-        meo.add(Model(ID_TIMETABLE, R.drawable.ic_timetable))
-        meo.add(Model(ID_SETTING, R.drawable.ic_setting))
+        meo.add(MeowBottomNavigation.Model(ID_ALERT, R.drawable.ic_alert))
+        meo.add(MeowBottomNavigation.Model(ID_FAVORITES, R.drawable.ic_favorite))
+        meo.add(MeowBottomNavigation.Model(ID_HOME, R.drawable.ic_home))
+        meo.add(MeowBottomNavigation.Model(ID_TIMETABLE, R.drawable.ic_timetable))
+        meo.add(MeowBottomNavigation.Model(ID_SETTING, R.drawable.ic_setting))
 
         meo.setOnClickMenuListener {
             when (it.id) {
@@ -84,7 +77,6 @@ class MainActivity : AppCompatActivity() {
         if (savedInstanceState == null) {
             meo.show(ID_HOME, true)
             addFragment(HomeFragment())
-            Log.i(TAG, "savedInstanceState == null")
         } else {
             val fragmentID: Int = savedInstanceState.get("FRAGMENT_ID") as Int
             meo.show(fragmentID, true)
@@ -118,13 +110,9 @@ class MainActivity : AppCompatActivity() {
 
     private fun setAppLocale(localeCode: String) {
         val resources: Resources = resources
-        val dm: DisplayMetrics = resources.getDisplayMetrics()
-        val config: Configuration = resources.getConfiguration()
-        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.JELLY_BEAN_MR1) {
-            config.setLocale(Locale(localeCode.toLowerCase()))
-        } else {
-            config.locale = Locale(localeCode.toLowerCase())
-        }
+        val dm: DisplayMetrics = resources.displayMetrics
+        val config: Configuration = resources.configuration
+        config.setLocale(Locale(localeCode.toLowerCase()))
         resources.updateConfiguration(config, dm)
     }
 }

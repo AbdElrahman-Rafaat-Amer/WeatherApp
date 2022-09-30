@@ -1,4 +1,4 @@
-package com.abdelrahman.rafaat.weatherapp.setting.view
+package com.abdelrahman.rafaat.weatherapp.setting
 
 import android.content.Context
 import android.content.Context.MODE_PRIVATE
@@ -13,8 +13,6 @@ import android.view.ViewGroup
 import android.widget.*
 import androidx.cardview.widget.CardView
 import androidx.fragment.app.Fragment
-import androidx.fragment.app.FragmentManager
-import androidx.fragment.app.FragmentTransaction
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.transition.AutoTransition
 import androidx.transition.TransitionManager
@@ -23,21 +21,20 @@ import com.abdelrahman.rafaat.weatherapp.MainActivity
 import com.abdelrahman.rafaat.weatherapp.R
 import com.abdelrahman.rafaat.weatherapp.maps.view.GoogleMapsActivity
 import com.abdelrahman.rafaat.weatherapp.model.ConstantsValue
-import com.abdelrahman.rafaat.weatherapp.model.isInternetAvailable
+import com.abdelrahman.rafaat.weatherapp.utils.ConnectionLiveData
 import com.google.android.material.snackbar.Snackbar
 import java.util.*
 
+private const val TAG = "SettingFragment"
 
 class SettingFragment : Fragment() {
 
-    private val TAG = "SettingFragment"
-    lateinit var sharedPreferences: SharedPreferences
-    lateinit var editor: SharedPreferences.Editor
+    private lateinit var sharedPreferences: SharedPreferences
+    private lateinit var editor: SharedPreferences.Editor
 
     //language
     private lateinit var languageRadioGroup: RadioGroup
     private lateinit var showChangeLanguageView: RelativeLayout
-    private lateinit var visibilityChangeLanguageLinear: LinearLayout
     private lateinit var languageRadioButton: RadioButton
 
     private lateinit var cardViewLanguage: CardView
@@ -94,15 +91,15 @@ class SettingFragment : Fragment() {
         initUI(view)
 
 
-        showChangeLanguageView.setOnClickListener(View.OnClickListener {
+        showChangeLanguageView.setOnClickListener {
             Log.i(TAG, "inside setOnClickListener: ")
-            if (visibilityChangeLanguageLinear.visibility == View.GONE) {
+            if (languageRadioGroup.visibility == View.GONE) {
                 Log.i(TAG, "inside if: ")
-                visibilityChangeLanguageLinear.visibility = View.VISIBLE
+                languageRadioGroup.visibility = View.VISIBLE
                 val manager = LinearLayoutManager(context)
                 manager.orientation = LinearLayoutManager.VERTICAL
                 showLanguageOptionImageView.setImageResource(R.drawable.ic_up_arrow)
-                languageRadioGroup.setOnCheckedChangeListener { group, checkedId ->
+                languageRadioGroup.setOnCheckedChangeListener { _, _ ->
                     val selectedOption: Int = languageRadioGroup.checkedRadioButtonId
                     languageRadioButton = view.findViewById(selectedOption)
                     radioButtonTag = languageRadioButton.tag.toString()
@@ -121,19 +118,19 @@ class SettingFragment : Fragment() {
                 }
             } else {
                 Log.i(TAG, "inside else: ")
-                visibilityChangeLanguageLinear.visibility = View.GONE
+                languageRadioGroup.visibility = View.GONE
                 showLanguageOptionImageView.setImageResource(R.drawable.ic_down_arrow)
             }
             TransitionManager.beginDelayedTransition(cardViewLanguage, AutoTransition())
-        })
+        }
 
-        showChangeTemperatureUnitView.setOnClickListener(View.OnClickListener {
+        showChangeTemperatureUnitView.setOnClickListener {
             if (visibilityChangeTemperatureLinear.visibility == View.GONE) {
                 visibilityChangeTemperatureLinear.visibility = View.VISIBLE
                 val manager = LinearLayoutManager(context)
                 manager.orientation = LinearLayoutManager.VERTICAL
                 showTemperatureOptionImageView.setImageResource(R.drawable.ic_up_arrow)
-                temperatureRadioGroup.setOnCheckedChangeListener { group, checkedId ->
+                temperatureRadioGroup.setOnCheckedChangeListener { _, _ ->
                     val selectedOption: Int = temperatureRadioGroup.checkedRadioButtonId
                     temperatureRadioButton = view.findViewById(selectedOption)
                     radioButtonTag = temperatureRadioButton.tag.toString()
@@ -162,15 +159,15 @@ class SettingFragment : Fragment() {
                 showTemperatureOptionImageView.setImageResource(R.drawable.ic_down_arrow)
             }
             TransitionManager.beginDelayedTransition(cardViewTemperature, AutoTransition())
-        })
+        }
 
-        showChangeWindSpeedUnitView.setOnClickListener(View.OnClickListener {
+        showChangeWindSpeedUnitView.setOnClickListener {
             if (visibilityChangeWindSpeedLinear.visibility == View.GONE) {
                 visibilityChangeWindSpeedLinear.visibility = View.VISIBLE
                 val manager = LinearLayoutManager(context)
                 manager.orientation = LinearLayoutManager.VERTICAL
                 showWindSpeedOptionImageView.setImageResource(R.drawable.ic_up_arrow)
-                windSpeedRadioGroup.setOnCheckedChangeListener { group, checkedId ->
+                windSpeedRadioGroup.setOnCheckedChangeListener { _, _ ->
                     val selectedOption: Int = windSpeedRadioGroup.checkedRadioButtonId
                     windSpeedRadioButton = view.findViewById(selectedOption)
                     radioButtonTag = windSpeedRadioButton.tag.toString()
@@ -192,52 +189,53 @@ class SettingFragment : Fragment() {
                 showWindSpeedOptionImageView.setImageResource(R.drawable.ic_down_arrow)
             }
             TransitionManager.beginDelayedTransition(cardViewWindSpeed, AutoTransition())
-        })
+        }
 
-        showChangeLocationMethodView.setOnClickListener(View.OnClickListener {
+        showChangeLocationMethodView.setOnClickListener {
             if (visibilityChangeLocationLinear.visibility == View.GONE) {
                 visibilityChangeLocationLinear.visibility = View.VISIBLE
                 val manager = LinearLayoutManager(context)
                 manager.orientation = LinearLayoutManager.VERTICAL
                 showLocationOptionImageView.setImageResource(R.drawable.ic_up_arrow)
-                locationRadioGroup.setOnCheckedChangeListener { group, checkedId ->
+                locationRadioGroup.setOnCheckedChangeListener { _, _ ->
                     val selectedOption: Int = locationRadioGroup.checkedRadioButtonId
                     locationRadioButton = view.findViewById(selectedOption)
                     radioButtonTag = locationRadioButton.tag.toString()
                     Log.i(TAG, "radioButtonTag Location: $radioButtonTag")
                     when (radioButtonTag) {
                         "G" -> {
-
-                            if (isInternetAvailable(requireContext())) {
-                                ConstantsValue.locationMethod = "G"
-                                editor.putString("CURRENT_LOCATION", "G").commit()
-                                startActivity(
-                                    Intent(
-                                        requireContext(),
-                                        InitializationScreenActivity::class.java
-                                    )
-                                )
-                                requireActivity().finish()
-                            } else {
-                                showSnackBar()
-                            }
-
+                            ConnectionLiveData.getInstance(requireContext())
+                                .observe(viewLifecycleOwner) {
+                                    if (it) {
+                                        ConstantsValue.locationMethod = "G"
+                                        editor.putString("CURRENT_LOCATION", "G").commit()
+                                        startActivity(
+                                            Intent(
+                                                requireContext(),
+                                                InitializationScreenActivity::class.java
+                                            )
+                                        )
+                                        requireActivity().finish()
+                                    } else
+                                        showSnackBar()
+                                }
                         }
                         "M" -> {
-
-                            if (isInternetAvailable(requireContext())) {
-                                ConstantsValue.locationMethod = "M"
-                                editor.putString("CURRENT_LOCATION", "M").commit()
-                                startActivity(
-                                    Intent(
-                                        requireContext(),
-                                        GoogleMapsActivity::class.java
-                                    )
-                                )
-                                requireActivity().finish()
-                            } else {
-                                showSnackBar()
-                            }
+                            ConnectionLiveData.getInstance(requireContext())
+                                .observe(viewLifecycleOwner) {
+                                    if (it) {
+                                        ConstantsValue.locationMethod = "M"
+                                        editor.putString("CURRENT_LOCATION", "M").commit()
+                                        startActivity(
+                                            Intent(
+                                                requireContext(),
+                                                GoogleMapsActivity::class.java
+                                            )
+                                        )
+                                        requireActivity().finish()
+                                    } else
+                                        showSnackBar()
+                                }
                         }
                     }
                     Log.i(TAG, "locationMethod: " + ConstantsValue.locationMethod)
@@ -247,15 +245,15 @@ class SettingFragment : Fragment() {
                 showLocationOptionImageView.setImageResource(R.drawable.ic_down_arrow)
             }
             TransitionManager.beginDelayedTransition(cardViewLocation, AutoTransition())
-        })
+        }
 
-        showChangeNotificationMethodView.setOnClickListener(View.OnClickListener {
+        showChangeNotificationMethodView.setOnClickListener {
             if (visibilityChangeNotificationLinear.visibility == View.GONE) {
                 visibilityChangeNotificationLinear.visibility = View.VISIBLE
                 val manager = LinearLayoutManager(context)
                 manager.orientation = LinearLayoutManager.VERTICAL
                 showNotificationOptionImageView.setImageResource(R.drawable.ic_up_arrow)
-                notificationRadioGroup.setOnCheckedChangeListener { group, checkedId ->
+                notificationRadioGroup.setOnCheckedChangeListener { _, _ ->
                     val selectedOption: Int = notificationRadioGroup.checkedRadioButtonId
                     notificationRadioButton = view.findViewById(selectedOption)
                     radioButtonTag = notificationRadioButton.tag.toString()
@@ -277,7 +275,7 @@ class SettingFragment : Fragment() {
                 showNotificationOptionImageView.setImageResource(R.drawable.ic_down_arrow)
             }
             TransitionManager.beginDelayedTransition(cardViewNotification, AutoTransition())
-        })
+        }
 
 
         return view
@@ -285,7 +283,7 @@ class SettingFragment : Fragment() {
 
 
     private fun showSnackBar() {
-        var snackBar = Snackbar.make(
+        val snackBar = Snackbar.make(
             currentView.findViewById(R.id.ConstraintLayout_SettingFragment),
             getString(R.string.error_network_for_update),
             Snackbar.LENGTH_SHORT
@@ -358,8 +356,8 @@ class SettingFragment : Fragment() {
         showChangeNotificationMethodView =
             view.findViewById(R.id.show_change_Notification_method_View)
 
-        visibilityChangeLanguageLinear =
-            view.findViewById(R.id.linear_layout_visibility_change_language)
+        /*  visibilityChangeLanguageLinear =
+              view.findViewById(R.id.linear_layout_visibility_change_language)*/
         visibilityChangeLocationLinear =
             view.findViewById(R.id.linear_layout_visibility_change_location_method)
         visibilityChangeTemperatureLinear =
@@ -389,7 +387,7 @@ class SettingFragment : Fragment() {
         // val resources = resources
         val configuration = resources.configuration
         configuration.setLocale(locale)//locale = locale
-        resources.updateConfiguration(configuration, resources.getDisplayMetrics())
+        resources.updateConfiguration(configuration, resources.displayMetrics)
         editor.putString("CURRENT_LANGUAGE", language).commit()
         (requireActivity() as MainActivity).restartFragment(this)
 

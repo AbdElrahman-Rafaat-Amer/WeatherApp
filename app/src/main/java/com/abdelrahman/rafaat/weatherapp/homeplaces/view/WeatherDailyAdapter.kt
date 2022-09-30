@@ -21,14 +21,16 @@ import java.util.*
 
 import kotlin.collections.ArrayList
 
-class WeatherDailyAdapter(context: Context) :
+private const val TAG = "WeatherDailyAdapter"
+
+class WeatherDailyAdapter :
     RecyclerView.Adapter<WeatherDailyAdapter.ViewHolder?>() {
-    private var context = context
-    private val TAG = "WeatherDailyAdapter"
+    private lateinit var context: Context
+
     private var days: List<Daily> = ArrayList()
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ViewHolder {
-        Log.i(TAG, "onCreateViewHolder: ")
+        context = parent.context
         val layoutInflater: LayoutInflater = LayoutInflater.from(parent.context)
         val view: View = layoutInflater.inflate(R.layout.custom_row_current_daily, parent, false)
         return ViewHolder(view)
@@ -36,7 +38,7 @@ class WeatherDailyAdapter(context: Context) :
 
     override fun onBindViewHolder(holder: WeatherDailyAdapter.ViewHolder, position: Int) {
         Log.i(TAG, "onBindViewHolder: ")
-        var day = days[position]
+        val day = days[position]
         holder.dateOfDay.text = getNameOfDay(day.dt)
         holder.statusOfDay.text = day.weather[0].description
         holder.temperature.text = getTemperature(day.temp.day)
@@ -52,9 +54,8 @@ class WeatherDailyAdapter(context: Context) :
     }
 
     fun setList(days: List<Daily>) {
-        Log.i(TAG, "setList: days" + days.size)
-        Log.i(TAG, "setList: this.days " + this.days.size)
         this.days = days.subList(1, 8)
+        notifyDataSetChanged()
     }
 
     inner class ViewHolder(itemView: View) : RecyclerView.ViewHolder(itemView) {

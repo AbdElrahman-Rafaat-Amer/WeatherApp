@@ -1,23 +1,20 @@
 package com.abdelrahman.rafaat.weatherapp.favoriteplaces.view
 
 import android.content.Context
-import android.os.Build
 import android.os.Bundle
 import android.util.Log
+import com.abdelrahman.rafaat.weatherapp.utils.getAddress
 import android.view.LayoutInflater
 import android.view.View
 import android.view.View.GONE
 import android.view.View.VISIBLE
 import android.view.ViewGroup
-import android.view.animation.Animation
 import android.widget.ImageView
 import android.widget.ProgressBar
 import android.widget.TextView
 import android.widget.Toast
-import androidx.annotation.RequiresApi
 import androidx.constraintlayout.widget.ConstraintLayout
 import androidx.fragment.app.Fragment
-import androidx.lifecycle.Observer
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.abdelrahman.rafaat.weatherapp.MainActivity
@@ -34,8 +31,10 @@ import java.text.DecimalFormat
 import java.text.SimpleDateFormat
 import java.util.*
 
+private const val TAG = "FavoriteDetailsFragment"
+
 class FavoriteDetailsFragment(var viewModel: FavoritePlaceViewModel) : Fragment() {
-    private val TAG = "FavoriteDetailsFragment"
+
     private lateinit var mainActivity: MainActivity
 
     private lateinit var locationNameTextView: TextView
@@ -65,47 +64,26 @@ class FavoriteDetailsFragment(var viewModel: FavoritePlaceViewModel) : Fragment(
     private lateinit var visibilityConstrainLayout: ConstraintLayout
     private lateinit var progressBar: ProgressBar
     private lateinit var animatedImageView: ImageView
-    private lateinit var moveAnimation: Animation
 
     override fun onAttach(context: Context) {
         super.onAttach(context)
         mainActivity = context as MainActivity
     }
 
-    override fun onCreate(savedInstanceState: Bundle?) {
-        super.onCreate(savedInstanceState)
-        Log.i(TAG, "onCreate: ")
-        Log.i(TAG, "onCreate: longitude--------> " + ConstantsValue.longitude)
-        Log.i(TAG, "onCreate: latitude---------> " + ConstantsValue.latitude)
-    }
-
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View? {
-        Log.i(TAG, "onCreateView: ")
-        Log.i(TAG, "onCreateView: longitude--------> " + ConstantsValue.longitude)
-        Log.i(TAG, "onCreateView: latitude---------> " + ConstantsValue.latitude)
         return inflater.inflate(R.layout.fragment_home, container, false)
     }
 
 
-    @RequiresApi(Build.VERSION_CODES.O)
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
-        Log.i(TAG, "onViewCreated: ")
+
         initUI(view)
-        animatedImageView.animate().rotation(360f).setDuration(2000).start()
-        viewModel.selectedFavoritePlaces.observe(viewLifecycleOwner, Observer {
-            Log.i(TAG, "onCreateView: observe $it")
-            when (it) {
-                is WeatherResponse -> {
-                    assignDataToView(it)
-                    getAddress(it)
-                }
-                else -> Toast.makeText(context, "Return is null $it", Toast.LENGTH_SHORT).show()
-            }
-        })
+        observeViewModel()
+
 
     }
 
@@ -123,16 +101,16 @@ class FavoriteDetailsFragment(var viewModel: FavoritePlaceViewModel) : Fragment(
         currentDayImageView = view.findViewById(R.id.current_day_imageView)
 
         hourlyRecyclerView = view.findViewById(R.id.hourly_recyclerView)
-        weatherHourlyAdapter = WeatherHourlyAdapter(view.context)
-        val hourlyManager = LinearLayoutManager(view.context)
+        weatherHourlyAdapter = WeatherHourlyAdapter()
+        val hourlyManager = LinearLayoutManager(requireContext())
         hourlyManager.orientation = LinearLayoutManager.HORIZONTAL
         hourlyRecyclerView.layoutManager = hourlyManager
         hourlyRecyclerView.adapter = weatherHourlyAdapter
 
 
         dailyRecyclerView = view.findViewById(R.id.daily_recyclerView)
-        weatherDailyAdapter = WeatherDailyAdapter(view.context)
-        val dailyManager = LinearLayoutManager(view.context)
+        weatherDailyAdapter = WeatherDailyAdapter()
+        val dailyManager = LinearLayoutManager(requireContext())
         dailyManager.orientation = LinearLayoutManager.VERTICAL
         dailyRecyclerView.layoutManager = dailyManager
         dailyRecyclerView.adapter = weatherDailyAdapter
@@ -148,9 +126,22 @@ class FavoriteDetailsFragment(var viewModel: FavoritePlaceViewModel) : Fragment(
         visibilityTextView = view.findViewById(R.id.visibility_textView)
         ultravioletTextView = view.findViewById(R.id.ultraviolet_textView)
 
+        animatedImageView.animate().rotation(360f).setDuration(2000).start()
     }
 
-    @RequiresApi(Build.VERSION_CODES.O)
+    private fun observeViewModel() {
+        viewModel.selectedFavoritePlaces.observe(viewLifecycleOwner) {
+            Log.i(TAG, "onCreateView: observe $it")
+            when (it) {
+                is WeatherResponse -> {
+                    assignDataToView(it)
+                    getAddress(it)
+                }
+                else -> Toast.makeText(context, "Return is null $it", Toast.LENGTH_SHORT).show()
+            }
+        }
+    }
+
     private fun assignDataToView(weatherResponse: WeatherResponse) {
         progressBar.visibility = GONE
         animatedImageView.visibility = GONE
@@ -164,9 +155,8 @@ class FavoriteDetailsFragment(var viewModel: FavoritePlaceViewModel) : Fragment(
             .load("https://openweathermap.org/img/wn/" + weatherResponse.current.weather[0].icon + "@2x.png")
             .into(currentDayImageView)
         weatherDailyAdapter.setList(weatherResponse.daily)
-        weatherDailyAdapter.notifyDataSetChanged()
         weatherHourlyAdapter.setList(weatherResponse.hourly)
-        weatherHourlyAdapter.notifyDataSetChanged()
+
 
         sunRiseTimeTextView.text = getTimeInHour(
             weatherResponse.current.sunrise,
@@ -176,21 +166,23 @@ class FavoriteDetailsFragment(var viewModel: FavoritePlaceViewModel) : Fragment(
             weatherResponse.current.sunset,
             weatherResponse.timezone
         )
-        humidityTextView.text = DecimalFormat("#").format(weatherResponse.current.humidity) + " %"
+        humidityTextView.text =
+            DecimalFormat("#").format(weatherResponse.current.humidity).plus(" %")
         windSpeedTextView.text = getWindSpeed(weatherResponse)
         windDegreeTextView.text = DecimalFormat("##").format(weatherResponse.current.wind_deg)
-        cloudTextView.text = DecimalFormat("#").format(weatherResponse.current.clouds) + " %"
+        cloudTextView.text = DecimalFormat("#").format(weatherResponse.current.clouds).plus(" %")
         pressureTextView.text =
-            DecimalFormat("#").format(weatherResponse.current.pressure) + " " + getString(R.string.pressure_unit)
+            DecimalFormat("#").format(weatherResponse.current.pressure)
+                .plus(" ${getString(R.string.pressure_unit)}")
         visibilityTextView.text =
-            DecimalFormat("#").format(weatherResponse.current.visibility) + " " + getString(R.string.meter)
+            DecimalFormat("#").format(weatherResponse.current.visibility)
+                .plus(" ${getString(R.string.meter)}")
         ultravioletTextView.text = DecimalFormat("#.##").format(weatherResponse.current.uvi)
 
     }
 
     private fun getWindSpeed(weatherResponse: WeatherResponse): String {
-        var windSpeed = ""
-        windSpeed = when (ConstantsValue.windSpeedUnit) {
+        val windSpeed: String = when (ConstantsValue.windSpeedUnit) {
             "H" -> DecimalFormat("#.##").format(weatherResponse.current.wind_speed * 3.6) + " " + getString(
                 R.string.wind_speed_unit_KH
             )
@@ -202,7 +194,7 @@ class FavoriteDetailsFragment(var viewModel: FavoritePlaceViewModel) : Fragment(
     }
 
     private fun getTemperature(temp: Double): String {
-        var temperature = ""
+        val temperature: String
         when (ConstantsValue.tempUnit) {
             "C" -> {
                 temperature = DecimalFormat("#").format(temp - 273.15)
@@ -223,13 +215,10 @@ class FavoriteDetailsFragment(var viewModel: FavoritePlaceViewModel) : Fragment(
         return temperature
     }
 
-    @RequiresApi(Build.VERSION_CODES.O)
     private fun formatDate(dateInSeconds: Long): String {
-
         val time = dateInSeconds * 1000.toLong()
         val date = Date(time)
         Log.i(TAG, "getTimeInHour: date $date")
-
 
         val dateFormat = SimpleDateFormat("d MMM yyyy", Locale(ConstantsValue.language))
         Log.i(TAG, "formatDate : " + dateFormat.format(date))
@@ -239,7 +228,7 @@ class FavoriteDetailsFragment(var viewModel: FavoritePlaceViewModel) : Fragment(
     private fun getTimeInHour(milliSeconds: Long, timeZone: String): String {
         val time = milliSeconds * 1000.toLong()
         val date = Date(time)
-        Log.i(TAG, "getTimeInHour: date " + date)
+        Log.i(TAG, "getTimeInHour: date $date")
         val format = SimpleDateFormat("h:mm a", Locale(ConstantsValue.language))
         format.timeZone = TimeZone.getTimeZone(timeZone)
         Log.i(TAG, format.format(date))
@@ -247,7 +236,7 @@ class FavoriteDetailsFragment(var viewModel: FavoritePlaceViewModel) : Fragment(
     }
 
     private fun getAddress(weatherResponse: WeatherResponse) {
-        var address = com.abdelrahman.rafaat.weatherapp.model.getAddress(
+        val address = getAddress(
             weatherResponse.lat,
             weatherResponse.lon,
             requireContext()
@@ -259,7 +248,8 @@ class FavoriteDetailsFragment(var viewModel: FavoritePlaceViewModel) : Fragment(
 
     private fun assignAddressToView(savedAddress: SavedAddress) {
         locationNameTextView.text = savedAddress.subAdminArea
-        locationDetailsNameTextView.text = savedAddress.adminArea + " - " + savedAddress.countryName
+        locationDetailsNameTextView.text =
+            savedAddress.adminArea.plus(" ${savedAddress.countryName}")
     }
 
 

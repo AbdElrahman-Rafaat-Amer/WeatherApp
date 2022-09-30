@@ -4,12 +4,12 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".setting.view.SettingFragment">
+    tools:context=".setting.SettingFragment">
 
     <androidx.constraintlayout.widget.ConstraintLayout
-        android:layout_width="match_parent"
         android:id="@+id/ConstraintLayout_SettingFragment"
-        android:layout_height="match_parent">
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content">
 
         <!-- Card View for Language -->
         <androidx.cardview.widget.CardView
@@ -40,7 +40,7 @@
                         android:text="@string/language"
                         android:textColor="@color/black"
                         android:textSize="@dimen/_20sdp"
-                        android:textStyle="bold"></TextView>
+                        android:textStyle="bold" />
 
                     <ImageView
                         android:id="@+id/show_language_options_imageView"
@@ -48,47 +48,42 @@
                         android:layout_height="wrap_content"
                         android:layout_alignParentEnd="true"
                         android:layout_centerVertical="true"
-                        android:src="@drawable/ic_down_arrow"></ImageView>
+                        android:src="@drawable/ic_down_arrow" />
                 </RelativeLayout>
 
                 <!-- To mange Radio Buttons -->
-                <LinearLayout
-                    android:id="@+id/linear_layout_visibility_change_language"
+                <RadioGroup
+                    android:id="@+id/language_radio_group"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:layout_marginStart="@dimen/_10sdp"
                     android:layout_marginTop="@dimen/_5sdp"
                     android:layout_marginEnd="@dimen/_10sdp"
                     android:layout_marginBottom="@dimen/_5sdp"
-                    android:orientation="vertical"
                     android:visibility="gone">
 
-                    <RadioGroup
-                        android:id="@+id/language_radio_group"
+                    <RadioButton
+                        android:id="@+id/language_arabic"
                         android:layout_width="match_parent"
-                        android:layout_height="wrap_content">
+                        android:layout_height="wrap_content"
+                        android:tag="A"
+                        android:text="@string/language_arabic"
+                        android:textSize="24sp" />
 
-                        <RadioButton
-                            android:id="@+id/language_arabic"
-                            android:layout_width="match_parent"
-                            android:layout_height="wrap_content"
-                            android:tag="A"
-                            android:text="@string/language_arabic"
-                            android:textSize="24sp" />
+                    <RadioButton
+                        android:id="@+id/language_english"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:tag="E"
+                        android:text="@string/language_english"
+                        android:textSize="24sp" />
 
-                        <RadioButton
-                            android:id="@+id/language_english"
-                            android:layout_width="match_parent"
-                            android:layout_height="wrap_content"
-                            android:tag="E"
-                            android:text="@string/language_english"
-                            android:textSize="24sp" />
+                </RadioGroup>
 
-                    </RadioGroup>
-                </LinearLayout>
             </LinearLayout>
 
         </androidx.cardview.widget.CardView>
+
 
         <!-- Card View for Location -->
         <androidx.cardview.widget.CardView
@@ -119,7 +114,7 @@
                         android:text="@string/location"
                         android:textColor="@color/black"
                         android:textSize="@dimen/_20sdp"
-                        android:textStyle="bold"></TextView>
+                        android:textStyle="bold" />
 
                     <ImageView
                         android:id="@+id/show_location_options_imageView"
@@ -127,7 +122,7 @@
                         android:layout_height="wrap_content"
                         android:layout_alignParentEnd="true"
                         android:layout_centerVertical="true"
-                        android:src="@drawable/ic_down_arrow"></ImageView>
+                        android:src="@drawable/ic_down_arrow" />
                 </RelativeLayout>
 
 
@@ -198,7 +193,7 @@
                         android:text="@string/temperature_setting"
                         android:textColor="@color/black"
                         android:textSize="@dimen/_20sdp"
-                        android:textStyle="bold"></TextView>
+                        android:textStyle="bold" />
 
                     <ImageView
                         android:id="@+id/show_temperature_options_imageView"
@@ -206,7 +201,7 @@
                         android:layout_height="wrap_content"
                         android:layout_alignParentEnd="true"
                         android:layout_centerVertical="true"
-                        android:src="@drawable/ic_down_arrow"></ImageView>
+                        android:src="@drawable/ic_down_arrow" />
                 </RelativeLayout>
 
 
@@ -286,7 +281,7 @@
                         android:text="@string/wind_speed"
                         android:textColor="@color/black"
                         android:textSize="@dimen/_20sdp"
-                        android:textStyle="bold"></TextView>
+                        android:textStyle="bold" />
 
                     <ImageView
                         android:id="@+id/show_wind_speed_options_imageView"
@@ -294,7 +289,7 @@
                         android:layout_height="wrap_content"
                         android:layout_alignParentEnd="true"
                         android:layout_centerVertical="true"
-                        android:src="@drawable/ic_down_arrow"></ImageView>
+                        android:src="@drawable/ic_down_arrow" />
                 </RelativeLayout>
 
 
@@ -366,7 +361,7 @@
                         android:text="@string/notification"
                         android:textColor="@color/black"
                         android:textSize="@dimen/_20sdp"
-                        android:textStyle="bold"></TextView>
+                        android:textStyle="bold" />
 
                     <ImageView
                         android:id="@+id/show_notification_options_imageView"
@@ -374,7 +369,7 @@
                         android:layout_height="wrap_content"
                         android:layout_alignParentEnd="true"
                         android:layout_centerVertical="true"
-                        android:src="@drawable/ic_down_arrow"></ImageView>
+                        android:src="@drawable/ic_down_arrow" />
                 </RelativeLayout>
 
 

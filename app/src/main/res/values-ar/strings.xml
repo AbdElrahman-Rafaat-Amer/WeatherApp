@@ -65,5 +65,8 @@
     <string name="wind_alert">رياح</string>
     <string name="avalanches_alert">الانهيارات الثلجية</string>
     <string name="other_alert">عواصف ورعد وبرق</string>
-    <string name="forestfire_alert">"حريق الغابة "</string>
+    <string name="forest_fire_alert">"حريق الغابة "</string>
+    <string name="add_new_alert">اضف تحذير جديد</string>
+    <string name="waiting_image">إنتظار</string>
+
 </resources>

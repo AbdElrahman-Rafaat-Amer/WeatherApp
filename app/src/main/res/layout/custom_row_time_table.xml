@@ -36,7 +36,7 @@
                 android:textSize="@dimen/_20sdp"
                 app:layout_constraintEnd_toEndOf="@+id/ConstraintLayout"
                 app:layout_constraintStart_toStartOf="@+id/ConstraintLayout"
-                app:layout_constraintTop_toTopOf="@+id/ConstraintLayout"></TextView>
+                app:layout_constraintTop_toTopOf="@+id/ConstraintLayout"/>
 
             <GridLayout
                 android:layout_width="match_parent"

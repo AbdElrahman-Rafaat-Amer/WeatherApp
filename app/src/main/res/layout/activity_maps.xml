@@ -24,7 +24,7 @@
         app:fab_icon="@dimen/_40sdp"
         app:srcCompat="@android:drawable/ic_menu_add"
         map:layout_constraintBottom_toBottomOf="parent"
-        map:layout_constraintEnd_toEndOf="parent"></com.google.android.material.floatingactionbutton.FloatingActionButton>
+        map:layout_constraintEnd_toEndOf="parent"/>
 
     <TextView
         android:id="@+id/show_selected_location_textView"
@@ -33,5 +33,5 @@
         android:padding="@dimen/_10sdp"
         android:textAlignment="center"
         android:textSize="@dimen/_30sdp"
-        map:layout_constraintBottom_toBottomOf="parent"></TextView>
+        map:layout_constraintBottom_toBottomOf="parent"/>
 </androidx.constraintlayout.widget.ConstraintLayout>

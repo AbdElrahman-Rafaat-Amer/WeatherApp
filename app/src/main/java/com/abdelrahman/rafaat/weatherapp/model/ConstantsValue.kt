@@ -1,11 +1,5 @@
 package com.abdelrahman.rafaat.weatherapp.model
 
-
-import android.location.Address
-import com.abdelrahman.rafaat.weatherapp.R
-import java.text.DecimalFormat
-
-
 class ConstantsValue {
     companion object {
         var language: String = ""

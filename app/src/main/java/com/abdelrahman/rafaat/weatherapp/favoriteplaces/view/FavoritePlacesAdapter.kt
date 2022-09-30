@@ -1,13 +1,11 @@
 package com.abdelrahman.rafaat.weatherapp.favoriteplaces.view
 
-import android.content.Context
 import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.ImageView
 import android.widget.TextView
-import android.widget.Toast
 import androidx.constraintlayout.widget.ConstraintLayout
 import androidx.recyclerview.widget.RecyclerView
 import com.abdelrahman.rafaat.weatherapp.R
@@ -15,13 +13,13 @@ import com.abdelrahman.rafaat.weatherapp.model.ConstantsValue
 import com.abdelrahman.rafaat.weatherapp.model.FavoritePlaces
 import java.util.*
 
-class FavoritePlacesAdapter(context: Context, fragment: OnDeleteFavorite) :
+private const val TAG = "FavoritePlacesAdapter"
+
+class FavoritePlacesAdapter(private var fragment: OnDeleteFavorite) :
     RecyclerView.Adapter<FavoritePlacesAdapter.ViewHolder>() {
 
-    private val TAG = "FavoritePlacesAdapter"
-    private var context = context
     private var favorites: List<FavoritePlaces> = ArrayList()
-    private var fragment: OnDeleteFavorite = fragment
+
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ViewHolder {
         Log.i(TAG, "onCreateViewHolder: ")
         val layoutInflater: LayoutInflater = LayoutInflater.from(parent.context)
@@ -31,16 +29,14 @@ class FavoritePlacesAdapter(context: Context, fragment: OnDeleteFavorite) :
 
     override fun onBindViewHolder(holder: FavoritePlacesAdapter.ViewHolder, position: Int) {
         Log.i(TAG, "onBindViewHolder: ")
-        var favoritePlace = favorites[position]
+        val favoritePlace = favorites[position]
         holder.nameOfFavoritePlace.text = favoritePlace.selectedPlaces
         holder.dateOfFavoritePlace.text = favoritePlace.selectedDate
         holder.deleteFavoritePlace.setOnClickListener {
-            Toast.makeText(context, "deleteFavoritePlace success", Toast.LENGTH_SHORT).show()
             fragment.deleteFromRoom(favoritePlace)
         }
 
         holder.showDetailsOfFavorite.setOnClickListener {
-            Toast.makeText(context, "showDetailsOfFavorite success", Toast.LENGTH_SHORT).show()
             Log.i(TAG, "onBindViewHolder: " + Locale.getDefault().toLanguageTag())
             fragment.showDetails(
                 favoritePlace.lat.toString(),
@@ -57,8 +53,7 @@ class FavoritePlacesAdapter(context: Context, fragment: OnDeleteFavorite) :
 
     fun setList(favorites: List<FavoritePlaces>) {
         this.favorites = favorites
-        Log.i(TAG, "setList: hours" + favorites.size)
-        Log.i(TAG, "setList: this.hours " + this.favorites.size)
+        notifyDataSetChanged()
     }
 
     inner class ViewHolder(itemView: View) : RecyclerView.ViewHolder(itemView) {

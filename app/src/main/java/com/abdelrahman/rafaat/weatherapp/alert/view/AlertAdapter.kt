@@ -1,32 +1,22 @@
 package com.abdelrahman.rafaat.weatherapp.alert.view
 
 import android.content.Context
-import android.text.format.DateFormat
 import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.ImageView
 import android.widget.TextView
-import android.widget.Toast
 import androidx.recyclerview.widget.RecyclerView
 import com.abdelrahman.rafaat.weatherapp.R
-import com.abdelrahman.rafaat.weatherapp.model.ConstantsValue
-import com.abdelrahman.rafaat.weatherapp.model.Hourly
 import com.abdelrahman.rafaat.weatherapp.model.SavedAlerts
-import com.bumptech.glide.Glide
-import com.bumptech.glide.request.RequestOptions
-import java.text.DecimalFormat
-import java.text.Format
-import java.text.NumberFormat
-import java.text.SimpleDateFormat
 import java.util.*
 
-class AlertAdapter(context: Context, var onDeleteAlert: OnAlertDeleteClickListener) :
+private const val TAG = "AlertAdapter"
+
+class AlertAdapter(var onDeleteAlert: OnAlertDeleteClickListener) :
     RecyclerView.Adapter<AlertAdapter.ViewHolder>() {
 
-    private val TAG = "AlertAdapter"
-    private var context = context
     private var alerts: List<SavedAlerts> = ArrayList()
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ViewHolder {
@@ -38,7 +28,7 @@ class AlertAdapter(context: Context, var onDeleteAlert: OnAlertDeleteClickListen
 
     override fun onBindViewHolder(holder: AlertAdapter.ViewHolder, position: Int) {
         Log.i(TAG, "onBindViewHolder: ")
-        var alert = alerts[position]
+        val alert = alerts[position]
         holder.startTime.text = alert.startTime
         holder.startDate.text = alert.startDate
         holder.endTime.text = alert.endTime
@@ -55,6 +45,7 @@ class AlertAdapter(context: Context, var onDeleteAlert: OnAlertDeleteClickListen
 
     fun setList(alerts: List<SavedAlerts>) {
         this.alerts = alerts
+        notifyDataSetChanged()
         Log.i(TAG, "setList: after")
         Log.i(TAG, "setList: hours" + alerts.size)
         Log.i(TAG, "setList: this.hours " + this.alerts.size)

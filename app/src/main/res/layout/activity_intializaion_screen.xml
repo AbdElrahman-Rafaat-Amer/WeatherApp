@@ -5,6 +5,7 @@
     android:id="@+id/ConstraintLayout_InitializationScreenActivity"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:background="@color/colorLightBlue"
     tools:context=".InitializationScreenActivity">
 
 
@@ -15,11 +16,12 @@
         android:layout_marginTop="@dimen/_50sdp"
         android:text="@string/waiting_enable_gps"
         android:textAlignment="center"
+        android:textColor="?colorOnSecondary"
         android:textSize="@dimen/_20sdp"
         android:visibility="gone"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent"></TextView>
+        app:layout_constraintTop_toTopOf="parent" />
 
     <ImageView
         android:id="@+id/background_InitializationScreenActivity"
@@ -30,6 +32,7 @@
         android:visibility="gone"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/text_InitializationScreenActivity"></ImageView>
+        app:layout_constraintTop_toBottomOf="@+id/text_InitializationScreenActivity"
+        android:contentDescription="@string/waiting_image" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>

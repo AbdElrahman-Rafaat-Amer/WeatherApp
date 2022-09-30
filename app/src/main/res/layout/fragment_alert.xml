@@ -13,6 +13,7 @@
         android:id="@+id/no_alerts_imageView"
         android:layout_width="@dimen/_150sdp"
         android:layout_height="@dimen/_150sdp"
+        android:contentDescription="@string/no_alert"
         android:src="@drawable/ic_alert"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
@@ -24,6 +25,7 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:text="@string/no_alerts"
+        android:textColor="?colorOnSecondary"
         android:textSize="@dimen/_20sdp"
         android:textStyle="bold"
         app:layout_constraintEnd_toEndOf="parent"
@@ -46,6 +48,7 @@
         app:fabCustomSize="@dimen/_40sdp"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        app:srcCompat="@drawable/ic_alert" />
+        app:srcCompat="@drawable/ic_alert"
+        android:contentDescription="@string/add_new_alert" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>

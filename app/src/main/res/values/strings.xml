@@ -66,7 +66,9 @@
     <string name="wind_alert">Wind</string>
     <string name="avalanches_alert">Avalanches</string>
     <string name="other_alert">Rain and Wind</string>
-    <string name="forestfire_alert">Fire warning</string>
+    <string name="forest_fire_alert">Fire warning</string>
+    <string name="add_new_alert">add new alert</string>
+    <string name="waiting_image">Waiting</string>
 
 
 </resources>
