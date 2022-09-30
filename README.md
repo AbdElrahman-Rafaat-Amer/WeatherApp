@@ -8,9 +8,9 @@ You can choose between units of temperature and wind speed
 
 # Technologies used
 
-Kotlin
-MVVM
-kotlin coroutines
-Retrofit
-Room
-Work Manger
+- Kotlin
+- MVVM
+- kotlin coroutines
+- Retrofit
+- Room
+- Work Manger
