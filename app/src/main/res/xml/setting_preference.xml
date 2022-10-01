@@ -1,0 +1,57 @@
+<?xml version="1.0" encoding="utf-8"?>
+<PreferenceScreen xmlns:android="http://schemas.android.com/apk/res/android">
+
+    <PreferenceCategory android:title="@string/notification">
+        <SwitchPreference
+            android:defaultValue="true"
+            android:key="toggle_notification"
+            android:summaryOff="@string/notification_disabled"
+            android:summaryOn="@string/notification_enabled"
+            android:title="@string/notification" />
+    </PreferenceCategory>
+
+    <PreferenceCategory android:title="@string/language">
+        <ListPreference
+            android:defaultValue="auto"
+            android:entries="@array/pref_language_names"
+            android:entryValues="@array/pref_language_codes"
+            android:icon="@drawable/ic_language"
+            android:key="language_name"
+            android:summary="%s"
+            android:title="@string/select_language" />
+    </PreferenceCategory>
+
+    <PreferenceCategory android:title="@string/location_method">
+        <ListPreference
+            android:defaultValue="GPS"
+            android:entries="@array/pref_location_names"
+            android:entryValues="@array/pref_location_codes"
+            android:icon="@drawable/ic_add_favorite"
+            android:key="location_method"
+            android:summary="%s"
+            android:title="@string/location" />
+    </PreferenceCategory>
+
+    <PreferenceCategory android:title="@string/temperature_unit">
+        <ListPreference
+            android:defaultValue="K"
+            android:entries="@array/pref_temperature_names"
+            android:entryValues="@array/pref_temperature_codes"
+            android:icon="@drawable/ic_temperature"
+            android:key="temperature_unit"
+            android:summary="%s"
+            android:title="@string/temperature" />
+    </PreferenceCategory>
+
+    <PreferenceCategory android:title="@string/wind_speed_unit">
+        <ListPreference
+            android:defaultValue="S"
+            android:entries="@array/pref_wind_names"
+            android:entryValues="@array/pref_wind_codes"
+            android:icon="@drawable/ic_wind"
+            android:key="wind_speed"
+            android:summary="%s"
+            android:title="@string/wind_speed" />
+    </PreferenceCategory>
+
+</PreferenceScreen>

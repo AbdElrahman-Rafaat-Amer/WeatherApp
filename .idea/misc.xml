@@ -4,7 +4,15 @@
     <option name="filePathToZoomLevelMap">
       <map>
         <entry key="..\:/Android/projects/MyProjects/WeatherApp/app/src/main/res/drawable/alert_background.xml" value="0.1685" />
+        <entry key="..\:/Android/projects/MyProjects/WeatherApp/app/src/main/res/drawable/ic_add_favorite.xml" value="0.1685" />
+        <entry key="..\:/Android/projects/MyProjects/WeatherApp/app/src/main/res/drawable/ic_language.xml" value="0.1685" />
+        <entry key="..\:/Android/projects/MyProjects/WeatherApp/app/src/main/res/drawable/ic_temperature.xml" value="0.1685" />
+        <entry key="..\:/Android/projects/MyProjects/WeatherApp/app/src/main/res/drawable/ic_temperature_setting.xml" value="0.1685" />
+        <entry key="..\:/Android/projects/MyProjects/WeatherApp/app/src/main/res/drawable/ic_timetable.xml" value="0.1685" />
         <entry key="..\:/Android/projects/MyProjects/WeatherApp/app/src/main/res/drawable/ic_up_arrow.xml" value="0.1685" />
+        <entry key="..\:/Android/projects/MyProjects/WeatherApp/app/src/main/res/drawable/ic_wind.xml" value="0.1685" />
+        <entry key="..\:/Android/projects/MyProjects/WeatherApp/app/src/main/res/drawable/tornado_twister_weather_natural_phenomenon_wind_icon_194234.xml" value="0.1685" />
+        <entry key="..\:/Android/projects/MyProjects/WeatherApp/app/src/main/res/drawable/weather_storm_hurricane_tornado_icon_187701.xml" value="0.1685" />
         <entry key="..\:/Android/projects/MyProjects/WeatherApp/app/src/main/res/layout/activity_intializaion_screen.xml" value="0.27447916666666666" />
         <entry key="..\:/Android/projects/MyProjects/WeatherApp/app/src/main/res/layout/activity_main.xml" value="0.27447916666666666" />
         <entry key="..\:/Android/projects/MyProjects/WeatherApp/app/src/main/res/layout/activity_main2.xml" value="0.27447916666666666" />
@@ -24,6 +32,8 @@
         <entry key="..\:/Android/projects/MyProjects/WeatherApp/app/src/main/res/layout/fragment_setting.xml" value="0.264" />
         <entry key="..\:/Android/projects/MyProjects/WeatherApp/app/src/main/res/layout/fragment_time_table.xml" value="0.1265625" />
         <entry key="..\:/Android/projects/MyProjects/WeatherApp/app/src/main/res/layout/main_fragment.xml" value="0.1265625" />
+        <entry key="..\:/Android/projects/MyProjects/WeatherApp/app/src/main/res/xml/setting.xml" value="0.2734375" />
+        <entry key="..\:/Android/projects/MyProjects/WeatherApp/app/src/main/res/xml/setting_preference.xml" value="0.27447916666666666" />
       </map>
     </option>
   </component>

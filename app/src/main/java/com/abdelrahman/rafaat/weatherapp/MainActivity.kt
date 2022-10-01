@@ -10,7 +10,7 @@ import com.abdelrahman.rafaat.weatherapp.alert.view.AlertFragment
 import com.abdelrahman.rafaat.weatherapp.favoriteplaces.view.FavoriteFragment
 import com.abdelrahman.rafaat.weatherapp.homeplaces.view.HomeFragment
 import com.abdelrahman.rafaat.weatherapp.model.ConstantsValue
-import com.abdelrahman.rafaat.weatherapp.setting.SettingFragment
+import com.abdelrahman.rafaat.weatherapp.setting.Setting
 import com.abdelrahman.rafaat.weatherapp.timetable.TimeTableFragment
 import com.etebarian.meowbottomnavigation.MeowBottomNavigation
 import java.util.*
@@ -59,7 +59,7 @@ class MainActivity : AppCompatActivity() {
                 }
                 ID_SETTING -> {
                     fragmentShow = ID_SETTING
-                    replaceFragment(SettingFragment())
+                    replaceFragment(Setting())
 
                 }
                 ID_TIMETABLE -> {

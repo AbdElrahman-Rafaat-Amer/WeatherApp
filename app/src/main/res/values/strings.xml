@@ -3,21 +3,26 @@
 
     <string name="day_status">Clear</string>
     <string name="language">Language</string>
+    <string name="system_default">System default</string>
+    <string name="select_language">Select Language</string>
     <string name="language_arabic">Arabic</string>
     <string name="language_english">English</string>
     <string name="location">Location</string>
+    <string name="location_method">Location method</string>
     <string name="location_gps">GPS</string>
-    <string name="language_map">Map</string>
+    <string name="location_map">Map</string>
     <string name="temperature_celsius">Celsius</string>
     <string name="temperature_kelvin">Kelvin</string>
     <string name="temperature_fahrenheit">Fahrenheit</string>
-    <string name="temperature_setting">Temperature</string>
+    <string name="temperature">Temperature</string>
+    <string name="temperature_unit">Temperature unit</string>
     <string name="wind_speed">Wind Speed</string>
+    <string name="wind_speed_unit">Wind Speed unit</string>
     <string name="wind_speed_MS">Meter / Second</string>
     <string name="wind_speed_MH">Mile / Hour</string>
     <string name="notification">Notification</string>
-    <string name="notification_enabled">Enable</string>
-    <string name="notification_disabled">Disable</string>
+    <string name="notification_enabled">Enabled</string>
+    <string name="notification_disabled">Disabled</string>
     <string name="sunrise">Sunrise</string>
     <string name="sunset">Sunset</string>
     <string name="cloud">Cloud</string>
@@ -70,5 +75,59 @@
     <string name="add_new_alert">add new alert</string>
     <string name="waiting_image">Waiting</string>
 
+    <string-array name="pref_notification">
+        <item>@string/notification_enabled</item>
+        <item>@string/notification_disabled</item>
+    </string-array>
+
+    <string-array name="pref_notification_codes">
+        <item>true</item>
+        <item>false</item>
+    </string-array>
+
+    <string-array name="pref_language_names">
+        <item>@string/system_default</item>
+        <item>@string/language_arabic</item>
+        <item>@string/language_english</item>
+    </string-array>
+
+    <string-array name="pref_language_codes">
+        <item>auto</item>
+        <item>ar</item>
+        <item>en</item>
+    </string-array>
+
+
+    <string-array name="pref_location_names">
+        <item>@string/location_gps</item>
+        <item>@string/location_map</item>
+    </string-array>
+
+    <string-array name="pref_location_codes">
+        <item>GPS</item>
+        <item>Map</item>
+    </string-array>
+
+    <string-array name="pref_temperature_names">
+        <item>@string/temperature_celsius</item>
+        <item>@string/temperature_kelvin</item>
+        <item>@string/temperature_fahrenheit</item>
+    </string-array>
+
+    <string-array name="pref_temperature_codes">
+        <item>C</item>
+        <item>K</item>
+        <item>F</item>
+    </string-array>
+
+    <string-array name="pref_wind_names">
+        <item>@string/wind_speed_MS</item>
+        <item>@string/wind_speed_MH</item>
+    </string-array>
+
+    <string-array name="pref_wind_codes">
+        <item>S</item>
+        <item>H</item>
+    </string-array>
 
 </resources>

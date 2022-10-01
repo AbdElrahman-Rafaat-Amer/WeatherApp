@@ -5,14 +5,13 @@ import android.util.Log
 import com.abdelrahman.rafaat.weatherapp.database.LocaleSource
 import com.abdelrahman.rafaat.weatherapp.network.RemoteSource
 
+private const val TAG = "Repository"
 
 class Repository private constructor(
     var context: Context,
-    var remoteSource: RemoteSource,
+    private var remoteSource: RemoteSource,
     var localSource: LocaleSource
 ) : RepositoryInterface {
-
-    private val TAG = "Repository"
 
     companion object {
         private var weatherRepo: Repository? = null
@@ -33,7 +32,7 @@ class Repository private constructor(
         language: String
     ): WeatherResponse {
         Log.i(TAG, "getWeatherFromNetwork: getWeatherFromNetwork parameterized")
-        var response = remoteSource.getWeatherData(latitude, longitude, language)
+        val response = remoteSource.getWeatherData(latitude, longitude, language)
         localSource.insertCurrentDataToRoom(response)
         return response
     }
@@ -55,7 +54,7 @@ class Repository private constructor(
 
     //Address
     override suspend fun getStoredPlace(): SavedAddress {
-        var address = localSource.getStoredPlace()
+        val address = localSource.getStoredPlace()
         Log.i(TAG, "getStoredPlace: $address")
         return address
     }
@@ -89,7 +88,7 @@ class Repository private constructor(
 
     override suspend fun getStoredAlerts(): List<SavedAlerts>? {
         Log.i(TAG, "getStoredAlerts: ")
-        var response = localSource.getStoredAlerts()
+        val response = localSource.getStoredAlerts()
         if (response != null) {
             Log.i(TAG, "getStoredAlerts: response.size---> " + response.size)
         }
@@ -98,13 +97,13 @@ class Repository private constructor(
 
     override suspend fun deleteAlertFromRoom(id: Int) {
         Log.i(TAG, "deleteAlertFromRoom: alert---> $id")
-        var response = localSource.deleteAlertFromRoom(id)
+        val response = localSource.deleteAlertFromRoom(id)
         Log.i(TAG, "deleteAlertFromRoom: response-----> $response")
     }
 
     override suspend fun getAlertFromRoom(id: Int): SavedAlerts {
         Log.i(TAG, "getAlertFromRoom: alert---> $id")
-        var response = localSource.getAlertFromRoom(id)
+        val response = localSource.getAlertFromRoom(id)
         Log.i(TAG, "deleteAlertFromRoom: response-----> $response")
         return response
     }

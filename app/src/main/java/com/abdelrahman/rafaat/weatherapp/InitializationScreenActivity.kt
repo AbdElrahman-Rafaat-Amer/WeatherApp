@@ -28,7 +28,6 @@ class InitializationScreenActivity : AppCompatActivity() {
     private val PERMISSION_ID_LOCATION = 0
 
     override fun onCreate(savedInstanceState: Bundle?) {
-
         Locale.setDefault(Locale.forLanguageTag(ConstantsValue.language))
         super.onCreate(savedInstanceState)
         binding = ActivityIntializaionScreenBinding.inflate(layoutInflater)
