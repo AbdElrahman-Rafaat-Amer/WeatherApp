@@ -3,6 +3,7 @@ package com.abdelrahman.rafaat.weatherapp.database
 import android.content.Context
 import android.util.Log
 import com.abdelrahman.rafaat.weatherapp.model.*
+import com.abdelrahman.rafaat.weatherapp.utils.ConstantsValue
 
 
 class ConcreteLocaleSource(context: Context) : LocaleSource {

@@ -4,16 +4,18 @@ import android.content.res.Configuration
 import android.content.res.Resources
 import android.os.Bundle
 import android.util.DisplayMetrics
+import android.util.Log
 import androidx.appcompat.app.AppCompatActivity
 import androidx.fragment.app.Fragment
 import com.abdelrahman.rafaat.weatherapp.alert.view.AlertFragment
 import com.abdelrahman.rafaat.weatherapp.favoriteplaces.view.FavoriteFragment
 import com.abdelrahman.rafaat.weatherapp.homeplaces.view.HomeFragment
-import com.abdelrahman.rafaat.weatherapp.model.ConstantsValue
 import com.abdelrahman.rafaat.weatherapp.setting.Setting
 import com.abdelrahman.rafaat.weatherapp.timetable.TimeTableFragment
+import com.abdelrahman.rafaat.weatherapp.utils.ConstantsValue
 import com.etebarian.meowbottomnavigation.MeowBottomNavigation
 import java.util.*
+
 
 class MainActivity : AppCompatActivity() {
 
@@ -99,13 +101,11 @@ class MainActivity : AppCompatActivity() {
             .commit()
     }
 
-    fun restartFragment(currentFragment: Fragment) {
-        supportFragmentManager.beginTransaction()
-            .detach(currentFragment)
-            .commit()
-        supportFragmentManager.beginTransaction()
-            .attach(currentFragment)
-            .commit()
+    fun restartFragment() {
+        Log.i(TAG, "restartFragment: ------------------------------>")
+        val intent = intent
+        finish()
+        startActivity(intent)
     }
 
     private fun setAppLocale(localeCode: String) {

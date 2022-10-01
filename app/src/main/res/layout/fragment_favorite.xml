@@ -10,22 +10,11 @@
     android:paddingEnd="@dimen/_15sdp"
     tools:context=".favoriteplaces.view.FavoriteFragment">
 
-    <TextView
-        android:textColor="?colorOnSecondary"
-        android:id="@+id/fragment_favorite_textView"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="@string/fragment_favorite"
-        android:textSize="@dimen/_20sdp"
-        android:textStyle="bold"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent" />
-
     <ImageView
         android:id="@+id/no_favorite_imageView"
         android:layout_width="wrap_content"
         android:layout_height="@dimen/_250sdp"
+        android:contentDescription="@string/no_favorite"
         android:paddingTop="@dimen/_100sdp"
         android:scaleType="center"
         android:src="@drawable/ic_no_favorites"
@@ -40,9 +29,9 @@
         android:layout_height="wrap_content"
         android:layout_marginTop="@dimen/_20sdp"
         android:text="@string/no_favorite"
+        android:textColor="?colorOnSecondary"
         android:textSize="@dimen/_20sdp"
         android:textStyle="bold"
-        android:textColor="?colorOnSecondary"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/no_favorite_imageView" />
@@ -52,7 +41,7 @@
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:layout_marginTop="@dimen/_30sdp"
-        app:layout_constraintTop_toBottomOf="@id/fragment_favorite_textView" />
+        app:layout_constraintTop_toTopOf="parent" />
 
     <com.google.android.material.floatingactionbutton.FloatingActionButton
         android:id="@+id/add_favorite_floatingActionButton"
@@ -64,5 +53,6 @@
         app:fabCustomSize="@dimen/_40sdp"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        app:srcCompat="@drawable/ic_add_favorite" />
+        app:srcCompat="@drawable/ic_add_favorite"
+        android:contentDescription="@string/add_favorite_place" />
 </androidx.constraintlayout.widget.ConstraintLayout>

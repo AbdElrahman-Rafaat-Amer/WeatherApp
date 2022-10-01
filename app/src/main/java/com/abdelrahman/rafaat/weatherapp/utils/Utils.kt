@@ -3,7 +3,6 @@ package com.abdelrahman.rafaat.weatherapp.utils
 import android.content.Context
 import android.location.Geocoder
 import android.util.Log
-import com.abdelrahman.rafaat.weatherapp.model.ConstantsValue
 import com.abdelrahman.rafaat.weatherapp.model.SavedAddress
 import java.io.IOException
 import java.util.*

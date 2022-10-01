@@ -10,7 +10,7 @@ import android.widget.TextView
 import androidx.constraintlayout.widget.ConstraintLayout
 import androidx.recyclerview.widget.RecyclerView
 import com.abdelrahman.rafaat.weatherapp.R
-import com.abdelrahman.rafaat.weatherapp.model.ConstantsValue
+import com.abdelrahman.rafaat.weatherapp.utils.ConstantsValue
 import com.abdelrahman.rafaat.weatherapp.model.Daily
 import com.bumptech.glide.Glide
 import com.bumptech.glide.request.RequestOptions
@@ -112,13 +112,13 @@ class DayAdapter : RecyclerView.Adapter<DayAdapter.ViewHolder>() {
     private fun getTemperature(day: Daily): String {
         var temperature: String
         when (ConstantsValue.tempUnit) {
-            "C" -> {
+            "celsius" -> {
                 temperature = DecimalFormat("#").format(day.temp.min - 273.15)
                 temperature += " / "
                 temperature += DecimalFormat("#").format(day.temp.max - 273.15)
                 temperature += " " + context.getString(R.string.temperature_celsius_unit)
             }
-            "F" -> {
+            "fahrenheit" -> {
                 temperature = DecimalFormat("#").format(((day.temp.min - 273.15) * 1.8) + 32)
                 temperature += " / "
                 temperature = DecimalFormat("#").format(((day.temp.max - 273.15) * 1.8) + 32)
@@ -148,8 +148,8 @@ class DayAdapter : RecyclerView.Adapter<DayAdapter.ViewHolder>() {
 
     private fun getWindSpeed(windSpeed: Double): String {
         val windSpeedFormat: String = when (ConstantsValue.windSpeedUnit) {
-            "H" -> DecimalFormat("#.##").format(windSpeed * 3.6) + " " + context.getString(
-                R.string.wind_speed_unit_KH
+            "M/H" -> DecimalFormat("#.##").format(windSpeed * 3.6) + " " + context.getString(
+                R.string.wind_speed_unit_MH
             )
             else -> DecimalFormat("#.##").format(windSpeed) + " " + context.getString(
                 R.string.wind_speed_unit_MS

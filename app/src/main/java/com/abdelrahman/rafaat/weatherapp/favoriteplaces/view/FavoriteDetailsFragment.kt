@@ -22,7 +22,7 @@ import com.abdelrahman.rafaat.weatherapp.R
 import com.abdelrahman.rafaat.weatherapp.favoriteplaces.viewmodel.FavoritePlaceViewModel
 import com.abdelrahman.rafaat.weatherapp.homeplaces.view.WeatherDailyAdapter
 import com.abdelrahman.rafaat.weatherapp.homeplaces.view.WeatherHourlyAdapter
-import com.abdelrahman.rafaat.weatherapp.model.ConstantsValue
+import com.abdelrahman.rafaat.weatherapp.utils.ConstantsValue
 import com.abdelrahman.rafaat.weatherapp.model.SavedAddress
 import com.abdelrahman.rafaat.weatherapp.model.WeatherResponse
 import com.bumptech.glide.Glide
@@ -184,7 +184,7 @@ class FavoriteDetailsFragment(var viewModel: FavoritePlaceViewModel) : Fragment(
     private fun getWindSpeed(weatherResponse: WeatherResponse): String {
         val windSpeed: String = when (ConstantsValue.windSpeedUnit) {
             "H" -> DecimalFormat("#.##").format(weatherResponse.current.wind_speed * 3.6) + " " + getString(
-                R.string.wind_speed_unit_KH
+                R.string.wind_speed_unit_MH
             )
             else -> DecimalFormat("#.##").format(weatherResponse.current.wind_speed) + " " + getString(
                 R.string.wind_speed_unit_MS

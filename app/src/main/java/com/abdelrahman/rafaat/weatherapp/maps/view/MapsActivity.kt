@@ -11,11 +11,9 @@ import androidx.lifecycle.ViewModelProvider
 import com.abdelrahman.rafaat.weatherapp.MainActivity
 import com.abdelrahman.rafaat.weatherapp.R
 import com.abdelrahman.rafaat.weatherapp.database.ConcreteLocaleSource
-import com.abdelrahman.rafaat.weatherapp.homeplaces.viewmodel.CurrentPlaceViewModel
-import com.abdelrahman.rafaat.weatherapp.homeplaces.viewmodel.CurrentPlaceViewModelFactory
 import com.abdelrahman.rafaat.weatherapp.maps.viewmodel.MapViewModel
 import com.abdelrahman.rafaat.weatherapp.maps.viewmodel.MapViewModelFactory
-import com.abdelrahman.rafaat.weatherapp.model.ConstantsValue
+import com.abdelrahman.rafaat.weatherapp.utils.ConstantsValue
 import com.abdelrahman.rafaat.weatherapp.model.FavoritePlaces
 import com.abdelrahman.rafaat.weatherapp.model.Repository
 import com.abdelrahman.rafaat.weatherapp.network.WeatherClient

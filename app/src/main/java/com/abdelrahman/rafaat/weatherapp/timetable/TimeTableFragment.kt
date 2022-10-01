@@ -13,7 +13,7 @@ import com.abdelrahman.rafaat.weatherapp.database.ConcreteLocaleSource
 import com.abdelrahman.rafaat.weatherapp.databinding.FragmentTimeTableBinding
 import com.abdelrahman.rafaat.weatherapp.homeplaces.viewmodel.CurrentPlaceViewModel
 import com.abdelrahman.rafaat.weatherapp.homeplaces.viewmodel.CurrentPlaceViewModelFactory
-import com.abdelrahman.rafaat.weatherapp.model.ConstantsValue
+import com.abdelrahman.rafaat.weatherapp.utils.ConstantsValue
 import com.abdelrahman.rafaat.weatherapp.model.Repository
 import com.abdelrahman.rafaat.weatherapp.model.WeatherResponse
 import com.abdelrahman.rafaat.weatherapp.network.WeatherClient

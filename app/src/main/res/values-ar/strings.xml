@@ -35,7 +35,7 @@
     <string name="temperature_kelvin_unit">" °ك"</string>
     <string name="temperature_fahrenheit_unit">" °ف"</string>
     <string name="wind_speed_unit_MS"> م/ث </string>
-    <string name="wind_speed_unit_KH"> ك/س </string>
+    <string name="wind_speed_unit_MH"> ك/س </string>
     <string name="meter"> م</string>
     <string name="pressure_unit"> ه.ب.ا </string>
     <string name="weather_description">حالة الطقس</string>
@@ -73,5 +73,6 @@
     <string name="forest_fire_alert">"حريق الغابة "</string>
     <string name="add_new_alert">اضف تحذير جديد</string>
     <string name="waiting_image">إنتظار</string>
-
+    <string name="loading_bar">يجري تحميل الصفحة الان</string>
+    <string name="add_favorite_place">اضف مكان جديد</string>
 </resources>

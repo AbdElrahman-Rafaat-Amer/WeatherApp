@@ -35,7 +35,7 @@
     <string name="temperature_kelvin_unit">" °K"</string>
     <string name="temperature_fahrenheit_unit"> °F</string>
     <string name="wind_speed_unit_MS"> m/s</string>
-    <string name="wind_speed_unit_KH"> k/h</string>
+    <string name="wind_speed_unit_MH"> m/h</string>
     <string name="meter"> m</string>
     <string name="pressure_unit"> hPa</string>
     <string name="weather_description">Weather</string>
@@ -74,6 +74,8 @@
     <string name="forest_fire_alert">Fire warning</string>
     <string name="add_new_alert">add new alert</string>
     <string name="waiting_image">Waiting</string>
+    <string name="loading_bar">loading bar</string>
+    <string name="add_favorite_place">add favorite place</string>
 
     <string-array name="pref_notification">
         <item>@string/notification_enabled</item>
@@ -115,9 +117,9 @@
     </string-array>
 
     <string-array name="pref_temperature_codes">
-        <item>C</item>
-        <item>K</item>
-        <item>F</item>
+        <item>celsius</item>
+        <item>kelvin</item>
+        <item>fahrenheit</item>
     </string-array>
 
     <string-array name="pref_wind_names">
@@ -126,8 +128,8 @@
     </string-array>
 
     <string-array name="pref_wind_codes">
-        <item>S</item>
-        <item>H</item>
+        <item>M/S</item>
+        <item>M/H</item>
     </string-array>
 
 </resources>

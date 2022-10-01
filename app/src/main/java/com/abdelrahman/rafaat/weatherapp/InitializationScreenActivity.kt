@@ -9,13 +9,12 @@ import android.location.LocationManager
 import android.os.Bundle
 import android.os.Looper
 import android.provider.Settings
-import android.util.Log
 import android.view.View
 import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
 import androidx.core.app.ActivityCompat
 import com.abdelrahman.rafaat.weatherapp.databinding.ActivityIntializaionScreenBinding
-import com.abdelrahman.rafaat.weatherapp.model.ConstantsValue
+import com.abdelrahman.rafaat.weatherapp.utils.ConstantsValue
 import com.google.android.gms.location.*
 import com.google.android.material.snackbar.Snackbar
 import java.util.*
@@ -36,11 +35,10 @@ class InitializationScreenActivity : AppCompatActivity() {
         fusedLocationClient = LocationServices.getFusedLocationProviderClient(this)
 
         if (checkPermission()) {
-            if (ConstantsValue.locationMethod == "M") {
+            if (ConstantsValue.locationMethod == "Map") {
                 goToNextActivity()
             } else {
                 getLastLocation()
-                ConstantsValue.locationMethod = "G"
             }
         } else {
             requestPermission()
@@ -100,8 +98,6 @@ class InitializationScreenActivity : AppCompatActivity() {
                 } else {
                     ConstantsValue.longitude = location.longitude.toString()
                     ConstantsValue.latitude = location.latitude.toString()
-
-                    finish()
                     goToNextActivity()
                 }
             }
@@ -159,7 +155,6 @@ class InitializationScreenActivity : AppCompatActivity() {
 
     override fun onRestart() {
         super.onRestart()
-        Log.i("TAG", "onRestart: ")
         getLastLocation()
     }
 }

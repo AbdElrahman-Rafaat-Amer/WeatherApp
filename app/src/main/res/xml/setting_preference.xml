@@ -34,7 +34,7 @@
 
     <PreferenceCategory android:title="@string/temperature_unit">
         <ListPreference
-            android:defaultValue="K"
+            android:defaultValue="kelvin"
             android:entries="@array/pref_temperature_names"
             android:entryValues="@array/pref_temperature_codes"
             android:icon="@drawable/ic_temperature"
@@ -45,7 +45,7 @@
 
     <PreferenceCategory android:title="@string/wind_speed_unit">
         <ListPreference
-            android:defaultValue="S"
+            android:defaultValue="M/S"
             android:entries="@array/pref_wind_names"
             android:entryValues="@array/pref_wind_codes"
             android:icon="@drawable/ic_wind"

@@ -1,6 +1,7 @@
 package com.abdelrahman.rafaat.weatherapp.homeplaces.view
 
 import android.os.Bundle
+import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.View.GONE
@@ -18,11 +19,13 @@ import com.abdelrahman.rafaat.weatherapp.homeplaces.viewmodel.CurrentPlaceViewMo
 import com.abdelrahman.rafaat.weatherapp.model.*
 import com.abdelrahman.rafaat.weatherapp.network.WeatherClient
 import com.abdelrahman.rafaat.weatherapp.utils.ConnectionLiveData
+import com.abdelrahman.rafaat.weatherapp.utils.ConstantsValue
 import com.bumptech.glide.Glide
 import java.text.DecimalFormat
 import java.text.SimpleDateFormat
 import java.util.*
 import com.abdelrahman.rafaat.weatherapp.utils.getAddress
+import com.abdelrahman.rafaat.weatherapp.TAG
 
 class HomeFragment : Fragment() {
     private lateinit var binding: FragmentHomeBinding
@@ -81,12 +84,15 @@ class HomeFragment : Fragment() {
 
     private fun checkInternet() {
         ConnectionLiveData.getInstance(requireContext()).observe(viewLifecycleOwner) {
+            Log.i(TAG, "checkInternet: it-------------------> $it")
             if (it) {
+                Log.i(TAG, "checkInternet:in if it-------------------> $it")
                 getAddress()
                 viewModel.getWeatherFromNetwork(
                     ConstantsValue.latitude, ConstantsValue.longitude, ConstantsValue.language
                 )
             } else {
+                Log.i(TAG, "checkInternet:in else it-------------------> $it")
                 binding.loadingProgressBar.visibility = GONE
                 binding.visibilityConstrainLayout.visibility = VISIBLE
                 viewModel.getDataFromRoom()
@@ -177,8 +183,8 @@ class HomeFragment : Fragment() {
 
     private fun getWindSpeed(weatherResponse: WeatherResponse): String {
         val windSpeed = when (ConstantsValue.windSpeedUnit) {
-            "H" -> DecimalFormat("#.##").format(weatherResponse.current.wind_speed * 3.6) + " " + getString(
-                R.string.wind_speed_unit_KH
+            "M/H" -> DecimalFormat("#.##").format(weatherResponse.current.wind_speed * 3.6) + " " + getString(
+                R.string.wind_speed_unit_MH
             )
             else -> DecimalFormat("#.##").format(weatherResponse.current.wind_speed) + " " + getString(
                 R.string.wind_speed_unit_MS
@@ -190,12 +196,12 @@ class HomeFragment : Fragment() {
     private fun getTemperature(temp: Double): String {
         val temperature: String
         when (ConstantsValue.tempUnit) {
-            "C" -> {
+            "celsius" -> {
                 temperature = DecimalFormat("#").format(temp - 273.15)
                 binding.currentDayTemperatureUnitTextView.text =
                     resources.getString(R.string.temperature_celsius_unit)
             }
-            "F" -> {
+            "fahrenheit" -> {
                 temperature = DecimalFormat("#").format(((temp - 273.15) * 1.8) + 32)
                 binding.currentDayTemperatureUnitTextView.text =
                     resources.getString(R.string.temperature_fahrenheit_unit)
