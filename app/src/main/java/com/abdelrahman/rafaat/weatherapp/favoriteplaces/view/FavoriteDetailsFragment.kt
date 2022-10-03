@@ -9,8 +9,6 @@ import android.view.View
 import android.view.View.GONE
 import android.view.View.VISIBLE
 import android.view.ViewGroup
-import android.widget.ImageView
-import android.widget.ProgressBar
 import android.widget.TextView
 import android.widget.Toast
 import androidx.constraintlayout.widget.ConstraintLayout
@@ -25,6 +23,7 @@ import com.abdelrahman.rafaat.weatherapp.homeplaces.view.WeatherHourlyAdapter
 import com.abdelrahman.rafaat.weatherapp.utils.ConstantsValue
 import com.abdelrahman.rafaat.weatherapp.model.SavedAddress
 import com.abdelrahman.rafaat.weatherapp.model.WeatherResponse
+import com.airbnb.lottie.LottieAnimationView
 import com.bumptech.glide.Glide
 import de.hdodenhof.circleimageview.CircleImageView
 import java.text.DecimalFormat
@@ -62,8 +61,7 @@ class FavoriteDetailsFragment(var viewModel: FavoritePlaceViewModel) : Fragment(
     private lateinit var dailyRecyclerView: RecyclerView
     private lateinit var weatherDailyAdapter: WeatherDailyAdapter
     private lateinit var visibilityConstrainLayout: ConstraintLayout
-    private lateinit var progressBar: ProgressBar
-    private lateinit var animatedImageView: ImageView
+    private lateinit var lottieAnimationView: LottieAnimationView
 
     override fun onAttach(context: Context) {
         super.onAttach(context)
@@ -88,8 +86,7 @@ class FavoriteDetailsFragment(var viewModel: FavoritePlaceViewModel) : Fragment(
     }
 
     private fun initUI(view: View) {
-        progressBar = view.findViewById(R.id.loading_progressBar)
-        animatedImageView = view.findViewById(R.id.animated_imageView)
+        lottieAnimationView = view.findViewById(R.id.lottieAnimationView)
         visibilityConstrainLayout = view.findViewById(R.id.visibility_constrainLayout)
         locationNameTextView = view.findViewById(R.id.location_name_textView)
         locationDetailsNameTextView = view.findViewById(R.id.locationDetails_name_textView)
@@ -126,7 +123,6 @@ class FavoriteDetailsFragment(var viewModel: FavoritePlaceViewModel) : Fragment(
         visibilityTextView = view.findViewById(R.id.visibility_textView)
         ultravioletTextView = view.findViewById(R.id.ultraviolet_textView)
 
-        animatedImageView.animate().rotation(360f).setDuration(2000).start()
     }
 
     private fun observeViewModel() {
@@ -143,8 +139,7 @@ class FavoriteDetailsFragment(var viewModel: FavoritePlaceViewModel) : Fragment(
     }
 
     private fun assignDataToView(weatherResponse: WeatherResponse) {
-        progressBar.visibility = GONE
-        animatedImageView.visibility = GONE
+        lottieAnimationView.visibility = GONE
         visibilityConstrainLayout.visibility = VISIBLE
 
         currentDateTextView.text = formatDate(weatherResponse.current.dt)

@@ -63,7 +63,6 @@ class HomeFragment : Fragment() {
         binding.dailyRecyclerView.layoutManager = dailyManager
         binding.dailyRecyclerView.adapter = weatherDailyAdapter
 
-        binding.animatedImageView.animate().rotation(360f).setDuration(2000).start()
     }
 
     private fun checkInternet() {
@@ -75,7 +74,7 @@ class HomeFragment : Fragment() {
                     ConstantsValue.latitude, ConstantsValue.longitude, ConstantsValue.language
                 )
             } else {
-                binding.loadingProgressBar.visibility = GONE
+                binding.loadingAnimationView.visibility = GONE
                 binding.visibilityConstrainLayout.visibility = VISIBLE
                 viewModel.getDataFromRoom()
                 viewModel.getStoredAddressFromRoom()
@@ -112,8 +111,7 @@ class HomeFragment : Fragment() {
     }
 
     private fun assignDataToView(weatherResponse: WeatherResponse) {
-        binding.loadingProgressBar.visibility = GONE
-        binding.animatedImageView.visibility = GONE
+        binding.loadingAnimationView.visibility = GONE
         binding.visibilityConstrainLayout.visibility = VISIBLE
 
         binding.currentDateTextView.text = formatDate(weatherResponse.current.dt)

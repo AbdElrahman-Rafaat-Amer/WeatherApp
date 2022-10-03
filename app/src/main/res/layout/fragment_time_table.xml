@@ -3,7 +3,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".timetable.view.TimeTableFragment"
+    tools:context=".timetable.TimeTableFragment"
     android:padding="@dimen/_15sdp">
 
     <androidx.recyclerview.widget.RecyclerView

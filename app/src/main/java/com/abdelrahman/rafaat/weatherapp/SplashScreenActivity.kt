@@ -1,8 +1,6 @@
 package com.abdelrahman.rafaat.weatherapp
 
-import android.content.Context
 import android.content.Intent
-import android.content.SharedPreferences
 import android.content.res.Resources
 import android.os.Bundle
 import androidx.appcompat.app.AppCompatActivity
@@ -14,11 +12,8 @@ const val TAG = "SplashScreenActivity"
 
 class SplashScreenActivity : AppCompatActivity() {
 
-    private lateinit var sharedPreferences: SharedPreferences
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-
-        sharedPreferences = this.getSharedPreferences("SETTING", Context.MODE_PRIVATE)
         setContentView(R.layout.activity_splash_screen)
         getDefaultValues()
 

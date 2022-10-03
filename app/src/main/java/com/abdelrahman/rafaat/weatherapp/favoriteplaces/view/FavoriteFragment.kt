@@ -12,6 +12,7 @@ import android.view.View.VISIBLE
 import android.view.ViewGroup
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.ViewModelProvider
+import androidx.navigation.Navigation
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.abdelrahman.rafaat.weatherapp.R
 import com.abdelrahman.rafaat.weatherapp.database.ConcreteLocaleSource
@@ -121,9 +122,8 @@ class FavoriteFragment : Fragment(), OnDeleteFavorite {
         viewModel.getDetailsOfSelectedFavorite(latitude, longitude, language)
         ConnectionLiveData.getInstance(requireContext()).observe(viewLifecycleOwner) {
             if (it) {
-                requireActivity().supportFragmentManager.beginTransaction()
-                    .replace(R.id.fragment_container, FavoriteDetailsFragment(viewModel))
-                    .addToBackStack(null).commit()
+                Navigation.findNavController(binding.root)
+                    .navigate(R.id.favoriteDetails_Fragment)
             } else
                 showSnackBar()
         }

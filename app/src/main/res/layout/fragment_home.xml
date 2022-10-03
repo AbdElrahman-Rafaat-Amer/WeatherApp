@@ -1,10 +1,8 @@
 <?xml version="1.0" encoding="utf-8"?>
 <ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
-    xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent">
-
 
     <androidx.constraintlayout.widget.ConstraintLayout
         android:id="@+id/ConstraintLayout_HomeFragment"
@@ -12,27 +10,18 @@
         android:layout_height="wrap_content"
         android:padding="@dimen/_15sdp">
 
-        <ImageView
-            android:id="@+id/animated_imageView"
-            android:layout_width="@dimen/_120sdp"
-            android:layout_height="@dimen/_120sdp"
-            android:layout_marginTop="@dimen/_190sdp"
-            android:src="@drawable/ic_pngtree_waiting"
+        <com.airbnb.lottie.LottieAnimationView
+            android:id="@+id/loadingAnimationView"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent"
-            android:contentDescription="@string/loading_bar" />
+            app:lottie_autoPlay="true"
+            app:lottie_loop="true"
+            app:lottie_rawRes="@raw/loading" />
 
-        <ProgressBar
-            android:id="@+id/loading_progressBar"
-            android:layout_width="@dimen/_170sdp"
-            android:layout_height="@dimen/_170sdp"
-            android:layout_marginTop="@dimen/_190sdp"
-            app:layout_constraintBottom_toBottomOf="parent"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toTopOf="parent" />
 
         <androidx.constraintlayout.widget.ConstraintLayout
             android:id="@+id/visibility_constrainLayout"
@@ -192,6 +181,7 @@
                         <ImageView
                             android:layout_width="@dimen/_35sdp"
                             android:layout_height="@dimen/_35sdp"
+                            android:contentDescription="@string/sunrise"
                             android:scaleType="centerCrop"
                             android:src="@drawable/ic_sunny" />
 
@@ -200,14 +190,14 @@
                             android:layout_height="wrap_content"
                             android:text="@string/sunrise"
                             android:textColor="@color/white"
-                            android:textSize="12dp" />
+                            android:textSize="12sp" />
 
                         <TextView
                             android:id="@+id/sun_rise_time_textView"
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
                             android:textColor="@color/white"
-                            android:textSize="14dp" />
+                            android:textSize="14sp" />
                     </LinearLayout>
 
                     <!--  Column 2-->
@@ -223,6 +213,7 @@
                         <ImageView
                             android:layout_width="@dimen/_30sdp"
                             android:layout_height="@dimen/_30sdp"
+                            android:contentDescription="@string/sunset"
                             android:scaleType="centerCrop"
                             android:src="@drawable/ic_ocean" />
 
@@ -232,14 +223,14 @@
                             android:layout_marginTop="@dimen/_7sdp"
                             android:text="@string/sunset"
                             android:textColor="@color/white"
-                            android:textSize="12dp" />
+                            android:textSize="12sp" />
 
                         <TextView
                             android:id="@+id/sun_set_time_textView"
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
                             android:textColor="@color/white"
-                            android:textSize="14dp" />
+                            android:textSize="14sp" />
                     </LinearLayout>
 
                     <!--  Column 3-->
@@ -255,6 +246,7 @@
                         <ImageView
                             android:layout_width="@dimen/_40sdp"
                             android:layout_height="@dimen/_40sdp"
+                            android:contentDescription="@string/humidity_cardView"
                             android:src="@drawable/ic_humidity" />
 
                         <TextView
@@ -262,14 +254,14 @@
                             android:layout_height="wrap_content"
                             android:text="@string/humidity_cardView"
                             android:textColor="@color/white"
-                            android:textSize="12dp" />
+                            android:textSize="12sp" />
 
                         <TextView
                             android:id="@+id/humidity_textView"
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
                             android:textColor="@color/white"
-                            android:textSize="14dp" />
+                            android:textSize="14sp" />
                     </LinearLayout>
 
                     <!--  Row 2 -->
@@ -286,6 +278,7 @@
                         <ImageView
                             android:layout_width="@dimen/_40sdp"
                             android:layout_height="@dimen/_40sdp"
+                            android:contentDescription="@string/wind_speed"
                             android:src="@drawable/ic_wind" />
 
                         <TextView
@@ -293,14 +286,14 @@
                             android:layout_height="wrap_content"
                             android:text="@string/wind_speed"
                             android:textColor="@color/white"
-                            android:textSize="12dp" />
+                            android:textSize="12sp" />
 
                         <TextView
                             android:id="@+id/wind_speed_textView"
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
                             android:textColor="@color/white"
-                            android:textSize="14dp" />
+                            android:textSize="14sp" />
                     </LinearLayout>
 
                     <!--  Column 2-->
@@ -316,21 +309,22 @@
                         <ImageView
                             android:layout_width="@dimen/_40sdp"
                             android:layout_height="@dimen/_40sdp"
+                            android:contentDescription="@string/wind_degree"
                             android:src="@drawable/ic_wind" />
 
                         <TextView
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
-                            android:text="@string/wind_deg"
+                            android:text="@string/wind_degree"
                             android:textColor="@color/white"
-                            android:textSize="12dp" />
+                            android:textSize="12sp" />
 
                         <TextView
                             android:id="@+id/wind_degree_textView"
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
                             android:textColor="@color/white"
-                            android:textSize="14dp" />
+                            android:textSize="14sp" />
                     </LinearLayout>
 
                     <!--  Column 3-->
@@ -346,6 +340,7 @@
                         <ImageView
                             android:layout_width="@dimen/_40sdp"
                             android:layout_height="@dimen/_40sdp"
+                            android:contentDescription="@string/cloud"
                             android:src="@drawable/ic_cloud" />
 
                         <TextView
@@ -353,14 +348,14 @@
                             android:layout_height="wrap_content"
                             android:text="@string/cloud"
                             android:textColor="@color/white"
-                            android:textSize="12dp" />
+                            android:textSize="12sp" />
 
                         <TextView
                             android:id="@+id/cloud_textView"
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
                             android:textColor="@color/white"
-                            android:textSize="14dp" />
+                            android:textSize="14sp" />
                     </LinearLayout>
 
                     <!--  Row 3 -->
@@ -377,6 +372,7 @@
                         <ImageView
                             android:layout_width="@dimen/_40sdp"
                             android:layout_height="@dimen/_40sdp"
+                            android:contentDescription="@string/pressure"
                             android:scaleType="centerCrop"
                             android:src="@drawable/ic_pressure" />
 
@@ -385,14 +381,14 @@
                             android:layout_height="wrap_content"
                             android:text="@string/pressure"
                             android:textColor="@color/white"
-                            android:textSize="12dp" />
+                            android:textSize="12sp" />
 
                         <TextView
                             android:id="@+id/pressure_textView"
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
                             android:textColor="@color/white"
-                            android:textSize="14dp" />
+                            android:textSize="14sp" />
                     </LinearLayout>
 
                     <!--  Column 2-->
@@ -408,6 +404,7 @@
                         <ImageView
                             android:layout_width="@dimen/_40sdp"
                             android:layout_height="@dimen/_40sdp"
+                            android:contentDescription="@string/visibility"
                             android:src="@drawable/ic_visibility" />
 
                         <TextView
@@ -415,14 +412,14 @@
                             android:layout_height="wrap_content"
                             android:text="@string/visibility"
                             android:textColor="@color/white"
-                            android:textSize="12dp" />
+                            android:textSize="12sp" />
 
                         <TextView
                             android:id="@+id/visibility_textView"
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
                             android:textColor="@color/white"
-                            android:textSize="14dp" />
+                            android:textSize="14sp" />
                     </LinearLayout>
 
                     <!--  Column 3-->
@@ -438,6 +435,7 @@
                         <ImageView
                             android:layout_width="@dimen/_40sdp"
                             android:layout_height="@dimen/_40sdp"
+                            android:contentDescription="@string/ultraviolet"
                             android:src="@drawable/ic_ultraviolet" />
 
                         <TextView
@@ -445,14 +443,14 @@
                             android:layout_height="wrap_content"
                             android:text="@string/ultraviolet"
                             android:textColor="@color/white"
-                            android:textSize="12dp" />
+                            android:textSize="12sp" />
 
                         <TextView
                             android:id="@+id/ultraviolet_textView"
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
                             android:textColor="@color/white"
-                            android:textSize="14dp" />
+                            android:textSize="14sp" />
                     </LinearLayout>
 
                 </GridLayout>

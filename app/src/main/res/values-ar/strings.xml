@@ -26,7 +26,7 @@
     <string name="sunrise">الشروق</string>
     <string name="sunset">الغروب</string>
     <string name="cloud">الغيوم</string>
-    <string name="wind_deg">اتجاه الرياح</string>
+    <string name="wind_degree">اتجاه الرياح</string>
     <string name="humidity_cardView">الرطوبة</string>
     <string name="pressure">الضغط الجوي</string>
     <string name="visibility">الرؤية</string>

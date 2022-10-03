@@ -27,6 +27,7 @@
         android:layout_width="@dimen/_50sdp"
         android:layout_height="@dimen/_50sdp"
         android:adjustViewBounds="true"
+        android:contentDescription="@string/status_of_day"
         android:scaleType="centerCrop"
         android:src="@drawable/ic_sunny"
         app:layout_constraintEnd_toEndOf="parent"
