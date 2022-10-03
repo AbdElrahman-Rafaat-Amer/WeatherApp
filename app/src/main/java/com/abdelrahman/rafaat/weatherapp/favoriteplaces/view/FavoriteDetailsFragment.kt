@@ -183,7 +183,7 @@ class FavoriteDetailsFragment(var viewModel: FavoritePlaceViewModel) : Fragment(
 
     private fun getWindSpeed(weatherResponse: WeatherResponse): String {
         val windSpeed: String = when (ConstantsValue.windSpeedUnit) {
-            "H" -> DecimalFormat("#.##").format(weatherResponse.current.wind_speed * 3.6) + " " + getString(
+            "M/H" -> DecimalFormat("#.##").format(weatherResponse.current.wind_speed * 3.6) + " " + getString(
                 R.string.wind_speed_unit_MH
             )
             else -> DecimalFormat("#.##").format(weatherResponse.current.wind_speed) + " " + getString(
@@ -196,12 +196,12 @@ class FavoriteDetailsFragment(var viewModel: FavoritePlaceViewModel) : Fragment(
     private fun getTemperature(temp: Double): String {
         val temperature: String
         when (ConstantsValue.tempUnit) {
-            "C" -> {
+            "celsius" -> {
                 temperature = DecimalFormat("#").format(temp - 273.15)
                 currentDayTemperatureUnitTextView.text =
                     resources.getString(R.string.temperature_celsius_unit)
             }
-            "F" -> {
+            "fahrenheit" -> {
                 temperature = DecimalFormat("#").format(((temp - 273.15) * 1.8) + 32)
                 currentDayTemperatureUnitTextView.text =
                     resources.getString(R.string.temperature_fahrenheit_unit)

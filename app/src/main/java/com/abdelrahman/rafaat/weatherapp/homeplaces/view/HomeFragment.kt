@@ -1,7 +1,6 @@
 package com.abdelrahman.rafaat.weatherapp.homeplaces.view
 
 import android.os.Bundle
-import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.View.GONE
@@ -9,15 +8,12 @@ import android.view.View.VISIBLE
 import android.view.ViewGroup
 import android.widget.Toast
 import androidx.fragment.app.Fragment
-import androidx.lifecycle.ViewModelProvider
+import androidx.fragment.app.activityViewModels
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.abdelrahman.rafaat.weatherapp.R
-import com.abdelrahman.rafaat.weatherapp.database.ConcreteLocaleSource
 import com.abdelrahman.rafaat.weatherapp.databinding.FragmentHomeBinding
 import com.abdelrahman.rafaat.weatherapp.homeplaces.viewmodel.CurrentPlaceViewModel
-import com.abdelrahman.rafaat.weatherapp.homeplaces.viewmodel.CurrentPlaceViewModelFactory
 import com.abdelrahman.rafaat.weatherapp.model.*
-import com.abdelrahman.rafaat.weatherapp.network.WeatherClient
 import com.abdelrahman.rafaat.weatherapp.utils.ConnectionLiveData
 import com.abdelrahman.rafaat.weatherapp.utils.ConstantsValue
 import com.bumptech.glide.Glide
@@ -25,13 +21,17 @@ import java.text.DecimalFormat
 import java.text.SimpleDateFormat
 import java.util.*
 import com.abdelrahman.rafaat.weatherapp.utils.getAddress
-import com.abdelrahman.rafaat.weatherapp.TAG
+import kotlinx.coroutines.CoroutineScope
+import kotlinx.coroutines.Dispatchers
+import kotlinx.coroutines.delay
+import kotlinx.coroutines.launch
 
 class HomeFragment : Fragment() {
     private lateinit var binding: FragmentHomeBinding
     private lateinit var weatherHourlyAdapter: WeatherHourlyAdapter
     private lateinit var weatherDailyAdapter: WeatherDailyAdapter
-    private lateinit var viewModel: CurrentPlaceViewModel
+    private val viewModel: CurrentPlaceViewModel by activityViewModels()
+    private var isInternet = false
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
@@ -45,7 +45,6 @@ class HomeFragment : Fragment() {
         super.onViewCreated(view, savedInstanceState)
 
         initUI()
-        initViewModel()
         checkInternet()
         observeViewModel()
 
@@ -67,38 +66,29 @@ class HomeFragment : Fragment() {
         binding.animatedImageView.animate().rotation(360f).setDuration(2000).start()
     }
 
-    private fun initViewModel() {
-        val viewModelFactory = CurrentPlaceViewModelFactory(
-            Repository.getInstance(
-                requireContext(),
-                WeatherClient.getInstance(),
-                ConcreteLocaleSource.getInstance(requireContext())
-            )
-        )
-
-        viewModel = ViewModelProvider(
-            requireActivity(),
-            viewModelFactory
-        )[CurrentPlaceViewModel::class.java]
-    }
-
     private fun checkInternet() {
         ConnectionLiveData.getInstance(requireContext()).observe(viewLifecycleOwner) {
-            Log.i(TAG, "checkInternet: it-------------------> $it")
             if (it) {
-                Log.i(TAG, "checkInternet:in if it-------------------> $it")
+                isInternet = true
                 getAddress()
                 viewModel.getWeatherFromNetwork(
                     ConstantsValue.latitude, ConstantsValue.longitude, ConstantsValue.language
                 )
             } else {
-                Log.i(TAG, "checkInternet:in else it-------------------> $it")
                 binding.loadingProgressBar.visibility = GONE
                 binding.visibilityConstrainLayout.visibility = VISIBLE
                 viewModel.getDataFromRoom()
                 viewModel.getStoredAddressFromRoom()
             }
         }
+        CoroutineScope(Dispatchers.Main).launch {
+            delay(1000)
+            if (!isInternet) {
+                viewModel.getDataFromRoom()
+                viewModel.getStoredAddressFromRoom()
+            }
+        }
+
     }
 
     private fun observeViewModel() {
@@ -106,7 +96,6 @@ class HomeFragment : Fragment() {
             when (it) {
                 is WeatherResponse -> {
                     assignDataToView(it)
-
                 }
                 else -> Toast.makeText(context, "Return is null $it", Toast.LENGTH_SHORT).show()
             }

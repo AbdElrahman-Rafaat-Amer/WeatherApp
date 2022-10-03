@@ -70,11 +70,11 @@ class WeatherHourlyAdapter :
     private fun getTemperature(temp: Double): String {
         var temperature: String
         when (ConstantsValue.tempUnit) {
-            "C" -> {
+            "celsius" -> {
                 temperature = DecimalFormat("#").format(temp - 273.15)
                 temperature += " " + context.getString(R.string.temperature_celsius_unit)
             }
-            "F" -> {
+            "fahrenheit" -> {
                 temperature = DecimalFormat("#").format(((temp - 273.15) * 1.8) + 32)
                 temperature += " " + context.getString(R.string.temperature_fahrenheit_unit)
             }

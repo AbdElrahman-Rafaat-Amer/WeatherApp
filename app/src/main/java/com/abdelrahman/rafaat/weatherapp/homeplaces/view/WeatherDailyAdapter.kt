@@ -7,7 +7,7 @@ import android.view.View
 import android.view.ViewGroup
 import android.widget.ImageView
 import android.widget.TextView
-import androidx.constraintlayout.widget.ConstraintLayout
+
 
 import androidx.recyclerview.widget.RecyclerView
 import com.abdelrahman.rafaat.weatherapp.R
@@ -63,8 +63,7 @@ class WeatherDailyAdapter :
         var statusOfDay: TextView = itemView.findViewById(R.id.status_of_day_textView)
         var temperature: TextView = itemView.findViewById(R.id.temperature_of_day_textView)
         var statusImage: ImageView = itemView.findViewById(R.id.status_of_day_imageView)
-        var currentDayConstraintLayout: ConstraintLayout =
-            itemView.findViewById(R.id.current_day_constraintLayout)
+
     }
 
     private fun getNameOfDay(milliSeconds: Long): String {
@@ -74,25 +73,14 @@ class WeatherDailyAdapter :
         return SimpleDateFormat("EE").format(milliSeconds * 1000)
     }
 
-    private fun getTemperature(day: Daily): String {
-
-        var temperature: String
-        val minTemperature = DecimalFormat("#").format(day.temp.day - 273.15)
-        val maxTemperature = DecimalFormat("#").format(day.temp.max - 273.15)
-        temperature = "$minTemperature / $maxTemperature"
-        temperature += context.getString(R.string.temperature_celsius_unit)
-        return temperature
-    }
-
-
     private fun getTemperature(temp: Double): String {
-        var temperature = ""
+        var temperature: String
         when (ConstantsValue.tempUnit) {
-            "C" -> {
+            "celsius" -> {
                 temperature = DecimalFormat("#").format(temp - 273.15)
                 temperature += " " + context.getString(R.string.temperature_celsius_unit)
             }
-            "F" -> {
+            "fahrenheit" -> {
                 temperature = DecimalFormat("#").format(((temp - 273.15) * 1.8) + 32)
                 temperature += " " + context.getString(R.string.temperature_fahrenheit_unit)
             }

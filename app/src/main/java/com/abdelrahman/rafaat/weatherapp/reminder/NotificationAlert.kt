@@ -9,7 +9,6 @@ import android.content.Intent
 import android.os.Handler
 import android.os.Looper
 import androidx.core.app.NotificationCompat
-
 import androidx.work.Worker
 import androidx.work.WorkerParameters
 import com.abdelrahman.rafaat.weatherapp.R
@@ -20,13 +19,11 @@ import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
 
-private const val TAG = "NotificationAlert"
+class NotificationAlert(private var context: Context, workerParams: WorkerParameters) :
+    Worker(context, workerParams) {
 
-class NotificationAlert(private var mcontext: Context, workerParams: WorkerParameters) :
-    Worker(mcontext, workerParams) {
 
     override fun doWork(): Result {
-
         Handler(Looper.getMainLooper()).post {
             checkAlerts()
         }
@@ -38,9 +35,9 @@ class NotificationAlert(private var mcontext: Context, workerParams: WorkerParam
         var keyWord = ""
 
         val repository = Repository.getInstance(
-            mcontext,
+            context,
             WeatherClient.getInstance(),
-            ConcreteLocaleSource.getInstance(mcontext)
+            ConcreteLocaleSource.getInstance(context)
         )
 
         CoroutineScope(Dispatchers.Main).launch {
@@ -60,7 +57,7 @@ class NotificationAlert(private var mcontext: Context, workerParams: WorkerParam
                             if (alertTag == "Fire warning") {
                                 keyWord = "Fire"
                             } else {
-                                keyWord = mcontext.getString(R.string.other_alert)
+                                keyWord = context.getString(R.string.other_alert)
                                 keyWord = "Ohter"
                             }
                         }
@@ -78,7 +75,7 @@ class NotificationAlert(private var mcontext: Context, workerParams: WorkerParam
 
     private fun display(keyword: String) {
         val mBuilder = NotificationCompat.Builder(applicationContext, "notify_001")
-        val intent = Intent(applicationContext, mcontext::class.java)
+        val intent = Intent(applicationContext, context::class.java)
         val pendingIntent = PendingIntent.getActivity(
             applicationContext,
             0,
@@ -89,7 +86,7 @@ class NotificationAlert(private var mcontext: Context, workerParams: WorkerParam
 
         val bigText = NotificationCompat.BigTextStyle()
         bigText.bigText(keyword)
-        bigText.setBigContentTitle(mcontext.getString(R.string.app_name))
+        bigText.setBigContentTitle(context.getString(R.string.app_name))
         bigText.setSummaryText(keyword)
 
 

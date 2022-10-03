@@ -2,37 +2,39 @@
 <androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
-    android:id="@+id/ConstraintLayout_InitializationScreenActivity"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:background="@color/colorLightBlue"
     tools:context=".InitializationScreenActivity">
 
 
+    <com.airbnb.lottie.LottieAnimationView
+        android:id="@+id/waiting_animation"
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        android:visibility="gone"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHeight_percent=".78"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:lottie_autoPlay="true"
+        app:lottie_loop="true"
+        app:lottie_rawRes="@raw/waiting"
+        tools:ignore="ImageContrastCheck" />
+
     <TextView
-        android:id="@+id/text_InitializationScreenActivity"
-        android:layout_width="wrap_content"
+        android:id="@+id/give_permission"
+        android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_marginTop="@dimen/_50sdp"
-        android:text="@string/waiting_enable_gps"
+        android:layout_marginHorizontal="15sp"
+        android:layout_marginBottom="100sp"
         android:textAlignment="center"
         android:textColor="?colorOnSecondary"
-        android:textSize="@dimen/_20sdp"
+        android:textSize="25sp"
+        android:textStyle="bold"
         android:visibility="gone"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent" />
-
-    <ImageView
-        android:id="@+id/background_InitializationScreenActivity"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:background="@drawable/ic_waiting"
-        android:scaleType="centerCrop"
-        android:visibility="gone"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/text_InitializationScreenActivity"
-        android:contentDescription="@string/waiting_image" />
+        app:layout_constraintTop_toBottomOf="@id/waiting_animation" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>
