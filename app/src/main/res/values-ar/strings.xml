@@ -79,4 +79,12 @@
     <string name="open_setting">افتح الإعدادات وامنح الاذن </string>
     <string name="action_settings">الإعدادات</string>
     <string name="wait">في انتظار منحنا إذنًا للوصول إلى الموقع</string>
+    <string name="status_of_day">حالة اليوم</string>
+    <string name="remove_alert">مسح الإنذار</string>
+    <string name="remove">مسح </string>
+    <string name="cancel">إالغاء</string>
+    <string name="warning">تحذير</string>
+    <string name="delete_alert"> هل أنت متأكد أنك تريد حذف هذا التنبيه؟</string>
+    <string name="delete_place"> هل أنت متأكد أنك تريد حذف هذا المكان؟</string>
+
 </resources>

@@ -7,7 +7,6 @@ class ConstantsValue {
         var latitude: String = ""
         var tempUnit = "kelvin"
         var windSpeedUnit = "M/S"
-        var locationMethod = "GPS"
         var notificationMethod = true
     }
 }

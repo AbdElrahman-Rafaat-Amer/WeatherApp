@@ -46,12 +46,6 @@ class SettingFragment : PreferenceFragmentCompat() {
             true
         }
 
-        val locationPreference: ListPreference = findPreference("location_method")!!
-        locationPreference.setOnPreferenceChangeListener { _, locationMethod ->
-            ConstantsValue.locationMethod = locationMethod as String
-            true
-        }
-
         val notificationPreference: SwitchPreference = findPreference("toggle_notification")!!
         notificationPreference.setOnPreferenceChangeListener { _, notificationMethod ->
             ConstantsValue.notificationMethod = notificationMethod as Boolean

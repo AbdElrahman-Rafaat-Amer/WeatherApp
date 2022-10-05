@@ -1,6 +1,5 @@
 package com.abdelrahman.rafaat.weatherapp.favoriteplaces.view
 
-import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -11,9 +10,10 @@ import androidx.recyclerview.widget.RecyclerView
 import com.abdelrahman.rafaat.weatherapp.R
 import com.abdelrahman.rafaat.weatherapp.utils.ConstantsValue
 import com.abdelrahman.rafaat.weatherapp.model.FavoritePlaces
+import com.abdelrahman.rafaat.weatherapp.utils.formatDate
 import java.util.*
 
-private const val TAG = "FavoritePlacesAdapter"
+
 
 class FavoritePlacesAdapter(private var fragment: OnDeleteFavorite) :
     RecyclerView.Adapter<FavoritePlacesAdapter.ViewHolder>() {
@@ -21,23 +21,20 @@ class FavoritePlacesAdapter(private var fragment: OnDeleteFavorite) :
     private var favorites: List<FavoritePlaces> = ArrayList()
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ViewHolder {
-        Log.i(TAG, "onCreateViewHolder: ")
         val layoutInflater: LayoutInflater = LayoutInflater.from(parent.context)
         val view: View = layoutInflater.inflate(R.layout.custom_row_favorite, parent, false)
         return ViewHolder(view)
     }
 
     override fun onBindViewHolder(holder: FavoritePlacesAdapter.ViewHolder, position: Int) {
-        Log.i(TAG, "onBindViewHolder: ")
         val favoritePlace = favorites[position]
         holder.nameOfFavoritePlace.text = favoritePlace.selectedPlaces
-        holder.dateOfFavoritePlace.text = favoritePlace.selectedDate
+        holder.dateOfFavoritePlace.text = formatDate(favoritePlace.selectedDate)
         holder.deleteFavoritePlace.setOnClickListener {
             fragment.deleteFromRoom(favoritePlace)
         }
 
         holder.showDetailsOfFavorite.setOnClickListener {
-            Log.i(TAG, "onBindViewHolder: " + Locale.getDefault().toLanguageTag())
             fragment.showDetails(
                 favoritePlace.lat.toString(),
                 favoritePlace.lng.toString(),

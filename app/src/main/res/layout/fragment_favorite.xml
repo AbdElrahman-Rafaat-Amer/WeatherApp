@@ -5,23 +5,24 @@
     android:id="@+id/ConstraintLayout_FavoriteFragment"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:paddingStart="@dimen/_15sdp"
-    android:paddingTop="@dimen/_15sdp"
-    android:paddingEnd="@dimen/_15sdp"
+    android:padding="@dimen/_15sdp"
     tools:context=".favoriteplaces.view.FavoriteFragment">
 
-    <ImageView
-        android:id="@+id/no_favorite_imageView"
-        android:layout_width="wrap_content"
+
+    <com.airbnb.lottie.LottieAnimationView
+        android:id="@+id/no_favorite_places"
+        android:layout_width="match_parent"
         android:layout_height="@dimen/_250sdp"
-        android:contentDescription="@string/no_favorite"
         android:paddingTop="@dimen/_100sdp"
-        android:scaleType="center"
-        android:src="@drawable/ic_no_favorites"
+        android:visibility="gone"
         app:layout_constraintBottom_toBottomOf="@+id/recyclerView_favorites"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent" />
+        app:layout_constraintTop_toTopOf="parent"
+        app:lottie_autoPlay="true"
+        app:lottie_loop="true"
+        app:lottie_rawRes="@raw/no_favorite_places"
+        tools:ignore="ImageContrastCheck" />
 
     <TextView
         android:id="@+id/no_favorite_textView"
@@ -32,15 +33,19 @@
         android:textColor="?colorOnSecondary"
         android:textSize="@dimen/_20sdp"
         android:textStyle="bold"
+        android:visibility="gone"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/no_favorite_imageView" />
+        app:layout_constraintTop_toBottomOf="@+id/no_favorite_places" />
 
     <androidx.recyclerview.widget.RecyclerView
         android:id="@+id/recyclerView_favorites"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:layout_marginTop="@dimen/_30sdp"
+        android:visibility="gone"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
 
     <com.google.android.material.floatingactionbutton.FloatingActionButton
@@ -49,10 +54,10 @@
         android:layout_height="wrap_content"
         android:layout_margin="@dimen/_7sdp"
         android:backgroundTint="#2196F3"
+        android:contentDescription="@string/add_favorite_place"
         android:scaleType="center"
         app:fabCustomSize="@dimen/_40sdp"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        app:srcCompat="@drawable/ic_add_favorite"
-        android:contentDescription="@string/add_favorite_place" />
+        app:srcCompat="@drawable/ic_add_favorite" />
 </androidx.constraintlayout.widget.ConstraintLayout>

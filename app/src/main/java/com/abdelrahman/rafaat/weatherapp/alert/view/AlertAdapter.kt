@@ -1,7 +1,5 @@
 package com.abdelrahman.rafaat.weatherapp.alert.view
 
-import android.content.Context
-import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -12,22 +10,19 @@ import com.abdelrahman.rafaat.weatherapp.R
 import com.abdelrahman.rafaat.weatherapp.model.SavedAlerts
 import java.util.*
 
-private const val TAG = "AlertAdapter"
 
-class AlertAdapter(var onDeleteAlert: OnAlertDeleteClickListener) :
+class AlertAdapter(private var onDeleteAlert: OnAlertDeleteClickListener) :
     RecyclerView.Adapter<AlertAdapter.ViewHolder>() {
 
     private var alerts: List<SavedAlerts> = ArrayList()
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ViewHolder {
-        Log.i(TAG, "onCreateViewHolder: ")
         val layoutInflater: LayoutInflater = LayoutInflater.from(parent.context)
         val view: View = layoutInflater.inflate(R.layout.custom_row_alert, parent, false)
         return ViewHolder(view)
     }
 
     override fun onBindViewHolder(holder: AlertAdapter.ViewHolder, position: Int) {
-        Log.i(TAG, "onBindViewHolder: ")
         val alert = alerts[position]
         holder.startTime.text = alert.startTime
         holder.startDate.text = alert.startDate
@@ -46,9 +41,6 @@ class AlertAdapter(var onDeleteAlert: OnAlertDeleteClickListener) :
     fun setList(alerts: List<SavedAlerts>) {
         this.alerts = alerts
         notifyDataSetChanged()
-        Log.i(TAG, "setList: after")
-        Log.i(TAG, "setList: hours" + alerts.size)
-        Log.i(TAG, "setList: this.hours " + this.alerts.size)
     }
 
     inner class ViewHolder(itemView: View) : RecyclerView.ViewHolder(itemView) {

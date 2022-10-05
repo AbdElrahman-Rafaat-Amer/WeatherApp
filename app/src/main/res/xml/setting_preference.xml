@@ -21,17 +21,6 @@
             android:title="@string/select_language" />
     </PreferenceCategory>
 
-    <PreferenceCategory android:title="@string/location_method">
-        <ListPreference
-            android:defaultValue="GPS"
-            android:entries="@array/pref_location_names"
-            android:entryValues="@array/pref_location_codes"
-            android:icon="@drawable/ic_add_favorite"
-            android:key="location_method"
-            android:summary="%s"
-            android:title="@string/location" />
-    </PreferenceCategory>
-
     <PreferenceCategory android:title="@string/temperature_unit">
         <ListPreference
             android:defaultValue="kelvin"

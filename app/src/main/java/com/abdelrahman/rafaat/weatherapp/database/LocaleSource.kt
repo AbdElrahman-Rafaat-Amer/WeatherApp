@@ -1,5 +1,6 @@
 package com.abdelrahman.rafaat.weatherapp.database
 
+import androidx.lifecycle.LiveData
 import com.abdelrahman.rafaat.weatherapp.model.FavoritePlaces
 import com.abdelrahman.rafaat.weatherapp.model.SavedAddress
 import com.abdelrahman.rafaat.weatherapp.model.SavedAlerts

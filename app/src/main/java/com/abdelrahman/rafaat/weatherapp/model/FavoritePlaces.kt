@@ -4,7 +4,7 @@ import androidx.room.ColumnInfo
 import androidx.room.Entity
 import androidx.room.PrimaryKey
 import java.io.Serializable
-import java.util.*
+
 
 
 @Entity(tableName = "favorite")
@@ -20,5 +20,5 @@ data class FavoritePlaces(
     var selectedPlaces: String,
 
     @ColumnInfo(name = "date")
-    var selectedDate: String
+    var selectedDate: Long
 ) : Serializable

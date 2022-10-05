@@ -14,7 +14,7 @@
         <!-- Customize your theme here. -->
     </style>
 
-    <style name="CustomAlertDialog" parent="Theme.AppCompat.Light.Dialog.Alert">
+    <style name="AlertDialog" parent="Theme.AppCompat.Light.Dialog.Alert">
         <item name="android:windowBackground">@drawable/alert_background</item>
     </style>
 

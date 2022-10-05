@@ -1,6 +1,5 @@
 package com.abdelrahman.rafaat.weatherapp.database
 
-import androidx.lifecycle.LiveData
 import androidx.room.*
 import com.abdelrahman.rafaat.weatherapp.model.FavoritePlaces
 import com.abdelrahman.rafaat.weatherapp.model.SavedAddress
@@ -17,7 +16,7 @@ interface WeatherDAO {
     @Insert(onConflict = OnConflictStrategy.REPLACE)
     suspend fun insertCurrentToRoom(weatherResponse: WeatherResponse): Long
 
-    //-------------------------------------------------------------------------------------------
+//-------------------------------------------------------------------------------------------
 
     //Alerts
     @Query("SELECT * From alerts")
@@ -26,14 +25,15 @@ interface WeatherDAO {
     @Insert(onConflict = OnConflictStrategy.REPLACE)
     suspend fun insertAlertToRoom(alerts: SavedAlerts): Long
 
-    // @Query("DELETE FROM alerts WHERE id LIKE id" + "LIMIT 1")
+
     @Query("DELETE FROM alerts where id = :id")
     suspend fun deleteAlertFromRoom(id: Int): Int
 
-    //@Query("SELECT * from alerts  WHERE id LIKE :id " + "LIMIT 1")
+
     @Query("select * from alerts where id = :id")
     suspend fun getAlertFromRoom(id: Int): SavedAlerts
-    //-------------------------------------------------------------------------------------------
+
+//-------------------------------------------------------------------------------------------
 
     //Address
     @Query("SELECT * From address WHERE language LIKE :language " + "LIMIT 1")

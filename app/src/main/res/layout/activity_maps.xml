@@ -5,9 +5,10 @@
     android:name="com.google.android.gms.maps.SupportMapFragment"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".maps.view.GoogleMapsActivity">
+    android:id="@+id/map_root"
+    tools:context=".maps.GoogleMapsActivity">
 
-    <fragment
+    <androidx.fragment.app.FragmentContainerView
         android:id="@+id/map"
         android:name="com.google.android.gms.maps.SupportMapFragment"
         android:layout_width="match_parent"
@@ -33,6 +34,7 @@
         android:layout_height="wrap_content"
         android:padding="@dimen/_10sdp"
         android:textAlignment="center"
+        android:textColor="@color/black"
         android:textSize="@dimen/_30sdp"
         map:layout_constraintBottom_toBottomOf="parent" />
 </androidx.constraintlayout.widget.ConstraintLayout>

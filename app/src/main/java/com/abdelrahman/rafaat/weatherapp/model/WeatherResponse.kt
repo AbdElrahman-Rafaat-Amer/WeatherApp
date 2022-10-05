@@ -4,7 +4,6 @@ import androidx.room.*
 import com.abdelrahman.rafaat.weatherapp.database.DataConverter
 import org.jetbrains.annotations.Nullable
 
-
 @Entity(tableName = "weather")
 data class WeatherResponse
     (

@@ -1,6 +1,5 @@
 package com.abdelrahman.rafaat.weatherapp.database
 
-import android.location.Address
 import androidx.room.TypeConverter
 import com.abdelrahman.rafaat.weatherapp.model.*
 import com.google.gson.Gson

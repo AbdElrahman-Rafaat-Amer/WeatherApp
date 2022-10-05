@@ -10,7 +10,6 @@ import android.net.Uri
 import android.os.Bundle
 import android.os.Looper
 import android.provider.Settings
-import android.util.Log
 import android.view.View
 import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
@@ -43,13 +42,8 @@ class InitializationScreenActivity : AppCompatActivity() {
         setContentView(binding.root)
 
         fusedLocationClient = LocationServices.getFusedLocationProviderClient(this)
-        Log.i(TAG, "onCreate: InitializationScreenActivity-------------------")
         if (checkPermission()) {
-            if (ConstantsValue.locationMethod == "Map") {
-                goToNextActivity()
-            } else {
-                getLastLocation()
-            }
+            getLastLocation()
         } else {
             checkInternet()
         }
@@ -93,7 +87,6 @@ class InitializationScreenActivity : AppCompatActivity() {
 
     private fun requestPermission() {
         setVisibility(View.GONE, "")
-        Log.i(TAG, "requestPermission: ----------------InitializationScreenActivity")
         ActivityCompat.requestPermissions(
             this, arrayOf(
                 Manifest.permission.ACCESS_COARSE_LOCATION,
@@ -110,7 +103,6 @@ class InitializationScreenActivity : AppCompatActivity() {
         super.onRequestPermissionsResult(requestCode, permissions, grantResults)
         when (requestCode) {
             PERMISSION_ID_LOCATION -> if (grantResults[0] == PackageManager.PERMISSION_GRANTED && grantResults[1] == PackageManager.PERMISSION_GRANTED) {
-                Log.i(TAG, "onRequestPermissionsResult: getLastLocation")
                 getLastLocation()
             } else {
                 if (ActivityCompat.shouldShowRequestPermissionRationale(
@@ -121,7 +113,6 @@ class InitializationScreenActivity : AppCompatActivity() {
                 ) {
                     requestPermission()
                 } else {
-                    Log.i(TAG, "onRequestPermissionsResult: else if3-------------------->")
                     val snackbar = showSnackBar(getString(R.string.open_setting))
                     snackbar.setAction(R.string.action_settings) {
                         val intent = Intent()
@@ -149,7 +140,6 @@ class InitializationScreenActivity : AppCompatActivity() {
 
     @SuppressLint("MissingPermission")
     private fun getLastLocation() {
-        Log.i(TAG, "InitializationScreenActivity getLastLocation: ------------------------")
         if (isLocationEnabled()) {
             fusedLocationClient.lastLocation.addOnCompleteListener { task ->
                 val location = task.result
@@ -162,7 +152,6 @@ class InitializationScreenActivity : AppCompatActivity() {
                     goToNextActivity()
                 }
             }
-            Log.i(TAG, "getLastLocation: ----------------------- in if isLocationEnabled")
         } else {
             setVisibility(View.VISIBLE, getString(R.string.waiting_enable_gps))
             val snackbar = showSnackBar(getString(R.string.enable_gps))
@@ -201,7 +190,6 @@ class InitializationScreenActivity : AppCompatActivity() {
             locationRequest, mLocationCallback,
             Looper.myLooper()!!
         )
-        Log.i(TAG, "requestNewLocationData: ------------------")
     }
 
     private val mLocationCallback: LocationCallback = object : LocationCallback() {
@@ -209,7 +197,6 @@ class InitializationScreenActivity : AppCompatActivity() {
             val mLastLocation = locationResult.lastLocation
             ConstantsValue.longitude = mLastLocation?.longitude.toString()
             ConstantsValue.latitude = mLastLocation?.latitude.toString()
-            Log.i(TAG, "onLocationResult: ----------------------------")
             finish()
             goToNextActivity()
         }
@@ -223,7 +210,6 @@ class InitializationScreenActivity : AppCompatActivity() {
 
     override fun onResume() {
         super.onResume()
-        Log.i(TAG, "onResume: ------------------->")
         if (!checkPermission()) {
             if (!isFirstTime) {
                 val snackbar = showSnackBar(getString(R.string.open_setting))

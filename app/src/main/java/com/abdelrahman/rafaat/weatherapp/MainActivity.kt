@@ -4,14 +4,12 @@ import android.content.res.Configuration
 import android.content.res.Resources
 import android.os.Bundle
 import android.util.DisplayMetrics
-import android.util.Log
 import androidx.appcompat.app.AppCompatActivity
-import androidx.viewpager2.widget.ViewPager2
+import androidx.navigation.Navigation.findNavController
 import com.abdelrahman.rafaat.weatherapp.databinding.ActivityMainBinding
 import com.abdelrahman.rafaat.weatherapp.utils.ConstantsValue
 import com.etebarian.meowbottomnavigation.MeowBottomNavigation
 import java.util.*
-
 
 class MainActivity : AppCompatActivity() {
     private val alertID = 0
@@ -29,10 +27,7 @@ class MainActivity : AppCompatActivity() {
         binding = ActivityMainBinding.inflate(layoutInflater)
         setContentView(binding.root)
 
-
         initBottomNavigation()
-        initViewPager()
-
 
     }
 
@@ -46,19 +41,24 @@ class MainActivity : AppCompatActivity() {
         binding.bottomNav.setOnClickMenuListener {
             when (it.id) {
                 homeID -> {
-                    binding.viewPager.currentItem = homeID
+                    findNavController(binding.navHostFragment)
+                        .navigate(R.id.home_fragment)
                 }
                 favoriteID -> {
-                    binding.viewPager.currentItem = favoriteID
+                    findNavController(binding.navHostFragment)
+                        .navigate(R.id.favorite_Fragment)
                 }
                 alertID -> {
-                    binding.viewPager.currentItem = alertID
+                    findNavController(binding.navHostFragment)
+                        .navigate(R.id.alert_Fragment)
                 }
                 settingID -> {
-                    binding.viewPager.currentItem = settingID
+                    findNavController(binding.navHostFragment)
+                        .navigate(R.id.setting_fragment)
                 }
                 timeTableID -> {
-                    binding.viewPager.currentItem = timeTableID
+                    findNavController(binding.navHostFragment)
+                        .navigate(R.id.timetable_fragment)
                 }
             }
         }
@@ -66,25 +66,9 @@ class MainActivity : AppCompatActivity() {
         binding.bottomNav.setOnShowListener {
 
         }
-    }
 
-    private fun initViewPager() {
-        binding.viewPager.adapter =
-            ViewPagerAdapter(this.lifecycle, supportFragmentManager, 5)
-
-        binding.viewPager.registerOnPageChangeCallback(object :
-            ViewPager2.OnPageChangeCallback() {
-            override fun onPageSelected(position: Int) {
-                super.onPageSelected(position)
-                binding.bottomNav.show(position, true)
-                Log.i(TAG, "onPageSelected: position-----------> $position")
-            }
-        })
-
-        binding.viewPager.setCurrentItem(homeID, false)
         binding.bottomNav.show(homeID, true)
     }
-
 
     fun restartFragment() {
         val intent = intent
@@ -99,5 +83,29 @@ class MainActivity : AppCompatActivity() {
         config.setLocale(Locale(localeCode.lowercase(Locale.ROOT)))
         resources.updateConfiguration(config, dm)
         Locale.setDefault(Locale.forLanguageTag(ConstantsValue.language))
+    }
+
+    override fun onBackPressed() {
+        super.onBackPressed()
+        when (findNavController(binding.navHostFragment).currentDestination?.id) {
+            R.id.home_fragment -> {
+                binding.bottomNav.show(homeID, true)
+            }
+            R.id.timetable_fragment -> {
+                binding.bottomNav.show(timeTableID, true)
+            }
+            R.id.setting_fragment -> {
+                binding.bottomNav.show(settingID, true)
+            }
+            R.id.alert_Fragment -> {
+                binding.bottomNav.show(alertID, true)
+            }
+            R.id.favorite_Fragment -> {
+                binding.bottomNav.show(favoriteID, true)
+            }
+            else -> {
+                super.onBackPressed()
+            }
+        }
     }
 }

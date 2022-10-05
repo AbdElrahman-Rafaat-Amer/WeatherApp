@@ -14,13 +14,9 @@ import com.abdelrahman.rafaat.weatherapp.R
 import com.abdelrahman.rafaat.weatherapp.databinding.FragmentHomeBinding
 import com.abdelrahman.rafaat.weatherapp.homeplaces.viewmodel.CurrentPlaceViewModel
 import com.abdelrahman.rafaat.weatherapp.model.*
-import com.abdelrahman.rafaat.weatherapp.utils.ConnectionLiveData
-import com.abdelrahman.rafaat.weatherapp.utils.ConstantsValue
+import com.abdelrahman.rafaat.weatherapp.utils.*
 import com.bumptech.glide.Glide
 import java.text.DecimalFormat
-import java.text.SimpleDateFormat
-import java.util.*
-import com.abdelrahman.rafaat.weatherapp.utils.getAddress
 import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.delay
@@ -202,19 +198,6 @@ class HomeFragment : Fragment() {
         return temperature
     }
 
-    private fun formatDate(dateInSeconds: Long): String {
-        val time = dateInSeconds * 1000.toLong()
-        val date = Date(time)
-        val dateFormat = SimpleDateFormat("d MMM yyyy", Locale(ConstantsValue.language))
-        return dateFormat.format(date)
-    }
 
-    private fun getTimeInHour(milliSeconds: Long, timeZone: String): String {
-        val time = milliSeconds * 1000.toLong()
-        val date = Date(time)
-        val format = SimpleDateFormat("h:mm a", Locale(ConstantsValue.language))
-        format.timeZone = TimeZone.getTimeZone(timeZone)
-        return format.format(date)
-    }
 
 }

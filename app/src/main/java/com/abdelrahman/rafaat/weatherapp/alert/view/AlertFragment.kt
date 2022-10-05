@@ -107,7 +107,7 @@ class AlertFragment : Fragment(), OnAlertDeleteClickListener {
 
     private fun showDialog() {
 
-        val alertDialogBuilder = AlertDialog.Builder(requireContext(), R.style.CustomAlertDialog)
+        val alertDialogBuilder = AlertDialog.Builder(requireContext(), R.style.AlertDialog)
             .create()
         val bindingAlert: AlertLayoutBinding =
             AlertLayoutBinding.inflate(LayoutInflater.from(requireContext()))

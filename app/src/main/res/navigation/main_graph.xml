@@ -8,35 +8,29 @@
     <fragment
         android:id="@+id/home_fragment"
         android:name="com.abdelrahman.rafaat.weatherapp.homeplaces.view.HomeFragment"
-        android:label="PlaylistDetailsFragment"
         tools:layout="@layout/fragment_home" />
 
     <fragment
         android:id="@+id/timetable_fragment"
         android:name="com.abdelrahman.rafaat.weatherapp.timetable.TimeTableFragment"
-        android:label="PlaylistDetailsFragment"
         tools:layout="@layout/fragment_time_table" />
 
     <fragment
         android:id="@+id/setting_fragment"
-        android:name="com.abdelrahman.rafaat.weatherapp.setting.SettingFragment"
-        android:label="PlaylistDetailsFragment" />
+        android:name="com.abdelrahman.rafaat.weatherapp.setting.SettingFragment" />
 
     <fragment
         android:id="@+id/alert_Fragment"
         android:name="com.abdelrahman.rafaat.weatherapp.alert.view.AlertFragment"
-        android:label="AlbumDetailsFragment"
-        tools:layout="@layout/alert_layout" />
+        tools:layout="@layout/fragment_alert" />
 
     <fragment
         android:id="@+id/favorite_Fragment"
         android:name="com.abdelrahman.rafaat.weatherapp.favoriteplaces.view.FavoriteFragment"
-        android:label="AlbumDetailsFragment"
         tools:layout="@layout/fragment_favorite" />
 
     <fragment
         android:id="@+id/favoriteDetails_Fragment"
         android:name="com.abdelrahman.rafaat.weatherapp.favoriteplaces.view.FavoriteDetailsFragment"
-        android:label="AlbumDetailsFragment"
-        />
+        tools:layout="@layout/fragment_home" />
 </navigation>

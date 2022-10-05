@@ -1,5 +1,7 @@
 package com.abdelrahman.rafaat.weatherapp.model
 
+import androidx.lifecycle.LiveData
+
 
 interface RepositoryInterface {
 

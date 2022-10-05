@@ -1,34 +1,33 @@
 package com.abdelrahman.rafaat.weatherapp
 
+import android.annotation.SuppressLint
 import android.content.Intent
 import android.content.res.Resources
 import android.os.Bundle
 import androidx.appcompat.app.AppCompatActivity
 import androidx.preference.PreferenceManager
+import com.abdelrahman.rafaat.weatherapp.databinding.ActivitySplashBinding
 import com.abdelrahman.rafaat.weatherapp.utils.ConstantsValue
-import kotlinx.coroutines.*
+import kotlinx.coroutines.CoroutineScope
+import kotlinx.coroutines.Dispatchers
+import kotlinx.coroutines.delay
+import kotlinx.coroutines.launch
 
-const val TAG = "SplashScreenActivity"
+@SuppressLint("CustomSplashScreen")
+class SplashActivity : AppCompatActivity() {
 
-class SplashScreenActivity : AppCompatActivity() {
-
+    private lateinit var binding: ActivitySplashBinding
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        setContentView(R.layout.activity_splash_screen)
+
+        binding = ActivitySplashBinding.inflate(layoutInflater)
+        setContentView(binding.root)
         getDefaultValues()
-
-
         CoroutineScope(Dispatchers.Main).launch {
             delay(4000)
-            startActivity(
-                Intent(
-                    this@SplashScreenActivity,
-                    InitializationScreenActivity::class.java
-                )
-            )
+            startActivity(Intent(this@SplashActivity, InitializationScreenActivity::class.java))
             finish()
         }
-
 
     }
 
@@ -46,21 +45,9 @@ class SplashScreenActivity : AppCompatActivity() {
         ConstantsValue.windSpeedUnit =
             PreferenceManager.getDefaultSharedPreferences(application.applicationContext)
                 .getString("wind_speed", "M/S")!!
-
-        ConstantsValue.locationMethod =
-            PreferenceManager.getDefaultSharedPreferences(application.applicationContext)
-                .getString("location_method", "GPS")!!
-
+        
         ConstantsValue.notificationMethod =
             PreferenceManager.getDefaultSharedPreferences(application.applicationContext)
                 .getBoolean("toggle_notification", true)
     }
-
-
-    override fun onBackPressed() {
-        super.onBackPressed()
-        finish()
-    }
-
-
 }
