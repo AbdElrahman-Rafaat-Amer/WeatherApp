@@ -14,3 +14,4 @@
 .cxx
 local.properties
 app/src/main/res/drawable/bg_gradient.xml
+app/src/main/res/values/strings.xml

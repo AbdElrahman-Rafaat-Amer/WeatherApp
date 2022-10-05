@@ -86,5 +86,6 @@
     <string name="warning">تحذير</string>
     <string name="delete_alert"> هل أنت متأكد أنك تريد حذف هذا التنبيه؟</string>
     <string name="delete_place"> هل أنت متأكد أنك تريد حذف هذا المكان؟</string>
+    <string name="no_place_selected">الرجاء تحديد مكان صالح</string>
 
 </resources>
