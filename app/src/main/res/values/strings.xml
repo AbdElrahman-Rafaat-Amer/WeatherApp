@@ -87,7 +87,7 @@
     <string name="warning">Warning</string>
     <string name="delete_alert">Are you sure you want delete this Alert?</string>
     <string name="delete_place">Are you sure you want delete this Place?</string>
-    <string name="no_place_selected">Please select a valid place</string>
+    <string name="no_place_selected">Please select place first</string>
 
 
     <string-array name="pref_notification">
