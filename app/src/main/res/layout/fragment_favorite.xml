@@ -5,17 +5,16 @@
     android:id="@+id/ConstraintLayout_FavoriteFragment"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:padding="@dimen/_15sdp"
+    android:paddingHorizontal="@dimen/_15sdp"
+    android:paddingTop="@dimen/_15sdp"
     tools:context=".favoriteplaces.view.FavoriteFragment">
-
 
     <com.airbnb.lottie.LottieAnimationView
         android:id="@+id/no_favorite_places"
         android:layout_width="match_parent"
-        android:layout_height="@dimen/_250sdp"
-        android:paddingTop="@dimen/_100sdp"
+        android:layout_height="0dp"
         android:visibility="gone"
-        app:layout_constraintBottom_toBottomOf="@+id/recyclerView_favorites"
+        app:layout_constraintBottom_toTopOf="@+id/no_favorite_textView"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
@@ -29,14 +28,15 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginTop="@dimen/_20sdp"
+        android:layout_marginBottom="10sp"
         android:text="@string/no_favorite"
         android:textColor="?colorOnSecondary"
         android:textSize="@dimen/_20sdp"
         android:textStyle="bold"
         android:visibility="gone"
+        app:layout_constraintBottom_toTopOf="@+id/addFavorite_floatingActionButton"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/no_favorite_places" />
+        app:layout_constraintStart_toStartOf="parent" />
 
     <androidx.recyclerview.widget.RecyclerView
         android:id="@+id/recyclerView_favorites"
@@ -49,7 +49,7 @@
         app:layout_constraintTop_toTopOf="parent" />
 
     <com.google.android.material.floatingactionbutton.FloatingActionButton
-        android:id="@+id/add_favorite_floatingActionButton"
+        android:id="@+id/addFavorite_floatingActionButton"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_margin="@dimen/_7sdp"

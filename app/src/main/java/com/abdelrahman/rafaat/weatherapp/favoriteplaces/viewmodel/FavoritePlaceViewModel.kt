@@ -1,6 +1,7 @@
 package com.abdelrahman.rafaat.weatherapp.favoriteplaces.viewmodel
 
 
+import android.util.Log
 import androidx.lifecycle.*
 import com.abdelrahman.rafaat.weatherapp.model.FavoritePlaces
 import com.abdelrahman.rafaat.weatherapp.model.RepositoryInterface
@@ -17,11 +18,23 @@ class FavoritePlaceViewModel(private var _iRepo: RepositoryInterface) : ViewMode
     private var _selectedFavoritePlaces = MutableLiveData<WeatherResponse>()
     val selectedFavoritePlaces: LiveData<WeatherResponse> = _selectedFavoritePlaces
 
+    init {
+        Log.i("Favorite", "init-----------------: ")
+    }
+
+    override fun onCleared() {
+        super.onCleared()
+        Log.i("Favorite", "onCleared-----------------: ")
+    }
 
     fun getStoredFavoritePlaces() {
         viewModelScope.launch {
             val response = _iRepo.getFavoriteFromDataBase()
             withContext(Dispatchers.Main) {
+                Log.i(
+                    "Favorite",
+                    "getStoredFavoritePlaces:response---------------------------> ${response.size}"
+                )
                 _favoritePlaces.postValue(response)
             }
         }
@@ -37,8 +50,16 @@ class FavoritePlaceViewModel(private var _iRepo: RepositoryInterface) : ViewMode
 
     fun deleteFromRoom(favoritePlaces: FavoritePlaces) {
         viewModelScope.launch {
+            val response = _iRepo.removeFromFavorite(favoritePlaces)
             withContext(Dispatchers.Main) {
-                _iRepo.removeFromFavorite(favoritePlaces)
+                Log.i("Favorite", "delete ViewModel:response------------> $response")
+                if (response > 0) {
+                    Log.i("Favorite", "deleteFromRoom: success")
+                    getStoredFavoritePlaces()
+                } else {
+                    Log.i("Favorite", "deleteFromRoom: failed")
+                }
+
             }
         }
     }
@@ -46,7 +67,7 @@ class FavoritePlaceViewModel(private var _iRepo: RepositoryInterface) : ViewMode
     fun getDetailsOfSelectedFavorite(latitude: String, longitude: String, language: String) {
         viewModelScope.launch {
             val response = _iRepo.getWeatherFromNetwork(latitude, longitude, language)
-            withContext(Dispatchers.Main) {
+            withContext(Dispatchers.IO) {
                 _selectedFavoritePlaces.postValue(response)
             }
         }

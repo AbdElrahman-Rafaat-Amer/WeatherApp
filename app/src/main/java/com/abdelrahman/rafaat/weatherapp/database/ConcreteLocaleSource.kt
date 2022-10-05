@@ -5,8 +5,6 @@ import android.util.Log
 import com.abdelrahman.rafaat.weatherapp.model.*
 import com.abdelrahman.rafaat.weatherapp.utils.ConstantsValue
 
-private const val TAG = "ConcreteLocaleSource"
-
 class ConcreteLocaleSource(context: Context) : LocaleSource {
 
     private var weatherDao: WeatherDAO?
@@ -26,9 +24,6 @@ class ConcreteLocaleSource(context: Context) : LocaleSource {
     }
 
     override suspend fun getWeatherFromDataBase(): WeatherResponse {
-        Log.i(TAG, "getWeatherFromDataBase: ")
-        val response = weatherDao?.getStoredWeather()!!
-        Log.i(TAG, "getWeatherFromDataBase: ------------------> $response")
         return weatherDao?.getStoredWeather()!!
     }
 
@@ -37,30 +32,29 @@ class ConcreteLocaleSource(context: Context) : LocaleSource {
     }
 
     override suspend fun insertAddressToRoom(address: SavedAddress) {
-        Log.i(TAG, "insertAddressToRoom: address------> $address")
-        val response = weatherDao?.insertAddressToRoom(address)
-        Log.i(TAG, "insertAddressToRoom: response $response")
+        weatherDao?.insertAddressToRoom(address)
     }
 
     override suspend fun getFavoriteFromDataBase(): List<FavoritePlaces> {
-        return weatherDao!!.getStoredFavoritePlaces()
+        Log.i("Favorite", "getFavoriteFromDataBase database before")
+        val response = weatherDao!!.getStoredFavoritePlaces()
+        Log.i("Favorite", "getFavoriteFromDataBase database after--------> ${response.size}")
+        return response
     }
 
     override suspend fun insertCurrentDataToRoom(weatherResponse: WeatherResponse) {
-        Log.i(TAG, "insertCurrentDataToRoom:\n\n\n\n\n ")
-        Log.i(TAG, "insertCurrentDataToRoom: weatherResponse")
-        val response = weatherDao?.insertCurrentToRoom(weatherResponse)
-        Log.i(TAG, "insertCurrentDataToRoom: response from room -----> $response")
+        weatherDao?.insertCurrentToRoom(weatherResponse)
     }
 
     override suspend fun insertToFavorite(favoritePlaces: FavoritePlaces) {
-        Log.i(TAG, "insertToFavorite: favoritePlaces---------> $favoritePlaces")
         weatherDao!!.insertToFavorite(favoritePlaces)
     }
 
-    override suspend fun removeFromFavorite(favoritePlaces: FavoritePlaces) {
-        Log.i(TAG, "removeFromFavorite: favoritePlaces --------> $favoritePlaces")
-        weatherDao!!.deleteFromRoom(favoritePlaces)
+    override suspend fun removeFromFavorite(favoritePlaces: FavoritePlaces): Int {
+        Log.i("Favorite", "delete database before")
+        val deleteResponse = weatherDao!!.deleteFromRoom(favoritePlaces)
+        Log.i("Favorite", "delete database after--------> $deleteResponse")
+        return deleteResponse
     }
 
 
@@ -68,24 +62,19 @@ class ConcreteLocaleSource(context: Context) : LocaleSource {
 
     //Alerts
     override suspend fun getStoredAlerts(): List<SavedAlerts>? {
-        val response = weatherDao?.getStoredAlerts()
-        Log.i(TAG, "getStoredAlerts: response --------> $response")
-        return response
+        return weatherDao?.getStoredAlerts()
     }
 
     override suspend fun insertAlertToRoom(alerts: SavedAlerts) {
-        val response = weatherDao?.insertAlertToRoom(alerts)
-        Log.i(TAG, "insertAlertToRoom: response --------> $response")
+        weatherDao?.insertAlertToRoom(alerts)
     }
 
     override suspend fun deleteAlertFromRoom(id: Int) {
-        val response = weatherDao?.deleteAlertFromRoom(id)
-        Log.i(TAG, "deleteAlertFromRoom: response--> $response")
+        weatherDao?.deleteAlertFromRoom(id)
     }
 
     override suspend fun getAlertFromRoom(id: Int): SavedAlerts {
         val response = weatherDao?.getAlertFromRoom(id)
-        Log.i(TAG, "getAlertFromRoom: response-----> $response")
         return response!!
     }
 

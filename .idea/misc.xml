@@ -5,17 +5,56 @@
       <map>
         <entry key="..\:/Android/projects/MyProjects/WeatherApp/app/src/main/res/drawable-v24/dialog_background.xml" value="0.1695" />
         <entry key="..\:/Android/projects/MyProjects/WeatherApp/app/src/main/res/drawable-v24/ic_info_icon.xml" value="0.1695" />
+        <entry key="..\:/Android/projects/MyProjects/WeatherApp/app/src/main/res/drawable-v24/ic_launcher_foreground.xml" value="0.1695" />
         <entry key="..\:/Android/projects/MyProjects/WeatherApp/app/src/main/res/drawable/alert_background.xml" value="0.1685" />
+        <entry key="..\:/Android/projects/MyProjects/WeatherApp/app/src/main/res/drawable/background_alert.xml" value="0.1695" />
+        <entry key="..\:/Android/projects/MyProjects/WeatherApp/app/src/main/res/drawable/bg_gradient.xml" value="0.1695" />
+        <entry key="..\:/Android/projects/MyProjects/WeatherApp/app/src/main/res/drawable/black_outline_square_rounded_shape_bg.xml" value="0.1695" />
+        <entry key="..\:/Android/projects/MyProjects/WeatherApp/app/src/main/res/drawable/circle.xml" value="0.1695" />
+        <entry key="..\:/Android/projects/MyProjects/WeatherApp/app/src/main/res/drawable/current_daily_background.xml" value="0.1695" />
+        <entry key="..\:/Android/projects/MyProjects/WeatherApp/app/src/main/res/drawable/hourly_custom_row_background.xml" value="0.1695" />
         <entry key="..\:/Android/projects/MyProjects/WeatherApp/app/src/main/res/drawable/ic_add_favorite.xml" value="0.1685" />
+        <entry key="..\:/Android/projects/MyProjects/WeatherApp/app/src/main/res/drawable/ic_alert.xml" value="0.1695" />
+        <entry key="..\:/Android/projects/MyProjects/WeatherApp/app/src/main/res/drawable/ic_alert_notification.xml" value="0.1695" />
+        <entry key="..\:/Android/projects/MyProjects/WeatherApp/app/src/main/res/drawable/ic_antarcticae.xml" value="0.1695" />
         <entry key="..\:/Android/projects/MyProjects/WeatherApp/app/src/main/res/drawable/ic_background_discard_button.xml" value="0.1695" />
+        <entry key="..\:/Android/projects/MyProjects/WeatherApp/app/src/main/res/drawable/ic_background_save_button.xml" value="0.137" />
+        <entry key="..\:/Android/projects/MyProjects/WeatherApp/app/src/main/res/drawable/ic_cloud.xml" value="0.1695" />
+        <entry key="..\:/Android/projects/MyProjects/WeatherApp/app/src/main/res/drawable/ic_delete_favorite_place.xml" value="0.1695" />
+        <entry key="..\:/Android/projects/MyProjects/WeatherApp/app/src/main/res/drawable/ic_down_arrow.xml" value="0.1695" />
+        <entry key="..\:/Android/projects/MyProjects/WeatherApp/app/src/main/res/drawable/ic_droup_menu.xml" value="0.1695" />
+        <entry key="..\:/Android/projects/MyProjects/WeatherApp/app/src/main/res/drawable/ic_favorite.xml" value="0.1695" />
+        <entry key="..\:/Android/projects/MyProjects/WeatherApp/app/src/main/res/drawable/ic_feeds.xml" value="0.1695" />
+        <entry key="..\:/Android/projects/MyProjects/WeatherApp/app/src/main/res/drawable/ic_home.xml" value="0.1695" />
+        <entry key="..\:/Android/projects/MyProjects/WeatherApp/app/src/main/res/drawable/ic_humidity.xml" value="0.1695" />
         <entry key="..\:/Android/projects/MyProjects/WeatherApp/app/src/main/res/drawable/ic_info_icon.xml" value="0.1695" />
         <entry key="..\:/Android/projects/MyProjects/WeatherApp/app/src/main/res/drawable/ic_language.xml" value="0.1685" />
+        <entry key="..\:/Android/projects/MyProjects/WeatherApp/app/src/main/res/drawable/ic_launcher_background.xml" value="0.1695" />
+        <entry key="..\:/Android/projects/MyProjects/WeatherApp/app/src/main/res/drawable/ic_launcher_foreground.xml" value="0.1695" />
+        <entry key="..\:/Android/projects/MyProjects/WeatherApp/app/src/main/res/drawable/ic_moon_phases.xml" value="0.1695" />
+        <entry key="..\:/Android/projects/MyProjects/WeatherApp/app/src/main/res/drawable/ic_moon_phases1.xml" value="0.1695" />
         <entry key="..\:/Android/projects/MyProjects/WeatherApp/app/src/main/res/drawable/ic_no_favorites.xml" value="0.1695" />
+        <entry key="..\:/Android/projects/MyProjects/WeatherApp/app/src/main/res/drawable/ic_ocean.xml" value="0.1695" />
+        <entry key="..\:/Android/projects/MyProjects/WeatherApp/app/src/main/res/drawable/ic_pngtree_waiting.xml" value="0.1695" />
+        <entry key="..\:/Android/projects/MyProjects/WeatherApp/app/src/main/res/drawable/ic_pressure.xml" value="0.1695" />
+        <entry key="..\:/Android/projects/MyProjects/WeatherApp/app/src/main/res/drawable/ic_rain.xml" value="0.1695" />
+        <entry key="..\:/Android/projects/MyProjects/WeatherApp/app/src/main/res/drawable/ic_search.xml" value="0.1695" />
+        <entry key="..\:/Android/projects/MyProjects/WeatherApp/app/src/main/res/drawable/ic_setting.xml" value="0.1695" />
+        <entry key="..\:/Android/projects/MyProjects/WeatherApp/app/src/main/res/drawable/ic_sun_rise.xml" value="0.1695" />
+        <entry key="..\:/Android/projects/MyProjects/WeatherApp/app/src/main/res/drawable/ic_sunny.xml" value="0.1695" />
         <entry key="..\:/Android/projects/MyProjects/WeatherApp/app/src/main/res/drawable/ic_temperature.xml" value="0.1685" />
         <entry key="..\:/Android/projects/MyProjects/WeatherApp/app/src/main/res/drawable/ic_temperature_setting.xml" value="0.1685" />
         <entry key="..\:/Android/projects/MyProjects/WeatherApp/app/src/main/res/drawable/ic_timetable.xml" value="0.1685" />
+        <entry key="..\:/Android/projects/MyProjects/WeatherApp/app/src/main/res/drawable/ic_ultraviolet.xml" value="0.1695" />
         <entry key="..\:/Android/projects/MyProjects/WeatherApp/app/src/main/res/drawable/ic_up_arrow.xml" value="0.1685" />
+        <entry key="..\:/Android/projects/MyProjects/WeatherApp/app/src/main/res/drawable/ic_uv_index__1_.xml" value="0.1695" />
+        <entry key="..\:/Android/projects/MyProjects/WeatherApp/app/src/main/res/drawable/ic_visibility.xml" value="0.1695" />
+        <entry key="..\:/Android/projects/MyProjects/WeatherApp/app/src/main/res/drawable/ic_waiting.xml" value="0.1695" />
         <entry key="..\:/Android/projects/MyProjects/WeatherApp/app/src/main/res/drawable/ic_wind.xml" value="0.1685" />
+        <entry key="..\:/Android/projects/MyProjects/WeatherApp/app/src/main/res/drawable/ic_wind2.xml" value="0.1695" />
+        <entry key="..\:/Android/projects/MyProjects/WeatherApp/app/src/main/res/drawable/ic_winter.xml" value="0.1695" />
+        <entry key="..\:/Android/projects/MyProjects/WeatherApp/app/src/main/res/drawable/light_blue_square_rounded_shape_bg.xml" value="0.1695" />
+        <entry key="..\:/Android/projects/MyProjects/WeatherApp/app/src/main/res/drawable/rounded_corner.xml" value="0.1695" />
         <entry key="..\:/Android/projects/MyProjects/WeatherApp/app/src/main/res/drawable/tornado_twister_weather_natural_phenomenon_wind_icon_194234.xml" value="0.1685" />
         <entry key="..\:/Android/projects/MyProjects/WeatherApp/app/src/main/res/drawable/weather_storm_hurricane_tornado_icon_187701.xml" value="0.1685" />
         <entry key="..\:/Android/projects/MyProjects/WeatherApp/app/src/main/res/layout/activity_intializaion_screen.xml" value="0.27447916666666666" />

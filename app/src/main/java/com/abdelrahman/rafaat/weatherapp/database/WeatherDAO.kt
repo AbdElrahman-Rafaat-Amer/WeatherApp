@@ -52,6 +52,6 @@ interface WeatherDAO {
     suspend fun insertToFavorite(favoritePlaces: FavoritePlaces): Long
 
     @Delete
-    suspend fun deleteFromRoom(favoritePlaces: FavoritePlaces)
+    suspend fun deleteFromRoom(favoritePlaces: FavoritePlaces): Int
 
 }

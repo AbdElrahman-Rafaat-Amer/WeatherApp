@@ -1,6 +1,5 @@
 package com.abdelrahman.rafaat.weatherapp.database
 
-import androidx.lifecycle.LiveData
 import com.abdelrahman.rafaat.weatherapp.model.FavoritePlaces
 import com.abdelrahman.rafaat.weatherapp.model.SavedAddress
 import com.abdelrahman.rafaat.weatherapp.model.SavedAlerts
@@ -27,6 +26,6 @@ interface LocaleSource {
     //Favorites
     suspend fun getFavoriteFromDataBase(): List<FavoritePlaces>
     suspend fun insertToFavorite(favoritePlaces: FavoritePlaces)
-    suspend fun removeFromFavorite(favoritePlaces: FavoritePlaces)
+    suspend fun removeFromFavorite(favoritePlaces: FavoritePlaces) : Int
 
 }

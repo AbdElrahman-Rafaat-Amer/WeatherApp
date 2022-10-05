@@ -9,6 +9,7 @@
     <androidx.recyclerview.widget.RecyclerView
         android:id="@+id/days_recyclerView"
         android:layout_width="match_parent"
+        tools:listitem="@layout/custom_row_time_table"
         android:layout_height="match_parent" />
 
 </FrameLayout>

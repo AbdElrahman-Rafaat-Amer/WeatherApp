@@ -1,7 +1,5 @@
 package com.abdelrahman.rafaat.weatherapp.model
 
-import androidx.lifecycle.LiveData
-
 
 interface RepositoryInterface {
 
@@ -27,7 +25,7 @@ interface RepositoryInterface {
     //Favorites
     suspend fun getFavoriteFromDataBase(): List<FavoritePlaces>
     suspend fun insertToFavorite(favoritePlaces: FavoritePlaces)
-    suspend fun removeFromFavorite(favoritePlaces: FavoritePlaces)
+    suspend fun removeFromFavorite(favoritePlaces: FavoritePlaces) : Int
 
 
     //Alerts

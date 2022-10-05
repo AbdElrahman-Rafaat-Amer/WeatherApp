@@ -4,9 +4,8 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:paddingStart="@dimen/_15sdp"
+    android:paddingHorizontal="@dimen/_15sdp"
     android:paddingTop="@dimen/_15sdp"
-    android:paddingEnd="@dimen/_15sdp"
     tools:context=".alert.view.AlertFragment">
 
     <ImageView
@@ -35,7 +34,8 @@
     <androidx.recyclerview.widget.RecyclerView
         android:id="@+id/recyclerView_alerts"
         android:layout_width="match_parent"
-        android:layout_height="match_parent" />
+        android:layout_height="match_parent"
+        tools:listitem="@layout/custom_row_alert" />
 
 
     <com.google.android.material.floatingactionbutton.FloatingActionButton
@@ -44,11 +44,11 @@
         android:layout_height="wrap_content"
         android:layout_margin="@dimen/_7sdp"
         android:backgroundTint="#038DFB"
+        android:contentDescription="@string/add_new_alert"
         android:scaleType="center"
         app:fabCustomSize="@dimen/_40sdp"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        app:srcCompat="@drawable/ic_alert"
-        android:contentDescription="@string/add_new_alert" />
+        app:srcCompat="@drawable/ic_alert" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>

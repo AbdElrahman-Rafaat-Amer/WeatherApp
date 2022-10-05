@@ -1,14 +1,11 @@
 package com.abdelrahman.rafaat.weatherapp.homeplaces.view
 
 import android.content.Context
-import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.ImageView
 import android.widget.TextView
-
-
 import androidx.recyclerview.widget.RecyclerView
 import com.abdelrahman.rafaat.weatherapp.R
 import com.abdelrahman.rafaat.weatherapp.utils.ConstantsValue
@@ -17,11 +14,8 @@ import com.bumptech.glide.Glide
 import com.bumptech.glide.request.RequestOptions
 import java.text.DecimalFormat
 import java.text.SimpleDateFormat
-import java.util.*
 
 import kotlin.collections.ArrayList
-
-private const val TAG = "WeatherDailyAdapter"
 
 class WeatherDailyAdapter :
     RecyclerView.Adapter<WeatherDailyAdapter.ViewHolder?>() {
@@ -37,7 +31,6 @@ class WeatherDailyAdapter :
     }
 
     override fun onBindViewHolder(holder: WeatherDailyAdapter.ViewHolder, position: Int) {
-        Log.i(TAG, "onBindViewHolder: ")
         val day = days[position]
         holder.dateOfDay.text = getNameOfDay(day.dt)
         holder.statusOfDay.text = day.weather[0].description
@@ -49,7 +42,6 @@ class WeatherDailyAdapter :
     }
 
     override fun getItemCount(): Int {
-        Log.i(TAG, "getItemCount: " + days.size)
         return days.size
     }
 
@@ -67,9 +59,6 @@ class WeatherDailyAdapter :
     }
 
     private fun getNameOfDay(milliSeconds: Long): String {
-        val time = milliSeconds * 1000.toLong()
-        val format = SimpleDateFormat("yyyy.MM.dd", Locale(ConstantsValue.language))
-        Log.i(TAG, "getNameOfDay: " + format.format(time))
         return SimpleDateFormat("EE").format(milliSeconds * 1000)
     }
 

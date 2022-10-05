@@ -33,7 +33,7 @@
             android:layout_height="@dimen/_40sdp"
             android:layout_weight="1"
             android:scaleType="centerCrop"
-            android:src="@drawable/cloud"
+            android:src="@drawable/ic_sunny"
             android:contentDescription="@string/status_of_day" />
 
         <TextView

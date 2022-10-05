@@ -1,10 +1,9 @@
 <androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/const_click"
     android:layout_width="match_parent"
-    android:layout_height="wrap_content"
-    android:id="@+id/const_click">
-
+    android:layout_height="wrap_content">
 
     <androidx.cardview.widget.CardView
         android:id="@+id/cardView2"
@@ -29,14 +28,13 @@
                 android:layout_height="wrap_content"
                 android:layout_marginTop="@dimen/_5sdp"
                 android:layout_marginBottom="@dimen/_30sdp"
-                android:background="@drawable/black_outline_square_rounded_shape_bg"
                 android:padding="@dimen/_5sdp"
                 android:textAlignment="center"
                 android:textColor="@color/white"
                 android:textSize="@dimen/_20sdp"
                 app:layout_constraintEnd_toEndOf="@+id/ConstraintLayout"
                 app:layout_constraintStart_toStartOf="@+id/ConstraintLayout"
-                app:layout_constraintTop_toTopOf="@+id/ConstraintLayout"/>
+                app:layout_constraintTop_toTopOf="@+id/ConstraintLayout" />
 
             <GridLayout
                 android:layout_width="match_parent"
@@ -61,9 +59,9 @@
                     <ImageView
                         android:layout_width="@dimen/_35sdp"
                         android:layout_height="@dimen/_35sdp"
+                        android:contentDescription="@string/sunrise"
                         android:scaleType="centerCrop"
-                        android:src="@drawable/ic_sunny"
-                        android:contentDescription="@string/sunrise" />
+                        android:src="@drawable/ic_sunny" />
 
                     <TextView
                         android:layout_width="wrap_content"
@@ -93,8 +91,8 @@
                     <ImageView
                         android:layout_width="@dimen/_26sdp"
                         android:layout_height="@dimen/_25sdp"
-                        android:scaleType="centerCrop"
                         android:contentDescription="@string/sunset"
+                        android:scaleType="centerCrop"
                         android:src="@drawable/ic_ocean" />
 
                     <TextView
@@ -124,9 +122,9 @@
                     android:padding="@dimen/_10sdp">
 
                     <ImageView
-                        android:contentDescription="@string/moon_phase"
                         android:layout_width="@dimen/_40sdp"
                         android:layout_height="@dimen/_40sdp"
+                        android:contentDescription="@string/moon_phase"
                         android:src="@drawable/ic_moon_phases" />
 
                     <TextView
@@ -189,8 +187,8 @@
                     <ImageView
                         android:id="@+id/weather_imageView_day"
                         android:layout_width="@dimen/_40sdp"
-                        android:contentDescription="@string/weather_description"
-                        android:layout_height="@dimen/_40sdp" />
+                        android:layout_height="@dimen/_40sdp"
+                        android:contentDescription="@string/weather_description" />
 
                     <TextView
                         android:layout_width="wrap_content"
@@ -218,9 +216,9 @@
                     android:padding="@dimen/_10sdp">
 
                     <ImageView
-                        android:contentDescription="@string/probability_precipitation"
                         android:layout_width="@dimen/_40sdp"
                         android:layout_height="@dimen/_40sdp"
+                        android:contentDescription="@string/probability_precipitation"
                         android:src="@drawable/ic_rain" />
 
                     <TextView
@@ -250,9 +248,9 @@
                     android:padding="@dimen/_10sdp">
 
                     <ImageView
-                        android:contentDescription="@string/cloud"
                         android:layout_width="@dimen/_40sdp"
                         android:layout_height="@dimen/_40sdp"
+                        android:contentDescription="@string/cloud"
                         android:src="@drawable/ic_cloud" />
 
                     <TextView
@@ -281,9 +279,9 @@
                     android:padding="@dimen/_10sdp">
 
                     <ImageView
-                        android:contentDescription="@string/pressure"
                         android:layout_width="@dimen/_40sdp"
                         android:layout_height="@dimen/_40sdp"
+                        android:contentDescription="@string/pressure"
                         android:scaleType="centerCrop"
                         android:src="@drawable/ic_pressure" />
 
@@ -313,9 +311,9 @@
                     android:padding="@dimen/_10sdp">
 
                     <ImageView
-                        android:contentDescription="@string/ultraviolet"
                         android:layout_width="@dimen/_40sdp"
                         android:layout_height="@dimen/_40sdp"
+                        android:contentDescription="@string/ultraviolet"
                         android:src="@drawable/ic_ultraviolet" />
 
                     <TextView
@@ -345,9 +343,9 @@
                     android:padding="@dimen/_10sdp">
 
                     <ImageView
-                        android:contentDescription="@string/humidity_cardView"
                         android:layout_width="@dimen/_40sdp"
                         android:layout_height="@dimen/_40sdp"
+                        android:contentDescription="@string/humidity_cardView"
                         android:src="@drawable/ic_humidity" />
 
                     <TextView
@@ -407,9 +405,9 @@
                     android:padding="@dimen/_10sdp">
 
                     <ImageView
-                        android:contentDescription="@string/wind_degree"
                         android:layout_width="@dimen/_40sdp"
                         android:layout_height="@dimen/_40sdp"
+                        android:contentDescription="@string/wind_degree"
                         android:src="@drawable/ic_wind" />
 
                     <TextView

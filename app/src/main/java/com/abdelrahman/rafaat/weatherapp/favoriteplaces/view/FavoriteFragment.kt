@@ -5,19 +5,19 @@ import android.content.Intent
 import android.graphics.Color
 import android.graphics.Rect
 import android.os.Bundle
+import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.View.GONE
 import android.view.View.VISIBLE
 import android.view.ViewGroup
-import android.widget.Button
-import android.widget.TextView
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.ViewModelProvider
 import androidx.navigation.Navigation
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.abdelrahman.rafaat.weatherapp.R
 import com.abdelrahman.rafaat.weatherapp.database.ConcreteLocaleSource
+import com.abdelrahman.rafaat.weatherapp.databinding.DialogLayoutBinding
 import com.abdelrahman.rafaat.weatherapp.databinding.FragmentFavoriteBinding
 import com.abdelrahman.rafaat.weatherapp.favoriteplaces.viewmodel.FavoritePlaceViewModel
 import com.abdelrahman.rafaat.weatherapp.favoriteplaces.viewmodel.FavoritePlaceViewModelFactory
@@ -78,7 +78,7 @@ class FavoriteFragment : Fragment(), OnDeleteFavorite {
         viewModel =
             ViewModelProvider(this, viewModelFactory)[FavoritePlaceViewModel::class.java]
 
-        viewModel.getStoredFavoritePlaces()
+      //  viewModel.getStoredFavoritePlaces()
     }
 
     private fun checkInternet() {
@@ -90,16 +90,17 @@ class FavoriteFragment : Fragment(), OnDeleteFavorite {
     private fun observeViewModel() {
         viewModel.favoritePlaces.observe(viewLifecycleOwner) {
             if (!it.isNullOrEmpty() || it.isNotEmpty()) {
+                Log.i("Favorite", "observeViewModel:exist size-----------> ${it.size}")
                 binding.noFavoritePlaces.visibility = GONE
                 binding.noFavoriteTextView.visibility = GONE
                 binding.recyclerViewFavorites.visibility = VISIBLE
                 favoriteAdapter.setList(it)
             } else {
+                Log.i("Favorite", "observeViewModel:none size------------> ${it.size}")
                 favoriteAdapter.setList(emptyList())
                 binding.noFavoritePlaces.visibility = VISIBLE
                 binding.noFavoriteTextView.visibility = VISIBLE
                 binding.recyclerViewFavorites.visibility = GONE
-                favoriteAdapter.setList(emptyList())
             }
         }
     }
@@ -134,12 +135,9 @@ class FavoriteFragment : Fragment(), OnDeleteFavorite {
     }
 
     private fun showDialog(favoritePlaces: FavoritePlaces) {
-        val view = layoutInflater.inflate(R.layout.dialog_layout, null)
-        val dialogMessage = view.findViewById<TextView>(R.id.dialog_message_textView)
-        val removeButton = view.findViewById<Button>(R.id.remove_button)
-        val cancelButton = view.findViewById<Button>(R.id.cancel_button)
+        val binding = DialogLayoutBinding.inflate(layoutInflater)
         val builder = AlertDialog.Builder(context, R.style.CustomAlertDialog)
-        builder.setView(view)
+        builder.setView(binding.root)
         val alertDialog = builder.create()
         alertDialog.setCanceledOnTouchOutside(false)
         alertDialog.show()
@@ -150,19 +148,21 @@ class FavoriteFragment : Fragment(), OnDeleteFavorite {
             (displayRectangle.width() * 0.82f).toInt(),
             ViewGroup.LayoutParams.WRAP_CONTENT
         )
-        dialogMessage.text = getString(R.string.delete_place)
-        removeButton.setOnClickListener {
+        binding.dialogMessageTextView.text = getString(R.string.delete_place)
+        binding.removeButton.setOnClickListener {
             viewModel.deleteFromRoom(favoritePlaces)
-            viewModel.getStoredFavoritePlaces()
             alertDialog.dismiss()
+            Log.i("Favorite", "showDialog: deleteButton")
         }
-        cancelButton.setOnClickListener {
+        binding.cancelButton.setOnClickListener {
             alertDialog.dismiss()
+            Log.i("Favorite", "showDialog: cancelButton")
         }
     }
 
     override fun onResume() {
         super.onResume()
+        Log.i("Favorite", "onResume: --------------------")
         viewModel.getStoredFavoritePlaces()
     }
 
