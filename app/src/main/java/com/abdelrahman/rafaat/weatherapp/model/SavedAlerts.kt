@@ -23,6 +23,9 @@ class SavedAlerts(
     @ColumnInfo(name = "repetitions")
     var repetitions: Long,
 
+    @ColumnInfo(name = "tag")
+    var tag: Long,
+
     @PrimaryKey(autoGenerate = true)
     @NonNull
     val id: Int? = null,

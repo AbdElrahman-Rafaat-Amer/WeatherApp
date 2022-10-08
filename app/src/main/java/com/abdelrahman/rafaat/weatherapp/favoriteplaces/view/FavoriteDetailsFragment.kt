@@ -1,8 +1,6 @@
 package com.abdelrahman.rafaat.weatherapp.favoriteplaces.view
 
-
 import android.os.Bundle
-import android.util.Log
 import com.abdelrahman.rafaat.weatherapp.utils.getAddress
 import android.view.LayoutInflater
 import android.view.View
@@ -92,7 +90,6 @@ class FavoriteDetailsFragment : Fragment() {
 
     private fun observeViewModel() {
         viewModel.selectedFavoritePlaces.observe(viewLifecycleOwner) {
-            Log.i("Favorite", "observeViewModel: it---------------------> $it")
             when (it) {
                 is WeatherResponse -> {
                     assignDataToView(it)

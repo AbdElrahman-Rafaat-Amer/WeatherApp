@@ -13,7 +13,7 @@ import com.abdelrahman.rafaat.weatherapp.model.WeatherResponse
 
 @Database(
     entities = [WeatherResponse::class, FavoritePlaces::class, SavedAddress::class, SavedAlerts::class],
-    version = 15
+    version = 16
 )
 @TypeConverters(DataConverter::class)
 abstract class AppDataBase : RoomDatabase() {

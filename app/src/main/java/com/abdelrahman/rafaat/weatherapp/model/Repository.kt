@@ -1,7 +1,6 @@
 package com.abdelrahman.rafaat.weatherapp.model
 
 import android.content.Context
-import android.util.Log
 import com.abdelrahman.rafaat.weatherapp.database.LocaleSource
 import com.abdelrahman.rafaat.weatherapp.network.RemoteSource
 
@@ -59,10 +58,7 @@ class Repository private constructor(
 
     //Favorites
     override suspend fun getFavoriteFromDataBase(): List<FavoritePlaces> {
-        Log.i("Favorite", "getFavoriteFromDataBase Repo before")
-        val response = localSource.getFavoriteFromDataBase()
-        Log.i("Favorite", "getFavoriteFromDataBase Repo after--------> ${response.size}")
-        return response
+        return localSource.getFavoriteFromDataBase()
     }
 
     override suspend fun insertToFavorite(favoritePlaces: FavoritePlaces) {
@@ -70,23 +66,20 @@ class Repository private constructor(
     }
 
     override suspend fun removeFromFavorite(favoritePlaces: FavoritePlaces): Int {
-        Log.i("Favorite", "delete Repo before")
-        val deleteResponse = localSource.removeFromFavorite(favoritePlaces)
-        Log.i("Favorite", "removeFromFavorite:after--------------> $deleteResponse")
-        return deleteResponse
+        return localSource.removeFromFavorite(favoritePlaces)
     }
 
     //Alert
-    override suspend fun insertAlertToRoom(savedAlerts: SavedAlerts) {
-        localSource.insertAlertToRoom(savedAlerts)
+    override suspend fun insertAlertToRoom(savedAlerts: SavedAlerts): Long {
+        return localSource.insertAlertToRoom(savedAlerts)
     }
 
-    override suspend fun getStoredAlerts(): List<SavedAlerts>? {
+    override suspend fun getStoredAlerts(): List<SavedAlerts> {
         return localSource.getStoredAlerts()
     }
 
-    override suspend fun deleteAlertFromRoom(id: Int) {
-        localSource.deleteAlertFromRoom(id)
+    override suspend fun deleteAlertFromRoom(id: Int): Int {
+        return localSource.deleteAlertFromRoom(id)
     }
 
     override suspend fun getAlertFromRoom(id: Int): SavedAlerts {

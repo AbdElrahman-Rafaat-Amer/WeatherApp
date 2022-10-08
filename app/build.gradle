@@ -50,7 +50,7 @@ dependencies {
     implementation 'androidx.preference:preference-ktx:1.2.0'
 
     //Worker Manger
-    implementation 'androidx.work:work-runtime:2.7.1'
+    implementation "androidx.work:work-runtime-ktx:2.7.1"
 
     //Location
     implementation 'com.google.android.gms:play-services-location:20.0.0'
@@ -90,9 +90,6 @@ dependencies {
     //Glide
     implementation 'com.github.bumptech.glide:glide:4.13.2'
     annotationProcessor 'com.github.bumptech.glide:compiler:4.13.2'
-
-    //Shimmer Animation
-    implementation 'com.facebook.shimmer:shimmer:0.5.0@aar'
 
     //Room
     implementation "androidx.room:room-ktx:2.4.3"

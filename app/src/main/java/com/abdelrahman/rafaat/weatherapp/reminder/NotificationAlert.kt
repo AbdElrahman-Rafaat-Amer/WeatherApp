@@ -1,13 +1,11 @@
 package com.abdelrahman.rafaat.weatherapp.reminder
 
-import android.app.Notification
 import android.app.NotificationChannel
 import android.app.NotificationManager
 import android.app.PendingIntent
 import android.content.Context
 import android.content.Intent
-import android.os.Handler
-import android.os.Looper
+import android.util.Log
 import androidx.core.app.NotificationCompat
 import androidx.work.Worker
 import androidx.work.WorkerParameters
@@ -24,16 +22,14 @@ class NotificationAlert(private var context: Context, workerParams: WorkerParame
 
 
     override fun doWork(): Result {
-        Handler(Looper.getMainLooper()).post {
-            checkAlerts()
-        }
+        checkAlerts()
+        Log.i("AlertFragment", "doWork: ------------")
         return Result.success()
     }
 
     private fun checkAlerts(): String {
 
         var keyWord = ""
-
         val repository = Repository.getInstance(
             context,
             WeatherClient.getInstance(),
@@ -45,26 +41,26 @@ class NotificationAlert(private var context: Context, workerParams: WorkerParame
             if (alerts?.size != null) {
                 val alertTag = alerts[0].tags[0]
                 if (alertTag == "Rain") {
-                    keyWord = "Rain"
+                    keyWord = context.getString(R.string.rain_alert)
                 } else {
                     if (alertTag == "Wind") {
-                        keyWord = "Wind"
+                        keyWord = context.getString(R.string.wind_alert)
                     } else {
                         if (alertTag == "Avalanches") {
-                            keyWord = "Avalanches"
+                            keyWord = context.getString(R.string.avalanches_alert)
 
                         } else {
                             if (alertTag == "Fire warning") {
-                                keyWord = "Fire"
+                                keyWord = context.getString(R.string.forest_fire_alert)
                             } else {
                                 keyWord = context.getString(R.string.other_alert)
-                                keyWord = "Ohter"
+                                keyWord = "Other"
                             }
                         }
                     }
                 }
             } else {
-                keyWord = "No Alert"
+                keyWord = context.getString(R.string.no_alert)
             }
 
             display(keyWord)
@@ -83,19 +79,10 @@ class NotificationAlert(private var context: Context, workerParams: WorkerParame
             PendingIntent.FLAG_UPDATE_CURRENT or PendingIntent.FLAG_IMMUTABLE
         )
 
-
-        val bigText = NotificationCompat.BigTextStyle()
-        bigText.bigText(keyword)
-        bigText.setBigContentTitle(context.getString(R.string.app_name))
-        bigText.setSummaryText(keyword)
-
-
         mBuilder.setContentIntent(pendingIntent)
         mBuilder.setSmallIcon(R.drawable.ic_alert_notification)
-        mBuilder.setContentTitle("Alert")
+        mBuilder.setContentTitle(context.getString(R.string.alert))
         mBuilder.setContentText(keyword)
-        mBuilder.priority = Notification.PRIORITY_MAX
-        mBuilder.setStyle(bigText)
 
         val mNotificationManager =
             applicationContext.getSystemService(Context.NOTIFICATION_SERVICE) as NotificationManager

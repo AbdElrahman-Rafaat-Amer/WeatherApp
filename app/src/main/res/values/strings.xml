@@ -51,6 +51,7 @@
     <string name="alert_from">From</string>
     <string name="alert_to">To</string>
     <string name="alarm">Alarm</string>
+    <string name="alert">Alert</string>
     <string name="alert_save_button">Save</string>
     <string name="undefined_place">Undefined Place</string>
     <string name="enable_gps">Please Enable GPS</string>
@@ -58,20 +59,18 @@
     <string name="waiting_enable_gps">Waiting you to enable GPS to get your location</string>
     <string name="error_network">No internet Founded</string>
 
-    <string name="fragment_favorite">Favorite Places</string>
     <string name="PM">PM</string>
     <string name="AM">AM</string>
-    <string name="alert_time_error">Start date must be  after current date</string>
+    <string name="alert_start_time_error">Start date must be  after current date</string>
+    <string name="alert_end_time_error">End date must be after start date</string>
     <string name="error_network_for_update">No internet Founded to update your information</string>
 
-    <string name="no_alert">No Alerts Founded</string>
-    <string name="sky_clear">The sky clear</string>
-
+    <string name="no_alert">Weather is fine,No Alerts for this time</string>
     <string name="rain_alert">Rain</string>
     <string name="wind_alert">Wind</string>
     <string name="avalanches_alert">Avalanches</string>
-    <string name="other_alert">Rain and Wind</string>
     <string name="forest_fire_alert">Fire warning</string>
+    <string name="other_alert">Rain and Wind</string>
     <string name="add_new_alert">add new alert</string>
     <string name="waiting_image">Waiting</string>
     <string name="loading_bar">loading bar</string>
@@ -88,6 +87,10 @@
     <string name="delete_alert">Are you sure you want delete this Alert?</string>
     <string name="delete_place">Are you sure you want delete this Place?</string>
     <string name="no_place_selected">Please select place first</string>
+    <string name="start_time">2:25 AM</string>
+    <string name="start_date">7 Aug 1999</string>
+    <string name="end_time">3:25 PM</string>
+    <string name="end_date">1 Nov 202</string>
 
 
     <string-array name="pref_notification">

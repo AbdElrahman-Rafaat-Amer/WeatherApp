@@ -1,5 +1,6 @@
 package com.abdelrahman.rafaat.weatherapp.alert.viewmodel
 
+import android.util.Log
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
@@ -20,7 +21,7 @@ class AlertViewModel(iRepo: RepositoryInterface) : ViewModel() {
         viewModelScope.launch {
             val response = _iRepo.getStoredAlerts()
             withContext(Dispatchers.Main) {
-                _alertResponse.postValue(response!!)
+                _alertResponse.postValue(response)
             }
         }
     }
@@ -35,8 +36,12 @@ class AlertViewModel(iRepo: RepositoryInterface) : ViewModel() {
 
     fun deleteAlertFromRoom(id: Int) {
         viewModelScope.launch {
+            val response = _iRepo.deleteAlertFromRoom(id)
             withContext(Dispatchers.Main) {
-                _iRepo.deleteAlertFromRoom(id)
+                if (response > 0)
+                    getStoredAlerts()
+                else
+                    Log.i("AlertFragment", "deleteAlertFromRoom: failed")
             }
         }
     }

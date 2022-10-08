@@ -18,23 +18,11 @@ class FavoritePlaceViewModel(private var _iRepo: RepositoryInterface) : ViewMode
     private var _selectedFavoritePlaces = MutableLiveData<WeatherResponse>()
     val selectedFavoritePlaces: LiveData<WeatherResponse> = _selectedFavoritePlaces
 
-    init {
-        Log.i("Favorite", "init-----------------: ")
-    }
-
-    override fun onCleared() {
-        super.onCleared()
-        Log.i("Favorite", "onCleared-----------------: ")
-    }
 
     fun getStoredFavoritePlaces() {
         viewModelScope.launch {
             val response = _iRepo.getFavoriteFromDataBase()
             withContext(Dispatchers.Main) {
-                Log.i(
-                    "Favorite",
-                    "getStoredFavoritePlaces:response---------------------------> ${response.size}"
-                )
                 _favoritePlaces.postValue(response)
             }
         }
@@ -52,9 +40,7 @@ class FavoritePlaceViewModel(private var _iRepo: RepositoryInterface) : ViewMode
         viewModelScope.launch {
             val response = _iRepo.removeFromFavorite(favoritePlaces)
             withContext(Dispatchers.Main) {
-                Log.i("Favorite", "delete ViewModel:response------------> $response")
                 if (response > 0) {
-                    Log.i("Favorite", "deleteFromRoom: success")
                     getStoredFavoritePlaces()
                 } else {
                     Log.i("Favorite", "deleteFromRoom: failed")
