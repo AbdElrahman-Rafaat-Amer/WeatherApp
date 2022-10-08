@@ -18,9 +18,9 @@ interface LocaleSource {
     suspend fun insertAddressToRoom(address: SavedAddress)
 
     //Alerts
-    suspend fun getStoredAlerts(): List<SavedAlerts>?
-    suspend fun insertAlertToRoom(alerts: SavedAlerts)
-    suspend fun deleteAlertFromRoom(id: Int)
+    suspend fun getStoredAlerts(): List<SavedAlerts>
+    suspend fun insertAlertToRoom(alerts: SavedAlerts) : Long
+    suspend fun deleteAlertFromRoom(id: Int) : Int
     suspend fun getAlertFromRoom(id: Int): SavedAlerts
 
     //Favorites

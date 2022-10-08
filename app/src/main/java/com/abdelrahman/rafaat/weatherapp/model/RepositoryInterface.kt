@@ -29,9 +29,9 @@ interface RepositoryInterface {
 
 
     //Alerts
-    suspend fun insertAlertToRoom(savedAlerts: SavedAlerts)
-    suspend fun getStoredAlerts(): List<SavedAlerts>?
-    suspend fun deleteAlertFromRoom(id: Int)
+    suspend fun insertAlertToRoom(savedAlerts: SavedAlerts): Long
+    suspend fun getStoredAlerts(): List<SavedAlerts>
+    suspend fun deleteAlertFromRoom(id: Int): Int
     suspend fun getAlertFromRoom(id: Int): SavedAlerts
 
 

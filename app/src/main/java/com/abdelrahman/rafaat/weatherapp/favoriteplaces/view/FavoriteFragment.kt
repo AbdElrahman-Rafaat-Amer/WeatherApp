@@ -5,7 +5,6 @@ import android.content.Intent
 import android.graphics.Color
 import android.graphics.Rect
 import android.os.Bundle
-import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.View.GONE
@@ -77,8 +76,6 @@ class FavoriteFragment : Fragment(), OnDeleteFavorite {
         )
         viewModel =
             ViewModelProvider(this, viewModelFactory)[FavoritePlaceViewModel::class.java]
-
-      //  viewModel.getStoredFavoritePlaces()
     }
 
     private fun checkInternet() {
@@ -90,13 +87,11 @@ class FavoriteFragment : Fragment(), OnDeleteFavorite {
     private fun observeViewModel() {
         viewModel.favoritePlaces.observe(viewLifecycleOwner) {
             if (!it.isNullOrEmpty() || it.isNotEmpty()) {
-                Log.i("Favorite", "observeViewModel:exist size-----------> ${it.size}")
                 binding.noFavoritePlaces.visibility = GONE
                 binding.noFavoriteTextView.visibility = GONE
                 binding.recyclerViewFavorites.visibility = VISIBLE
                 favoriteAdapter.setList(it)
             } else {
-                Log.i("Favorite", "observeViewModel:none size------------> ${it.size}")
                 favoriteAdapter.setList(emptyList())
                 binding.noFavoritePlaces.visibility = VISIBLE
                 binding.noFavoriteTextView.visibility = VISIBLE
@@ -152,17 +147,14 @@ class FavoriteFragment : Fragment(), OnDeleteFavorite {
         binding.removeButton.setOnClickListener {
             viewModel.deleteFromRoom(favoritePlaces)
             alertDialog.dismiss()
-            Log.i("Favorite", "showDialog: deleteButton")
         }
         binding.cancelButton.setOnClickListener {
             alertDialog.dismiss()
-            Log.i("Favorite", "showDialog: cancelButton")
         }
     }
 
     override fun onResume() {
         super.onResume()
-        Log.i("Favorite", "onResume: --------------------")
         viewModel.getStoredFavoritePlaces()
     }
 
