@@ -14,3 +14,9 @@
 .cxx
 local.properties
 app/src/main/res/drawable/bg_gradient.xml
+.idea/compiler.xml
+.idea/gradle.xml
+.idea/kotlinc.xml
+.idea/misc.xml
+.idea/other.xml
+.idea/vcs.xml
