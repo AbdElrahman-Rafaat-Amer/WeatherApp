@@ -38,20 +38,20 @@ fun connectInternet(context: Context) {
 
 fun getAddress(latitude: Double, longitude: Double, context: Context): SavedAddress {
     var address: SavedAddress? = null
-    var subAdminArea: String
+    var subAdminArea = context.getString(R.string.undefined_place)
     try {
         val geocoder = Geocoder(context, Locale.getDefault())
 
         val addresses = geocoder.getFromLocation(latitude, longitude, 1)
 
-        addresses[0].subAdminArea.let {
-            subAdminArea = it ?: context.getString(R.string.undefined_place)
+        addresses?.get(0)?.subAdminArea?.let {
+            subAdminArea = it
         }
 
         address = SavedAddress(
             ConstantsValue.language,
             subAdminArea,
-            addresses[0].adminArea, addresses[0].countryName
+            addresses?.get(0)?.adminArea ?: "",   addresses?.get(0)?.countryName ?: ""
         )
 
     } catch (exception: IOException) {
