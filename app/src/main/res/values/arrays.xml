@@ -1,0 +1,47 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+
+    <string-array name="pref_notification">
+        <item>@string/notification_enabled</item>
+        <item>@string/notification_disabled</item>
+    </string-array>
+
+    <string-array name="pref_notification_codes">
+        <item>true</item>
+        <item>false</item>
+    </string-array>
+
+    <string-array name="pref_language_names">
+        <item>@string/system_default</item>
+        <item>@string/language_arabic</item>
+        <item>@string/language_english</item>
+    </string-array>
+
+    <string-array name="pref_language_codes">
+        <item>auto</item>
+        <item>ar</item>
+        <item>en</item>
+    </string-array>
+
+    <string-array name="pref_temperature_names">
+        <item>@string/temperature_celsius</item>
+        <item>@string/temperature_kelvin</item>
+        <item>@string/temperature_fahrenheit</item>
+    </string-array>
+
+    <string-array name="pref_temperature_codes">
+        <item>celsius</item>
+        <item>kelvin</item>
+        <item>fahrenheit</item>
+    </string-array>
+
+    <string-array name="pref_wind_names">
+        <item>@string/wind_speed_MS</item>
+        <item>@string/wind_speed_MH</item>
+    </string-array>
+
+    <string-array name="pref_wind_codes">
+        <item>M/S</item>
+        <item>M/H</item>
+    </string-array>
+</resources>
