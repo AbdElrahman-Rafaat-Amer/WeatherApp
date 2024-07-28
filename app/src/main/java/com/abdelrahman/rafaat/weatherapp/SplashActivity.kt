@@ -1,5 +1,6 @@
 package com.abdelrahman.rafaat.weatherapp
 
+import android.animation.Animator.AnimatorListener
 import android.annotation.SuppressLint
 import android.content.Intent
 import android.content.res.Resources
@@ -8,10 +9,6 @@ import androidx.appcompat.app.AppCompatActivity
 import androidx.preference.PreferenceManager
 import com.abdelrahman.rafaat.weatherapp.databinding.ActivitySplashBinding
 import com.abdelrahman.rafaat.weatherapp.utils.ConstantsValue
-import kotlinx.coroutines.CoroutineScope
-import kotlinx.coroutines.Dispatchers
-import kotlinx.coroutines.delay
-import kotlinx.coroutines.launch
 
 @SuppressLint("CustomSplashScreen")
 class SplashActivity : AppCompatActivity() {
@@ -23,11 +20,18 @@ class SplashActivity : AppCompatActivity() {
         binding = ActivitySplashBinding.inflate(layoutInflater)
         setContentView(binding.root)
         getDefaultValues()
-        CoroutineScope(Dispatchers.Main).launch {
-            delay(4000)
-            startActivity(Intent(this@SplashActivity, InitializationScreenActivity::class.java))
-            finish()
-        }
+        binding.splashAnimation.addAnimatorListener(object : AnimatorListener{
+            override fun onAnimationStart(animation: android.animation.Animator) {}
+
+            override fun onAnimationEnd(animation: android.animation.Animator) {
+                startActivity(Intent(this@SplashActivity, InitializationScreenActivity::class.java))
+                finish()
+            }
+
+            override fun onAnimationCancel(animation: android.animation.Animator) {}
+
+            override fun onAnimationRepeat(animation: android.animation.Animator) {}
+        })
 
     }
 
