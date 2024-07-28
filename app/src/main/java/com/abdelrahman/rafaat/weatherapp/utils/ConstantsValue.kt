@@ -8,5 +8,6 @@ class ConstantsValue {
         var tempUnit = "kelvin"
         var windSpeedUnit = "M/S"
         var notificationMethod = true
+        val imageURL = "https://openweathermap.org/img/wn/"
     }
 }

@@ -5,7 +5,7 @@ import android.widget.ImageView
 import android.widget.TextView
 import coil.load
 import coil.transform.CircleCropTransformation
-import com.abdelrahman.rafaat.weatherapp.BaseViewHolder
+import com.abdelrahman.rafaat.weatherapp.base.BaseViewHolder
 import com.abdelrahman.rafaat.weatherapp.R
 import com.abdelrahman.rafaat.weatherapp.homeplaces.view.HomeItem
 

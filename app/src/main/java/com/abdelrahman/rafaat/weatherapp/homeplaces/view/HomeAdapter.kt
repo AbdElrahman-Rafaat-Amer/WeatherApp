@@ -3,7 +3,7 @@ package com.abdelrahman.rafaat.weatherapp.homeplaces.view
 import android.view.LayoutInflater
 import android.view.ViewGroup
 import androidx.recyclerview.widget.RecyclerView
-import com.abdelrahman.rafaat.weatherapp.BaseViewHolder
+import com.abdelrahman.rafaat.weatherapp.base.BaseViewHolder
 import com.abdelrahman.rafaat.weatherapp.R
 import com.abdelrahman.rafaat.weatherapp.homeplaces.viewholders.DailyHomeViewHolder
 import com.abdelrahman.rafaat.weatherapp.homeplaces.viewholders.DayInfoHomeViewHolder

@@ -2,7 +2,7 @@ package com.abdelrahman.rafaat.weatherapp.homeplaces.viewholders
 
 import android.view.View
 import android.widget.TextView
-import com.abdelrahman.rafaat.weatherapp.BaseViewHolder
+import com.abdelrahman.rafaat.weatherapp.base.BaseViewHolder
 import com.abdelrahman.rafaat.weatherapp.R
 import com.abdelrahman.rafaat.weatherapp.homeplaces.view.HomeItem
 

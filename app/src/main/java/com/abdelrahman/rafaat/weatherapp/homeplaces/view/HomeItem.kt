@@ -25,7 +25,6 @@ sealed class HomeItem {
     ) : HomeItem()
 
     data class DailyItem(
-        var dailyItem: Daily,
         var dayName: String,
         var dayStatus: String,
         var dayTemperature: String,

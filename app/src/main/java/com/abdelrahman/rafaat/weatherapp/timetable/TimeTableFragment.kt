@@ -9,7 +9,7 @@ import android.widget.Toast
 import androidx.fragment.app.activityViewModels
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.abdelrahman.rafaat.weatherapp.databinding.FragmentTimeTableBinding
-import com.abdelrahman.rafaat.weatherapp.homeplaces.viewmodel.CurrentPlaceViewModel
+import com.abdelrahman.rafaat.weatherapp.homeplaces.viewmodel.HomeViewModel
 import com.abdelrahman.rafaat.weatherapp.utils.ConstantsValue
 import com.abdelrahman.rafaat.weatherapp.model.WeatherResponse
 import com.abdelrahman.rafaat.weatherapp.utils.ConnectionLiveData
@@ -17,7 +17,7 @@ import com.abdelrahman.rafaat.weatherapp.utils.ConnectionLiveData
 class TimeTableFragment : Fragment() {
     private lateinit var binding: FragmentTimeTableBinding
     private lateinit var dayAdapter: DayAdapter
-    private val viewModel: CurrentPlaceViewModel by activityViewModels()
+    private val viewModel: HomeViewModel by activityViewModels()
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,

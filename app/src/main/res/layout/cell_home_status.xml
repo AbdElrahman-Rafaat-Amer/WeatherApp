@@ -1,11 +1,12 @@
 <?xml version="1.0" encoding="utf-8"?>
-<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
-    android:layout_height="match_parent">
+    android:layout_height="wrap_content">
 
     <RelativeLayout
+        android:id="@+id/relativeLayout"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         app:layout_constraintTop_toTopOf="parent">
@@ -15,12 +16,12 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:padding="20dp"
-            app:cardCornerRadius="@dimen/_50sdp"
+            app:cardCornerRadius="20dp"
             app:layout_constraintTop_toTopOf="parent">
 
             <androidx.constraintlayout.widget.ConstraintLayout
                 android:layout_width="match_parent"
-                android:layout_height="@dimen/_200sdp"
+                android:layout_height="200dp"
                 android:background="@drawable/background_bottom_right"
                 android:padding="10dp">
 
@@ -28,7 +29,7 @@
                     android:id="@+id/current_day_status_textView"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:layout_marginTop="@dimen/_7sdp"
+                    android:layout_marginTop="7dp"
                     android:textColor="@color/white"
                     android:textSize="25sp"
                     app:layout_constraintEnd_toEndOf="parent"
@@ -40,9 +41,10 @@
                     android:id="@+id/current_day_temperature_textView"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:layout_marginTop="@dimen/_15sdp"
+                    android:layout_marginTop="3dp"
+                    android:text="90"
                     android:textColor="@color/white"
-                    android:textSize="@dimen/_60sdp"
+                    android:textSize="60sp"
                     app:layout_constraintEnd_toEndOf="parent"
                     app:layout_constraintStart_toStartOf="parent"
                     app:layout_constraintTop_toBottomOf="@+id/current_day_status_textView"
@@ -52,12 +54,14 @@
                     android:id="@+id/current_day_temperatureUnit_textView"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:layout_marginStart="@dimen/_5sdp"
-                    android:layout_marginTop="@dimen/_25sdp"
+                    android:layout_marginStart="10dp"
+                    android:text="K"
+                    app:layout_constraintVertical_bias="0.2"
                     android:textColor="@color/white"
-                    android:textSize="@dimen/_30sdp"
+                    android:textSize="30sp"
+                    app:layout_constraintBottom_toBottomOf="@+id/current_day_temperature_textView"
                     app:layout_constraintStart_toEndOf="@+id/current_day_temperature_textView"
-                    app:layout_constraintTop_toBottomOf="@+id/current_day_status_textView"
+                    app:layout_constraintTop_toTopOf="@+id/current_day_temperature_textView"
                     tools:text="K" />
 
             </androidx.constraintlayout.widget.ConstraintLayout>
@@ -66,10 +70,13 @@
 
     <de.hdodenhof.circleimageview.CircleImageView
         android:id="@+id/current_day_imageView"
-        android:layout_width="@dimen/_200sdp"
-        android:layout_height="@dimen/_200sdp"
+        android:layout_width="200dp"
+        android:layout_height="200dp"
         android:layout_gravity="center"
-        android:layout_marginTop="-80dp"
-        android:src="@drawable/ic_sunny" />
+        android:layout_marginTop="100dp"
+        android:src="@drawable/ic_sunny"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="@id/relativeLayout" />
 
-</FrameLayout>
+</androidx.constraintlayout.widget.ConstraintLayout>
