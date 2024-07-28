@@ -13,6 +13,7 @@ import androidx.lifecycle.ViewModelProvider
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.abdelrahman.rafaat.weatherapp.R
 import com.abdelrahman.rafaat.weatherapp.database.ConcreteLocaleSource
+import com.abdelrahman.rafaat.weatherapp.databinding.FragmentHome2Binding
 import com.abdelrahman.rafaat.weatherapp.databinding.FragmentHomeBinding
 import com.abdelrahman.rafaat.weatherapp.favoriteplaces.viewmodel.FavoritePlaceViewModel
 import com.abdelrahman.rafaat.weatherapp.favoriteplaces.viewmodel.FavoritePlaceViewModelFactory
@@ -31,7 +32,7 @@ import java.text.DecimalFormat
 class FavoriteDetailsFragment : Fragment() {
 
     private lateinit var viewModel: FavoritePlaceViewModel
-    private lateinit var binding: FragmentHomeBinding
+    private lateinit var binding: FragmentHome2Binding
     private lateinit var weatherHourlyAdapter: WeatherHourlyAdapter
     private lateinit var weatherDailyAdapter: WeatherDailyAdapter
 
@@ -40,7 +41,7 @@ class FavoriteDetailsFragment : Fragment() {
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View {
-        binding = FragmentHomeBinding.inflate(layoutInflater)
+        binding = FragmentHome2Binding.inflate(layoutInflater)
         return binding.root
     }
 

@@ -1,121 +1,111 @@
 package com.abdelrahman.rafaat.weatherapp.homeplaces.view
-
-import android.os.Bundle
-import android.view.LayoutInflater
-import android.view.View
-import android.view.View.GONE
-import android.view.View.VISIBLE
-import android.view.ViewGroup
-import android.widget.Toast
-import androidx.fragment.app.Fragment
-import androidx.fragment.app.activityViewModels
-import androidx.recyclerview.widget.GridLayoutManager
-import androidx.recyclerview.widget.GridLayoutManager.SpanSizeLookup
-import com.abdelrahman.rafaat.weatherapp.databinding.FragmentHomeBinding
-import com.abdelrahman.rafaat.weatherapp.homeplaces.viewmodel.CurrentPlaceViewModel
-import com.abdelrahman.rafaat.weatherapp.model.SavedAddress
-import com.abdelrahman.rafaat.weatherapp.model.WeatherResponse
-import com.abdelrahman.rafaat.weatherapp.utils.ConnectionLiveData
-import com.abdelrahman.rafaat.weatherapp.utils.ConstantsValue
-import com.abdelrahman.rafaat.weatherapp.utils.getAddress
-import kotlinx.coroutines.CoroutineScope
-import kotlinx.coroutines.Dispatchers
-import kotlinx.coroutines.delay
-import kotlinx.coroutines.launch
-
-class HomeFragment : Fragment() {
-    private lateinit var binding: FragmentHomeBinding
-
-    private val homeAdapter = HomeAdapter()
-    private val viewModel: CurrentPlaceViewModel by activityViewModels()
-    private var isInternet = false
-
-    override fun onCreateView(
-        inflater: LayoutInflater, container: ViewGroup?,
-        savedInstanceState: Bundle?
-    ): View {
-        binding = FragmentHomeBinding.inflate(layoutInflater)
-        return binding.root
-    }
-
-    override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
-        super.onViewCreated(view, savedInstanceState)
-
-        initUI()
-        checkInternet()
-        observeViewModel()
-
-    }
-
-    private fun initUI() {
-        val layoutManager = GridLayoutManager(requireContext(), 3)
-        layoutManager.spanSizeLookup = generateSpanSizeLookup()
-        binding.homeRecyclerView.layoutManager = layoutManager
-        binding.homeRecyclerView.adapter = homeAdapter
-
-    }
-
-    private fun generateSpanSizeLookup(): SpanSizeLookup =
-        object : SpanSizeLookup() {
-            override fun getSpanSize(position: Int): Int =
-                when (homeAdapter.getItemViewType(position)) {
-                    HomeItem.DayInfoItem::class.java.hashCode() -> 1
-                    else -> 3
-                }
-        }
-
-    private fun checkInternet() {
-        ConnectionLiveData.getInstance(requireContext()).observe(viewLifecycleOwner) {
-            if (it) {
-                isInternet = true
-                getAddress()
-                viewModel.getWeatherFromNetwork(
-                    ConstantsValue.latitude, ConstantsValue.longitude, ConstantsValue.language
-                )
-            } else {
-                binding.loadingAnimationView.visibility = GONE
-                binding.homeRecyclerView.visibility = VISIBLE
-                viewModel.getDataFromRoom()
-                viewModel.getStoredAddressFromRoom()
-            }
-        }
-        CoroutineScope(Dispatchers.Main).launch {
-            delay(1000)
-            if (isInternet.not()) {
-                viewModel.getDataFromRoom()
-                viewModel.getStoredAddressFromRoom()
-            }
-        }
-    }
-
-    private fun observeViewModel() {
-        viewModel.homeList.observe(viewLifecycleOwner) {
-            if (it.isNullOrEmpty().not()) {
-                homeAdapter.setData(it)
-            }
-        }
-
+//
+//import android.os.Bundle
+//import android.view.LayoutInflater
+//import android.view.View
+//import android.view.View.GONE
+//import android.view.View.VISIBLE
+//import android.view.ViewGroup
+//import android.widget.Toast
+//import androidx.fragment.app.Fragment
+//import androidx.fragment.app.activityViewModels
+//import androidx.recyclerview.widget.LinearLayoutManager
+//import com.abdelrahman.rafaat.weatherapp.R
+//import com.abdelrahman.rafaat.weatherapp.databinding.FragmentHomeBinding
+//import com.abdelrahman.rafaat.weatherapp.homeplaces.viewmodel.CurrentPlaceViewModel
+//import com.abdelrahman.rafaat.weatherapp.model.*
+//import com.abdelrahman.rafaat.weatherapp.utils.*
+//import com.bumptech.glide.Glide
+//import java.text.DecimalFormat
+//import kotlinx.coroutines.CoroutineScope
+//import kotlinx.coroutines.Dispatchers
+//import kotlinx.coroutines.delay
+//import kotlinx.coroutines.launch
+//
+//class HomeFragment2 : Fragment() {
+//    private lateinit var binding: FragmentHomeBinding
+//    private lateinit var weatherHourlyAdapter: WeatherHourlyAdapter
+//    private lateinit var weatherDailyAdapter: WeatherDailyAdapter
+//    private val viewModel: CurrentPlaceViewModel by activityViewModels()
+//    private var isInternet = false
+//
+//    override fun onCreateView(
+//        inflater: LayoutInflater, container: ViewGroup?,
+//        savedInstanceState: Bundle?
+//    ): View {
+//        binding = FragmentHomeBinding.inflate(layoutInflater)
+//        return binding.root
+//    }
+//
+//    override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
+//        super.onViewCreated(view, savedInstanceState)
+//
+//        initUI()
+//        checkInternet()
+//        observeViewModel()
+//
+//    }
+//
+//    private fun initUI() {
+//        weatherHourlyAdapter = WeatherHourlyAdapter()
+//        val hourlyManager = LinearLayoutManager(requireContext())
+//        hourlyManager.orientation = LinearLayoutManager.HORIZONTAL
+//        binding.hourlyRecyclerView.layoutManager = hourlyManager
+//        binding.hourlyRecyclerView.adapter = weatherHourlyAdapter
+//
+//        weatherDailyAdapter = WeatherDailyAdapter()
+//        val dailyManager = LinearLayoutManager(requireContext())
+//        dailyManager.orientation = LinearLayoutManager.VERTICAL
+//        binding.dailyRecyclerView.layoutManager = dailyManager
+//        binding.dailyRecyclerView.adapter = weatherDailyAdapter
+//
+//    }
+//
+//    private fun checkInternet() {
+//        ConnectionLiveData.getInstance(requireContext()).observe(viewLifecycleOwner) {
+//            if (it) {
+//                isInternet = true
+//                getAddress()
+//                viewModel.getWeatherFromNetwork(
+//                    ConstantsValue.latitude, ConstantsValue.longitude, ConstantsValue.language
+//                )
+//            } else {
+//                binding.loadingAnimationView.visibility = GONE
+//                binding.visibilityConstrainLayout.visibility = VISIBLE
+//                viewModel.getDataFromRoom()
+//                viewModel.getStoredAddressFromRoom()
+//            }
+//        }
+//        CoroutineScope(Dispatchers.Main).launch {
+//            delay(1000)
+//            if (!isInternet) {
+//                viewModel.getDataFromRoom()
+//                viewModel.getStoredAddressFromRoom()
+//            }
+//        }
+//
+//    }
+//
+//    private fun observeViewModel() {
 //        viewModel.weatherResponse.observe(viewLifecycleOwner) {
 //            when (it) {
 //                is WeatherResponse -> {
-////                    assignDataToView(it)
+//                    assignDataToView(it)
 //                }
-//
 //                else -> Toast.makeText(context, "Return is null $it", Toast.LENGTH_SHORT).show()
 //            }
 //        }
-
+//
 //        viewModel.addressResponse.observe(viewLifecycleOwner) {
 //            when (it) {
 //                is SavedAddress -> {
-////                    assignAddressToView(it)
+//                    assignAddressToView(it)
 //                }
-//
 //                else -> Toast.makeText(context, "Return is null $it", Toast.LENGTH_SHORT).show()
 //            }
 //        }
-    }
-
+//    }
+//
 //    private fun assignDataToView(weatherResponse: WeatherResponse) {
 //        binding.loadingAnimationView.visibility = GONE
 //        binding.visibilityConstrainLayout.visibility = VISIBLE
@@ -155,19 +145,19 @@ class HomeFragment : Fragment() {
 //        binding.ultravioletTextView.text = DecimalFormat("#.##").format(weatherResponse.current.uvi)
 //
 //    }
-
-    private fun getAddress() {
-        val address = getAddress(
-            ConstantsValue.latitude.toDouble(),
-            ConstantsValue.longitude.toDouble(),
-            requireContext()
-        )
+//
+//    private fun getAddress() {
+//        val address = getAddress(
+//            ConstantsValue.latitude.toDouble(),
+//            ConstantsValue.longitude.toDouble(),
+//            requireContext()
+//        )
 //        assignAddressToView(
 //            address
 //        )
-        viewModel.insertAddressToRoom(address)
-    }
-
+//        viewModel.insertAddressToRoom(address)
+//    }
+//
 //    private fun assignAddressToView(savedAddress: SavedAddress) {
 //        binding.locationNameTextView.text = savedAddress.subAdminArea
 //        binding.locationDetailsNameTextView.text =
@@ -207,6 +197,7 @@ class HomeFragment : Fragment() {
 //        }
 //        return temperature
 //    }
-
-
-}
+//
+//
+//
+//}

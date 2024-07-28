@@ -3,6 +3,7 @@ package com.abdelrahman.rafaat.weatherapp.homeplaces.viewmodel
 import android.app.Application
 import androidx.lifecycle.*
 import com.abdelrahman.rafaat.weatherapp.database.ConcreteLocaleSource
+import com.abdelrahman.rafaat.weatherapp.homeplaces.view.HomeItem
 import com.abdelrahman.rafaat.weatherapp.model.Repository
 import com.abdelrahman.rafaat.weatherapp.model.RepositoryInterface
 import com.abdelrahman.rafaat.weatherapp.model.SavedAddress
@@ -15,6 +16,11 @@ import kotlinx.coroutines.withContext
 class CurrentPlaceViewModel(application: Application) : AndroidViewModel(application) {
 
     private var _iRepo: RepositoryInterface
+
+
+    private var _homeList = MutableLiveData<List<HomeItem>>()
+    val homeList: LiveData<List<HomeItem>> = _homeList
+
     private var _weatherResponse = MutableLiveData<WeatherResponse>()
     val weatherResponse: LiveData<WeatherResponse> = _weatherResponse
 

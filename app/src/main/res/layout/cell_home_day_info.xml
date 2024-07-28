@@ -1,0 +1,32 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="wrap_content"
+    android:layout_height="wrap_content"
+    android:background="@drawable/background_bottom_right"
+    android:gravity="center"
+    android:orientation="vertical"
+    android:paddingHorizontal="26dp"
+    android:paddingVertical="13dp">
+
+    <ImageView
+        android:id="@+id/imageView"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:contentDescription="@string/sunrise"
+        android:src="@drawable/ic_sunny" />
+
+    <TextView
+        android:id="@+id/title_textView"
+        style="@style/ClimateClue.Theme.Text.SmallXX"
+        android:layout_width="wrap_content"
+        android:textSize="16sp"
+        tools:text="@string/sunrise" />
+
+    <TextView
+        android:id="@+id/description_textView"
+        style="@style/ClimateClue.Theme.Text.SmallXX"
+        android:layout_width="wrap_content"
+        android:textSize="13sp"
+        tools:text="6:17 AM" />
+</LinearLayout>

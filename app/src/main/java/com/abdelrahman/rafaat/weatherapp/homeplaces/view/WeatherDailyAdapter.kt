@@ -26,7 +26,7 @@ class WeatherDailyAdapter :
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ViewHolder {
         context = parent.context
         val layoutInflater: LayoutInflater = LayoutInflater.from(parent.context)
-        val view: View = layoutInflater.inflate(R.layout.custom_row_current_daily, parent, false)
+        val view: View = layoutInflater.inflate(R.layout.cell_home_daily, parent, false)
         return ViewHolder(view)
     }
 
@@ -51,10 +51,10 @@ class WeatherDailyAdapter :
     }
 
     inner class ViewHolder(itemView: View) : RecyclerView.ViewHolder(itemView) {
-        var dateOfDay: TextView = itemView.findViewById(R.id.name_of_day_textView)
-        var statusOfDay: TextView = itemView.findViewById(R.id.status_of_day_textView)
-        var temperature: TextView = itemView.findViewById(R.id.temperature_of_day_textView)
-        var statusImage: ImageView = itemView.findViewById(R.id.status_of_day_imageView)
+        var dateOfDay: TextView = itemView.findViewById(R.id.day_name_textView)
+        var statusOfDay: TextView = itemView.findViewById(R.id.day_status_textView)
+        var temperature: TextView = itemView.findViewById(R.id.day_temperature_textView)
+        var statusImage: ImageView = itemView.findViewById(R.id.day_status_imageView)
 
     }
 

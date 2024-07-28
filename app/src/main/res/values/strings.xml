@@ -89,4 +89,7 @@
     <string name="wind_speed_unit">Wind Speed unit</string>
     <string name="wind_speed_unit_MH">m/h</string>
     <string name="wind_speed_unit_MS">m/s</string>
+    <string name="day_name_description">Name of the day</string>
+    <string name="day_status_description">Weather status of the day</string>
+    <string name="day_temperature_description">Temperature of the day</string>
 </resources>

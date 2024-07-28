@@ -20,7 +20,7 @@
             android:id="@+id/ConstraintLayout"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
-            android:background="@drawable/current_daily_background">
+            android:background="@drawable/background_bottom_right">
 
             <TextView
                 android:id="@+id/information_of_currentDay_textView"

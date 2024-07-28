@@ -1,462 +1,508 @@
 <?xml version="1.0" encoding="utf-8"?>
-<ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent">
 
-    <androidx.constraintlayout.widget.ConstraintLayout
-        android:id="@+id/ConstraintLayout_HomeFragment"
+    <androidx.recyclerview.widget.RecyclerView
+        android:id="@+id/home_recyclerView"
+        android:visibility="gone"
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:padding="@dimen/_15sdp">
+        android:layout_height="match_parent" />
 
-        <com.airbnb.lottie.LottieAnimationView
-            android:id="@+id/loadingAnimationView"
-            android:layout_width="match_parent"
-            android:layout_height="match_parent"
-            app:layout_constraintBottom_toBottomOf="parent"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toTopOf="parent"
-            app:lottie_autoPlay="true"
-            app:lottie_loop="true"
-            app:lottie_rawRes="@raw/loading" />
-
-
-        <androidx.constraintlayout.widget.ConstraintLayout
-            android:id="@+id/visibility_constrainLayout"
-            android:layout_width="match_parent"
-            android:layout_height="match_parent"
-            android:visibility="gone">
-
-            <TextView
-                android:id="@+id/location_name_textView"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:textAlignment="center"
-                android:textColor="?colorOnSecondary"
-                android:textSize="@dimen/_35sdp"
-                app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toTopOf="parent" />
-
-            <TextView
-                android:id="@+id/locationDetails_name_textView"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:textAlignment="center"
-                android:textColor="?colorOnSecondary"
-                android:textSize="@dimen/_15sdp"
-                app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toBottomOf="@+id/location_name_textView" />
-
-            <TextView
-                android:id="@+id/current_date_textView"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_marginTop="@dimen/_4sdp"
-                android:textColor="?colorOnSecondary"
-                android:textSize="@dimen/_17sdp"
-                android:textStyle="bold"
-                app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toBottomOf="@+id/locationDetails_name_textView" />
-
-            <RelativeLayout
-                android:id="@+id/relative_layout"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_marginTop="@dimen/_15sdp"
-                app:layout_constraintTop_toBottomOf="@+id/current_date_textView">
-
-                <androidx.cardview.widget.CardView
-                    android:id="@+id/cardView"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:padding="20dp"
-                    app:cardCornerRadius="@dimen/_50sdp"
-                    app:layout_constraintBottom_toBottomOf="parent"
-                    app:layout_constraintTop_toTopOf="parent">
-
-                    <androidx.constraintlayout.widget.ConstraintLayout
-                        android:layout_width="match_parent"
-                        android:layout_height="@dimen/_200sdp"
-                        android:background="@drawable/current_daily_background"
-                        android:padding="10dp">
-
-                        <TextView
-                            android:id="@+id/current_day_status_textView"
-                            android:layout_width="wrap_content"
-                            android:layout_height="wrap_content"
-                            android:layout_marginTop="@dimen/_7sdp"
-                            android:textColor="@color/white"
-                            android:textSize="25sp"
-                            app:layout_constraintEnd_toEndOf="parent"
-                            app:layout_constraintStart_toStartOf="parent"
-                            app:layout_constraintTop_toTopOf="parent" />
-
-                        <TextView
-                            android:id="@+id/current_day_temperature_textView"
-                            android:layout_width="wrap_content"
-                            android:layout_height="wrap_content"
-                            android:layout_marginTop="@dimen/_15sdp"
-                            android:textColor="@color/white"
-                            android:textSize="@dimen/_60sdp"
-                            app:layout_constraintEnd_toEndOf="parent"
-                            app:layout_constraintStart_toStartOf="parent"
-                            app:layout_constraintTop_toBottomOf="@+id/current_day_status_textView" />
-
-                        <TextView
-                            android:id="@+id/current_day_temperatureUnit_textView"
-                            android:layout_width="wrap_content"
-                            android:layout_height="wrap_content"
-                            android:layout_marginStart="@dimen/_5sdp"
-                            android:layout_marginTop="@dimen/_25sdp"
-                            android:textColor="@color/white"
-                            android:textSize="@dimen/_30sdp"
-                            app:layout_constraintStart_toEndOf="@+id/current_day_temperature_textView"
-                            app:layout_constraintTop_toBottomOf="@+id/current_day_status_textView" />
-
-                    </androidx.constraintlayout.widget.ConstraintLayout>
-                </androidx.cardview.widget.CardView>
-            </RelativeLayout>
-
-            <de.hdodenhof.circleimageview.CircleImageView
-                android:id="@+id/current_day_imageView"
-                android:layout_width="@dimen/_200sdp"
-                android:layout_height="@dimen/_200sdp"
-                android:layout_marginTop="@dimen/_100sdp"
-                android:src="@drawable/ic_sunny"
-                app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toBottomOf="@+id/current_date_textView" />
+    <com.airbnb.lottie.LottieAnimationView
+        android:id="@+id/loadingAnimationView"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:lottie_autoPlay="true"
+        app:lottie_loop="true"
+        app:lottie_rawRes="@raw/loading" />
 
 
-            <androidx.recyclerview.widget.RecyclerView
-                android:id="@+id/hourly_recyclerView"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                app:layout_constraintTop_toBottomOf="@+id/current_day_imageView" />
+</androidx.constraintlayout.widget.ConstraintLayout>
 
-            <androidx.recyclerview.widget.RecyclerView
-                android:id="@+id/daily_recyclerView"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_gravity="center_horizontal"
-                android:layout_marginTop="@dimen/_15sdp"
-                app:layout_constraintTop_toBottomOf="@+id/hourly_recyclerView" />
+<!--    <ScrollView xmlns:android="http://schemas.android.com/apk/res/android"-->
+<!--        xmlns:app="http://schemas.android.com/apk/res-auto"-->
+<!--        android:layout_width="match_parent"-->
+<!--        android:layout_height="match_parent"-->
+<!--        xmlns:tools="http://schemas.android.com/tools">-->
+
+<!--        <androidx.constraintlayout.widget.ConstraintLayout-->
+<!--            android:id="@+id/ConstraintLayout_HomeFragment"-->
+<!--            android:layout_width="match_parent"-->
+<!--            android:layout_height="wrap_content"-->
+<!--            android:padding="@dimen/_10sdp">-->
+
+<!--            <com.airbnb.lottie.LottieAnimationView-->
+<!--                android:id="@+id/loadingAnimationView"-->
+<!--                android:layout_width="match_parent"-->
+<!--                android:layout_height="match_parent"-->
+<!--                app:layout_constraintBottom_toBottomOf="parent"-->
+<!--                app:layout_constraintEnd_toEndOf="parent"-->
+<!--                app:layout_constraintStart_toStartOf="parent"-->
+<!--                app:layout_constraintTop_toTopOf="parent"-->
+<!--                app:lottie_autoPlay="true"-->
+<!--                app:lottie_loop="true"-->
+<!--                app:lottie_rawRes="@raw/loading" />-->
 
 
-            <androidx.cardview.widget.CardView
-                android:id="@+id/git"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_margin="@dimen/_10sdp"
-                android:layout_marginTop="@dimen/_15sdp"
-                android:elevation="@dimen/_15sdp"
-                app:cardCornerRadius="@dimen/_30sdp"
-                app:cardElevation="@dimen/_15sdp"
-                app:layout_constraintBottom_toBottomOf="parent"
-                app:layout_constraintTop_toBottomOf="@+id/daily_recyclerView">
+<!--            <androidx.constraintlayout.widget.ConstraintLayout-->
+<!--                android:id="@+id/visibility_constrainLayout"-->
+<!--                android:layout_width="match_parent"-->
+<!--                android:layout_height="match_parent"-->
+<!--                android:visibility="visible">-->
 
-                <GridLayout
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:background="@drawable/current_daily_background"
-                    android:columnCount="3"
-                    android:rowCount="3">
+<!--                <TextView-->
+<!--                    android:id="@+id/location_name_textView"-->
+<!--                    android:layout_width="wrap_content"-->
+<!--                    android:layout_height="wrap_content"-->
+<!--                    android:textAlignment="center"-->
+<!--                    android:textColor="?colorOnSecondary"-->
+<!--                    android:textSize="@dimen/_35sdp"-->
+<!--                    tools:text="City Name"-->
+<!--                    app:layout_constraintEnd_toEndOf="parent"-->
+<!--                    app:layout_constraintStart_toStartOf="parent"-->
+<!--                    app:layout_constraintTop_toTopOf="parent" />-->
 
-                    <!--  Row 1 -->
-                    <!--  Column 1-->
-                    <LinearLayout
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:layout_rowWeight="1"
-                        android:layout_columnWeight="1"
-                        android:gravity="center"
-                        android:orientation="vertical"
-                        android:padding="@dimen/_10sdp">
+<!--                <TextView-->
+<!--                    android:id="@+id/locationDetails_name_textView"-->
+<!--                    android:layout_width="wrap_content"-->
+<!--                    android:layout_height="wrap_content"-->
+<!--                    android:textAlignment="center"-->
+<!--                    android:textColor="?colorOnSecondary"-->
+<!--                    android:textSize="@dimen/_15sdp"-->
+<!--                    tools:text="City Name - Country Name"-->
+<!--                    app:layout_constraintEnd_toEndOf="parent"-->
+<!--                    app:layout_constraintStart_toStartOf="parent"-->
+<!--                    app:layout_constraintTop_toBottomOf="@+id/location_name_textView" />-->
 
-                        <ImageView
-                            android:layout_width="@dimen/_35sdp"
-                            android:layout_height="@dimen/_35sdp"
-                            android:contentDescription="@string/sunrise"
-                            android:scaleType="centerCrop"
-                            android:src="@drawable/ic_sunny" />
+<!--                <TextView-->
+<!--                    android:id="@+id/current_date_textView"-->
+<!--                    android:layout_width="wrap_content"-->
+<!--                    android:layout_height="wrap_content"-->
+<!--                    android:layout_marginTop="@dimen/_4sdp"-->
+<!--                    android:textColor="?colorOnSecondary"-->
+<!--                    android:textSize="@dimen/_17sdp"-->
+<!--                    android:textStyle="bold"-->
+<!--                    tools:text="25 Jul 2024"-->
+<!--                    app:layout_constraintEnd_toEndOf="parent"-->
+<!--                    app:layout_constraintStart_toStartOf="parent"-->
+<!--                    app:layout_constraintTop_toBottomOf="@+id/locationDetails_name_textView" />-->
 
-                        <TextView
-                            android:layout_width="wrap_content"
-                            android:layout_height="wrap_content"
-                            android:text="@string/sunrise"
-                            android:textColor="@color/white"
-                            android:textSize="12sp" />
+<!--                <RelativeLayout-->
+<!--                    android:id="@+id/relative_layout"-->
+<!--                    android:layout_width="match_parent"-->
+<!--                    android:layout_height="wrap_content"-->
+<!--                    android:layout_marginTop="@dimen/_15sdp"-->
+<!--                    app:layout_constraintTop_toBottomOf="@+id/current_date_textView">-->
 
-                        <TextView
-                            android:id="@+id/sun_rise_time_textView"
-                            android:layout_width="wrap_content"
-                            android:layout_height="wrap_content"
-                            android:textColor="@color/white"
-                            android:textSize="14sp" />
-                    </LinearLayout>
+<!--                    <androidx.cardview.widget.CardView-->
+<!--                        android:id="@+id/cardView"-->
+<!--                        android:layout_width="match_parent"-->
+<!--                        android:layout_height="wrap_content"-->
+<!--                        android:padding="20dp"-->
+<!--                        app:cardCornerRadius="@dimen/_50sdp"-->
+<!--                        app:layout_constraintBottom_toBottomOf="parent"-->
+<!--                        app:layout_constraintTop_toTopOf="parent">-->
 
-                    <!--  Column 2-->
-                    <LinearLayout
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:layout_rowWeight="1"
-                        android:layout_columnWeight="1"
-                        android:gravity="center"
-                        android:orientation="vertical"
-                        android:padding="@dimen/_10sdp">
+<!--                        <androidx.constraintlayout.widget.ConstraintLayout-->
+<!--                            android:layout_width="match_parent"-->
+<!--                            android:layout_height="@dimen/_200sdp"-->
+<!--                            android:background="@drawable/current_daily_background_bottomRight"-->
+<!--                            android:padding="10dp">-->
 
-                        <ImageView
-                            android:layout_width="@dimen/_30sdp"
-                            android:layout_height="@dimen/_30sdp"
-                            android:contentDescription="@string/sunset"
-                            android:scaleType="centerCrop"
-                            android:src="@drawable/ic_ocean" />
+<!--                            <TextView-->
+<!--                                android:id="@+id/current_day_status_textView"-->
+<!--                                android:layout_width="wrap_content"-->
+<!--                                android:layout_height="wrap_content"-->
+<!--                                android:layout_marginTop="@dimen/_7sdp"-->
+<!--                                android:textColor="@color/white"-->
+<!--                                android:textSize="25sp"-->
+<!--                                tools:text="Day Status"-->
+<!--                                app:layout_constraintEnd_toEndOf="parent"-->
+<!--                                app:layout_constraintStart_toStartOf="parent"-->
+<!--                                app:layout_constraintTop_toTopOf="parent" />-->
 
-                        <TextView
-                            android:layout_width="wrap_content"
-                            android:layout_height="wrap_content"
-                            android:layout_marginTop="@dimen/_7sdp"
-                            android:text="@string/sunset"
-                            android:textColor="@color/white"
-                            android:textSize="12sp" />
+<!--                            <TextView-->
+<!--                                android:id="@+id/current_day_temperature_textView"-->
+<!--                                android:layout_width="wrap_content"-->
+<!--                                android:layout_height="wrap_content"-->
+<!--                                android:layout_marginTop="@dimen/_15sdp"-->
+<!--                                android:textColor="@color/white"-->
+<!--                                android:textSize="@dimen/_60sdp"-->
+<!--                                tools:text="22"-->
+<!--                                app:layout_constraintEnd_toEndOf="parent"-->
+<!--                                app:layout_constraintStart_toStartOf="parent"-->
+<!--                                app:layout_constraintTop_toBottomOf="@+id/current_day_status_textView" />-->
 
-                        <TextView
-                            android:id="@+id/sun_set_time_textView"
-                            android:layout_width="wrap_content"
-                            android:layout_height="wrap_content"
-                            android:textColor="@color/white"
-                            android:textSize="14sp" />
-                    </LinearLayout>
+<!--                            <TextView-->
+<!--                                android:id="@+id/current_day_temperatureUnit_textView"-->
+<!--                                android:layout_width="wrap_content"-->
+<!--                                android:layout_height="wrap_content"-->
+<!--                                android:layout_marginStart="@dimen/_5sdp"-->
+<!--                                android:layout_marginTop="@dimen/_25sdp"-->
+<!--                                android:textColor="@color/white"-->
+<!--                                android:textSize="@dimen/_30sdp"-->
+<!--                                tools:text="K"-->
+<!--                                app:layout_constraintStart_toEndOf="@+id/current_day_temperature_textView"-->
+<!--                                app:layout_constraintTop_toBottomOf="@+id/current_day_status_textView" />-->
 
-                    <!--  Column 3-->
-                    <LinearLayout
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:layout_rowWeight="1"
-                        android:layout_columnWeight="1"
-                        android:gravity="center"
-                        android:orientation="vertical"
-                        android:padding="@dimen/_10sdp">
+<!--                        </androidx.constraintlayout.widget.ConstraintLayout>-->
+<!--                    </androidx.cardview.widget.CardView>-->
+<!--                </RelativeLayout>-->
 
-                        <ImageView
-                            android:layout_width="@dimen/_40sdp"
-                            android:layout_height="@dimen/_40sdp"
-                            android:contentDescription="@string/humidity_cardView"
-                            android:src="@drawable/ic_humidity" />
+<!--                <de.hdodenhof.circleimageview.CircleImageView-->
+<!--                    android:id="@+id/current_day_imageView"-->
+<!--                    android:layout_width="@dimen/_200sdp"-->
+<!--                    android:layout_height="@dimen/_200sdp"-->
+<!--                    android:layout_marginTop="@dimen/_100sdp"-->
+<!--                    android:src="@drawable/ic_sunny"-->
+<!--                    app:layout_constraintEnd_toEndOf="parent"-->
+<!--                    app:layout_constraintStart_toStartOf="parent"-->
+<!--                    app:layout_constraintTop_toBottomOf="@+id/current_date_textView" />-->
 
-                        <TextView
-                            android:layout_width="wrap_content"
-                            android:layout_height="wrap_content"
-                            android:text="@string/humidity_cardView"
-                            android:textColor="@color/white"
-                            android:textSize="12sp" />
 
-                        <TextView
-                            android:id="@+id/humidity_textView"
-                            android:layout_width="wrap_content"
-                            android:layout_height="wrap_content"
-                            android:textColor="@color/white"
-                            android:textSize="14sp" />
-                    </LinearLayout>
+<!--                <androidx.recyclerview.widget.RecyclerView-->
+<!--                    android:id="@+id/hourly_recyclerView"-->
+<!--                    android:layout_width="match_parent"-->
+<!--                    android:layout_height="wrap_content"-->
+<!--                    app:layout_constraintTop_toBottomOf="@+id/current_day_imageView" />-->
 
-                    <!--  Row 2 -->
-                    <!--  Column 1-->
-                    <LinearLayout
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:layout_rowWeight="1"
-                        android:layout_columnWeight="1"
-                        android:gravity="center"
-                        android:orientation="vertical"
-                        android:padding="@dimen/_10sdp">
+<!--                <androidx.recyclerview.widget.RecyclerView-->
+<!--                    android:id="@+id/daily_recyclerView"-->
+<!--                    android:layout_width="match_parent"-->
+<!--                    android:layout_height="wrap_content"-->
+<!--                    android:layout_gravity="center_horizontal"-->
+<!--                    android:layout_marginTop="@dimen/_15sdp"-->
+<!--                    app:layout_constraintTop_toBottomOf="@+id/hourly_recyclerView" />-->
 
-                        <ImageView
-                            android:layout_width="@dimen/_40sdp"
-                            android:layout_height="@dimen/_40sdp"
-                            android:contentDescription="@string/wind_speed"
-                            android:src="@drawable/ic_wind" />
 
-                        <TextView
-                            android:layout_width="wrap_content"
-                            android:layout_height="wrap_content"
-                            android:text="@string/wind_speed"
-                            android:textColor="@color/white"
-                            android:textSize="12sp" />
+<!--&lt;!&ndash;                <androidx.cardview.widget.CardView&ndash;&gt;-->
+<!--&lt;!&ndash;                    android:id="@+id/git"&ndash;&gt;-->
+<!--&lt;!&ndash;                    android:layout_width="match_parent"&ndash;&gt;-->
+<!--&lt;!&ndash;                    android:layout_height="wrap_content"&ndash;&gt;-->
+<!--&lt;!&ndash;                    android:layout_marginVertical="@dimen/_10sdp"&ndash;&gt;-->
+<!--&lt;!&ndash;                    android:layout_marginTop="@dimen/_15sdp"&ndash;&gt;-->
+<!--&lt;!&ndash;                    android:elevation="@dimen/_15sdp"&ndash;&gt;-->
+<!--&lt;!&ndash;                    app:cardElevation="@dimen/_15sdp"&ndash;&gt;-->
+<!--&lt;!&ndash;                    app:layout_constraintBottom_toBottomOf="parent"&ndash;&gt;-->
+<!--&lt;!&ndash;                    app:layout_constraintTop_toBottomOf="@+id/daily_recyclerView">&ndash;&gt;-->
 
-                        <TextView
-                            android:id="@+id/wind_speed_textView"
-                            android:layout_width="wrap_content"
-                            android:layout_height="wrap_content"
-                            android:textColor="@color/white"
-                            android:textSize="14sp" />
-                    </LinearLayout>
+<!--                    <GridLayout-->
+<!--                        android:layout_width="match_parent"-->
+<!--                        android:layout_height="wrap_content"-->
+<!--                        android:columnCount="3"-->
 
-                    <!--  Column 2-->
-                    <LinearLayout
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:layout_rowWeight="1"
-                        android:layout_columnWeight="1"
-                        android:gravity="center"
-                        android:orientation="vertical"
-                        android:padding="@dimen/_10sdp">
+<!--                        android:rowCount="3"-->
+<!--                        app:layout_constraintBottom_toBottomOf="parent"-->
+<!--                         app:layout_constraintTop_toBottomOf="@+id/daily_recyclerView">-->
 
-                        <ImageView
-                            android:layout_width="@dimen/_40sdp"
-                            android:layout_height="@dimen/_40sdp"
-                            android:contentDescription="@string/wind_degree"
-                            android:src="@drawable/ic_wind" />
+<!--                        &lt;!&ndash;  Row 1 &ndash;&gt;-->
+<!--                        &lt;!&ndash;  Column 1&ndash;&gt;-->
+<!--                        <LinearLayout-->
+<!--                            android:layout_width="wrap_content"-->
+<!--                            android:layout_height="wrap_content"-->
+<!--                            android:layout_rowWeight="1"-->
+<!--                            android:layout_columnWeight="1"-->
+<!--                            android:background="@drawable/current_daily_background_bottomRight"-->
+<!--                            android:gravity="center"-->
+<!--                            android:orientation="vertical"-->
+<!--                            android:padding="@dimen/_5sdp"-->
+<!--                            android:layout_marginHorizontal="@dimen/_50sdp">-->
 
-                        <TextView
-                            android:layout_width="wrap_content"
-                            android:layout_height="wrap_content"
-                            android:text="@string/wind_degree"
-                            android:textColor="@color/white"
-                            android:textSize="12sp" />
+<!--                            <ImageView-->
+<!--                                android:layout_width="@dimen/_35sdp"-->
+<!--                                android:layout_height="@dimen/_35sdp"-->
+<!--                                android:contentDescription="@string/sunrise"-->
+<!--                                android:scaleType="centerCrop"-->
+<!--                                android:src="@drawable/ic_sunny" />-->
 
-                        <TextView
-                            android:id="@+id/wind_degree_textView"
-                            android:layout_width="wrap_content"
-                            android:layout_height="wrap_content"
-                            android:textColor="@color/white"
-                            android:textSize="14sp" />
-                    </LinearLayout>
+<!--                            <TextView-->
+<!--                                android:layout_width="wrap_content"-->
+<!--                                android:layout_height="wrap_content"-->
+<!--                                tools:text="@string/sunrise"-->
+<!--                                android:textColor="@color/white"-->
+<!--                                android:textSize="12sp" />-->
 
-                    <!--  Column 3-->
-                    <LinearLayout
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:layout_rowWeight="1"
-                        android:layout_columnWeight="1"
-                        android:gravity="center"
-                        android:orientation="vertical"
-                        android:padding="@dimen/_10sdp">
+<!--                            <TextView-->
+<!--                                android:id="@+id/sun_rise_time_textView"-->
+<!--                                android:layout_width="wrap_content"-->
+<!--                                android:layout_height="wrap_content"-->
+<!--                                android:textColor="@color/white"-->
+<!--                                tools:text="6:17 AM"-->
+<!--                                android:textSize="14sp" />-->
+<!--                        </LinearLayout>-->
 
-                        <ImageView
-                            android:layout_width="@dimen/_40sdp"
-                            android:layout_height="@dimen/_40sdp"
-                            android:contentDescription="@string/cloud"
-                            android:src="@drawable/ic_cloud" />
+<!--                        &lt;!&ndash;  Column 2&ndash;&gt;-->
+<!--                        <LinearLayout-->
+<!--                            android:layout_width="wrap_content"-->
+<!--                            android:layout_height="wrap_content"-->
+<!--                            android:layout_rowWeight="1"-->
+<!--                            android:layout_columnWeight="1"-->
+<!--                            android:gravity="center"-->
+<!--                            android:background="@drawable/current_daily_background_bottomRight"-->
+<!--                            android:orientation="vertical"-->
+<!--                            android:padding="@dimen/_5sdp">-->
 
-                        <TextView
-                            android:layout_width="wrap_content"
-                            android:layout_height="wrap_content"
-                            android:text="@string/cloud"
-                            android:textColor="@color/white"
-                            android:textSize="12sp" />
+<!--                            <ImageView-->
+<!--                                android:layout_width="@dimen/_30sdp"-->
+<!--                                android:layout_height="@dimen/_30sdp"-->
+<!--                                android:contentDescription="@string/sunset"-->
+<!--                                android:scaleType="centerCrop"-->
+<!--                                android:src="@drawable/ic_ocean" />-->
 
-                        <TextView
-                            android:id="@+id/cloud_textView"
-                            android:layout_width="wrap_content"
-                            android:layout_height="wrap_content"
-                            android:textColor="@color/white"
-                            android:textSize="14sp" />
-                    </LinearLayout>
+<!--                            <TextView-->
+<!--                                android:layout_width="wrap_content"-->
+<!--                                android:layout_height="wrap_content"-->
+<!--                                android:layout_marginTop="@dimen/_7sdp"-->
+<!--                                android:text="@string/sunset"-->
+<!--                                android:textColor="@color/white"-->
+<!--                                android:textSize="12sp" />-->
 
-                    <!--  Row 3 -->
-                    <!--  Column 1-->
-                    <LinearLayout
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:layout_rowWeight="1"
-                        android:layout_columnWeight="1"
-                        android:gravity="center"
-                        android:orientation="vertical"
-                        android:padding="@dimen/_10sdp">
+<!--                            <TextView-->
+<!--                                android:id="@+id/sun_set_time_textView"-->
+<!--                                android:layout_width="wrap_content"-->
+<!--                                android:layout_height="wrap_content"-->
+<!--                                android:textColor="@color/white"-->
+<!--                                android:textSize="14sp" />-->
+<!--                        </LinearLayout>-->
 
-                        <ImageView
-                            android:layout_width="@dimen/_40sdp"
-                            android:layout_height="@dimen/_40sdp"
-                            android:contentDescription="@string/pressure"
-                            android:scaleType="centerCrop"
-                            android:src="@drawable/ic_pressure" />
+<!--                        &lt;!&ndash;  Column 3&ndash;&gt;-->
+<!--                        <LinearLayout-->
+<!--                            android:layout_width="wrap_content"-->
+<!--                            android:layout_height="wrap_content"-->
+<!--                            android:layout_rowWeight="1"-->
+<!--                            android:layout_columnWeight="1"-->
+<!--                            android:gravity="center"-->
+<!--                            android:orientation="vertical"-->
+<!--                            android:background="@drawable/current_daily_background_bottomRight"-->
+<!--                            android:padding="@dimen/_10sdp">-->
 
-                        <TextView
-                            android:layout_width="wrap_content"
-                            android:layout_height="wrap_content"
-                            android:text="@string/pressure"
-                            android:textColor="@color/white"
-                            android:textSize="12sp" />
+<!--                            <ImageView-->
+<!--                                android:layout_width="@dimen/_40sdp"-->
+<!--                                android:layout_height="@dimen/_40sdp"-->
+<!--                                android:contentDescription="@string/humidity_cardView"-->
+<!--                                android:src="@drawable/ic_humidity" />-->
 
-                        <TextView
-                            android:id="@+id/pressure_textView"
-                            android:layout_width="wrap_content"
-                            android:layout_height="wrap_content"
-                            android:textColor="@color/white"
-                            android:textSize="14sp" />
-                    </LinearLayout>
+<!--                            <TextView-->
+<!--                                android:layout_width="wrap_content"-->
+<!--                                android:layout_height="wrap_content"-->
+<!--                                android:text="@string/humidity_cardView"-->
+<!--                                android:textColor=                 "@color/white"-->
+<!--                                android:textSize="12sp" />-->
 
-                    <!--  Column 2-->
-                    <LinearLayout
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:layout_rowWeight="1"
-                        android:layout_columnWeight="1"
-                        android:gravity="center"
-                        android:orientation="vertical"
-                        android:padding="@dimen/_10sdp">
+<!--                            <TextView-->
+<!--                                android:id="@+id/humidity_textView"-->
+<!--                                android:layout_width="wrap_content"-->
+<!--                                android:layout_height="wrap_content"-->
+<!--                                android:textColor="@color/white"-->
+<!--                                android:textSize="14sp" />-->
+<!--                        </LinearLayout>-->
 
-                        <ImageView
-                            android:layout_width="@dimen/_40sdp"
-                            android:layout_height="@dimen/_40sdp"
-                            android:contentDescription="@string/visibility"
-                            android:src="@drawable/ic_visibility" />
+<!--                        &lt;!&ndash;  Row 2 &ndash;&gt;-->
+<!--                        &lt;!&ndash;  Column 1&ndash;&gt;-->
+<!--                        <LinearLayout-->
+<!--                            android:layout_width="wrap_content"-->
+<!--                            android:layout_height="wrap_content"-->
+<!--                            android:layout_rowWeight="1"-->
+<!--                            android:layout_columnWeight="1"-->
+<!--                            android:gravity="center"-->
+<!--                            android:background="@drawable/current_daily_background_bottomRight"-->
+<!--                            android:orientation="vertical"-->
+<!--                            android:padding="@dimen/_10sdp">-->
 
-                        <TextView
-                            android:layout_width="wrap_content"
-                            android:layout_height="wrap_content"
-                            android:text="@string/visibility"
-                            android:textColor="@color/white"
-                            android:textSize="12sp" />
+<!--                            <ImageView-->
+<!--                                android:layout_width="@dimen/_40sdp"-->
+<!--                                android:layout_height="@dimen/_40sdp"-->
+<!--                                android:contentDescription="@string/wind_speed"-->
+<!--                                android:src="@drawable/ic_wind" />-->
 
-                        <TextView
-                            android:id="@+id/visibility_textView"
-                            android:layout_width="wrap_content"
-                            android:layout_height="wrap_content"
-                            android:textColor="@color/white"
-                            android:textSize="14sp" />
-                    </LinearLayout>
+<!--                            <TextView-->
+<!--                                android:layout_width="wrap_content"-->
+<!--                                android:layout_height="wrap_content"-->
+<!--                                android:text="@string/wind_speed"-->
+<!--                                android:textColor="@color/white"-->
+<!--                                android:textSize="12sp" />-->
 
-                    <!--  Column 3-->
-                    <LinearLayout
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:layout_rowWeight="1"
-                        android:layout_columnWeight="1"
-                        android:gravity="center"
-                        android:orientation="vertical"
-                        android:padding="@dimen/_10sdp">
+<!--                            <TextView-->
+<!--                                android:id="@+id/wind_speed_textView"-->
+<!--                                android:layout_width="wrap_content"-->
+<!--                                android:layout_height="wrap_content"-->
+<!--                                android:textColor="@color/white"-->
+<!--                                android:textSize="14sp" />-->
+<!--                        </LinearLayout>-->
 
-                        <ImageView
-                            android:layout_width="@dimen/_40sdp"
-                            android:layout_height="@dimen/_40sdp"
-                            android:contentDescription="@string/ultraviolet"
-                            android:src="@drawable/ic_ultraviolet" />
+<!--                        &lt;!&ndash;  Column 2&ndash;&gt;-->
+<!--                        <LinearLayout-->
+<!--                            android:layout_width="wrap_content"-->
+<!--                            android:layout_height="wrap_content"-->
+<!--                            android:layout_rowWeight="1"-->
+<!--                            android:layout_columnWeight="1"-->
+<!--                            android:gravity="center"-->
+<!--                            android:background="@drawable/current_daily_background_bottomRight"-->
+<!--                            android:orientation="vertical"-->
+<!--                            android:padding="@dimen/_10sdp">-->
 
-                        <TextView
-                            android:layout_width="wrap_content"
-                            android:layout_height="wrap_content"
-                            android:text="@string/ultraviolet"
-                            android:textColor="@color/white"
-                            android:textSize="12sp" />
+<!--                            <ImageView-->
+<!--                                android:layout_width="@dimen/_40sdp"-->
+<!--                                android:layout_height="@dimen/_40sdp"-->
+<!--                                android:contentDescription="@string/wind_degree"-->
+<!--                                android:src="@drawable/ic_wind" />-->
 
-                        <TextView
-                            android:id="@+id/ultraviolet_textView"
-                            android:layout_width="wrap_content"
-                            android:layout_height="wrap_content"
-                            android:textColor="@color/white"
-                            android:textSize="14sp" />
-                    </LinearLayout>
+<!--                            <TextView-->
+<!--                                android:layout_width="wrap_content"-->
+<!--                                android:layout_height="wrap_content"-->
+<!--                                android:text="@string/wind_degree"-->
+<!--                                android:textColor="@color/white"-->
+<!--                                android:textSize="12sp" />-->
 
-                </GridLayout>
-            </androidx.cardview.widget.CardView>
+<!--                            <TextView-->
+<!--                                android:id="@+id/wind_degree_textView"-->
+<!--                                android:layout_width="wrap_content"-->
+<!--                                android:layout_height="wrap_content"-->
+<!--                                android:textColor="@color/white"-->
+<!--                                android:textSize="14sp" />-->
+<!--                        </LinearLayout>-->
 
-        </androidx.constraintlayout.widget.ConstraintLayout>
+<!--                        &lt;!&ndash;  Column 3&ndash;&gt;-->
+<!--                        <LinearLayout-->
+<!--                            android:layout_width="wrap_content"-->
+<!--                            android:layout_height="wrap_content"-->
+<!--                            android:layout_rowWeight="1"-->
+<!--                            android:layout_columnWeight="1"-->
+<!--                            android:gravity="center"-->
+<!--                            android:background="@drawable/current_daily_background_bottomRight"-->
+<!--                            android:orientation="vertical"-->
+<!--                            android:padding="@dimen/_10sdp">-->
 
-    </androidx.constraintlayout.widget.ConstraintLayout>
-</ScrollView>
+<!--                            <ImageView-->
+<!--                                android:layout_width="@dimen/_40sdp"-->
+<!--                                android:layout_height="@dimen/_40sdp"-->
+<!--                                android:contentDescription="@string/cloud"-->
+<!--                                android:src="@drawable/ic_cloud" />-->
+
+<!--                            <TextView-->
+<!--                                android:layout_width="wrap_content"-->
+<!--                                android:layout_height="wrap_content"-->
+<!--                                android:text="@string/cloud"-->
+<!--                                android:textColor="@color/white"-->
+<!--                                android:textSize="12sp" />-->
+
+<!--                            <TextView-->
+<!--                                android:id="@+id/cloud_textView"-->
+<!--                                android:layout_width="wrap_content"-->
+<!--                                android:layout_height="wrap_content"-->
+<!--                                android:textColor="@color/white"-->
+<!--                                android:textSize="14sp" />-->
+<!--                        </LinearLayout>-->
+
+<!--                        &lt;!&ndash;  Row 3 &ndash;&gt;-->
+<!--                        &lt;!&ndash;  Column 1&ndash;&gt;-->
+<!--                        <LinearLayout-->
+<!--                            android:layout_width="wrap_content"-->
+<!--                            android:layout_height="wrap_content"-->
+<!--                            android:layout_rowWeight="1"-->
+<!--                            android:layout_columnWeight="1"-->
+<!--                            android:gravity="center"-->
+<!--                            android:orientation="vertical"-->
+<!--                            android:background="@drawable/current_daily_background_bottomRight"-->
+<!--                            android:padding="@dimen/_10sdp">-->
+
+<!--                            <ImageView-->
+<!--                                android:layout_width="@dimen/_40sdp"-->
+<!--                                android:layout_height="@dimen/_40sdp"-->
+<!--                                android:contentDescription="@string/pressure"-->
+<!--                                android:scaleType="centerCrop"-->
+<!--                                android:src="@drawable/ic_pressure" />-->
+
+<!--                            <TextView-->
+<!--                                android:layout_width="wrap_content"-->
+<!--                                android:layout_height="wrap_content"-->
+<!--                                android:text="@string/pressure"-->
+<!--                                android:textColor="@color/white"-->
+<!--                                android:textSize="12sp" />-->
+
+<!--                            <TextView-->
+<!--                                android:id="@+id/pressure_textView"-->
+<!--                                android:layout_width="wrap_content"-->
+<!--                                android:layout_height="wrap_content"-->
+<!--                                android:textColor="@color/white"-->
+<!--                                android:textSize="14sp" />-->
+<!--                        </LinearLayout>-->
+
+<!--                        &lt;!&ndash;  Column 2&ndash;&gt;-->
+<!--                        <LinearLayout-->
+<!--                            android:layout_width="wrap_content"-->
+<!--                            android:layout_height="wrap_content"-->
+<!--                            android:layout_rowWeight="1"-->
+<!--                            android:layout_columnWeight="1"-->
+<!--                            android:gravity="center"-->
+<!--                            android:background="@drawable/current_daily_background_bottomRight"-->
+<!--                            android:orientation="vertical"-->
+<!--                            android:padding="@dimen/_10sdp">-->
+
+<!--                            <ImageView-->
+<!--                                android:layout_width="@dimen/_40sdp"-->
+<!--                                android:layout_height="@dimen/_40sdp"-->
+<!--                                android:contentDescription="@string/visibility"-->
+<!--                                android:src="@drawable/ic_visibility" />-->
+
+<!--                            <TextView-->
+<!--                                android:layout_width="wrap_content"-->
+<!--                                android:layout_height="wrap_content"-->
+<!--                                android:text="@string/visibility"-->
+<!--                                android:textColor="@color/white"-->
+<!--                                android:textSize="12sp" />-->
+
+<!--                            <TextView-->
+<!--                                android:id="@+id/visibility_textView"-->
+<!--                                android:layout_width="wrap_content"-->
+<!--                                android:layout_height="wrap_content"-->
+<!--                                android:textColor="@color/white"-->
+<!--                                android:textSize="14sp" />-->
+<!--                        </LinearLayout>-->
+
+<!--                        &lt;!&ndash;  Column 3&ndash;&gt;-->
+<!--                        <LinearLayout-->
+<!--                            android:layout_width="wrap_content"-->
+<!--                            android:layout_height="wrap_content"-->
+<!--                            android:layout_rowWeight="1"-->
+<!--                            android:layout_columnWeight="1"-->
+<!--                            android:gravity="center"-->
+<!--                            android:orientation="vertical"-->
+<!--                            android:background="@drawable/current_daily_background_bottomRight"-->
+<!--                            android:padding="@dimen/_10sdp">-->
+
+<!--                            <ImageView-->
+<!--                                android:layout_width="@dimen/_40sdp"-->
+<!--                                android:layout_height="@dimen/_40sdp"-->
+<!--                                android:contentDescription="@string/ultraviolet"-->
+<!--                                android:src="@drawable/ic_ultraviolet" />-->
+
+<!--                            <TextView-->
+<!--                                android:layout_width="wrap_content"-->
+<!--                                android:layout_height="wrap_content"-->
+<!--                                android:text="@string/ultraviolet"-->
+<!--                                android:textColor="@color/white"-->
+<!--                                android:textSize="12sp" />-->
+
+<!--                            <TextView-->
+<!--                                android:id="@+id/ultraviolet_textView"-->
+<!--                                android:layout_width="wrap_content"-->
+<!--                                android:layout_height="wrap_content"-->
+<!--                                android:textColor="@color/white"-->
+<!--                                android:textSize="14sp" />-->
+<!--                        </LinearLayout>-->
+
+<!--                    </GridLayout>-->
+<!--&lt;!&ndash;                </androidx.cardview.widget.CardView>&ndash;&gt;-->
+
+<!--            </androidx.constraintlayout.widget.ConstraintLayout>-->
+
+<!--        </androidx.constraintlayout.widget.ConstraintLayout>-->
+<!--    </ScrollView>-->
