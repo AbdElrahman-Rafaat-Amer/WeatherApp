@@ -1,0 +1,75 @@
+package com.abdelrahman.raafat.climateClue.homeplaces.viewmodel
+
+import android.app.Application
+import androidx.lifecycle.*
+import com.abdelrahman.raafat.climateClue.database.ConcreteLocaleSource
+import com.abdelrahman.raafat.climateClue.model.Repository
+import com.abdelrahman.raafat.climateClue.model.RepositoryInterface
+import com.abdelrahman.raafat.climateClue.model.SavedAddress
+import com.abdelrahman.raafat.climateClue.model.WeatherResponse
+import com.abdelrahman.raafat.climateClue.network.WeatherClient
+import kotlinx.coroutines.Dispatchers
+import kotlinx.coroutines.launch
+import kotlinx.coroutines.withContext
+
+class CurrentPlaceViewModel(application: Application) : AndroidViewModel(application) {
+
+    private var _iRepo: RepositoryInterface
+    private var _weatherResponse = MutableLiveData<WeatherResponse>()
+    val weatherResponse: LiveData<WeatherResponse> = _weatherResponse
+
+    private var _addressResponse = MutableLiveData<SavedAddress>()
+    val addressResponse: LiveData<SavedAddress> = _addressResponse
+
+    init {
+        _iRepo =
+            Repository.getInstance(
+                application.applicationContext,
+                WeatherClient.getInstance(),
+                ConcreteLocaleSource(application.applicationContext)
+            )
+    }
+
+
+    fun getWeatherFromNetwork(latitude: String, longitude: String, language: String) {
+        viewModelScope.launch {
+            val response = _iRepo.getWeatherFromNetwork(latitude, longitude, language)
+            withContext(Dispatchers.Main) {
+                _weatherResponse.postValue(response)
+
+            }
+
+        }
+    }
+
+    fun getDataFromRoom() {
+        viewModelScope.launch {
+            val response = _iRepo.getWeatherFromDataBase()
+            withContext(Dispatchers.Main) {
+                _weatherResponse.postValue(response!!)
+            }
+
+        }
+    }
+
+    fun getStoredAddressFromRoom() {
+        viewModelScope.launch {
+            val response = _iRepo.getStoredPlace()
+            withContext(Dispatchers.Main) {
+                _addressResponse.postValue(response)
+            }
+
+        }
+    }
+
+
+    fun insertAddressToRoom(address: SavedAddress) {
+        viewModelScope.launch {
+            withContext(Dispatchers.IO) {
+                _iRepo.insertAddressToRoom(address)
+            }
+
+        }
+    }
+
+}
