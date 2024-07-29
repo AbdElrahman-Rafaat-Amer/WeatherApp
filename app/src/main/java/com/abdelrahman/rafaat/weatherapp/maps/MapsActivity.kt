@@ -6,17 +6,13 @@ import android.location.Geocoder
 import android.os.Bundle
 import android.util.Log
 import android.widget.TextView
+import androidx.activity.viewModels
 import androidx.appcompat.app.AppCompatActivity
 import androidx.constraintlayout.widget.ConstraintLayout
-import androidx.lifecycle.ViewModelProvider
 import com.abdelrahman.rafaat.weatherapp.R
-import com.abdelrahman.rafaat.weatherapp.database.ConcreteLocaleSource
 import com.abdelrahman.rafaat.weatherapp.favoriteplaces.viewmodel.FavoritePlaceViewModel
-import com.abdelrahman.rafaat.weatherapp.favoriteplaces.viewmodel.FavoritePlaceViewModelFactory
-import com.abdelrahman.rafaat.weatherapp.utils.ConstantsValue
 import com.abdelrahman.rafaat.weatherapp.model.FavoritePlaces
-import com.abdelrahman.rafaat.weatherapp.model.Repository
-import com.abdelrahman.rafaat.weatherapp.network.WeatherClient
+import com.abdelrahman.rafaat.weatherapp.utils.ConstantsValue
 import com.google.android.gms.maps.CameraUpdateFactory
 import com.google.android.gms.maps.GoogleMap
 import com.google.android.gms.maps.GoogleMap.OnMarkerDragListener
@@ -28,7 +24,7 @@ import com.google.android.gms.maps.model.MarkerOptions
 import com.google.android.material.floatingactionbutton.FloatingActionButton
 import com.google.android.material.snackbar.Snackbar
 import java.io.IOException
-import java.util.*
+import java.util.Locale
 
 private const val TAG = "GoogleMapsActivity"
 
@@ -43,7 +39,7 @@ class GoogleMapsActivity : AppCompatActivity(), OnMapReadyCallback {
     private lateinit var showSelectedLocation: TextView
     private lateinit var root: ConstraintLayout
     private var isPlaceSelected = false
-    private lateinit var viewModel: FavoritePlaceViewModel
+    private val viewModel: FavoritePlaceViewModel by viewModels()
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -51,7 +47,6 @@ class GoogleMapsActivity : AppCompatActivity(), OnMapReadyCallback {
         supportActionBar?.hide()
 
         initUI()
-        initViewModel()
 
     }
 
@@ -81,20 +76,6 @@ class GoogleMapsActivity : AppCompatActivity(), OnMapReadyCallback {
                 showSnackBar()
             }
         }
-    }
-
-    private fun initViewModel() {
-        val viewModelFactory = FavoritePlaceViewModelFactory(
-            Repository.getInstance(
-                this,
-                WeatherClient.getInstance(),
-                ConcreteLocaleSource.getInstance(this)
-            )
-        )
-
-        viewModel = ViewModelProvider(
-            this, viewModelFactory
-        )[FavoritePlaceViewModel::class.java]
     }
 
     private fun showSnackBar() {

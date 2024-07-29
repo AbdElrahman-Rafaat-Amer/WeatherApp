@@ -11,18 +11,15 @@ import android.view.View.GONE
 import android.view.View.VISIBLE
 import android.view.ViewGroup
 import androidx.fragment.app.Fragment
-import androidx.lifecycle.ViewModelProvider
+import androidx.fragment.app.viewModels
 import androidx.navigation.Navigation
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.abdelrahman.rafaat.weatherapp.R
-import com.abdelrahman.rafaat.weatherapp.database.ConcreteLocaleSource
 import com.abdelrahman.rafaat.weatherapp.databinding.DialogLayoutBinding
 import com.abdelrahman.rafaat.weatherapp.databinding.FragmentFavoriteBinding
 import com.abdelrahman.rafaat.weatherapp.favoriteplaces.viewmodel.FavoritePlaceViewModel
-import com.abdelrahman.rafaat.weatherapp.favoriteplaces.viewmodel.FavoritePlaceViewModelFactory
 import com.abdelrahman.rafaat.weatherapp.maps.GoogleMapsActivity
-import com.abdelrahman.rafaat.weatherapp.model.*
-import com.abdelrahman.rafaat.weatherapp.network.WeatherClient
+import com.abdelrahman.rafaat.weatherapp.model.FavoritePlaces
 import com.abdelrahman.rafaat.weatherapp.utils.ConnectionLiveData
 import com.abdelrahman.rafaat.weatherapp.utils.connectInternet
 import com.google.android.material.snackbar.Snackbar
@@ -30,7 +27,7 @@ import com.google.android.material.snackbar.Snackbar
 class FavoriteFragment : Fragment(), OnDeleteFavorite {
     private lateinit var binding: FragmentFavoriteBinding
     private lateinit var favoriteAdapter: FavoritePlacesAdapter
-    private lateinit var viewModel: FavoritePlaceViewModel
+    private val viewModel: FavoritePlaceViewModel by viewModels()
     private var isInternetExist = false
 
     override fun onCreateView(
@@ -46,7 +43,6 @@ class FavoriteFragment : Fragment(), OnDeleteFavorite {
         super.onViewCreated(view, savedInstanceState)
 
         initUI()
-        initViewModel()
         checkInternet()
         observeViewModel()
 
@@ -64,18 +60,6 @@ class FavoriteFragment : Fragment(), OnDeleteFavorite {
                 showSnackBar()
             }
         }
-    }
-
-    private fun initViewModel() {
-        val viewModelFactory = FavoritePlaceViewModelFactory(
-            Repository.getInstance(
-                requireContext(),
-                WeatherClient.getInstance(),
-                ConcreteLocaleSource(requireContext())
-            )
-        )
-        viewModel =
-            ViewModelProvider(this, viewModelFactory)[FavoritePlaceViewModel::class.java]
     }
 
     private fun checkInternet() {
@@ -116,7 +100,7 @@ class FavoriteFragment : Fragment(), OnDeleteFavorite {
     override fun deleteFromRoom(favoritePlaces: FavoritePlaces) {
         showDialog(favoritePlaces)
     }
-
+//
     override fun showDetails(latitude: String, longitude: String, language: String) {
         if (isInternetExist) {
             val bundle = Bundle()

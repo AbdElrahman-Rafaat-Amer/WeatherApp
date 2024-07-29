@@ -83,19 +83,19 @@ class HomeViewModel(private val application: Application) : AndroidViewModel(app
                 addresses?.get(0)?.adminArea ?: "", addresses?.get(0)?.countryName ?: ""
             )
             addressResponse = address
-            insertAddressToRoom(address)
             isGetAddressDone = true
             setupHomeData()
         } catch (exception: IOException) {
-            Log.i("Utils", "getAddress: exception-------------------- ${exception.message}")
+            Log.e("Utils", "getAddress: exception-------------------- ${exception.message}")
         }
+        insertAddressToRoom(address)
     }
 
     fun getDataFromRoom() {
         viewModelScope.launch {
             val response = _iRepo.getWeatherFromDataBase()
             withContext(Dispatchers.Main) {
-                _weatherResponse.postValue(response!!)
+//                _weatherResponse.postValue(response!!)
                 isGetWeatherDone = true
                 weatherResponse2 = response
                 setupHomeData()

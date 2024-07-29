@@ -37,7 +37,7 @@ fun connectInternet(context: Context) {
 }
 
 fun getAddress(latitude: Double, longitude: Double, context: Context): SavedAddress {
-    var address: SavedAddress? = null
+    var address: SavedAddress = SavedAddress("En", "Alex", "Alex", "Egypt")
     var subAdminArea = context.getString(R.string.undefined_place)
     try {
         val geocoder = Geocoder(context, Locale.getDefault())
@@ -57,7 +57,7 @@ fun getAddress(latitude: Double, longitude: Double, context: Context): SavedAddr
     } catch (exception: IOException) {
         Log.i("Utils", "getAddress: exception-------------------- ${exception.message}")
     }
-    return address!!
+    return address
 }
 
 

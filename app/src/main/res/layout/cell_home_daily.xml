@@ -3,7 +3,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:id="@+id/current_day_constraintLayout"
     android:layout_width="match_parent"
-    android:layout_height="wrap_content"
+    android:layout_height="90dp"
     android:background="@drawable/bg_rounded_light_blue_10"
     android:gravity="center"
     android:orientation="horizontal"
@@ -12,14 +12,15 @@
     <TextView
         android:id="@+id/day_name_textView"
         style="@style/ClimateClue.Theme.Text.SmallXX"
-        android:layout_weight="0.6"
+        android:layout_weight="0.5"
         android:contentDescription="@string/day_name_description"
+        android:textSize="20sp"
         tools:text="Fri" />
 
     <ImageView
         android:id="@+id/day_status_imageView"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
+        android:layout_width="0dp"
+        android:layout_height="match_parent"
         android:layout_weight="1"
         android:contentDescription="@string/status_of_day"
         android:src="@drawable/ic_sunny" />
@@ -27,16 +28,18 @@
     <TextView
         android:id="@+id/day_status_textView"
         style="@style/ClimateClue.Theme.Text.SmallXX"
-        android:layout_weight="1"
+        android:layout_weight="0.8"
         android:contentDescription="@string/day_status_description"
         android:maxLines="1"
+        android:textSize="20sp"
         tools:text="Clear" />
 
     <TextView
         android:id="@+id/day_temperature_textView"
         style="@style/ClimateClue.Theme.Text.SmallXX"
-        android:layout_weight="1"
+        android:layout_weight="0.8"
         android:contentDescription="@string/day_temperature_description"
+        android:textSize="20sp"
         tools:text="297 °K" />
 
 </LinearLayout>

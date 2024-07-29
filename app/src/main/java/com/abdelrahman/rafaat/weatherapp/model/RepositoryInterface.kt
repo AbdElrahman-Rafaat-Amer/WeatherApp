@@ -18,7 +18,7 @@ interface RepositoryInterface {
 
 
     //Address
-    suspend fun getStoredPlace(): SavedAddress
+    suspend fun getStoredPlace(): SavedAddress?
     suspend fun insertAddressToRoom(address: SavedAddress)
 
 

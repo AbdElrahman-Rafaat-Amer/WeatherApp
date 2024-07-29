@@ -1,47 +1,34 @@
 package com.abdelrahman.rafaat.weatherapp.favoriteplaces.view
 
 import android.os.Bundle
-import com.abdelrahman.rafaat.weatherapp.utils.getAddress
 import android.view.LayoutInflater
 import android.view.View
-import android.view.View.GONE
-import android.view.View.VISIBLE
 import android.view.ViewGroup
 import android.widget.Toast
 import androidx.fragment.app.Fragment
-import androidx.lifecycle.ViewModelProvider
-import androidx.recyclerview.widget.LinearLayoutManager
+import androidx.fragment.app.viewModels
+import androidx.recyclerview.widget.GridLayoutManager
+import androidx.recyclerview.widget.GridLayoutManager.SpanSizeLookup
 import com.abdelrahman.rafaat.weatherapp.R
-import com.abdelrahman.rafaat.weatherapp.database.ConcreteLocaleSource
-import com.abdelrahman.rafaat.weatherapp.databinding.FragmentHome2Binding
 import com.abdelrahman.rafaat.weatherapp.databinding.FragmentHomeBinding
 import com.abdelrahman.rafaat.weatherapp.favoriteplaces.viewmodel.FavoritePlaceViewModel
-import com.abdelrahman.rafaat.weatherapp.favoriteplaces.viewmodel.FavoritePlaceViewModelFactory
-import com.abdelrahman.rafaat.weatherapp.homeplaces.view.WeatherDailyAdapter
-import com.abdelrahman.rafaat.weatherapp.homeplaces.view.WeatherHourlyAdapter
-import com.abdelrahman.rafaat.weatherapp.model.Repository
-import com.abdelrahman.rafaat.weatherapp.utils.ConstantsValue
-import com.abdelrahman.rafaat.weatherapp.model.SavedAddress
+import com.abdelrahman.rafaat.weatherapp.homeplaces.view.HomeAdapter
+import com.abdelrahman.rafaat.weatherapp.homeplaces.view.HomeItem
 import com.abdelrahman.rafaat.weatherapp.model.WeatherResponse
-import com.abdelrahman.rafaat.weatherapp.network.WeatherClient
-import com.abdelrahman.rafaat.weatherapp.utils.formatDate
-import com.abdelrahman.rafaat.weatherapp.utils.getTimeInHour
-import com.bumptech.glide.Glide
-import java.text.DecimalFormat
+import com.abdelrahman.rafaat.weatherapp.utils.ConstantsValue
+import com.abdelrahman.rafaat.weatherapp.utils.SpacingItemDecoration
 
 class FavoriteDetailsFragment : Fragment() {
 
-    private lateinit var viewModel: FavoritePlaceViewModel
-    private lateinit var binding: FragmentHome2Binding
-    private lateinit var weatherHourlyAdapter: WeatherHourlyAdapter
-    private lateinit var weatherDailyAdapter: WeatherDailyAdapter
-
+    private val viewModel: FavoritePlaceViewModel by viewModels()
+    private lateinit var binding: FragmentHomeBinding
+    private val homeAdapter = HomeAdapter()
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View {
-        binding = FragmentHome2Binding.inflate(layoutInflater)
+        binding = FragmentHomeBinding.inflate(layoutInflater)
         return binding.root
     }
 
@@ -50,38 +37,30 @@ class FavoriteDetailsFragment : Fragment() {
         super.onViewCreated(view, savedInstanceState)
 
         initUI()
-        initViewModel()
         getData()
         observeViewModel()
 
     }
 
     private fun initUI() {
-        weatherHourlyAdapter = WeatherHourlyAdapter()
-        val hourlyManager = LinearLayoutManager(requireContext())
-        hourlyManager.orientation = LinearLayoutManager.HORIZONTAL
-        binding.hourlyRecyclerView.layoutManager = hourlyManager
-        binding.hourlyRecyclerView.adapter = weatherHourlyAdapter
-
-        weatherDailyAdapter = WeatherDailyAdapter()
-        val dailyManager = LinearLayoutManager(requireContext())
-        dailyManager.orientation = LinearLayoutManager.VERTICAL
-        binding.dailyRecyclerView.layoutManager = dailyManager
-        binding.dailyRecyclerView.adapter = weatherDailyAdapter
-
+        val layoutManager = GridLayoutManager(requireContext(), 3)
+        layoutManager.spanSizeLookup = generateSpanSizeLookup()
+        binding.homeRecyclerView.layoutManager = layoutManager
+        binding.homeRecyclerView.adapter = homeAdapter
+        // Define space in pixels
+        val verticalSpace = resources.getDimensionPixelSize(R.dimen.vertical_space)
+        val horizontalSpace = resources.getDimensionPixelSize(R.dimen.horizontal_space)
+        binding.homeRecyclerView.addItemDecoration(SpacingItemDecoration(verticalSpace, horizontalSpace, spanCount = 3))
     }
 
-    private fun initViewModel() {
-        val viewModelFactory = FavoritePlaceViewModelFactory(
-            Repository.getInstance(
-                requireContext(),
-                WeatherClient.getInstance(),
-                ConcreteLocaleSource(requireContext())
-            )
-        )
-        viewModel =
-            ViewModelProvider(this, viewModelFactory)[FavoritePlaceViewModel::class.java]
-    }
+    private fun generateSpanSizeLookup(): SpanSizeLookup =
+        object : SpanSizeLookup() {
+            override fun getSpanSize(position: Int): Int =
+                when (homeAdapter.getItemViewType(position)) {
+                    HomeItem.DayInfoItem::class.java.hashCode() -> 1
+                    else -> 3
+                }
+        }
 
     private fun getData() {
         val latitude = arguments?.getString("LAT") as String
@@ -93,103 +72,11 @@ class FavoriteDetailsFragment : Fragment() {
         viewModel.selectedFavoritePlaces.observe(viewLifecycleOwner) {
             when (it) {
                 is WeatherResponse -> {
-                    assignDataToView(it)
-                    getAddress(it)
+
                 }
                 else -> Toast.makeText(context, "Return is null $it", Toast.LENGTH_SHORT).show()
             }
         }
-    }
-
-    private fun assignDataToView(weatherResponse: WeatherResponse) {
-        binding.loadingAnimationView.visibility = GONE
-        binding.visibilityConstrainLayout.visibility = VISIBLE
-
-        binding.currentDateTextView.text = formatDate(weatherResponse.current.dt)
-        binding.currentDayStatusTextView.text = weatherResponse.current.weather[0].description
-        binding.currentDayTemperatureTextView.text = getTemperature(weatherResponse.current.temp)
-
-        Glide.with(this)
-            .load("https://openweathermap.org/img/wn/" + weatherResponse.current.weather[0].icon + "@2x.png")
-            .into(binding.currentDayImageView)
-        weatherDailyAdapter.setList(weatherResponse.daily)
-        weatherHourlyAdapter.setList(weatherResponse.hourly)
-
-
-        binding.sunRiseTimeTextView.text = getTimeInHour(
-            weatherResponse.current.sunrise,
-            weatherResponse.timezone
-        )
-        binding.sunSetTimeTextView.text = getTimeInHour(
-            weatherResponse.current.sunset,
-            weatherResponse.timezone
-        )
-        binding.humidityTextView.text =
-            DecimalFormat("#").format(weatherResponse.current.humidity).plus(" %")
-        binding.windSpeedTextView.text = getWindSpeed(weatherResponse)
-        binding.windDegreeTextView.text =
-            DecimalFormat("##").format(weatherResponse.current.wind_deg)
-        binding.cloudTextView.text =
-            DecimalFormat("#").format(weatherResponse.current.clouds).plus(" %")
-        binding.pressureTextView.text =
-            DecimalFormat("#").format(weatherResponse.current.pressure)
-                .plus(" ${getString(R.string.pressure_unit)}")
-        binding.visibilityTextView.text =
-            DecimalFormat("#").format(weatherResponse.current.visibility)
-                .plus(" ${getString(R.string.meter)}")
-        binding.ultravioletTextView.text = DecimalFormat("#.##").format(weatherResponse.current.uvi)
-
-    }
-
-    private fun getWindSpeed(weatherResponse: WeatherResponse): String {
-        val windSpeed: String = when (ConstantsValue.windSpeedUnit) {
-            "M/H" -> DecimalFormat("#.##").format(weatherResponse.current.wind_speed * 3.6) + " " + getString(
-                R.string.wind_speed_unit_MH
-            )
-            else -> DecimalFormat("#.##").format(weatherResponse.current.wind_speed) + " " + getString(
-                R.string.wind_speed_unit_MS
-            )
-        }
-        return windSpeed
-    }
-
-    private fun getTemperature(temp: Double): String {
-        val temperature: String
-        when (ConstantsValue.tempUnit) {
-            "celsius" -> {
-                temperature = DecimalFormat("#").format(temp - 273.15)
-                binding.currentDayTemperatureUnitTextView.text =
-                    resources.getString(R.string.temperature_celsius_unit)
-            }
-            "fahrenheit" -> {
-                temperature = DecimalFormat("#").format(((temp - 273.15) * 1.8) + 32)
-                binding.currentDayTemperatureUnitTextView.text =
-                    resources.getString(R.string.temperature_fahrenheit_unit)
-            }
-            else -> {
-                temperature = DecimalFormat("#").format(temp)
-                binding.currentDayTemperatureUnitTextView.text =
-                    resources.getString(R.string.temperature_kelvin_unit)
-            }
-        }
-        return temperature
-    }
-
-    private fun getAddress(weatherResponse: WeatherResponse) {
-        val address = getAddress(
-            weatherResponse.lat,
-            weatherResponse.lon,
-            requireContext()
-        )
-        assignAddressToView(
-            address
-        )
-    }
-
-    private fun assignAddressToView(savedAddress: SavedAddress) {
-        binding.locationNameTextView.text = savedAddress.subAdminArea
-        binding.locationDetailsNameTextView.text =
-            savedAddress.adminArea.plus(" ${savedAddress.countryName}")
     }
 
 

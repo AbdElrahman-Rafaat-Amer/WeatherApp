@@ -10,9 +10,11 @@ import androidx.fragment.app.Fragment
 import androidx.fragment.app.activityViewModels
 import androidx.recyclerview.widget.GridLayoutManager
 import androidx.recyclerview.widget.GridLayoutManager.SpanSizeLookup
+import com.abdelrahman.rafaat.weatherapp.R
 import com.abdelrahman.rafaat.weatherapp.databinding.FragmentHomeBinding
 import com.abdelrahman.rafaat.weatherapp.homeplaces.viewmodel.HomeViewModel
 import com.abdelrahman.rafaat.weatherapp.utils.ConnectionLiveData
+import com.abdelrahman.rafaat.weatherapp.utils.SpacingItemDecoration
 
 class HomeFragment : Fragment() {
     private lateinit var binding: FragmentHomeBinding
@@ -42,7 +44,10 @@ class HomeFragment : Fragment() {
         layoutManager.spanSizeLookup = generateSpanSizeLookup()
         binding.homeRecyclerView.layoutManager = layoutManager
         binding.homeRecyclerView.adapter = homeAdapter
-
+        // Define space in pixels
+        val verticalSpace = resources.getDimensionPixelSize(R.dimen.vertical_space)
+        val horizontalSpace = resources.getDimensionPixelSize(R.dimen.horizontal_space)
+        binding.homeRecyclerView.addItemDecoration(SpacingItemDecoration(verticalSpace, horizontalSpace, spanCount = 3))
     }
 
     private fun generateSpanSizeLookup(): SpanSizeLookup =

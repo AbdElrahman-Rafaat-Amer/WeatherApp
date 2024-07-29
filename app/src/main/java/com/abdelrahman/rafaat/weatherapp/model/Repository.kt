@@ -47,7 +47,7 @@ class Repository private constructor(
 
 
     //Address
-    override suspend fun getStoredPlace(): SavedAddress {
+    override suspend fun getStoredPlace(): SavedAddress? {
         return localSource.getStoredPlace()
     }
 

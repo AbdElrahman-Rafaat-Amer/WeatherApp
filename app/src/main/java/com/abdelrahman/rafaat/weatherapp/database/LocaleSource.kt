@@ -14,7 +14,7 @@ interface LocaleSource {
 
 
     //Address
-    suspend fun getStoredPlace(): SavedAddress
+    suspend fun getStoredPlace(): SavedAddress?
     suspend fun insertAddressToRoom(address: SavedAddress)
 
     //Alerts
