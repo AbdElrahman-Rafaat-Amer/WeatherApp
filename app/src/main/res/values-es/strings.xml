@@ -30,10 +30,8 @@
     <string name="full_moon">Luna llena</string>
     <string name="humidity_cardView">Humedad</string>
     <string name="language">Idioma</string>
-    <string name="language_arabic">العربية</string>
-    <string name="language_english">English</string>
-    <string name="language_dutch">Deutsche</string>
-    <string name="language_spanish">Español</string>
+    <string name="language_arabic">Árabe</string>
+    <string name="language_english">Inglés</string>
     <string name="last_quarter">Último trimestre</string>
     <string name="loading_bar">barra de carga</string>
     <string name="location">Ubicación</string>

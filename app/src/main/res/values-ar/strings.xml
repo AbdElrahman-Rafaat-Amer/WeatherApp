@@ -31,9 +31,7 @@
     <string name="humidity_cardView">الرطوبة</string>
     <string name="language">اللغة</string>
     <string name="language_arabic">العربية</string>
-    <string name="language_english">English</string>
-    <string name="language_dutch">Deutsche</string>
-    <string name="language_spanish">Español</string>
+    <string name="language_english">الانجليزية</string>
     <string name="last_quarter">ربع اخير</string>
     <string name="loading_bar">يجري تحميل الصفحة الان</string>
     <string name="location">الموقع</string>
