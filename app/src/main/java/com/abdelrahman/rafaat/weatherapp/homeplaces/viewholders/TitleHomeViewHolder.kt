@@ -1,10 +1,10 @@
-package com.abdelrahman.rafaat.weatherapp.homeplaces.viewholders
+package com.abdelrahman.raafat.climateClue.homeplaces.viewholders
 
 import android.view.View
 import android.widget.TextView
-import com.abdelrahman.rafaat.weatherapp.base.BaseViewHolder
-import com.abdelrahman.rafaat.weatherapp.R
-import com.abdelrahman.rafaat.weatherapp.homeplaces.view.HomeItem
+import com.abdelrahman.raafat.climateClue.base.BaseViewHolder
+import com.abdelrahman.raafat.climateClue.R
+import com.abdelrahman.raafat.climateClue.homeplaces.view.HomeItem
 
 class TitleHomeViewHolder(itemView: View) : BaseViewHolder<HomeItem.TitleItem>(itemView) {
     private val textView: TextView = itemView.findViewById(R.id.textView)

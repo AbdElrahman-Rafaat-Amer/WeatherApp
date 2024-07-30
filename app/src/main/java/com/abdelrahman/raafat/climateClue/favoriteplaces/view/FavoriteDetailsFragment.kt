@@ -13,9 +13,9 @@ import com.abdelrahman.raafat.climateClue.databinding.FragmentHomeBinding
 import com.abdelrahman.raafat.climateClue.favoriteplaces.viewmodel.FavoritePlaceViewModel
 import com.abdelrahman.raafat.climateClue.model.WeatherResponse
 import com.abdelrahman.raafat.climateClue.utils.ConstantsValue
-import com.abdelrahman.rafaat.weatherapp.homeplaces.view.HomeAdapter
-import com.abdelrahman.rafaat.weatherapp.homeplaces.view.HomeItem
-import com.abdelrahman.rafaat.weatherapp.utils.SpacingItemDecoration
+import com.abdelrahman.raafat.climateClue.homeplaces.view.HomeAdapter
+import com.abdelrahman.raafat.climateClue.homeplaces.view.HomeItem
+import com.abdelrahman.raafat.climateClue.utils.SpacingItemDecoration
 
 class FavoriteDetailsFragment : Fragment() {
 

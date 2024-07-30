@@ -12,7 +12,7 @@ import com.abdelrahman.raafat.climateClue.databinding.FragmentTimeTableBinding
 import com.abdelrahman.raafat.climateClue.utils.ConstantsValue
 import com.abdelrahman.raafat.climateClue.model.WeatherResponse
 import com.abdelrahman.raafat.climateClue.utils.ConnectionLiveData
-import com.abdelrahman.rafaat.weatherapp.homeplaces.viewmodel.HomeViewModel
+import com.abdelrahman.raafat.climateClue.homeplaces.viewmodel.HomeViewModel
 
 class TimeTableFragment : Fragment() {
     private lateinit var binding: FragmentTimeTableBinding

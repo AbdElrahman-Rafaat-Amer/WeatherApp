@@ -1,4 +1,4 @@
-package com.abdelrahman.rafaat.weatherapp.base
+package com.abdelrahman.raafat.climateClue.base
 
 import android.view.View
 import androidx.recyclerview.widget.RecyclerView

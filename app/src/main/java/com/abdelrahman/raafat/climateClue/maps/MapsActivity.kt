@@ -9,15 +9,10 @@ import android.widget.TextView
 import androidx.activity.viewModels
 import androidx.appcompat.app.AppCompatActivity
 import androidx.constraintlayout.widget.ConstraintLayout
-import androidx.lifecycle.ViewModelProvider
 import com.abdelrahman.raafat.climateClue.R
-import com.abdelrahman.raafat.climateClue.database.ConcreteLocaleSource
 import com.abdelrahman.raafat.climateClue.favoriteplaces.viewmodel.FavoritePlaceViewModel
-import com.abdelrahman.raafat.climateClue.favoriteplaces.viewmodel.FavoritePlaceViewModelFactory
-import com.abdelrahman.raafat.climateClue.utils.ConstantsValue
 import com.abdelrahman.raafat.climateClue.model.FavoritePlaces
-import com.abdelrahman.raafat.climateClue.model.Repository
-import com.abdelrahman.raafat.climateClue.network.WeatherClient
+import com.abdelrahman.raafat.climateClue.utils.ConstantsValue
 import com.google.android.gms.maps.CameraUpdateFactory
 import com.google.android.gms.maps.GoogleMap
 import com.google.android.gms.maps.GoogleMap.OnMarkerDragListener

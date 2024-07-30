@@ -1,15 +1,15 @@
-package com.abdelrahman.rafaat.weatherapp.homeplaces.view
+package com.abdelrahman.raafat.climateClue.homeplaces.view
 
 import android.view.LayoutInflater
 import android.view.ViewGroup
 import androidx.recyclerview.widget.RecyclerView
-import com.abdelrahman.rafaat.weatherapp.base.BaseViewHolder
-import com.abdelrahman.rafaat.weatherapp.R
-import com.abdelrahman.rafaat.weatherapp.homeplaces.viewholders.DailyHomeViewHolder
-import com.abdelrahman.rafaat.weatherapp.homeplaces.viewholders.DayInfoHomeViewHolder
-import com.abdelrahman.rafaat.weatherapp.homeplaces.viewholders.HourlyHomeViewHolder
-import com.abdelrahman.rafaat.weatherapp.homeplaces.viewholders.StatusHomeViewHolder
-import com.abdelrahman.rafaat.weatherapp.homeplaces.viewholders.TitleHomeViewHolder
+import com.abdelrahman.raafat.climateClue.R
+import com.abdelrahman.raafat.climateClue.base.BaseViewHolder
+import com.abdelrahman.raafat.climateClue.homeplaces.viewholders.DailyHomeViewHolder
+import com.abdelrahman.raafat.climateClue.homeplaces.viewholders.DayInfoHomeViewHolder
+import com.abdelrahman.raafat.climateClue.homeplaces.viewholders.HourlyHomeViewHolder
+import com.abdelrahman.raafat.climateClue.homeplaces.viewholders.StatusHomeViewHolder
+import com.abdelrahman.raafat.climateClue.homeplaces.viewholders.TitleHomeViewHolder
 
 class HomeAdapter : RecyclerView.Adapter<RecyclerView.ViewHolder>() {
 

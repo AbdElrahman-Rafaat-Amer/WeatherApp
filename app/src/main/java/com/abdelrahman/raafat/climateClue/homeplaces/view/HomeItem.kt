@@ -1,7 +1,7 @@
-package com.abdelrahman.rafaat.weatherapp.homeplaces.view
+package com.abdelrahman.raafat.climateClue.homeplaces.view
 
-import com.abdelrahman.rafaat.weatherapp.model.Daily
-import com.abdelrahman.rafaat.weatherapp.model.Hourly
+import com.abdelrahman.raafat.climateClue.model.Daily
+import com.abdelrahman.raafat.climateClue.model.Hourly
 
 sealed class HomeItem {
 

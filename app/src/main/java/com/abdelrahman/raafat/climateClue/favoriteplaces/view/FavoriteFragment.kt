@@ -15,14 +15,11 @@ import androidx.fragment.app.viewModels
 import androidx.navigation.Navigation
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.abdelrahman.raafat.climateClue.R
-import com.abdelrahman.raafat.climateClue.database.ConcreteLocaleSource
 import com.abdelrahman.raafat.climateClue.databinding.DialogLayoutBinding
 import com.abdelrahman.raafat.climateClue.databinding.FragmentFavoriteBinding
 import com.abdelrahman.raafat.climateClue.favoriteplaces.viewmodel.FavoritePlaceViewModel
-import com.abdelrahman.raafat.climateClue.favoriteplaces.viewmodel.FavoritePlaceViewModelFactory
 import com.abdelrahman.raafat.climateClue.maps.GoogleMapsActivity
-import com.abdelrahman.raafat.climateClue.model.*
-import com.abdelrahman.raafat.climateClue.network.WeatherClient
+import com.abdelrahman.raafat.climateClue.model.FavoritePlaces
 import com.abdelrahman.raafat.climateClue.utils.ConnectionLiveData
 import com.abdelrahman.raafat.climateClue.utils.connectInternet
 import com.google.android.material.snackbar.Snackbar

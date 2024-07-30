@@ -15,8 +15,8 @@ import com.abdelrahman.raafat.climateClue.network.WeatherClient
 import com.abdelrahman.raafat.climateClue.utils.ConstantsValue
 import com.abdelrahman.raafat.climateClue.utils.formatDate
 import com.abdelrahman.raafat.climateClue.utils.getTimeInHour
-import com.abdelrahman.rafaat.weatherapp.homeplaces.view.HomeItem
-import com.abdelrahman.rafaat.weatherapp.utils.TemperatureType
+import com.abdelrahman.raafat.climateClue.homeplaces.view.HomeItem
+import com.abdelrahman.raafat.climateClue.utils.TemperatureType
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
 import kotlinx.coroutines.withContext

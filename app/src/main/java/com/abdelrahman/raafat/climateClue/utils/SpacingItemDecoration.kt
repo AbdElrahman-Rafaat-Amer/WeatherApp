@@ -1,9 +1,9 @@
-package com.abdelrahman.rafaat.weatherapp.utils
+package com.abdelrahman.raafat.climateClue.utils
 
 import android.graphics.Rect
 import android.view.View
 import androidx.recyclerview.widget.RecyclerView
-import com.abdelrahman.rafaat.weatherapp.homeplaces.viewholders.DayInfoHomeViewHolder
+import com.abdelrahman.raafat.climateClue.homeplaces.viewholders.DayInfoHomeViewHolder
 
 class SpacingItemDecoration(
     private val verticalSpaceHeight: Int,

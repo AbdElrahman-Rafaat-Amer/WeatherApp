@@ -1,13 +1,13 @@
-package com.abdelrahman.rafaat.weatherapp.homeplaces.viewholders
+package com.abdelrahman.raafat.climateClue.homeplaces.viewholders
 
 import android.view.View
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
-import com.abdelrahman.rafaat.weatherapp.base.BaseViewHolder
-import com.abdelrahman.rafaat.weatherapp.R
-import com.abdelrahman.rafaat.weatherapp.homeplaces.view.HomeItem
-import com.abdelrahman.rafaat.weatherapp.homeplaces.view.WeatherHourlyAdapter
-import com.abdelrahman.rafaat.weatherapp.utils.SpacingItemDecoration
+import com.abdelrahman.raafat.climateClue.base.BaseViewHolder
+import com.abdelrahman.raafat.climateClue.R
+import com.abdelrahman.raafat.climateClue.homeplaces.view.HomeItem
+import com.abdelrahman.raafat.climateClue.homeplaces.view.WeatherHourlyAdapter
+import com.abdelrahman.raafat.climateClue.utils.SpacingItemDecoration
 
 class HourlyHomeViewHolder(itemView: View) : BaseViewHolder<HomeItem.HourlyItem>(itemView) {
     private val recyclerView: RecyclerView = itemView.findViewById(R.id.recyclerView)
