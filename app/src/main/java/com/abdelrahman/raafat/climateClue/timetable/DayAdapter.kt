@@ -58,10 +58,6 @@ class DayAdapter : RecyclerView.Adapter<DayAdapter.ViewHolder>() {
         holder.humidityTextView.text = DecimalFormat("#").format(day.humidity).plus(" %")
         holder.windSpeedTextView.text = getWindSpeed(day.wind_speed)
         holder.windDegreeTextView.text = DecimalFormat("##").format(day.wind_deg)
-        holder.consT.setOnClickListener {
-            Log.i(TAG, "onBindViewHolder:setOnClickListener $day\n\n\n")
-            Log.i(TAG, "onBindViewHolder: $position")
-        }
     }
 
 
@@ -76,9 +72,8 @@ class DayAdapter : RecyclerView.Adapter<DayAdapter.ViewHolder>() {
 
     class ViewHolder(itemView: View) : RecyclerView.ViewHolder(itemView) {
 
-        val consT: ConstraintLayout = itemView.findViewById(R.id.const_click)
         val dayInformationTextView: TextView =
-            itemView.findViewById(R.id.information_of_currentDay_textView)
+            itemView.findViewById(R.id.dayName_textView)
         val sunRiseTimeTextView: TextView = itemView.findViewById(R.id.sun_rise_time_textView_day)
         val sunSetTimeTextView: TextView = itemView.findViewById(R.id.sun_set_time_textView_day)
         val temperatureTextView: TextView = itemView.findViewById(R.id.temperature_textView_day)

@@ -110,7 +110,7 @@ class FavoritePlaceViewModel(private val application: Application) : AndroidView
                         status = it.current.weather[0].description,
                         temperature = temperature.first,
                         temperatureUnit = temperature.second,
-                        iconURL = ConstantsValue.imageURL + it.current.weather[0].icon + "@2x.png",
+                        iconURL = ConstantsValue.IMAGE_URL + it.current.weather[0].icon + "@2x.png",
                         iconPlaceHolder = R.drawable.ic_sunny
                     )
                 )
@@ -127,7 +127,7 @@ class FavoritePlaceViewModel(private val application: Application) : AndroidView
                             dayName = getNameOfDay(day.dt),
                             dayStatus = day.weather[0].description,
                             dayTemperature = dayTemperature.first + " " + dayTemperature.second,
-                            iconURL = ConstantsValue.imageURL + day.weather[0].icon + "@2x.png",
+                            iconURL = ConstantsValue.IMAGE_URL + day.weather[0].icon + "@2x.png",
                             iconPlaceHolder = R.drawable.ic_sunny
                         )
                     )

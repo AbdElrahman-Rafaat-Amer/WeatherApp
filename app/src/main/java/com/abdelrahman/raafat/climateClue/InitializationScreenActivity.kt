@@ -17,6 +17,7 @@ import androidx.core.app.ActivityCompat
 import com.abdelrahman.raafat.climateClue.databinding.ActivityIntializaionScreenBinding
 import com.abdelrahman.raafat.climateClue.utils.ConnectionLiveData
 import com.abdelrahman.raafat.climateClue.utils.ConstantsValue
+import com.abdelrahman.raafat.climateClue.utils.LocaleHelper
 import com.abdelrahman.raafat.climateClue.utils.connectInternet
 import com.google.android.gms.location.*
 import com.google.android.material.snackbar.Snackbar
@@ -36,7 +37,8 @@ class InitializationScreenActivity : AppCompatActivity() {
     private var isFirstTime = true
 
     override fun onCreate(savedInstanceState: Bundle?) {
-        Locale.setDefault(Locale.forLanguageTag(ConstantsValue.language))
+        LocaleHelper.setAppLocale(ConstantsValue.language, resources)
+        LocaleHelper.setAppLocale(ConstantsValue.language, resources)
         super.onCreate(savedInstanceState)
         binding = ActivityIntializaionScreenBinding.inflate(layoutInflater)
         setContentView(binding.root)

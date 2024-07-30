@@ -3,6 +3,7 @@ package com.abdelrahman.raafat.climateClue.utils
 import android.graphics.Rect
 import android.view.View
 import androidx.recyclerview.widget.RecyclerView
+import com.abdelrahman.raafat.climateClue.base.BaseItemDecoration
 import com.abdelrahman.raafat.climateClue.homeplaces.viewholders.DayInfoHomeViewHolder
 
 class SpacingItemDecoration(
@@ -10,7 +11,7 @@ class SpacingItemDecoration(
     private val horizontalSpaceWidth: Int,
     private val includeFirstItem: Boolean = true,
     private val spanCount: Int = 0
-) : RecyclerView.ItemDecoration() {
+) : BaseItemDecoration() {
 
     override fun getItemOffsets(
         outRect: Rect,
@@ -18,10 +19,8 @@ class SpacingItemDecoration(
         parent: RecyclerView,
         state: RecyclerView.State
     ) {
+        super.getItemOffsets(outRect, view, parent, state)
         with(outRect) {
-            val position = parent.getChildAdapterPosition(view) // item position
-
-
             top = verticalSpaceHeight
             bottom = verticalSpaceHeight
             if (parent.getChildViewHolder(view) is DayInfoHomeViewHolder) {
@@ -29,33 +28,33 @@ class SpacingItemDecoration(
                 // Check if the item is at the left or right edge
                 when (column) {
                     0 -> { // Item is in the last column (right edge)
-                        outRect.left = horizontalSpaceWidth/4
-                        outRect.right = horizontalSpaceWidth
+                        setLeft(horizontalSpaceWidth/4)
+                        setRight(horizontalSpaceWidth)
                     }
                     spanCount - 1 -> { //Item is in the middle
-                        outRect.left = horizontalSpaceWidth/4
-                        outRect.right = horizontalSpaceWidth/4
+                        setLeft(horizontalSpaceWidth/4)
+                        setRight(horizontalSpaceWidth/4)
                     }
                     else -> { // Item is in the first column (left edge)
-                        outRect.left = horizontalSpaceWidth
-                        outRect.right = horizontalSpaceWidth/4
+                        setLeft(horizontalSpaceWidth)
+                        setRight(horizontalSpaceWidth/4)
                     }
                 }
             } else {
-                right = horizontalSpaceWidth
+                setRight(horizontalSpaceWidth)
                 if (includeFirstItem) {
-                    left = horizontalSpaceWidth
+                    setLeft(horizontalSpaceWidth)
                 } else {
                     if (position != 0) {
-                        left = horizontalSpaceWidth
+                        setLeft(horizontalSpaceWidth)
                     }
                 }
             }
 
-            if (position == 0) {
+            if (isFirstItem()) {
                 top = verticalSpaceHeight // Add extra space for the first item
             }
-            if (position == parent.adapter?.itemCount?.minus(1)) {
+            if (isLastItem()) {
                 bottom = verticalSpaceHeight // Add extra space for the last item
             }
         }

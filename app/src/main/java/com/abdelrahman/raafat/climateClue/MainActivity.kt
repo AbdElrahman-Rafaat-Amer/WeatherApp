@@ -1,15 +1,12 @@
 package com.abdelrahman.raafat.climateClue
 
-import android.content.res.Configuration
-import android.content.res.Resources
 import android.os.Bundle
-import android.util.DisplayMetrics
 import androidx.appcompat.app.AppCompatActivity
 import androidx.navigation.Navigation.findNavController
 import com.abdelrahman.raafat.climateClue.databinding.ActivityMainBinding
 import com.abdelrahman.raafat.climateClue.utils.ConstantsValue
+import com.abdelrahman.raafat.climateClue.utils.LocaleHelper
 import com.etebarian.meowbottomnavigation.MeowBottomNavigation
-import java.util.*
 
 class MainActivity : AppCompatActivity() {
     private val alertID = 0
@@ -22,7 +19,7 @@ class MainActivity : AppCompatActivity() {
 
 
     override fun onCreate(savedInstanceState: Bundle?) {
-        setAppLocale(ConstantsValue.language)
+        LocaleHelper.setAppLocale(ConstantsValue.language, resources)
         super.onCreate(savedInstanceState)
         binding = ActivityMainBinding.inflate(layoutInflater)
         setContentView(binding.root)
@@ -74,15 +71,6 @@ class MainActivity : AppCompatActivity() {
         val intent = intent
         finish()
         startActivity(intent)
-    }
-
-    private fun setAppLocale(localeCode: String) {
-        val resources: Resources = resources
-        val dm: DisplayMetrics = resources.displayMetrics
-        val config: Configuration = resources.configuration
-        config.setLocale(Locale(localeCode.lowercase(Locale.ROOT)))
-        resources.updateConfiguration(config, dm)
-        Locale.setDefault(Locale.forLanguageTag(ConstantsValue.language))
     }
 
     override fun onBackPressed() {

@@ -5,18 +5,18 @@ import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import android.widget.Toast
 import androidx.fragment.app.activityViewModels
 import androidx.recyclerview.widget.LinearLayoutManager
+import com.abdelrahman.raafat.climateClue.R
 import com.abdelrahman.raafat.climateClue.databinding.FragmentTimeTableBinding
 import com.abdelrahman.raafat.climateClue.utils.ConstantsValue
-import com.abdelrahman.raafat.climateClue.model.WeatherResponse
 import com.abdelrahman.raafat.climateClue.utils.ConnectionLiveData
 import com.abdelrahman.raafat.climateClue.homeplaces.viewmodel.HomeViewModel
+import com.abdelrahman.raafat.climateClue.utils.SpacingItemDecoration
 
 class TimeTableFragment : Fragment() {
     private lateinit var binding: FragmentTimeTableBinding
-    private lateinit var dayAdapter: DayAdapter
+    private val dayAdapter = DayAdapter()
     private val viewModel: HomeViewModel by activityViewModels()
 
     override fun onCreateView(
@@ -35,11 +35,12 @@ class TimeTableFragment : Fragment() {
     }
 
     private fun initUI() {
-        dayAdapter = DayAdapter()
         val linerLayoutManager = LinearLayoutManager(requireContext())
-        linerLayoutManager.orientation = LinearLayoutManager.VERTICAL
         binding.daysRecyclerView.layoutManager = linerLayoutManager
         binding.daysRecyclerView.adapter = dayAdapter
+
+        val space = resources.getDimensionPixelSize(R.dimen.horizontal_space)
+        binding.daysRecyclerView.addItemDecoration(SpacingItemDecoration(space, space, spanCount = 0))
     }
 
     private fun checkInternet() {
@@ -58,11 +59,8 @@ class TimeTableFragment : Fragment() {
 
     private fun observeViewModel() {
         viewModel.weatherResponse.observe(viewLifecycleOwner) {
-            when (it) {
-                is WeatherResponse -> {
-                    dayAdapter.setList(it.daily)
-                }
-                else -> Toast.makeText(context, "Return is null $it", Toast.LENGTH_SHORT).show()
+            if (it != null) {
+                dayAdapter.setList(it.daily)
             }
         }
     }

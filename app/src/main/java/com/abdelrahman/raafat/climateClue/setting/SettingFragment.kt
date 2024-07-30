@@ -1,8 +1,10 @@
 package com.abdelrahman.raafat.climateClue.setting
 
 import android.content.SharedPreferences
+import android.content.res.Configuration
 import android.content.res.Resources
 import android.os.Bundle
+import android.util.DisplayMetrics
 import android.view.View
 import androidx.preference.ListPreference
 import androidx.preference.Preference
@@ -12,7 +14,8 @@ import androidx.preference.SwitchPreference
 import com.abdelrahman.raafat.climateClue.MainActivity
 import com.abdelrahman.raafat.climateClue.R
 import com.abdelrahman.raafat.climateClue.utils.ConstantsValue
-import java.util.*
+import com.abdelrahman.raafat.climateClue.utils.LocaleHelper
+import java.util.Locale
 
 
 class SettingFragment : PreferenceFragmentCompat() {
@@ -59,11 +62,7 @@ class SettingFragment : PreferenceFragmentCompat() {
 
     private fun setLanguage(language: String) {
         ConstantsValue.language = language
-        val locale = Locale(language)
-        Locale.setDefault(locale)
-        val configuration = resources.configuration
-        configuration.setLocale(locale)
-        resources.updateConfiguration(configuration, resources.displayMetrics)
+        LocaleHelper.updateLocale(requireContext(), language)
         (requireActivity() as MainActivity).restartFragment()
     }
 }

@@ -45,7 +45,6 @@ class HomeFragment : Fragment() {
         layoutManager.spanSizeLookup = generateSpanSizeLookup()
         binding.homeRecyclerView.layoutManager = layoutManager
         binding.homeRecyclerView.adapter = homeAdapter
-        // Define space in pixels
         val verticalSpace = resources.getDimensionPixelSize(R.dimen.vertical_space)
         val horizontalSpace = resources.getDimensionPixelSize(R.dimen.horizontal_space)
         binding.homeRecyclerView.addItemDecoration(SpacingItemDecoration(verticalSpace, horizontalSpace, spanCount = 3))

@@ -6,6 +6,7 @@ import android.util.Log
 import androidx.lifecycle.*
 import com.abdelrahman.raafat.climateClue.R
 import com.abdelrahman.raafat.climateClue.database.ConcreteLocaleSource
+import com.abdelrahman.raafat.climateClue.extension.getDayName
 import com.abdelrahman.raafat.climateClue.homeplaces.view.HomeItem
 import com.abdelrahman.raafat.climateClue.model.Repository
 import com.abdelrahman.raafat.climateClue.model.RepositoryInterface
@@ -13,7 +14,9 @@ import com.abdelrahman.raafat.climateClue.model.SavedAddress
 import com.abdelrahman.raafat.climateClue.model.WeatherResponse
 import com.abdelrahman.raafat.climateClue.network.WeatherClient
 import com.abdelrahman.raafat.climateClue.utils.ConstantsValue
+import com.abdelrahman.raafat.climateClue.utils.LocaleHelper
 import com.abdelrahman.raafat.climateClue.utils.TemperatureType
+import com.abdelrahman.raafat.climateClue.utils.WindSpeedType
 import com.abdelrahman.raafat.climateClue.utils.formatDate
 import com.abdelrahman.raafat.climateClue.utils.getTimeInHour
 import kotlinx.coroutines.Dispatchers
@@ -31,15 +34,17 @@ class HomeViewModel(private val application: Application) : AndroidViewModel(app
         WeatherClient.getInstance(),
         ConcreteLocaleSource(application.applicationContext)
     )
-
+    private val mContext by lazy {
+        LocaleHelper.getLocalizedContext(application.applicationContext)
+    }
     private var isGetAddressDone = false
     private var isGetWeatherDone = false
 
     private var _homeList = MutableLiveData<List<HomeItem>>()
     val homeList: LiveData<List<HomeItem>> = _homeList
 
-    private var _weatherResponse = MutableLiveData<WeatherResponse>()
-    val weatherResponse: LiveData<WeatherResponse> = _weatherResponse
+    private var _weatherResponse = MutableLiveData<WeatherResponse?>()
+    val weatherResponse: LiveData<WeatherResponse?> = _weatherResponse
 
     private var addressResponse: SavedAddress? = null
     private var weatherResponse2: WeatherResponse? = null
@@ -64,7 +69,7 @@ class HomeViewModel(private val application: Application) : AndroidViewModel(app
 
     private fun getAddress() {
         var address = SavedAddress("En", "Alex", "Alex", "Egypt")
-        var subAdminArea = application.applicationContext.getString(R.string.undefined_place)
+        var subAdminArea = mContext.getString(R.string.undefined_place)
         try {
             val geocoder = Geocoder(application.applicationContext, Locale.getDefault())
 
@@ -95,7 +100,7 @@ class HomeViewModel(private val application: Application) : AndroidViewModel(app
         viewModelScope.launch {
             val response = _iRepo.getWeatherFromDataBase()
             withContext(Dispatchers.Main) {
-//                _weatherResponse.postValue(response!!)
+                _weatherResponse.postValue(response)
                 isGetWeatherDone = true
                 weatherResponse2 = response
                 setupHomeData()
@@ -138,7 +143,7 @@ class HomeViewModel(private val application: Application) : AndroidViewModel(app
                         status = it.current.weather[0].description,
                         temperature = temperature.first,
                         temperatureUnit = temperature.second,
-                        iconURL = ConstantsValue.imageURL + it.current.weather[0].icon + "@2x.png",
+                        iconURL = ConstantsValue.IMAGE_URL + it.current.weather[0].icon + "@2x.png",
                         iconPlaceHolder = R.drawable.ic_sunny
                     )
                 )
@@ -152,10 +157,10 @@ class HomeViewModel(private val application: Application) : AndroidViewModel(app
                     val dayTemperature = getTemperature(day.temp.day)
                     homeItems.add(
                         HomeItem.DailyItem(
-                            dayName = getNameOfDay(day.dt),
+                            dayName = day.dt.getDayName(),
                             dayStatus = day.weather[0].description,
                             dayTemperature = dayTemperature.first + " " + dayTemperature.second,
-                            iconURL = ConstantsValue.imageURL + day.weather[0].icon + "@2x.png",
+                            iconURL = ConstantsValue.IMAGE_URL + day.weather[0].icon + "@2x.png",
                             iconPlaceHolder = R.drawable.ic_sunny
                         )
                     )
@@ -167,7 +172,7 @@ class HomeViewModel(private val application: Application) : AndroidViewModel(app
                 homeItems.add(
                     HomeItem.DayInfoItem(
                         icon = R.drawable.ic_sunny,
-                        title = application.applicationContext.getString(R.string.sunrise),
+                        title = mContext.getString(R.string.sunrise),
                         description = getTimeInHour(
                             it.current.sunrise,
                             it.timezone
@@ -179,7 +184,7 @@ class HomeViewModel(private val application: Application) : AndroidViewModel(app
                 homeItems.add(
                     HomeItem.DayInfoItem(
                         icon = R.drawable.ic_ocean,
-                        title = application.applicationContext.getString(R.string.sunset),
+                        title = mContext.getString(R.string.sunset),
                         description = getTimeInHour(
                             it.current.sunset,
                             it.timezone
@@ -191,7 +196,7 @@ class HomeViewModel(private val application: Application) : AndroidViewModel(app
                 homeItems.add(
                     HomeItem.DayInfoItem(
                         icon = R.drawable.ic_humidity,
-                        title = application.applicationContext.getString(R.string.humidity_cardView),
+                        title = mContext.getString(R.string.humidity_cardView),
                         description = DecimalFormat("#").format(it.current.humidity).plus(" %")
                     )
                 )
@@ -200,7 +205,7 @@ class HomeViewModel(private val application: Application) : AndroidViewModel(app
                 homeItems.add(
                     HomeItem.DayInfoItem(
                         icon = R.drawable.ic_wind,
-                        title = application.applicationContext.getString(R.string.wind_speed),
+                        title = mContext.getString(R.string.wind_speed),
                         description = getWindSpeed(it)
                     )
                 )
@@ -209,7 +214,7 @@ class HomeViewModel(private val application: Application) : AndroidViewModel(app
                 homeItems.add(
                     HomeItem.DayInfoItem(
                         icon = R.drawable.ic_wind,
-                        title = application.applicationContext.getString(R.string.wind_degree),
+                        title = mContext.getString(R.string.wind_degree),
                         description = DecimalFormat("##").format(it.current.wind_deg)
                     )
                 )
@@ -218,7 +223,7 @@ class HomeViewModel(private val application: Application) : AndroidViewModel(app
                 homeItems.add(
                     HomeItem.DayInfoItem(
                         icon = R.drawable.ic_cloud,
-                        title = application.applicationContext.getString(R.string.cloud),
+                        title = mContext.getString(R.string.cloud),
                         description = DecimalFormat("#").format(it.current.clouds).plus(" %")
                     )
                 )
@@ -227,9 +232,9 @@ class HomeViewModel(private val application: Application) : AndroidViewModel(app
                 homeItems.add(
                     HomeItem.DayInfoItem(
                         icon = R.drawable.ic_pressure,
-                        title = application.applicationContext.getString(R.string.pressure),
+                        title = mContext.getString(R.string.pressure),
                         description = DecimalFormat("#").format(it.current.pressure)
-                            .plus(" ${application.applicationContext.getString(R.string.pressure_unit)}")
+                            .plus(" ${mContext.getString(R.string.pressure_unit)}")
                     )
                 )
 
@@ -237,9 +242,9 @@ class HomeViewModel(private val application: Application) : AndroidViewModel(app
                 homeItems.add(
                     HomeItem.DayInfoItem(
                         icon = R.drawable.ic_visibility,
-                        title = application.applicationContext.getString(R.string.visibility),
+                        title = mContext.getString(R.string.visibility),
                         description = DecimalFormat("#").format(it.current.visibility)
-                            .plus(" ${application.applicationContext.getString(R.string.meter)}")
+                            .plus(" ${mContext.getString(R.string.meter)}")
                     )
                 )
 
@@ -247,7 +252,7 @@ class HomeViewModel(private val application: Application) : AndroidViewModel(app
                 homeItems.add(
                     HomeItem.DayInfoItem(
                         icon = R.drawable.ic_ultraviolet,
-                        title = application.applicationContext.getString(R.string.ultraviolet),
+                        title = mContext.getString(R.string.ultraviolet),
                         description = DecimalFormat("#.##").format(it.current.uvi)
                     )
                 )
@@ -263,38 +268,35 @@ class HomeViewModel(private val application: Application) : AndroidViewModel(app
         when (ConstantsValue.tempUnit) {
             TemperatureType.Celsius.unit -> {
                 temperature = DecimalFormat("#").format(temp - 273.15)
-                unit =
-                    application.applicationContext.resources.getString(R.string.temperature_celsius_unit)
+                unit = TemperatureType.getLocalizedUnit(mContext, TemperatureType.Celsius.unit)
             }
 
             TemperatureType.Fahrenheit.unit -> {
                 temperature = DecimalFormat("#").format(((temp - 273.15) * 1.8) + 32)
-                unit =
-                    application.applicationContext.resources.getString(R.string.temperature_fahrenheit_unit)
+                unit = TemperatureType.getLocalizedUnit(mContext, TemperatureType.Fahrenheit.unit)
             }
 
             TemperatureType.Kelvin.unit -> {
                 temperature = DecimalFormat("#").format(temp)
-                unit =
-                    application.applicationContext.resources.getString(R.string.temperature_kelvin_unit)
+                unit = TemperatureType.getLocalizedUnit(mContext, TemperatureType.Kelvin.unit)
             }
         }
         return Pair(temperature, unit)
     }
 
-    private fun getNameOfDay(milliSeconds: Long): String {
-        return SimpleDateFormat("EE").format(milliSeconds * 1000)
-    }
-
     private fun getWindSpeed(weatherResponse: WeatherResponse): String {
         val windSpeed = when (ConstantsValue.windSpeedUnit) {
-            "M/H" -> DecimalFormat("#.##").format(weatherResponse.current.wind_speed * 3.6) + " " + application.applicationContext.getString(
-                R.string.wind_speed_unit_MH
-            )
+            WindSpeedType.MilePerHour.unit -> {
+                DecimalFormat("#.##")
+                    .format(weatherResponse.current.wind_speed * 3.6) + " " +
+                        WindSpeedType.getLocalizedUnit(mContext, WindSpeedType.MilePerHour.unit)
+            }
 
-            else -> DecimalFormat("#.##").format(weatherResponse.current.wind_speed) + " " + application.applicationContext.getString(
-                R.string.wind_speed_unit_MS
-            )
+            else -> {
+                DecimalFormat("#.##")
+                    .format(weatherResponse.current.wind_speed) + " " +
+                        WindSpeedType.getLocalizedUnit(mContext, WindSpeedType.MeterPerSecond.unit)
+            }
         }
         return windSpeed
     }
