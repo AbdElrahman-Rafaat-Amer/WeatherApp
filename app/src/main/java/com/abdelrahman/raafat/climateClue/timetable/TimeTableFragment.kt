@@ -39,11 +39,12 @@ class TimeTableFragment : Fragment() {
         binding.daysRecyclerView.layoutManager = linerLayoutManager
         binding.daysRecyclerView.adapter = imeTableAdapter
 
-        val space = resources.getDimensionPixelSize(R.dimen.horizontal_space)
+        val verticalSpace = resources.getDimensionPixelSize(R.dimen.vertical_space)
+        val horizontalSpace = resources.getDimensionPixelSize(R.dimen.horizontal_space)
         binding.daysRecyclerView.addItemDecoration(
             SpacingItemDecoration(
-                space,
-                space,
+                verticalSpace,
+                horizontalSpace,
                 spanCount = 0
             )
         )
