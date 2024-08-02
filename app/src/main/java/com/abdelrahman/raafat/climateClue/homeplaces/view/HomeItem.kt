@@ -1,6 +1,6 @@
 package com.abdelrahman.raafat.climateClue.homeplaces.view
 
-import com.abdelrahman.raafat.climateClue.model.Daily
+import com.abdelrahman.raafat.climateClue.model.DayInfo
 import com.abdelrahman.raafat.climateClue.model.Hourly
 
 sealed class HomeItem {
@@ -33,8 +33,6 @@ sealed class HomeItem {
     ) : HomeItem()
 
     data class DayInfoItem(
-        var icon: Int,
-        var title: String,
-        var description: String
+        var dayInfo: DayInfo
     ) : HomeItem()
 }

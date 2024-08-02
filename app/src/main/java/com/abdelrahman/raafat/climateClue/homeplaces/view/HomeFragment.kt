@@ -13,8 +13,7 @@ import androidx.recyclerview.widget.GridLayoutManager.SpanSizeLookup
 import com.abdelrahman.raafat.climateClue.R
 import com.abdelrahman.raafat.climateClue.databinding.FragmentHomeBinding
 import com.abdelrahman.raafat.climateClue.utils.ConnectionLiveData
-import com.abdelrahman.raafat.climateClue.utils.SpacingItemDecoration
-import com.abdelrahman.raafat.climateClue.homeplaces.view.HomeItem
+import com.abdelrahman.raafat.climateClue.ui.itemDecorators.SpacingItemDecoration
 import com.abdelrahman.raafat.climateClue.homeplaces.viewmodel.HomeViewModel
 
 class HomeFragment : Fragment() {

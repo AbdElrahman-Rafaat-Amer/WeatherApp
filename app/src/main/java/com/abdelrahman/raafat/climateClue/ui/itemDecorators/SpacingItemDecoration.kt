@@ -1,9 +1,9 @@
-package com.abdelrahman.raafat.climateClue.utils
+package com.abdelrahman.raafat.climateClue.ui.itemDecorators
 
 import android.graphics.Rect
 import android.view.View
 import androidx.recyclerview.widget.RecyclerView
-import com.abdelrahman.raafat.climateClue.base.BaseItemDecoration
+import com.abdelrahman.raafat.climateClue.ui.base.BaseItemDecoration
 import com.abdelrahman.raafat.climateClue.homeplaces.viewholders.DayInfoHomeViewHolder
 
 class SpacingItemDecoration(

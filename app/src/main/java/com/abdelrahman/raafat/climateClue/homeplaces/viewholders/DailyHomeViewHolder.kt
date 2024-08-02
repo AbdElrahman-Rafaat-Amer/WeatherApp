@@ -5,7 +5,7 @@ import android.widget.ImageView
 import android.widget.TextView
 import coil.load
 import coil.transform.CircleCropTransformation
-import com.abdelrahman.raafat.climateClue.base.BaseViewHolder
+import com.abdelrahman.raafat.climateClue.ui.base.BaseViewHolder
 import com.abdelrahman.raafat.climateClue.R
 import com.abdelrahman.raafat.climateClue.homeplaces.view.HomeItem
 

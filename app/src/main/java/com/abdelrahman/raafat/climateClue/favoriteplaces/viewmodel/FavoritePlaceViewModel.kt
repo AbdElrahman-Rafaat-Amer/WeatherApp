@@ -6,6 +6,7 @@ import android.util.Log
 import androidx.lifecycle.*
 import com.abdelrahman.raafat.climateClue.R
 import com.abdelrahman.raafat.climateClue.database.ConcreteLocaleSource
+import com.abdelrahman.raafat.climateClue.extension.toAbbreviatedDayName
 import com.abdelrahman.raafat.climateClue.model.FavoritePlaces
 import com.abdelrahman.raafat.climateClue.model.Repository
 import com.abdelrahman.raafat.climateClue.model.RepositoryInterface
@@ -14,14 +15,14 @@ import com.abdelrahman.raafat.climateClue.model.WeatherResponse
 import com.abdelrahman.raafat.climateClue.network.WeatherClient
 import com.abdelrahman.raafat.climateClue.utils.ConstantsValue
 import com.abdelrahman.raafat.climateClue.utils.formatDate
-import com.abdelrahman.raafat.climateClue.utils.getTimeInHour
 import com.abdelrahman.raafat.climateClue.homeplaces.view.HomeItem
+import com.abdelrahman.raafat.climateClue.model.DayInfo
 import com.abdelrahman.raafat.climateClue.utils.TemperatureType
+import com.abdelrahman.raafat.climateClue.utils.formatTime
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
 import kotlinx.coroutines.withContext
 import java.text.DecimalFormat
-import java.text.SimpleDateFormat
 
 class FavoritePlaceViewModel(private val application: Application) : AndroidViewModel(application) {
 
@@ -88,6 +89,7 @@ class FavoritePlaceViewModel(private val application: Application) : AndroidView
             }
         }
     }
+
     private fun setupHomeData() {
         val homeItems = arrayListOf<HomeItem>()
         if (isGetAddressDone && isGetWeatherDone) {
@@ -124,7 +126,7 @@ class FavoritePlaceViewModel(private val application: Application) : AndroidView
                     val dayTemperature = getTemperature(day.temp.day)
                     homeItems.add(
                         HomeItem.DailyItem(
-                            dayName = getNameOfDay(day.dt),
+                            dayName = day.dt.toAbbreviatedDayName(),
                             dayStatus = day.weather[0].description,
                             dayTemperature = dayTemperature.first + " " + dayTemperature.second,
                             iconURL = ConstantsValue.IMAGE_URL + day.weather[0].icon + "@2x.png",
@@ -138,11 +140,13 @@ class FavoritePlaceViewModel(private val application: Application) : AndroidView
                 //sunrise
                 homeItems.add(
                     HomeItem.DayInfoItem(
-                        icon = R.drawable.ic_sunny,
-                        title = application.applicationContext.getString(R.string.sunrise),
-                        description = getTimeInHour(
-                            it.current.sunrise,
-                            it.timezone
+                        dayInfo = DayInfo(
+                            iconFromDrawable = R.drawable.ic_sunny,
+                            title = application.applicationContext.getString(R.string.sunrise),
+                            description = formatTime(
+                                it.current.sunrise,
+                                it.timezone
+                            )
                         )
                     )
                 )
@@ -150,11 +154,13 @@ class FavoritePlaceViewModel(private val application: Application) : AndroidView
                 //sunset
                 homeItems.add(
                     HomeItem.DayInfoItem(
-                        icon = R.drawable.ic_ocean,
-                        title = application.applicationContext.getString(R.string.sunset),
-                        description = getTimeInHour(
-                            it.current.sunset,
-                            it.timezone
+                        dayInfo = DayInfo(
+                            iconFromDrawable = R.drawable.ic_ocean,
+                            title = application.applicationContext.getString(R.string.sunset),
+                            description = formatTime(
+                                it.current.sunset,
+                                it.timezone
+                            )
                         )
                     )
                 )
@@ -162,65 +168,79 @@ class FavoritePlaceViewModel(private val application: Application) : AndroidView
                 //humidity
                 homeItems.add(
                     HomeItem.DayInfoItem(
-                        icon = R.drawable.ic_humidity,
-                        title = application.applicationContext.getString(R.string.humidity_cardView),
-                        description = DecimalFormat("#").format(it.current.humidity).plus(" %")
+                        dayInfo = DayInfo(
+                            iconFromDrawable = R.drawable.ic_humidity,
+                            title = application.applicationContext.getString(R.string.humidity_cardView),
+                            description = DecimalFormat("#").format(it.current.humidity).plus(" %")
+                        )
                     )
                 )
 
                 //wind_speed
                 homeItems.add(
                     HomeItem.DayInfoItem(
-                        icon = R.drawable.ic_wind,
-                        title = application.applicationContext.getString(R.string.wind_speed),
-                        description = getWindSpeed(it)
+                        dayInfo = DayInfo(
+                            iconFromDrawable = R.drawable.ic_wind,
+                            title = application.applicationContext.getString(R.string.wind_speed),
+                            description = getWindSpeed(it)
+                        )
                     )
                 )
 
                 //wind_degree
                 homeItems.add(
                     HomeItem.DayInfoItem(
-                        icon = R.drawable.ic_wind,
-                        title = application.applicationContext.getString(R.string.wind_degree),
-                        description = DecimalFormat("##").format(it.current.wind_deg)
+                        dayInfo = DayInfo(
+                            iconFromDrawable = R.drawable.ic_wind,
+                            title = application.applicationContext.getString(R.string.wind_degree),
+                            description = DecimalFormat("##").format(it.current.wind_deg)
+                        )
                     )
                 )
 
                 //cloud
                 homeItems.add(
                     HomeItem.DayInfoItem(
-                        icon = R.drawable.ic_cloud,
-                        title = application.applicationContext.getString(R.string.cloud),
-                        description = DecimalFormat("#").format(it.current.clouds).plus(" %")
+                        dayInfo = DayInfo(
+                            iconFromDrawable = R.drawable.ic_cloud,
+                            title = application.applicationContext.getString(R.string.cloud),
+                            description = DecimalFormat("#").format(it.current.clouds).plus(" %")
+                        )
                     )
                 )
 
                 //pressure
                 homeItems.add(
                     HomeItem.DayInfoItem(
-                        icon = R.drawable.ic_pressure,
-                        title = application.applicationContext.getString(R.string.pressure),
-                        description = DecimalFormat("#").format(it.current.pressure)
-                            .plus(" ${application.applicationContext.getString(R.string.pressure_unit)}")
+                        dayInfo = DayInfo(
+                            iconFromDrawable = R.drawable.ic_pressure,
+                            title = application.applicationContext.getString(R.string.pressure),
+                            description = DecimalFormat("#").format(it.current.pressure)
+                                .plus(" ${application.applicationContext.getString(R.string.pressure_unit)}")
+                        )
                     )
                 )
 
                 //visibility
                 homeItems.add(
                     HomeItem.DayInfoItem(
-                        icon = R.drawable.ic_visibility,
-                        title = "application.applicationContext.getString(R.string.visibility)",
-                        description = DecimalFormat("#").format(it.current.visibility)
-                            .plus(" ${application.applicationContext.getString(R.string.meter)}")
+                        dayInfo = DayInfo(
+                            iconFromDrawable = R.drawable.ic_visibility,
+                            title = "application.applicationContext.getString(R.string.visibility)",
+                            description = DecimalFormat("#").format(it.current.visibility)
+                                .plus(" ${application.applicationContext.getString(R.string.meter)}")
+                        )
                     )
                 )
 
                 //ultraviolet
                 homeItems.add(
                     HomeItem.DayInfoItem(
-                        icon = R.drawable.ic_ultraviolet,
-                        title = "application.applicationContext.getString(R.string.ultraviolet)",
-                        description = DecimalFormat("#.##").format(it.current.uvi)
+                        dayInfo = DayInfo(
+                            iconFromDrawable = R.drawable.ic_ultraviolet,
+                            title = "application.applicationContext.getString(R.string.ultraviolet)",
+                            description = DecimalFormat("#.##").format(it.current.uvi)
+                        )
                     )
                 )
             }
@@ -252,10 +272,6 @@ class FavoritePlaceViewModel(private val application: Application) : AndroidView
             }
         }
         return Pair(temperature, unit)
-    }
-
-    private fun getNameOfDay(milliSeconds: Long): String {
-        return SimpleDateFormat("EE").format(milliSeconds * 1000)
     }
 
     private fun getWindSpeed(weatherResponse: WeatherResponse): String {

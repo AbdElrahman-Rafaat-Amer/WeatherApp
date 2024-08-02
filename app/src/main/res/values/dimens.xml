@@ -6,5 +6,6 @@
 
     //CardView
     <dimen name="card_corner_radius">20dp</dimen>
+    <dimen name="card_corner_radius_small">10dp</dimen>
     <dimen name="card_elevation">20dp</dimen>
 </resources>

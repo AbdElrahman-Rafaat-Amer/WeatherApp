@@ -2,7 +2,7 @@ package com.abdelrahman.raafat.climateClue.homeplaces.viewholders
 
 import android.view.View
 import android.widget.TextView
-import com.abdelrahman.raafat.climateClue.base.BaseViewHolder
+import com.abdelrahman.raafat.climateClue.ui.base.BaseViewHolder
 import com.abdelrahman.raafat.climateClue.R
 import com.abdelrahman.raafat.climateClue.homeplaces.view.HomeItem
 

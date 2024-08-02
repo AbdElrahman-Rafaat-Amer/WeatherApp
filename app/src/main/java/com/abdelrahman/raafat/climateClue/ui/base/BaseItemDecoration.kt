@@ -1,4 +1,4 @@
-package com.abdelrahman.raafat.climateClue.base
+package com.abdelrahman.raafat.climateClue.ui.base
 
 import android.graphics.Rect
 import android.view.View

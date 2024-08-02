@@ -6,25 +6,30 @@ import android.util.Log
 import androidx.lifecycle.*
 import com.abdelrahman.raafat.climateClue.R
 import com.abdelrahman.raafat.climateClue.database.ConcreteLocaleSource
-import com.abdelrahman.raafat.climateClue.extension.getDayName
+import com.abdelrahman.raafat.climateClue.extension.toAbbreviatedDayName
+import com.abdelrahman.raafat.climateClue.extension.toFullDateString
 import com.abdelrahman.raafat.climateClue.homeplaces.view.HomeItem
+import com.abdelrahman.raafat.climateClue.model.Daily
+import com.abdelrahman.raafat.climateClue.model.DayInfo
 import com.abdelrahman.raafat.climateClue.model.Repository
 import com.abdelrahman.raafat.climateClue.model.RepositoryInterface
 import com.abdelrahman.raafat.climateClue.model.SavedAddress
 import com.abdelrahman.raafat.climateClue.model.WeatherResponse
 import com.abdelrahman.raafat.climateClue.network.WeatherClient
+import com.abdelrahman.raafat.climateClue.timetable.TimeTableItem
 import com.abdelrahman.raafat.climateClue.utils.ConstantsValue
 import com.abdelrahman.raafat.climateClue.utils.LocaleHelper
 import com.abdelrahman.raafat.climateClue.utils.TemperatureType
 import com.abdelrahman.raafat.climateClue.utils.WindSpeedType
+import com.abdelrahman.raafat.climateClue.utils.formatDailyTemperatureRange
 import com.abdelrahman.raafat.climateClue.utils.formatDate
-import com.abdelrahman.raafat.climateClue.utils.getTimeInHour
+import com.abdelrahman.raafat.climateClue.utils.formatTime
+import com.abdelrahman.raafat.climateClue.utils.getMoonPhase
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
 import kotlinx.coroutines.withContext
 import java.io.IOException
 import java.text.DecimalFormat
-import java.text.SimpleDateFormat
 import java.util.Locale
 
 class HomeViewModel(private val application: Application) : AndroidViewModel(application) {
@@ -39,9 +44,13 @@ class HomeViewModel(private val application: Application) : AndroidViewModel(app
     }
     private var isGetAddressDone = false
     private var isGetWeatherDone = false
+    var isTimeTable: Boolean = false
 
     private var _homeList = MutableLiveData<List<HomeItem>>()
     val homeList: LiveData<List<HomeItem>> = _homeList
+
+    private var _timeTableList = MutableLiveData<List<TimeTableItem>>()
+    val timeTableList: LiveData<List<TimeTableItem>> = _timeTableList
 
     private var _weatherResponse = MutableLiveData<WeatherResponse?>()
     val weatherResponse: LiveData<WeatherResponse?> = _weatherResponse
@@ -54,15 +63,58 @@ class HomeViewModel(private val application: Application) : AndroidViewModel(app
         getStoredAddressFromRoom()
     }
 
+    fun onInterconnectionChanged(isInternet: Boolean) {
+        resetData()
 
-    fun getWeatherFromNetwork(latitude: String, longitude: String, language: String) {
-        viewModelScope.launch {
-            val response = _iRepo.getWeatherFromNetwork(latitude, longitude, language)
-            withContext(Dispatchers.Main) {
-                _weatherResponse.postValue(response)
-                isGetWeatherDone = true
-                weatherResponse2 = response
-                setupHomeData()
+        if (isInternet) {
+            fetchWeatherDataOnline()
+            fetchAddressIfNeeded()
+        } else {
+            fetchWeatherDataOffline()
+            fetchStoredAddressIfNeeded()
+        }
+    }
+
+    private fun fetchWeatherDataOnline() {
+        try {
+            getWeatherFromNetwork(
+                ConstantsValue.latitude,
+                ConstantsValue.longitude,
+                ConstantsValue.language
+            )
+        } catch (e: Exception) {
+            // Handle network exceptions or log the error
+            Log.e("NetworkError", "Failed to fetch weather data: ${e.message}")
+        }
+    }
+
+    private fun fetchWeatherDataOffline() {
+        try {
+            getDataFromRoom()
+        } catch (e: Exception) {
+            // Handle data retrieval exceptions or log the error
+            Log.e("DataRetrievalError", "Failed to fetch data from Room: ${e.message}")
+        }
+    }
+
+    private fun fetchAddressIfNeeded() {
+        if (!isTimeTable) {
+            try {
+                getAddress()
+            } catch (e: Exception) {
+                // Handle address fetching exceptions or log the error
+                Log.e("AddressError", "Failed to fetch address: ${e.message}")
+            }
+        }
+    }
+
+    private fun fetchStoredAddressIfNeeded() {
+        if (!isTimeTable) {
+            try {
+                getStoredAddressFromRoom()
+            } catch (e: Exception) {
+                // Handle stored address retrieval exceptions or log the error
+                Log.e("StoredAddressError", "Failed to fetch stored address: ${e.message}")
             }
         }
     }
@@ -96,14 +148,38 @@ class HomeViewModel(private val application: Application) : AndroidViewModel(app
         insertAddressToRoom(address)
     }
 
-    fun getDataFromRoom() {
+    private fun getWeatherFromNetwork(
+        latitude: String,
+        longitude: String,
+        language: String
+    ) {
+        viewModelScope.launch {
+            val response = _iRepo.getWeatherFromNetwork(latitude, longitude, language)
+            withContext(Dispatchers.Main) {
+                _weatherResponse.postValue(response)
+                isGetWeatherDone = true
+                weatherResponse2 = response
+                if (isTimeTable) {
+                    setupTimeTableData()
+                } else {
+                    setupHomeData()
+                }
+            }
+        }
+    }
+
+    private fun getDataFromRoom() {
         viewModelScope.launch {
             val response = _iRepo.getWeatherFromDataBase()
             withContext(Dispatchers.Main) {
                 _weatherResponse.postValue(response)
                 isGetWeatherDone = true
                 weatherResponse2 = response
-                setupHomeData()
+                if (isTimeTable) {
+                    setupTimeTableData()
+                } else {
+                    setupHomeData()
+                }
             }
 
         }
@@ -157,7 +233,7 @@ class HomeViewModel(private val application: Application) : AndroidViewModel(app
                     val dayTemperature = getTemperature(day.temp.day)
                     homeItems.add(
                         HomeItem.DailyItem(
-                            dayName = day.dt.getDayName(),
+                            dayName = day.dt.toAbbreviatedDayName(),
                             dayStatus = day.weather[0].description,
                             dayTemperature = dayTemperature.first + " " + dayTemperature.second,
                             iconURL = ConstantsValue.IMAGE_URL + day.weather[0].icon + "@2x.png",
@@ -171,11 +247,13 @@ class HomeViewModel(private val application: Application) : AndroidViewModel(app
                 //sunrise
                 homeItems.add(
                     HomeItem.DayInfoItem(
-                        icon = R.drawable.ic_sunny,
-                        title = mContext.getString(R.string.sunrise),
-                        description = getTimeInHour(
-                            it.current.sunrise,
-                            it.timezone
+                        dayInfo = DayInfo(
+                            iconFromDrawable = R.drawable.ic_sunny,
+                            title = mContext.getString(R.string.sunrise),
+                            description = formatTime(
+                                it.current.sunrise,
+                                it.timezone
+                            )
                         )
                     )
                 )
@@ -183,11 +261,13 @@ class HomeViewModel(private val application: Application) : AndroidViewModel(app
                 //sunset
                 homeItems.add(
                     HomeItem.DayInfoItem(
-                        icon = R.drawable.ic_ocean,
-                        title = mContext.getString(R.string.sunset),
-                        description = getTimeInHour(
-                            it.current.sunset,
-                            it.timezone
+                        dayInfo = DayInfo(
+                            iconFromDrawable = R.drawable.ic_ocean,
+                            title = mContext.getString(R.string.sunset),
+                            description = formatTime(
+                                it.current.sunset,
+                                it.timezone
+                            )
                         )
                     )
                 )
@@ -195,71 +275,243 @@ class HomeViewModel(private val application: Application) : AndroidViewModel(app
                 //humidity
                 homeItems.add(
                     HomeItem.DayInfoItem(
-                        icon = R.drawable.ic_humidity,
-                        title = mContext.getString(R.string.humidity_cardView),
-                        description = DecimalFormat("#").format(it.current.humidity).plus(" %")
+                        dayInfo = DayInfo(
+                            iconFromDrawable = R.drawable.ic_humidity,
+                            title = mContext.getString(R.string.humidity_cardView),
+                            description = DecimalFormat("#").format(it.current.humidity).plus(" %")
+                        )
                     )
                 )
 
                 //wind_speed
                 homeItems.add(
                     HomeItem.DayInfoItem(
-                        icon = R.drawable.ic_wind,
-                        title = mContext.getString(R.string.wind_speed),
-                        description = getWindSpeed(it)
+                        dayInfo = DayInfo(
+                            iconFromDrawable = R.drawable.ic_wind,
+                            title = mContext.getString(R.string.wind_speed),
+                            description = getWindSpeed(it.current.wind_speed)
+                        )
                     )
                 )
 
                 //wind_degree
                 homeItems.add(
                     HomeItem.DayInfoItem(
-                        icon = R.drawable.ic_wind,
-                        title = mContext.getString(R.string.wind_degree),
-                        description = DecimalFormat("##").format(it.current.wind_deg)
+                        dayInfo = DayInfo(
+                            iconFromDrawable = R.drawable.ic_wind,
+                            title = mContext.getString(R.string.wind_degree),
+                            description = DecimalFormat("##").format(it.current.wind_deg)
+                        )
                     )
                 )
 
                 //cloud
                 homeItems.add(
                     HomeItem.DayInfoItem(
-                        icon = R.drawable.ic_cloud,
-                        title = mContext.getString(R.string.cloud),
-                        description = DecimalFormat("#").format(it.current.clouds).plus(" %")
+                        dayInfo = DayInfo(
+                            iconFromDrawable = R.drawable.ic_cloud,
+                            title = mContext.getString(R.string.cloud),
+                            description = DecimalFormat("#").format(it.current.clouds).plus(" %")
+                        )
                     )
                 )
 
                 //pressure
                 homeItems.add(
                     HomeItem.DayInfoItem(
-                        icon = R.drawable.ic_pressure,
-                        title = mContext.getString(R.string.pressure),
-                        description = DecimalFormat("#").format(it.current.pressure)
-                            .plus(" ${mContext.getString(R.string.pressure_unit)}")
+                        dayInfo = DayInfo(
+                            iconFromDrawable = R.drawable.ic_pressure,
+                            title = mContext.getString(R.string.pressure),
+                            description = DecimalFormat("#").format(it.current.pressure)
+                                .plus(" ${mContext.getString(R.string.pressure_unit)}")
+                        )
                     )
                 )
 
                 //visibility
                 homeItems.add(
                     HomeItem.DayInfoItem(
-                        icon = R.drawable.ic_visibility,
-                        title = mContext.getString(R.string.visibility),
-                        description = DecimalFormat("#").format(it.current.visibility)
-                            .plus(" ${mContext.getString(R.string.meter)}")
+                        dayInfo = DayInfo(
+                            iconFromDrawable = R.drawable.ic_visibility,
+                            title = mContext.getString(R.string.visibility),
+                            description = DecimalFormat("#").format(it.current.visibility)
+                                .plus(" ${mContext.getString(R.string.meter)}")
+                        )
                     )
                 )
 
                 //ultraviolet
                 homeItems.add(
                     HomeItem.DayInfoItem(
-                        icon = R.drawable.ic_ultraviolet,
-                        title = mContext.getString(R.string.ultraviolet),
-                        description = DecimalFormat("#.##").format(it.current.uvi)
+                        dayInfo = DayInfo(
+                            iconFromDrawable = R.drawable.ic_ultraviolet,
+                            title = mContext.getString(R.string.ultraviolet),
+                            description = DecimalFormat("#.##").format(it.current.uvi)
+                        )
                     )
                 )
             }
 
             _homeList.postValue(homeItems)
         }
+    }
+
+    private fun setupTimeTableData() {
+        weatherResponse.value?.daily
+        val timeTableItems = arrayListOf<TimeTableItem>()
+        weatherResponse2?.let { response ->
+            response.daily.forEach { day ->
+
+
+                timeTableItems.add(
+                    TimeTableItem.DayItem(
+                        dayName = day.dt.toFullDateString(),
+                        dayInfo = setupDayInfoData(day, response.timezone)
+                    )
+                )
+            }
+        }
+
+        _timeTableList.postValue(timeTableItems)
+    }
+
+    private fun setupDayInfoData(day: Daily, timezone: String): List<TimeTableItem.DayInfoItem> {
+        val list = arrayListOf<TimeTableItem.DayInfoItem>()
+        //SunRise
+        list.add(
+            TimeTableItem.DayInfoItem(
+                dayInfo = DayInfo(
+                    iconFromDrawable = R.drawable.ic_sunny,
+                    title = mContext.getString(R.string.sunrise),
+                    description = formatTime(day.sunrise, timezone)
+                )
+            )
+        )
+
+        //SunSet
+        list.add(
+            TimeTableItem.DayInfoItem(
+                dayInfo = DayInfo(
+                    iconFromDrawable = R.drawable.ic_ocean,
+                    title = mContext.getString(R.string.sunrise),
+                    description = formatTime(day.sunrise, timezone)
+                )
+            )
+        )
+
+        //moon phases
+        list.add(
+            TimeTableItem.DayInfoItem(
+                dayInfo = DayInfo(
+                    iconFromDrawable = R.drawable.ic_moon_phases,
+                    title = mContext.getString(R.string.moon_phase),
+                    description = getMoonPhase(day, mContext)
+                )
+            )
+        )
+
+        //temperature
+        list.add(
+            TimeTableItem.DayInfoItem(
+                dayInfo = DayInfo(
+                    iconFromDrawable = R.drawable.ic_temperature,
+                    title = mContext.getString(R.string.temperature),
+                    description = formatDailyTemperatureRange(day, mContext)
+                )
+            )
+        )
+
+        //weather
+        list.add(
+            TimeTableItem.DayInfoItem(
+                dayInfo = DayInfo(
+                    iconURL = ConstantsValue.IMAGE_URL + day.weather[0].icon + "@2x.png",
+                    iconFromDrawable = R.drawable.ic_sunny,
+                    title = mContext.getString(R.string.weather_description),
+                    description = day.weather[0].description
+                )
+            )
+        )
+
+        //rain
+        list.add(
+            TimeTableItem.DayInfoItem(
+                dayInfo = DayInfo(
+                    iconFromDrawable = R.drawable.ic_rain,
+                    title = mContext.getString(R.string.probability_precipitation),
+                    description = DecimalFormat("#").format((day.pop * 100)).plus(" %")
+                )
+            )
+        )
+
+        //cloud
+        list.add(
+            TimeTableItem.DayInfoItem(
+                dayInfo = DayInfo(
+                    iconFromDrawable = R.drawable.ic_cloud,
+                    title = mContext.getString(R.string.cloud),
+                    description = DecimalFormat("#").format(day.clouds).plus(" %")
+                )
+            )
+        )
+
+        //pressure
+        list.add(
+            TimeTableItem.DayInfoItem(
+                dayInfo = DayInfo(
+                    iconFromDrawable = R.drawable.ic_pressure,
+                    title = mContext.getString(R.string.pressure),
+                    description = DecimalFormat("#").format(day.pressure)
+                        .plus(" ${mContext.getString(R.string.pressure_unit)}")
+                )
+            )
+        )
+
+        //ultraviolet
+        list.add(
+            TimeTableItem.DayInfoItem(
+                dayInfo = DayInfo(
+                    iconFromDrawable = R.drawable.ic_ultraviolet,
+                    title = mContext.getString(R.string.ultraviolet),
+                    description = DecimalFormat("#.##").format(day.uvi)
+                )
+            )
+        )
+
+        //humidity
+        list.add(
+            TimeTableItem.DayInfoItem(
+                dayInfo = DayInfo(
+                    iconFromDrawable = R.drawable.ic_humidity,
+                    title = mContext.getString(R.string.humidity_cardView),
+                    description = DecimalFormat("#").format(day.humidity).plus(" %")
+                )
+            )
+        )
+
+        //wind speed
+        list.add(
+            TimeTableItem.DayInfoItem(
+                dayInfo = DayInfo(
+                    iconFromDrawable = R.drawable.ic_wind,
+                    title = mContext.getString(R.string.wind_speed),
+                    description = getWindSpeed(day.wind_speed)
+                )
+            )
+        )
+
+        // wind degree
+        list.add(
+            TimeTableItem.DayInfoItem(
+                dayInfo = DayInfo(
+                    iconFromDrawable = R.drawable.ic_wind,
+                    title = mContext.getString(R.string.wind_degree),
+                    description = DecimalFormat("##").format(day.wind_deg)
+                )
+            )
+        )
+
+        return list
     }
 
     private fun getTemperature(temp: Double): Pair<String, String> {
@@ -284,21 +536,20 @@ class HomeViewModel(private val application: Application) : AndroidViewModel(app
         return Pair(temperature, unit)
     }
 
-    private fun getWindSpeed(weatherResponse: WeatherResponse): String {
-        val windSpeed = when (ConstantsValue.windSpeedUnit) {
+    private fun getWindSpeed(windSpeed: Double): String {
+        return when (ConstantsValue.windSpeedUnit) {
             WindSpeedType.MilePerHour.unit -> {
                 DecimalFormat("#.##")
-                    .format(weatherResponse.current.wind_speed * 3.6) + " " +
+                    .format(windSpeed * 3.6) + " " +
                         WindSpeedType.getLocalizedUnit(mContext, WindSpeedType.MilePerHour.unit)
             }
 
             else -> {
                 DecimalFormat("#.##")
-                    .format(weatherResponse.current.wind_speed) + " " +
+                    .format(windSpeed) + " " +
                         WindSpeedType.getLocalizedUnit(mContext, WindSpeedType.MeterPerSecond.unit)
             }
         }
-        return windSpeed
     }
 
     private fun insertAddressToRoom(address: SavedAddress) {
@@ -306,19 +557,6 @@ class HomeViewModel(private val application: Application) : AndroidViewModel(app
             withContext(Dispatchers.IO) {
                 _iRepo.insertAddressToRoom(address)
             }
-        }
-    }
-
-    fun onInterconnectionChanged(isInternet: Boolean) {
-        resetData()
-        if (isInternet) {
-            getAddress()
-            getWeatherFromNetwork(
-                ConstantsValue.latitude, ConstantsValue.longitude, ConstantsValue.language
-            )
-        } else {
-            getDataFromRoom()
-            getStoredAddressFromRoom()
         }
     }
 

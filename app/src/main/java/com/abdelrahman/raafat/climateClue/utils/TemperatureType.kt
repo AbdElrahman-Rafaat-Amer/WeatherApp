@@ -4,7 +4,9 @@ import android.content.Context
 import com.abdelrahman.raafat.climateClue.R
 
 enum class TemperatureType(val unit: String) {
-    Celsius("celsius"), Fahrenheit("fahrenheit"), Kelvin("kelvin");
+    Celsius("celsius"),
+    Fahrenheit("fahrenheit"),
+    Kelvin("kelvin");
 
     companion object {
         fun getLocalizedUnit(mContext: Context, unit: String): String {

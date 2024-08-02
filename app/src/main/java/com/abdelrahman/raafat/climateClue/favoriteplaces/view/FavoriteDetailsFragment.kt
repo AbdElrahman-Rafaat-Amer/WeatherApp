@@ -15,7 +15,7 @@ import com.abdelrahman.raafat.climateClue.model.WeatherResponse
 import com.abdelrahman.raafat.climateClue.utils.ConstantsValue
 import com.abdelrahman.raafat.climateClue.homeplaces.view.HomeAdapter
 import com.abdelrahman.raafat.climateClue.homeplaces.view.HomeItem
-import com.abdelrahman.raafat.climateClue.utils.SpacingItemDecoration
+import com.abdelrahman.raafat.climateClue.ui.itemDecorators.SpacingItemDecoration
 
 class FavoriteDetailsFragment : Fragment() {
 

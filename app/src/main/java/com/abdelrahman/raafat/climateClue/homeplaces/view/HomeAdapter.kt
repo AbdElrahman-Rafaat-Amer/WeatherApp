@@ -1,10 +1,12 @@
 package com.abdelrahman.raafat.climateClue.homeplaces.view
 
+import android.annotation.SuppressLint
 import android.view.LayoutInflater
 import android.view.ViewGroup
 import androidx.recyclerview.widget.RecyclerView
 import com.abdelrahman.raafat.climateClue.R
-import com.abdelrahman.raafat.climateClue.base.BaseViewHolder
+import com.abdelrahman.raafat.climateClue.databinding.CellHomeDayInfoBinding
+import com.abdelrahman.raafat.climateClue.ui.base.BaseViewHolder
 import com.abdelrahman.raafat.climateClue.homeplaces.viewholders.DailyHomeViewHolder
 import com.abdelrahman.raafat.climateClue.homeplaces.viewholders.DayInfoHomeViewHolder
 import com.abdelrahman.raafat.climateClue.homeplaces.viewholders.HourlyHomeViewHolder
@@ -60,13 +62,8 @@ class HomeAdapter : RecyclerView.Adapter<RecyclerView.ViewHolder>() {
             }
 
             HomeItem.DayInfoItem::class.java.hashCode() -> {
-                DayInfoHomeViewHolder(
-                    layoutInflater.inflate(
-                        R.layout.cell_home_day_info,
-                        parent,
-                        false
-                    )
-                )
+                val binding = CellHomeDayInfoBinding.inflate(layoutInflater, parent, false)
+                return DayInfoHomeViewHolder(binding)
             }
 
             else -> {
@@ -91,6 +88,7 @@ class HomeAdapter : RecyclerView.Adapter<RecyclerView.ViewHolder>() {
 
     override fun getItemViewType(position: Int): Int = items[position]::class.java.hashCode()
 
+    @SuppressLint("NotifyDataSetChanged")
     fun setData(items: List<HomeItem>) {
         this.items = items
         notifyDataSetChanged()
