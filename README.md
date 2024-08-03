@@ -43,8 +43,8 @@ You can choose between units of temperature and wind speed
 
 
 
-# App APK
-https://drive.google.com/file/d/1ucy43IHKdGRgMrd1NNxEHUH2q4AFPHIj/view?usp=sharing
+# Download from GooglePlay
+https://play.google.com/store/apps/details?id=com.abdelrahman.rafaat.weatherapp
 
 # App Demo
 https://www.linkedin.com/feed/update/urn:li:ugcPost:6984420941942435840/
