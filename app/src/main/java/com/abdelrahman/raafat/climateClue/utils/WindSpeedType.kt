@@ -4,7 +4,8 @@ import android.content.Context
 import com.abdelrahman.raafat.climateClue.R
 
 enum class WindSpeedType(val unit: String) {
-    MilePerHour("M/H"), MeterPerSecond("M/S");
+    MilePerHour("M/H"),
+    MeterPerSecond("M/S");
 
     companion object {
         fun getLocalizedUnit(mContext: Context, unit: String): String {

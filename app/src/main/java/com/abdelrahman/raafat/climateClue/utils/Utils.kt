@@ -2,19 +2,17 @@ package com.abdelrahman.raafat.climateClue.utils
 
 import android.content.Context
 import android.content.Intent
-import android.location.Geocoder
 import android.os.Build
 import android.provider.Settings
-import android.util.Log
 import com.abdelrahman.raafat.climateClue.R
 import com.abdelrahman.raafat.climateClue.extension.toCelsius
 import com.abdelrahman.raafat.climateClue.extension.toFahrenheit
 import com.abdelrahman.raafat.climateClue.extension.toKelvin
 import com.abdelrahman.raafat.climateClue.model.Daily
-import com.abdelrahman.raafat.climateClue.model.SavedAddress
-import java.io.IOException
 import java.text.SimpleDateFormat
-import java.util.*
+import java.util.Date
+import java.util.Locale
+import java.util.TimeZone
 
 /**
  * Converts milliseconds to a formatted time string based on the specified pattern and time zone.
@@ -109,29 +107,3 @@ fun connectInternet(context: Context) {
         context.startActivity(Intent(Settings.ACTION_WIFI_SETTINGS))
     }
 }
-
-fun getAddress(latitude: Double, longitude: Double, context: Context): SavedAddress {
-    var address: SavedAddress = SavedAddress("En", "Alex", "Alex", "Egypt")
-    var subAdminArea = context.getString(R.string.undefined_place)
-    try {
-        val geocoder = Geocoder(context, Locale.getDefault())
-
-        val addresses = geocoder.getFromLocation(latitude, longitude, 1)
-
-        addresses?.get(0)?.subAdminArea?.let {
-            subAdminArea = it
-        }
-
-        address = SavedAddress(
-            ConstantsValue.language,
-            subAdminArea,
-            addresses?.get(0)?.adminArea ?: "", addresses?.get(0)?.countryName ?: ""
-        )
-
-    } catch (exception: IOException) {
-        Log.i("Utils", "getAddress: exception-------------------- ${exception.message}")
-    }
-    return address
-}
-
-

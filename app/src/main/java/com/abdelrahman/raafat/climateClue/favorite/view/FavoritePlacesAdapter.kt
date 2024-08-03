@@ -1,5 +1,6 @@
-package com.abdelrahman.raafat.climateClue.favoriteplaces.view
+package com.abdelrahman.raafat.climateClue.favorite.view
 
+import android.annotation.SuppressLint
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -48,6 +49,7 @@ class FavoritePlacesAdapter(private var fragment: OnDeleteFavorite) :
         return favorites.size
     }
 
+    @SuppressLint("NotifyDataSetChanged")
     fun setList(favorites: List<FavoritePlaces>) {
         this.favorites = favorites
         notifyDataSetChanged()

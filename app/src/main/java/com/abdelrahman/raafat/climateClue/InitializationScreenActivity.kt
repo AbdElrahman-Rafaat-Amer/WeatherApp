@@ -25,20 +25,18 @@ import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.delay
 import kotlinx.coroutines.launch
-import java.util.*
 
 
 class InitializationScreenActivity : AppCompatActivity() {
 
     private lateinit var binding: ActivityIntializaionScreenBinding
     private lateinit var fusedLocationClient: FusedLocationProviderClient
-    private val PERMISSION_ID_LOCATION = 0
+    private val permissionIDLocation = 0
     private var isInternet = false
     private var isFirstTime = true
 
     override fun onCreate(savedInstanceState: Bundle?) {
-        LocaleHelper.setAppLocale(ConstantsValue.language, resources)
-        LocaleHelper.setAppLocale(ConstantsValue.language, resources)
+        LocaleHelper.updateLocale(this, ConstantsValue.language)
         super.onCreate(savedInstanceState)
         binding = ActivityIntializaionScreenBinding.inflate(layoutInflater)
         setContentView(binding.root)
@@ -66,8 +64,8 @@ class InitializationScreenActivity : AppCompatActivity() {
 
     private fun checkInternet() {
 
-        val snackbar = showSnackBar(getString(R.string.enable_internet))
-        snackbar.setAction(getString(R.string.enable)) {
+        val snackBar = showSnackBar(getString(R.string.enable_internet))
+        snackBar.setAction(getString(R.string.enable)) {
             connectInternet(this)
         }
 
@@ -75,13 +73,13 @@ class InitializationScreenActivity : AppCompatActivity() {
             if (it) {
                 isInternet = true
                 requestPermission()
-                snackbar.dismiss()
+                snackBar.dismiss()
             }
         }
         CoroutineScope(Dispatchers.Main).launch {
             delay(1000)
             if (!isInternet) {
-                snackbar.show()
+                snackBar.show()
             }
         }
 
@@ -93,7 +91,7 @@ class InitializationScreenActivity : AppCompatActivity() {
             this, arrayOf(
                 Manifest.permission.ACCESS_COARSE_LOCATION,
                 Manifest.permission.ACCESS_FINE_LOCATION
-            ), PERMISSION_ID_LOCATION
+            ), permissionIDLocation
         )
     }
 
@@ -104,7 +102,7 @@ class InitializationScreenActivity : AppCompatActivity() {
     ) {
         super.onRequestPermissionsResult(requestCode, permissions, grantResults)
         when (requestCode) {
-            PERMISSION_ID_LOCATION -> if (grantResults[0] == PackageManager.PERMISSION_GRANTED && grantResults[1] == PackageManager.PERMISSION_GRANTED) {
+            permissionIDLocation -> if (grantResults[0] == PackageManager.PERMISSION_GRANTED && grantResults[1] == PackageManager.PERMISSION_GRANTED) {
                 getLastLocation()
             } else {
                 if (ActivityCompat.shouldShowRequestPermissionRationale(
@@ -115,8 +113,8 @@ class InitializationScreenActivity : AppCompatActivity() {
                 ) {
                     requestPermission()
                 } else {
-                    val snackbar = showSnackBar(getString(R.string.open_setting))
-                    snackbar.setAction(R.string.action_settings) {
+                    val snackBar = showSnackBar(getString(R.string.open_setting))
+                    snackBar.setAction(R.string.action_settings) {
                         val intent = Intent()
                         intent.action = Settings.ACTION_APPLICATION_DETAILS_SETTINGS
                         val uri = Uri.fromParts(
@@ -127,7 +125,7 @@ class InitializationScreenActivity : AppCompatActivity() {
                         intent.data = uri
                         startActivity(intent)
                     }
-                    snackbar.show()
+                    snackBar.show()
                     isFirstTime = false
                     setVisibility(View.VISIBLE, getString(R.string.wait))
                 }
@@ -156,11 +154,11 @@ class InitializationScreenActivity : AppCompatActivity() {
             }
         } else {
             setVisibility(View.VISIBLE, getString(R.string.waiting_enable_gps))
-            val snackbar = showSnackBar(getString(R.string.enable_gps))
-            snackbar.setAction(getString(R.string.enable)) {
+            val snackBar = showSnackBar(getString(R.string.enable_gps))
+            snackBar.setAction(getString(R.string.enable)) {
                 startActivity(Intent(Settings.ACTION_LOCATION_SOURCE_SETTINGS))
             }
-            snackbar.show()
+            snackBar.show()
         }
     }
 
@@ -183,10 +181,12 @@ class InitializationScreenActivity : AppCompatActivity() {
 
     @SuppressLint("MissingPermission")
     private fun requestNewLocationData() {
-        val locationRequest = LocationRequest()
-        locationRequest.priority = LocationRequest.PRIORITY_HIGH_ACCURACY
-        locationRequest.interval = 10000
-        locationRequest.fastestInterval = 5000
+        val builder = LocationRequest.Builder(
+            Priority.PRIORITY_HIGH_ACCURACY,
+            10000
+        )
+        builder.setMinUpdateIntervalMillis(5000)
+        val locationRequest = builder.build()
         fusedLocationClient = LocationServices.getFusedLocationProviderClient(this)
         fusedLocationClient.requestLocationUpdates(
             locationRequest, mLocationCallback,
@@ -214,8 +214,8 @@ class InitializationScreenActivity : AppCompatActivity() {
         super.onResume()
         if (!checkPermission()) {
             if (!isFirstTime) {
-                val snackbar = showSnackBar(getString(R.string.open_setting))
-                snackbar.setAction(R.string.action_settings) {
+                val snackBar = showSnackBar(getString(R.string.open_setting))
+                snackBar.setAction(R.string.action_settings) {
                     val intent = Intent()
                     intent.action = Settings.ACTION_APPLICATION_DETAILS_SETTINGS
                     val uri = Uri.fromParts(
@@ -226,7 +226,7 @@ class InitializationScreenActivity : AppCompatActivity() {
                     intent.data = uri
                     startActivity(intent)
                 }
-                snackbar.show()
+                snackBar.show()
                 setVisibility(View.VISIBLE, getString(R.string.wait))
             }
         }

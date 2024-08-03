@@ -1,4 +1,4 @@
-package com.abdelrahman.raafat.climateClue.favoriteplaces.view
+package com.abdelrahman.raafat.climateClue.favorite.view
 
 import com.abdelrahman.raafat.climateClue.model.FavoritePlaces
 

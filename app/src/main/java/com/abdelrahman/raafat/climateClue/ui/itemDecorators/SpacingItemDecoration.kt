@@ -4,7 +4,7 @@ import android.graphics.Rect
 import android.view.View
 import androidx.recyclerview.widget.RecyclerView
 import com.abdelrahman.raafat.climateClue.ui.base.BaseItemDecoration
-import com.abdelrahman.raafat.climateClue.homeplaces.viewholders.DayInfoHomeViewHolder
+import com.abdelrahman.raafat.climateClue.ui.home.viewholders.DayInfoHomeViewHolder
 
 class SpacingItemDecoration(
     private val verticalSpaceHeight: Int,

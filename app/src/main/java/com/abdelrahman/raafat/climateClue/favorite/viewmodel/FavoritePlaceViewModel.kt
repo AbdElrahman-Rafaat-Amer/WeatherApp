@@ -1,4 +1,4 @@
-package com.abdelrahman.raafat.climateClue.favoriteplaces.viewmodel
+package com.abdelrahman.raafat.climateClue.favorite.viewmodel
 
 
 import android.app.Application
@@ -15,7 +15,7 @@ import com.abdelrahman.raafat.climateClue.model.WeatherResponse
 import com.abdelrahman.raafat.climateClue.network.WeatherClient
 import com.abdelrahman.raafat.climateClue.utils.ConstantsValue
 import com.abdelrahman.raafat.climateClue.utils.formatDate
-import com.abdelrahman.raafat.climateClue.homeplaces.view.HomeItem
+import com.abdelrahman.raafat.climateClue.ui.home.view.HomeItem
 import com.abdelrahman.raafat.climateClue.model.DayInfo
 import com.abdelrahman.raafat.climateClue.utils.TemperatureType
 import com.abdelrahman.raafat.climateClue.utils.formatTime

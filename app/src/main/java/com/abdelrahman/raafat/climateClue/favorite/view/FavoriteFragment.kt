@@ -1,4 +1,4 @@
-package com.abdelrahman.raafat.climateClue.favoriteplaces.view
+package com.abdelrahman.raafat.climateClue.favorite.view
 
 import android.app.AlertDialog
 import android.content.Intent
@@ -17,7 +17,7 @@ import androidx.recyclerview.widget.LinearLayoutManager
 import com.abdelrahman.raafat.climateClue.R
 import com.abdelrahman.raafat.climateClue.databinding.DialogLayoutBinding
 import com.abdelrahman.raafat.climateClue.databinding.FragmentFavoriteBinding
-import com.abdelrahman.raafat.climateClue.favoriteplaces.viewmodel.FavoritePlaceViewModel
+import com.abdelrahman.raafat.climateClue.favorite.viewmodel.FavoritePlaceViewModel
 import com.abdelrahman.raafat.climateClue.maps.GoogleMapsActivity
 import com.abdelrahman.raafat.climateClue.model.FavoritePlaces
 import com.abdelrahman.raafat.climateClue.utils.ConnectionLiveData

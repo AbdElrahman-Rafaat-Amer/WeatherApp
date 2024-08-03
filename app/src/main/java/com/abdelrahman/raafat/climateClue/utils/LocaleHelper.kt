@@ -2,8 +2,6 @@ package com.abdelrahman.raafat.climateClue.utils
 
 import android.content.Context
 import android.content.res.Configuration
-import android.content.res.Resources
-import android.util.DisplayMetrics
 import java.util.Locale
 
 object LocaleHelper {
@@ -16,15 +14,6 @@ object LocaleHelper {
         val newConfig = context.resources.configuration
         newConfig.setLocale(locale)
         config = newConfig
-    }
-
-    fun setAppLocale(localeCode: String, resources: Resources) {
-        val dm: DisplayMetrics = resources.displayMetrics
-        val configuration: Configuration = resources.configuration
-        configuration.setLocale(Locale(localeCode.lowercase(Locale.ROOT)))
-        resources.updateConfiguration(configuration, dm)
-        Locale.setDefault(Locale.forLanguageTag(ConstantsValue.language))
-        config = configuration
     }
 
     fun getLocalizedContext(context: Context): Context {

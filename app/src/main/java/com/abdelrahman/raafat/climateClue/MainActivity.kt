@@ -19,7 +19,7 @@ class MainActivity : AppCompatActivity() {
 
 
     override fun onCreate(savedInstanceState: Bundle?) {
-        LocaleHelper.setAppLocale(ConstantsValue.language, resources)
+        LocaleHelper.updateLocale(this, ConstantsValue.language)
         super.onCreate(savedInstanceState)
         binding = ActivityMainBinding.inflate(layoutInflater)
         setContentView(binding.root)

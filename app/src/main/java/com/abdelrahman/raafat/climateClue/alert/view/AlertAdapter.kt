@@ -1,5 +1,6 @@
 package com.abdelrahman.raafat.climateClue.alert.view
 
+import android.annotation.SuppressLint
 import android.view.LayoutInflater
 import android.view.ViewGroup
 import androidx.recyclerview.widget.RecyclerView
@@ -28,6 +29,7 @@ class AlertAdapter(private var onDeleteAlert: OnAlertDeleteClickListener) :
         return alerts.size
     }
 
+    @SuppressLint("NotifyDataSetChanged")
     fun setList(alerts: List<SavedAlerts>) {
         this.alerts = alerts
         notifyDataSetChanged()

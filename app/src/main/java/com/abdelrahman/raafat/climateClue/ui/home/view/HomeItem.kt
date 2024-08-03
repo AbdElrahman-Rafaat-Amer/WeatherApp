@@ -1,4 +1,4 @@
-package com.abdelrahman.raafat.climateClue.homeplaces.view
+package com.abdelrahman.raafat.climateClue.ui.home.view
 
 import com.abdelrahman.raafat.climateClue.model.DayInfo
 import com.abdelrahman.raafat.climateClue.model.Hourly

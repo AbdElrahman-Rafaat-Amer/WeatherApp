@@ -10,7 +10,7 @@ import androidx.activity.viewModels
 import androidx.appcompat.app.AppCompatActivity
 import androidx.constraintlayout.widget.ConstraintLayout
 import com.abdelrahman.raafat.climateClue.R
-import com.abdelrahman.raafat.climateClue.favoriteplaces.viewmodel.FavoritePlaceViewModel
+import com.abdelrahman.raafat.climateClue.favorite.viewmodel.FavoritePlaceViewModel
 import com.abdelrahman.raafat.climateClue.model.FavoritePlaces
 import com.abdelrahman.raafat.climateClue.utils.ConstantsValue
 import com.google.android.gms.maps.CameraUpdateFactory

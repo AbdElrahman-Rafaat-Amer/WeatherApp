@@ -6,9 +6,9 @@ import android.view.LayoutInflater
 import androidx.core.content.ContextCompat
 import com.abdelrahman.raafat.climateClue.R
 import com.abdelrahman.raafat.climateClue.databinding.LayoutStatusDetailsBinding
-import com.abdelrahman.raafat.climateClue.homeplaces.view.HomeItem
+import com.abdelrahman.raafat.climateClue.ui.home.view.HomeItem
 import com.abdelrahman.raafat.climateClue.model.DayInfo
-import com.abdelrahman.raafat.climateClue.timetable.TimeTableItem
+import com.abdelrahman.raafat.climateClue.ui.timetable.TimeTableItem
 import com.google.android.material.card.MaterialCardView
 
 class StatusDetailsWidget @JvmOverloads constructor(

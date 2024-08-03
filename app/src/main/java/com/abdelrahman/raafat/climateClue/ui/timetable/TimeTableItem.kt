@@ -1,4 +1,4 @@
-package com.abdelrahman.raafat.climateClue.timetable
+package com.abdelrahman.raafat.climateClue.ui.timetable
 
 import com.abdelrahman.raafat.climateClue.model.DayInfo
 

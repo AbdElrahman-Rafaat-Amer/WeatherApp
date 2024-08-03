@@ -1,14 +1,17 @@
-package com.abdelrahman.raafat.climateClue.homeplaces.viewmodel
+package com.abdelrahman.raafat.climateClue.ui.home.viewmodel
 
 import android.app.Application
 import android.location.Geocoder
 import android.util.Log
-import androidx.lifecycle.*
+import androidx.lifecycle.AndroidViewModel
+import androidx.lifecycle.LiveData
+import androidx.lifecycle.MutableLiveData
+import androidx.lifecycle.viewModelScope
 import com.abdelrahman.raafat.climateClue.R
 import com.abdelrahman.raafat.climateClue.database.ConcreteLocaleSource
 import com.abdelrahman.raafat.climateClue.extension.toAbbreviatedDayName
 import com.abdelrahman.raafat.climateClue.extension.toFullDateString
-import com.abdelrahman.raafat.climateClue.homeplaces.view.HomeItem
+import com.abdelrahman.raafat.climateClue.ui.home.view.HomeItem
 import com.abdelrahman.raafat.climateClue.model.Daily
 import com.abdelrahman.raafat.climateClue.model.DayInfo
 import com.abdelrahman.raafat.climateClue.model.Repository
@@ -16,7 +19,7 @@ import com.abdelrahman.raafat.climateClue.model.RepositoryInterface
 import com.abdelrahman.raafat.climateClue.model.SavedAddress
 import com.abdelrahman.raafat.climateClue.model.WeatherResponse
 import com.abdelrahman.raafat.climateClue.network.WeatherClient
-import com.abdelrahman.raafat.climateClue.timetable.TimeTableItem
+import com.abdelrahman.raafat.climateClue.ui.timetable.TimeTableItem
 import com.abdelrahman.raafat.climateClue.utils.ConstantsValue
 import com.abdelrahman.raafat.climateClue.utils.LocaleHelper
 import com.abdelrahman.raafat.climateClue.utils.TemperatureType
@@ -52,11 +55,8 @@ class HomeViewModel(private val application: Application) : AndroidViewModel(app
     private var _timeTableList = MutableLiveData<List<TimeTableItem>>()
     val timeTableList: LiveData<List<TimeTableItem>> = _timeTableList
 
-    private var _weatherResponse = MutableLiveData<WeatherResponse?>()
-    val weatherResponse: LiveData<WeatherResponse?> = _weatherResponse
-
     private var addressResponse: SavedAddress? = null
-    private var weatherResponse2: WeatherResponse? = null
+    private var weatherResponse: WeatherResponse? = null
 
     init {
         getDataFromRoom()
@@ -156,9 +156,8 @@ class HomeViewModel(private val application: Application) : AndroidViewModel(app
         viewModelScope.launch {
             val response = _iRepo.getWeatherFromNetwork(latitude, longitude, language)
             withContext(Dispatchers.Main) {
-                _weatherResponse.postValue(response)
                 isGetWeatherDone = true
-                weatherResponse2 = response
+                weatherResponse = response
                 if (isTimeTable) {
                     setupTimeTableData()
                 } else {
@@ -172,9 +171,8 @@ class HomeViewModel(private val application: Application) : AndroidViewModel(app
         viewModelScope.launch {
             val response = _iRepo.getWeatherFromDataBase()
             withContext(Dispatchers.Main) {
-                _weatherResponse.postValue(response)
                 isGetWeatherDone = true
-                weatherResponse2 = response
+                weatherResponse = response
                 if (isTimeTable) {
                     setupTimeTableData()
                 } else {
@@ -206,7 +204,7 @@ class HomeViewModel(private val application: Application) : AndroidViewModel(app
                 homeItems.add(HomeItem.TitleItem(locationDetails, isTextSmall = true))
             }
 
-            weatherResponse2?.let {
+            weatherResponse?.let {
 
                 //Date
                 val date = formatDate(it.current.dt)
@@ -357,9 +355,8 @@ class HomeViewModel(private val application: Application) : AndroidViewModel(app
     }
 
     private fun setupTimeTableData() {
-        weatherResponse.value?.daily
         val timeTableItems = arrayListOf<TimeTableItem>()
-        weatherResponse2?.let { response ->
+        weatherResponse?.let { response ->
             response.daily.forEach { day ->
 
 
@@ -564,7 +561,7 @@ class HomeViewModel(private val application: Application) : AndroidViewModel(app
         isGetAddressDone = false
         isGetWeatherDone = false
         addressResponse = null
-        weatherResponse2 = null
+        weatherResponse = null
     }
 
 }

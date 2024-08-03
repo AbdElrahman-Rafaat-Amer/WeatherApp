@@ -1,4 +1,4 @@
-package com.abdelrahman.raafat.climateClue.timetable
+package com.abdelrahman.raafat.climateClue.ui.timetable
 
 import android.os.Bundle
 import android.view.LayoutInflater
@@ -9,7 +9,7 @@ import androidx.fragment.app.activityViewModels
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.abdelrahman.raafat.climateClue.R
 import com.abdelrahman.raafat.climateClue.databinding.FragmentTimeTableBinding
-import com.abdelrahman.raafat.climateClue.homeplaces.viewmodel.HomeViewModel
+import com.abdelrahman.raafat.climateClue.ui.home.viewmodel.HomeViewModel
 import com.abdelrahman.raafat.climateClue.ui.itemDecorators.SpacingItemDecoration
 import com.abdelrahman.raafat.climateClue.utils.ConnectionLiveData
 
