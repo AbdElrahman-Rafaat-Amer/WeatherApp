@@ -53,6 +53,10 @@ class SplashActivity : AppCompatActivity() {
         
         ConstantsValue.notificationMethod =
             PreferenceManager.getDefaultSharedPreferences(application.applicationContext)
-                .getBoolean("toggle_notification", true)
+                .getBoolean("toggle_notification", false)
+
+        ConstantsValue.is24HoursEnabled =
+            PreferenceManager.getDefaultSharedPreferences(application.applicationContext)
+                .getBoolean("IS_24HOURS_ENABLED", true)
     }
 }

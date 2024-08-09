@@ -4,14 +4,14 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:paddingHorizontal="@dimen/_15sdp"
-    android:paddingTop="@dimen/_15sdp"
+    android:paddingHorizontal="@dimen/horizontal_space"
+    android:paddingTop="@dimen/vertical_space"
     tools:context=".alert.view.AlertFragment">
 
     <ImageView
         android:id="@+id/no_alerts_imageView"
-        android:layout_width="@dimen/_150sdp"
-        android:layout_height="@dimen/_150sdp"
+        android:layout_width="200dp"
+        android:layout_height="200dp"
         android:contentDescription="@string/no_alert"
         android:src="@drawable/ic_alert"
         android:visibility="gone"

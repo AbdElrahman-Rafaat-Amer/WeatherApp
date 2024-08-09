@@ -1,9 +1,11 @@
 <?xml version="1.0" encoding="utf-8"?>
-<PreferenceScreen xmlns:android="http://schemas.android.com/apk/res/android">
+<PreferenceScreen xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto">
 
     <PreferenceCategory android:title="@string/notification">
         <SwitchPreference
             android:defaultValue="true"
+            android:icon="@drawable/ic_alert"
             android:key="toggle_notification"
             android:summaryOff="@string/notification_disabled"
             android:summaryOn="@string/notification_enabled"
@@ -41,6 +43,16 @@
             android:key="wind_speed"
             android:summary="%s"
             android:title="@string/wind_speed" />
+    </PreferenceCategory>
+
+    <PreferenceCategory app:title="@string/enable_24h">
+        <SwitchPreference
+            app:defaultValue="false"
+            app:key="IS_24HOURS_ENABLED"
+            android:icon="@drawable/ic_24_hours"
+            app:summaryOff="@string/_24h_off"
+            app:summaryOn="@string/_24h_on"
+            app:title="@string/enable_24h" />
     </PreferenceCategory>
 
 </PreferenceScreen>

@@ -17,13 +17,11 @@ object LocaleHelper {
     }
 
     fun getLocalizedContext(context: Context): Context {
-        if (config != null) {
-            val newContext = context.createConfigurationContext(config!!)
-            return newContext
-        } else {
+        if (config == null)
             return context
-        }
 
+        val newContext = context.createConfigurationContext(config!!)
+        return newContext
     }
 
     fun isRTL(): Boolean {

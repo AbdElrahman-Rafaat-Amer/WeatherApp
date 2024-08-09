@@ -15,11 +15,11 @@
     </style>
 
     <style name="AlertDialog" parent="Theme.AppCompat.Light.Dialog.Alert">
-        <item name="android:windowBackground">@drawable/alert_background</item>
+        <item name="android:windowBackground">@drawable/bg_light_blue_7</item>
     </style>
 
     <style name="CustomAlertDialog" parent="Theme.AppCompat.Light.Dialog.Alert">
-        <item name="android:windowBackground">@drawable/alert_background</item>
+        <item name="android:windowBackground">@drawable/bg_light_blue_7</item>
         <item name="android:colorAccent">@color/white</item>
         <item name="android:textColorPrimary">@color/white</item>
         <item name="android:buttonBarNegativeButtonStyle">@style/NegativeButtonStyle</item>

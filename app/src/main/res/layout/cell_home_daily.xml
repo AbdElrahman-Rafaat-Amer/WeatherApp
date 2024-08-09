@@ -4,7 +4,7 @@
     android:id="@+id/current_day_constraintLayout"
     android:layout_width="match_parent"
     android:layout_height="90dp"
-    android:background="@drawable/bg_rounded_light_blue_10"
+    android:background="@drawable/bg_light_blue_10"
     android:gravity="center"
     android:orientation="horizontal"
     android:padding="5dp">

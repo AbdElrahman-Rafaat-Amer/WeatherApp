@@ -11,7 +11,6 @@ import com.abdelrahman.raafat.climateClue.R
 import com.abdelrahman.raafat.climateClue.databinding.FragmentTimeTableBinding
 import com.abdelrahman.raafat.climateClue.ui.home.viewmodel.HomeViewModel
 import com.abdelrahman.raafat.climateClue.ui.itemDecorators.SpacingItemDecoration
-import com.abdelrahman.raafat.climateClue.utils.ConnectionLiveData
 
 class TimeTableFragment : Fragment() {
     private lateinit var binding: FragmentTimeTableBinding
@@ -22,7 +21,6 @@ class TimeTableFragment : Fragment() {
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View {
-        homeViewModel.isTimeTable = true
         binding = FragmentTimeTableBinding.inflate(layoutInflater)
         return binding.root
     }
@@ -30,7 +28,6 @@ class TimeTableFragment : Fragment() {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
         initUI()
-        checkInternet()
         observeViewModel()
     }
 
@@ -50,23 +47,12 @@ class TimeTableFragment : Fragment() {
         )
     }
 
-    private fun checkInternet() {
-        ConnectionLiveData.getInstance(requireContext()).observe(viewLifecycleOwner) {
-            homeViewModel.onInterconnectionChanged(it)
-        }
-    }
-
     private fun observeViewModel() {
+        homeViewModel.setupTimeTableData()
         homeViewModel.timeTableList.observe(viewLifecycleOwner) {
             if (it != null) {
                 imeTableAdapter.setData(it)
             }
         }
     }
-
-    override fun onDestroyView() {
-        homeViewModel.isTimeTable = false
-        super.onDestroyView()
-    }
-
 }

@@ -27,7 +27,7 @@ fun formatTime(
     seconds: Long,
     timeZone: String,
     includeMinutes: Boolean = true,
-    use24HourFormat: Boolean = false
+    use24HourFormat: Boolean = ConstantsValue.is24HoursEnabled
 ): String {
     // Convert seconds to milliSeconds
     val milliSeconds = seconds * 1000

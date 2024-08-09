@@ -47,7 +47,6 @@ class HomeViewModel(private val application: Application) : AndroidViewModel(app
     }
     private var isGetAddressDone = false
     private var isGetWeatherDone = false
-    var isTimeTable: Boolean = false
 
     private var _homeList = MutableLiveData<List<HomeItem>>()
     val homeList: LiveData<List<HomeItem>> = _homeList
@@ -98,24 +97,20 @@ class HomeViewModel(private val application: Application) : AndroidViewModel(app
     }
 
     private fun fetchAddressIfNeeded() {
-        if (!isTimeTable) {
-            try {
-                getAddress()
-            } catch (e: Exception) {
-                // Handle address fetching exceptions or log the error
-                Log.e("AddressError", "Failed to fetch address: ${e.message}")
-            }
+        try {
+            getAddress()
+        } catch (e: Exception) {
+            // Handle address fetching exceptions or log the error
+            Log.e("AddressError", "Failed to fetch address: ${e.message}")
         }
     }
 
     private fun fetchStoredAddressIfNeeded() {
-        if (!isTimeTable) {
-            try {
-                getStoredAddressFromRoom()
-            } catch (e: Exception) {
-                // Handle stored address retrieval exceptions or log the error
-                Log.e("StoredAddressError", "Failed to fetch stored address: ${e.message}")
-            }
+        try {
+            getStoredAddressFromRoom()
+        } catch (e: Exception) {
+            // Handle stored address retrieval exceptions or log the error
+            Log.e("StoredAddressError", "Failed to fetch stored address: ${e.message}")
         }
     }
 
@@ -158,11 +153,7 @@ class HomeViewModel(private val application: Application) : AndroidViewModel(app
             withContext(Dispatchers.Main) {
                 isGetWeatherDone = true
                 weatherResponse = response
-                if (isTimeTable) {
-                    setupTimeTableData()
-                } else {
-                    setupHomeData()
-                }
+                setupHomeData()
             }
         }
     }
@@ -173,11 +164,7 @@ class HomeViewModel(private val application: Application) : AndroidViewModel(app
             withContext(Dispatchers.Main) {
                 isGetWeatherDone = true
                 weatherResponse = response
-                if (isTimeTable) {
-                    setupTimeTableData()
-                } else {
-                    setupHomeData()
-                }
+                setupHomeData()
             }
 
         }
@@ -354,7 +341,7 @@ class HomeViewModel(private val application: Application) : AndroidViewModel(app
         }
     }
 
-    private fun setupTimeTableData() {
+    fun setupTimeTableData() {
         val timeTableItems = arrayListOf<TimeTableItem>()
         weatherResponse?.let { response ->
             response.daily.forEach { day ->

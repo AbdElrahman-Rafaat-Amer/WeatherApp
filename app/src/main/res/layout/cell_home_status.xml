@@ -22,7 +22,7 @@
             <androidx.constraintlayout.widget.ConstraintLayout
                 android:layout_width="match_parent"
                 android:layout_height="200dp"
-                android:background="@drawable/background_bottom_right"
+                android:background="@drawable/bg_light_blue_10"
                 android:padding="10dp">
 
                 <TextView
