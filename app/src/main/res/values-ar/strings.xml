@@ -1,5 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
+    <string name="_24h_off">كل الوقت الآن سيكون بتنسيق 12H_مثل: 8:27 مساءً أو 8:27 صباحًا</string>
+    <string name="_24h_on">الآن سيكون كل الوقت بتنسيق 24 ساعة\\nex:20:27</string>
     <string name="action_settings">الإعدادات</string>
     <string name="add_favorite_place">اضف مكان جديد</string>
     <string name="add_new_alert">اضف تحذير جديد</string>
@@ -15,10 +17,14 @@
     <string name="avalanches_alert">الانهيارات الثلجية</string>
     <string name="cancel">إالغاء</string>
     <string name="cloud">الغيوم</string>
+    <string name="day_name_description">اسم اليوم</string>
     <string name="day_status">صافي</string>
+    <string name="day_status_description">حالة الطقس لهذا اليوم</string>
+    <string name="day_temperature_description">درجة الحرارة لهذا اليوم</string>
     <string name="delete_alert">هل أنت متأكد أنك تريد حذف هذا التنبيه؟</string>
     <string name="delete_place">هل أنت متأكد أنك تريد حذف هذا المكان؟</string>
     <string name="enable">تفعيل</string>
+    <string name="enable_24h">تمكين 24 ساعة</string>
     <string name="enable_gps">من فضلك قم بتفعيل خدمات الموقع</string>
     <string name="enable_internet">قم بتشغيل الانترنت في اول مرة تستخدم الابليكشن</string>
     <string name="end_date">١ يناير ٢٠٢٢</string>
@@ -31,8 +37,8 @@
     <string name="humidity_cardView">الرطوبة</string>
     <string name="language">اللغة</string>
     <string name="language_arabic">العربية</string>
-    <string name="language_english">English</string>
     <string name="language_dutch">Deutsche</string>
+    <string name="language_english">English</string>
     <string name="language_spanish">Español</string>
     <string name="last_quarter">ربع اخير</string>
     <string name="loading_bar">يجري تحميل الصفحة الان</string>

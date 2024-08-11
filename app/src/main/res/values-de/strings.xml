@@ -1,5 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
+    <string name="_24h_off">Die gesamte Zeit wird nun im 12-Stunden-Format sein\\nex:8:27 PM oder 8:27 AM</string>
+    <string name="_24h_on">Ab sofort ist die Zeit immer im 24-Stunden-Format angegeben.\\nex:20:27</string>
     <string name="action_settings">Einstellungen</string>
     <string name="add_favorite_place">Lieblingsplatz hinzufügen</string>
     <string name="add_new_alert">neuen Alarm hinzufügen</string>
@@ -15,10 +17,14 @@
     <string name="avalanches_alert">Lawinen</string>
     <string name="cancel">Abbrechen</string>
     <string name="cloud">Wolke</string>
+    <string name="day_name_description">Name des Tages</string>
     <string name="day_status">Klar</string>
+    <string name="day_status_description">Wetterlage des Tages</string>
+    <string name="day_temperature_description">Temperatur des Tages</string>
     <string name="delete_alert">Sind Sie sicher, dass Sie diesen Alert löschen wollen?</string>
     <string name="delete_place">Sind Sie sicher, dass Sie diesen Ort löschen wollen?</string>
     <string name="enable">Aktivieren Sie</string>
+    <string name="enable_24h">24 Stunden aktivieren</string>
     <string name="enable_gps">Bitte aktivieren Sie GPS</string>
     <string name="enable_internet">Internet beim ersten Mal aktivieren</string>
     <string name="end_date">1 Nov 202</string>
@@ -31,8 +37,8 @@
     <string name="humidity_cardView">Luftfeuchtigkeit</string>
     <string name="language">Sprache</string>
     <string name="language_arabic">العربية</string>
-    <string name="language_english">English</string>
     <string name="language_dutch">Deutsche</string>
+    <string name="language_english">English</string>
     <string name="language_spanish">Español</string>
     <string name="last_quarter">Letztes Quartal</string>
     <string name="loading_bar">Ladebalken</string>
