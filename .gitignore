@@ -24,3 +24,4 @@ app/google-services.json
 app/.idea/workspace.xml
 app/.idea/misc.xml
 app/.idea/gradle.xml
+app/release/app-release.aab

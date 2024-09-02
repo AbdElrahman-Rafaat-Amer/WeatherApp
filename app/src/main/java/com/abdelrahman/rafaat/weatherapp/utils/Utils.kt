@@ -44,6 +44,9 @@ fun getAddress(latitude: Double, longitude: Double, context: Context): SavedAddr
 
         val addresses = geocoder.getFromLocation(latitude, longitude, 1)
 
+        if (addresses.isNullOrEmpty()){
+            return  SavedAddress("EN", "", "", "")
+        }
         addresses[0].subAdminArea.let {
             subAdminArea = it ?: context.getString(R.string.undefined_place)
         }
