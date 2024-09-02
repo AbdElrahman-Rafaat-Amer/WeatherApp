@@ -48,7 +48,7 @@
                 <!--  Row 1 -->
                 <!--  Column sunrise-->
                 <LinearLayout
-                    android:layout_width="wrap_content"
+                    android:layout_width="0dp"
                     android:layout_height="wrap_content"
                     android:layout_rowWeight="1"
                     android:layout_columnWeight="1"
@@ -57,30 +57,35 @@
                     android:padding="@dimen/_10sdp">
 
                     <ImageView
-                        android:layout_width="@dimen/_35sdp"
-                        android:layout_height="@dimen/_35sdp"
+                        android:layout_width="@dimen/_40sdp"
+                        android:layout_height="@dimen/_40sdp"
+                        android:scaleType="fitXY"
                         android:contentDescription="@string/sunrise"
-                        android:scaleType="centerCrop"
                         android:src="@drawable/ic_sunny" />
 
-                    <TextView
+                    <com.abdelrahman.raafat.climateClue.ui.MarqueeTextView
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:text="@string/sunrise"
                         android:textColor="@color/white"
-                        android:textSize="12sp" />
+                        android:textSize="15sp"
+                        android:textStyle="bold" />
 
                     <TextView
                         android:id="@+id/sun_rise_time_textView_day"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
+                        android:layout_marginTop="5dp"
+                        android:maxLines="2"
+                        android:textAlignment="center"
                         android:textColor="@color/white"
-                        android:textSize="14sp" />
+                        android:textSize="12sp"
+                        tools:text="12 AM" />
                 </LinearLayout>
 
                 <!--  Column sunset-->
                 <LinearLayout
-                    android:layout_width="wrap_content"
+                    android:layout_width="0dp"
                     android:layout_height="wrap_content"
                     android:layout_rowWeight="1"
                     android:layout_columnWeight="1"
@@ -89,31 +94,35 @@
                     android:padding="@dimen/_10sdp">
 
                     <ImageView
-                        android:layout_width="@dimen/_26sdp"
-                        android:layout_height="@dimen/_25sdp"
+                        android:layout_width="@dimen/_40sdp"
+                        android:layout_height="@dimen/_40sdp"
                         android:contentDescription="@string/sunset"
-                        android:scaleType="centerCrop"
                         android:src="@drawable/ic_ocean" />
 
-                    <TextView
+                    <com.abdelrahman.raafat.climateClue.ui.MarqueeTextView
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:layout_marginTop="@dimen/_7sdp"
+
                         android:text="@string/sunset"
                         android:textColor="@color/white"
-                        android:textSize="12sp" />
+                        android:textSize="15sp"
+                        android:textStyle="bold" />
 
                     <TextView
                         android:id="@+id/sun_set_time_textView_day"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
+                        android:layout_marginTop="5dp"
+                        android:maxLines="2"
+                        android:textAlignment="center"
                         android:textColor="@color/white"
-                        android:textSize="14sp" />
+                        android:textSize="12sp"
+                        tools:text="12 AM" />
                 </LinearLayout>
 
                 <!--  Column moon phases-->
                 <LinearLayout
-                    android:layout_width="wrap_content"
+                    android:layout_width="0dp"
                     android:layout_height="wrap_content"
                     android:layout_rowWeight="1"
                     android:layout_columnWeight="1"
@@ -125,27 +134,33 @@
                         android:layout_width="@dimen/_40sdp"
                         android:layout_height="@dimen/_40sdp"
                         android:contentDescription="@string/moon_phase"
+                        android:scaleType="fitXY"
                         android:src="@drawable/ic_moon_phases" />
 
-                    <TextView
+                    <com.abdelrahman.raafat.climateClue.ui.MarqueeTextView
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:text="@string/moon_phase"
                         android:textColor="@color/white"
-                        android:textSize="12sp" />
+                        android:textSize="15sp"
+                        android:textStyle="bold" />
 
                     <TextView
                         android:id="@+id/moon_phase_textView_day"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
+                        android:layout_marginTop="5dp"
+                        android:maxLines="2"
+                        android:textAlignment="center"
                         android:textColor="@color/white"
-                        android:textSize="14sp" />
+                        android:textSize="12sp"
+                        tools:text="12 AM" />
                 </LinearLayout>
 
                 <!--  Row 2 -->
                 <!--  temperature -->
                 <LinearLayout
-                    android:layout_width="wrap_content"
+                    android:layout_width="0dp"
                     android:layout_height="wrap_content"
                     android:layout_rowWeight="1"
                     android:layout_columnWeight="1"
@@ -159,24 +174,29 @@
                         android:contentDescription="@string/temperature"
                         android:src="@drawable/ic_temperature" />
 
-                    <TextView
+                    <com.abdelrahman.raafat.climateClue.ui.MarqueeTextView
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:text="@string/temperature"
                         android:textColor="@color/white"
-                        android:textSize="12sp" />
+                        android:textSize="15sp"
+                        android:textStyle="bold" />
 
                     <TextView
                         android:id="@+id/temperature_textView_day"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
+                        android:layout_marginTop="5dp"
+                        android:maxLines="2"
+                        android:textAlignment="center"
                         android:textColor="@color/white"
-                        android:textSize="14sp" />
+                        android:textSize="12sp"
+                        tools:text="12 AM" />
                 </LinearLayout>
 
                 <!--  weather -->
                 <LinearLayout
-                    android:layout_width="wrap_content"
+                    android:layout_width="0dp"
                     android:layout_height="wrap_content"
                     android:layout_rowWeight="1"
                     android:layout_columnWeight="1"
@@ -188,26 +208,32 @@
                         android:id="@+id/weather_imageView_day"
                         android:layout_width="@dimen/_40sdp"
                         android:layout_height="@dimen/_40sdp"
-                        android:contentDescription="@string/weather_description" />
+                        android:contentDescription="@string/weather_description"
+                        tools:src="@drawable/ic_sunny" />
 
-                    <TextView
+                    <com.abdelrahman.raafat.climateClue.ui.MarqueeTextView
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:text="@string/weather_description"
                         android:textColor="@color/white"
-                        android:textSize="14sp" />
+                        android:textSize="15sp"
+                        android:textStyle="bold" />
 
                     <TextView
                         android:id="@+id/weather_description_textView_day"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
+                        android:layout_marginTop="5dp"
+                        android:maxLines="2"
+                        android:textAlignment="center"
                         android:textColor="@color/white"
-                        android:textSize="14sp" />
+                        android:textSize="12sp"
+                        tools:text="12 AM" />
                 </LinearLayout>
 
                 <!--  rain -->
                 <LinearLayout
-                    android:layout_width="wrap_content"
+                    android:layout_width="0dp"
                     android:layout_height="wrap_content"
                     android:layout_rowWeight="1"
                     android:layout_columnWeight="1"
@@ -221,25 +247,30 @@
                         android:contentDescription="@string/probability_precipitation"
                         android:src="@drawable/ic_rain" />
 
-                    <TextView
+                    <com.abdelrahman.raafat.climateClue.ui.MarqueeTextView
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:text="@string/probability_precipitation"
                         android:textColor="@color/white"
-                        android:textSize="14sp" />
+                        android:textSize="15sp"
+                        android:textStyle="bold" />
 
                     <TextView
                         android:id="@+id/probability_precipitation_textView_day"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
+                        android:layout_marginTop="5dp"
+                        android:maxLines="2"
+                        android:textAlignment="center"
                         android:textColor="@color/white"
-                        android:textSize="14sp" />
+                        android:textSize="12sp"
+                        tools:text="12 AM" />
                 </LinearLayout>
 
                 <!--  Row 3 -->
                 <!--  cloud -->
                 <LinearLayout
-                    android:layout_width="wrap_content"
+                    android:layout_width="0dp"
                     android:layout_height="wrap_content"
                     android:layout_rowWeight="1"
                     android:layout_columnWeight="1"
@@ -253,24 +284,29 @@
                         android:contentDescription="@string/cloud"
                         android:src="@drawable/ic_cloud" />
 
-                    <TextView
+                    <com.abdelrahman.raafat.climateClue.ui.MarqueeTextView
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:text="@string/cloud"
                         android:textColor="@color/white"
-                        android:textSize="12sp" />
+                        android:textSize="15sp"
+                        android:textStyle="bold" />
 
                     <TextView
                         android:id="@+id/cloud_textView_day"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
+                        android:layout_marginTop="5dp"
+                        android:maxLines="2"
+                        android:textAlignment="center"
                         android:textColor="@color/white"
-                        android:textSize="14sp" />
+                        android:textSize="12sp"
+                        tools:text="12 AM" />
                 </LinearLayout>
 
                 <!--  pressure -->
                 <LinearLayout
-                    android:layout_width="wrap_content"
+                    android:layout_width="0dp"
                     android:layout_height="wrap_content"
                     android:layout_rowWeight="1"
                     android:layout_columnWeight="1"
@@ -285,24 +321,29 @@
                         android:scaleType="centerCrop"
                         android:src="@drawable/ic_pressure" />
 
-                    <TextView
+                    <com.abdelrahman.raafat.climateClue.ui.MarqueeTextView
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:text="@string/pressure"
                         android:textColor="@color/white"
-                        android:textSize="12sp" />
+                        android:textSize="15sp"
+                        android:textStyle="bold" />
 
                     <TextView
                         android:id="@+id/pressure_textView_day"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
+                        android:layout_marginTop="5dp"
+                        android:maxLines="2"
+                        android:textAlignment="center"
                         android:textColor="@color/white"
-                        android:textSize="14sp" />
+                        android:textSize="12sp"
+                        tools:text="12 AM" />
                 </LinearLayout>
 
                 <!-- ultraviolet -->
                 <LinearLayout
-                    android:layout_width="wrap_content"
+                    android:layout_width="0dp"
                     android:layout_height="wrap_content"
                     android:layout_rowWeight="1"
                     android:layout_columnWeight="1"
@@ -316,25 +357,30 @@
                         android:contentDescription="@string/ultraviolet"
                         android:src="@drawable/ic_ultraviolet" />
 
-                    <TextView
+                    <com.abdelrahman.raafat.climateClue.ui.MarqueeTextView
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:text="@string/ultraviolet"
                         android:textColor="@color/white"
-                        android:textSize="12sp" />
+                        android:textSize="15sp"
+                        android:textStyle="bold" />
 
                     <TextView
                         android:id="@+id/ultraviolet_textView_day"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
+                        android:layout_marginTop="5dp"
+                        android:maxLines="2"
+                        android:textAlignment="center"
                         android:textColor="@color/white"
-                        android:textSize="14sp" />
+                        android:textSize="12sp"
+                        tools:text="12 AM" />
                 </LinearLayout>
 
                 <!--  Row 4 -->
                 <!--  humidity -->
                 <LinearLayout
-                    android:layout_width="wrap_content"
+                    android:layout_width="0dp"
                     android:layout_height="wrap_content"
                     android:layout_rowWeight="1"
                     android:layout_columnWeight="1"
@@ -348,24 +394,29 @@
                         android:contentDescription="@string/humidity_cardView"
                         android:src="@drawable/ic_humidity" />
 
-                    <TextView
+                    <com.abdelrahman.raafat.climateClue.ui.MarqueeTextView
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:text="@string/humidity_cardView"
                         android:textColor="@color/white"
-                        android:textSize="12sp" />
+                        android:textSize="15sp"
+                        android:textStyle="bold" />
 
                     <TextView
                         android:id="@+id/humidity_textView_day"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
+                        android:layout_marginTop="5dp"
+                        android:maxLines="2"
+                        android:textAlignment="center"
                         android:textColor="@color/white"
-                        android:textSize="14sp" />
+                        android:textSize="12sp"
+                        tools:text="12 AM" />
                 </LinearLayout>
 
                 <!--  wind speed -->
                 <LinearLayout
-                    android:layout_width="wrap_content"
+                    android:layout_width="0dp"
                     android:layout_height="wrap_content"
                     android:layout_rowWeight="1"
                     android:layout_columnWeight="1"
@@ -379,24 +430,29 @@
                         android:contentDescription="@string/wind_speed"
                         android:src="@drawable/ic_wind" />
 
-                    <TextView
+                    <com.abdelrahman.raafat.climateClue.ui.MarqueeTextView
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:text="@string/wind_speed"
                         android:textColor="@color/white"
-                        android:textSize="12sp" />
+                        android:textSize="15sp"
+                        android:textStyle="bold" />
 
                     <TextView
                         android:id="@+id/wind_speed_textView_day"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
+                        android:layout_marginTop="5dp"
+                        android:maxLines="2"
+                        android:textAlignment="center"
                         android:textColor="@color/white"
-                        android:textSize="14sp" />
+                        android:textSize="12sp"
+                        tools:text="12 AM" />
                 </LinearLayout>
 
                 <!--  wind degree -->
                 <LinearLayout
-                    android:layout_width="wrap_content"
+                    android:layout_width="0dp"
                     android:layout_height="wrap_content"
                     android:layout_rowWeight="1"
                     android:layout_columnWeight="1"
@@ -410,19 +466,24 @@
                         android:contentDescription="@string/wind_degree"
                         android:src="@drawable/ic_wind" />
 
-                    <TextView
+                    <com.abdelrahman.raafat.climateClue.ui.MarqueeTextView
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:text="@string/wind_degree"
                         android:textColor="@color/white"
-                        android:textSize="12sp" />
+                        android:textSize="15sp"
+                        android:textStyle="bold" />
 
                     <TextView
                         android:id="@+id/wind_degree_textView_day"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
+                        android:layout_marginTop="5dp"
+                        android:maxLines="2"
+                        android:textAlignment="center"
                         android:textColor="@color/white"
-                        android:textSize="14sp" />
+                        android:textSize="12sp"
+                        tools:text="12 AM" />
                 </LinearLayout>
 
             </GridLayout>
