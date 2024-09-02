@@ -5,18 +5,18 @@ import android.content.res.Resources
 import android.os.Bundle
 import android.util.DisplayMetrics
 import androidx.appcompat.app.AppCompatActivity
-import androidx.navigation.Navigation.findNavController
-import com.abdelrahman.raafat.climateClue.databinding.ActivityMainBinding
-import com.abdelrahman.raafat.climateClue.utils.ConstantsValue
-import com.etebarian.meowbottomnavigation.MeowBottomNavigation
+import androidx.navigation.fragment.NavHostFragment
+import com.abdelrahman.rafaat.weatherapp.databinding.ActivityMainBinding
+import com.abdelrahman.rafaat.weatherapp.utils.ConstantsValue
+import np.com.susanthapa.curved_bottom_navigation.CbnMenuItem
 import java.util.*
 
 class MainActivity : AppCompatActivity() {
-    private val alertID = 0
-    private val favoriteID = 1
-    private val homeID = 2
-    private val timeTableID = 3
-    private val settingID = 4
+    private val alertID = R.id.alert_Fragment
+    private val favoriteID = R.id.favorite_Fragment
+    private val homeID = R.id.home_fragment
+    private val timeTableID = R.id.timetable_fragment
+    private val settingID = R.id.setting_fragment
 
     private lateinit var binding: ActivityMainBinding
 
@@ -32,42 +32,39 @@ class MainActivity : AppCompatActivity() {
     }
 
     private fun initBottomNavigation() {
-        binding.bottomNav.add(MeowBottomNavigation.Model(alertID, R.drawable.ic_alert))
-        binding.bottomNav.add(MeowBottomNavigation.Model(favoriteID, R.drawable.ic_favorite))
-        binding.bottomNav.add(MeowBottomNavigation.Model(homeID, R.drawable.ic_home))
-        binding.bottomNav.add(MeowBottomNavigation.Model(timeTableID, R.drawable.ic_timetable))
-        binding.bottomNav.add(MeowBottomNavigation.Model(settingID, R.drawable.ic_setting))
 
-        binding.bottomNav.setOnClickMenuListener {
-            when (it.id) {
-                homeID -> {
-                    findNavController(binding.navHostFragment)
-                        .navigate(R.id.home_fragment)
-                }
-                favoriteID -> {
-                    findNavController(binding.navHostFragment)
-                        .navigate(R.id.favorite_Fragment)
-                }
-                alertID -> {
-                    findNavController(binding.navHostFragment)
-                        .navigate(R.id.alert_Fragment)
-                }
-                settingID -> {
-                    findNavController(binding.navHostFragment)
-                        .navigate(R.id.setting_fragment)
-                }
-                timeTableID -> {
-                    findNavController(binding.navHostFragment)
-                        .navigate(R.id.timetable_fragment)
-                }
-            }
-        }
+        val navHostFragment = supportFragmentManager.findFragmentById(R.id.nav_host_fragment) as NavHostFragment
+        val navController = navHostFragment.navController
 
-        binding.bottomNav.setOnShowListener {
-
-        }
-
-        binding.bottomNav.show(homeID, true)
+        val menuItems = arrayOf(
+            CbnMenuItem(
+                R.drawable.ic_alert, // the icon
+                R.drawable.avd_notification, // the AVD that will be shown in FAB
+                alertID
+            ),
+            CbnMenuItem(
+                R.drawable.ic_favorite,
+                R.drawable.avd_favorite,
+                favoriteID
+            ),
+            CbnMenuItem(
+                R.drawable.ic_home,
+                R.drawable.avd_home,
+                homeID
+            ),
+            CbnMenuItem(
+                R.drawable.ic_timetable,
+                R.drawable.avd_timetable,
+                timeTableID
+            ),
+            CbnMenuItem(
+                R.drawable.ic_setting,
+                R.drawable.avd_settings,
+                settingID
+            )
+        )
+        binding.bottomNavigation.setMenuItems(menuItems, 2)
+        binding.bottomNavigation.setupWithNavController(navController)
     }
 
     fun restartFragment() {
@@ -83,29 +80,5 @@ class MainActivity : AppCompatActivity() {
         config.setLocale(Locale(localeCode.lowercase(Locale.ROOT)))
         resources.updateConfiguration(config, dm)
         Locale.setDefault(Locale.forLanguageTag(ConstantsValue.language))
-    }
-
-    override fun onBackPressed() {
-        super.onBackPressed()
-        when (findNavController(binding.navHostFragment).currentDestination?.id) {
-            R.id.home_fragment -> {
-                binding.bottomNav.show(homeID, true)
-            }
-            R.id.timetable_fragment -> {
-                binding.bottomNav.show(timeTableID, true)
-            }
-            R.id.setting_fragment -> {
-                binding.bottomNav.show(settingID, true)
-            }
-            R.id.alert_Fragment -> {
-                binding.bottomNav.show(alertID, true)
-            }
-            R.id.favorite_Fragment -> {
-                binding.bottomNav.show(favoriteID, true)
-            }
-            else -> {
-                super.onBackPressed()
-            }
-        }
     }
 }
