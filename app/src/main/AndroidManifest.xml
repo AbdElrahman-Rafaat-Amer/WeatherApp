@@ -20,7 +20,7 @@
         android:label="@string/app_name"
         android:roundIcon="@drawable/ic_app_logo"
         android:supportsRtl="true"
-        android:theme="@style/Theme.WeatherApp"
+        android:theme="@style/ClimateClue.Theme"
         tools:targetApi="31">
        
         <meta-data

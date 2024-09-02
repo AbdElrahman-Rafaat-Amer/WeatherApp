@@ -7,7 +7,7 @@
     android:layout_height="match_parent"
     android:paddingHorizontal="@dimen/_15sdp"
     android:paddingTop="@dimen/_15sdp"
-    tools:context=".favoriteplaces.view.FavoriteFragment">
+    tools:context=".favorite.view.FavoriteFragment">
 
     <com.airbnb.lottie.LottieAnimationView
         android:id="@+id/no_favorite_places"
