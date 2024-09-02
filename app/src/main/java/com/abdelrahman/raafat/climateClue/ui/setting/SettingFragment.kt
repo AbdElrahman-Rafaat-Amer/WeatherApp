@@ -1,5 +1,6 @@
 package com.abdelrahman.raafat.climateClue.ui.setting
 
+import android.content.Intent
 import android.content.res.Resources
 import android.os.Bundle
 import android.view.View
@@ -11,6 +12,7 @@ import com.abdelrahman.raafat.climateClue.MainActivity
 import com.abdelrahman.raafat.climateClue.R
 import com.abdelrahman.raafat.climateClue.utils.ConstantsValue
 import com.abdelrahman.raafat.climateClue.utils.LocaleHelper
+import com.abdelrahman.raafat.contactus.ContactUsActivity
 
 
 class SettingFragment : PreferenceFragmentCompat() {
@@ -56,6 +58,13 @@ class SettingFragment : PreferenceFragmentCompat() {
             ConstantsValue.is24HoursEnabled = isEnabled as Boolean
             true
         }
+
+        val contactUSPreference: Preference? = findPreference("contact_us")
+        contactUSPreference?.setOnPreferenceClickListener {
+            startActivity(Intent(requireActivity(), ContactUsActivity::class.java))
+            true
+        }
+
     }
 
     private fun setLanguage(language: String) {
