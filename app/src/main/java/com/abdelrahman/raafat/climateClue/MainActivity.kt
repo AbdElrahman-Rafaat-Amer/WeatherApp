@@ -1,8 +1,13 @@
 package com.abdelrahman.raafat.climateClue
 
+import android.content.res.Configuration
+import android.content.res.Resources
 import android.os.Bundle
+import android.util.DisplayMetrics
 import androidx.appcompat.app.AppCompatActivity
+import androidx.navigation.Navigation.findNavController
 import androidx.navigation.fragment.NavHostFragment
+import com.abdelrahman.raafat.climateClue.databinding.ActivityMainBinding
 import com.abdelrahman.raafat.climateClue.utils.ConstantsValue
 import com.abdelrahman.raafat.climateClue.utils.LocaleHelper
 import np.com.susanthapa.curved_bottom_navigation.CbnMenuItem
@@ -78,27 +83,5 @@ class MainActivity : AppCompatActivity() {
         resources.updateConfiguration(config, dm)
         Locale.setDefault(Locale.forLanguageTag(ConstantsValue.language))
     }
-    override fun onBackPressed() {
-        super.onBackPressed()
-        when (findNavController(binding.navHostFragment).currentDestination?.id) {
-            R.id.home_fragment -> {
-                binding.bottomNav.show(homeID, true)
-            }
-            R.id.timetable_fragment -> {
-                binding.bottomNav.show(timeTableID, true)
-            }
-            R.id.setting_fragment -> {
-                binding.bottomNav.show(settingID, true)
-            }
-            R.id.alert_Fragment -> {
-                binding.bottomNav.show(alertID, true)
-            }
-            R.id.favorite_Fragment -> {
-                binding.bottomNav.show(favoriteID, true)
-            }
-            else -> {
-                super.onBackPressed()
-            }
-        }
-    }
+
 }
