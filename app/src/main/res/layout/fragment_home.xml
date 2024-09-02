@@ -170,7 +170,7 @@
                     <!--  Row 1 -->
                     <!--  Column 1-->
                     <LinearLayout
-                        android:layout_width="wrap_content"
+                        android:layout_width="0dp"
                         android:layout_height="wrap_content"
                         android:layout_rowWeight="1"
                         android:layout_columnWeight="1"
@@ -185,7 +185,8 @@
                             android:scaleType="centerCrop"
                             android:src="@drawable/ic_sunny" />
 
-                        <TextView
+                        <com.abdelrahman.raafat.climateClue.ui.MarqueeTextView
+                            android:id="@+id/sun_rise_textView"
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
                             android:text="@string/sunrise"
@@ -202,7 +203,7 @@
 
                     <!--  Column 2-->
                     <LinearLayout
-                        android:layout_width="wrap_content"
+                        android:layout_width="0dp"
                         android:layout_height="wrap_content"
                         android:layout_rowWeight="1"
                         android:layout_columnWeight="1"
@@ -217,7 +218,8 @@
                             android:scaleType="centerCrop"
                             android:src="@drawable/ic_ocean" />
 
-                        <TextView
+                        <com.abdelrahman.raafat.climateClue.ui.MarqueeTextView
+                            android:id="@+id/sun_set_textView"
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
                             android:layout_marginTop="@dimen/_7sdp"
@@ -235,7 +237,7 @@
 
                     <!--  Column 3-->
                     <LinearLayout
-                        android:layout_width="wrap_content"
+                        android:layout_width="0dp"
                         android:layout_height="wrap_content"
                         android:layout_rowWeight="1"
                         android:layout_columnWeight="1"
@@ -249,7 +251,8 @@
                             android:contentDescription="@string/humidity_cardView"
                             android:src="@drawable/ic_humidity" />
 
-                        <TextView
+                        <com.abdelrahman.raafat.climateClue.ui.MarqueeTextView
+                            android:id="@+id/humidity"
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
                             android:text="@string/humidity_cardView"
@@ -267,7 +270,7 @@
                     <!--  Row 2 -->
                     <!--  Column 1-->
                     <LinearLayout
-                        android:layout_width="wrap_content"
+                        android:layout_width="0dp"
                         android:layout_height="wrap_content"
                         android:layout_rowWeight="1"
                         android:layout_columnWeight="1"
@@ -281,7 +284,8 @@
                             android:contentDescription="@string/wind_speed"
                             android:src="@drawable/ic_wind" />
 
-                        <TextView
+                        <com.abdelrahman.raafat.climateClue.ui.MarqueeTextView
+                            android:id="@+id/wind_speed"
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
                             android:text="@string/wind_speed"
@@ -298,7 +302,7 @@
 
                     <!--  Column 2-->
                     <LinearLayout
-                        android:layout_width="wrap_content"
+                        android:layout_width="0dp"
                         android:layout_height="wrap_content"
                         android:layout_rowWeight="1"
                         android:layout_columnWeight="1"
@@ -312,7 +316,8 @@
                             android:contentDescription="@string/wind_degree"
                             android:src="@drawable/ic_wind" />
 
-                        <TextView
+                        <com.abdelrahman.raafat.climateClue.ui.MarqueeTextView
+                            android:id="@+id/wind_degree"
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
                             android:text="@string/wind_degree"
@@ -329,7 +334,7 @@
 
                     <!--  Column 3-->
                     <LinearLayout
-                        android:layout_width="wrap_content"
+                        android:layout_width="0dp"
                         android:layout_height="wrap_content"
                         android:layout_rowWeight="1"
                         android:layout_columnWeight="1"
@@ -343,7 +348,8 @@
                             android:contentDescription="@string/cloud"
                             android:src="@drawable/ic_cloud" />
 
-                        <TextView
+                        <com.abdelrahman.raafat.climateClue.ui.MarqueeTextView
+                            android:id="@+id/cloud"
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
                             android:text="@string/cloud"
@@ -361,7 +367,7 @@
                     <!--  Row 3 -->
                     <!--  Column 1-->
                     <LinearLayout
-                        android:layout_width="wrap_content"
+                        android:layout_width="0dp"
                         android:layout_height="wrap_content"
                         android:layout_rowWeight="1"
                         android:layout_columnWeight="1"
@@ -376,7 +382,8 @@
                             android:scaleType="centerCrop"
                             android:src="@drawable/ic_pressure" />
 
-                        <TextView
+                        <com.abdelrahman.raafat.climateClue.ui.MarqueeTextView
+                            android:id="@+id/pressure"
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
                             android:text="@string/pressure"
@@ -393,7 +400,7 @@
 
                     <!--  Column 2-->
                     <LinearLayout
-                        android:layout_width="wrap_content"
+                        android:layout_width="0dp"
                         android:layout_height="wrap_content"
                         android:layout_rowWeight="1"
                         android:layout_columnWeight="1"
@@ -407,7 +414,8 @@
                             android:contentDescription="@string/visibility"
                             android:src="@drawable/ic_visibility" />
 
-                        <TextView
+                        <com.abdelrahman.raafat.climateClue.ui.MarqueeTextView
+                            android:id="@+id/visibility"
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
                             android:text="@string/visibility"
@@ -424,7 +432,7 @@
 
                     <!--  Column 3-->
                     <LinearLayout
-                        android:layout_width="wrap_content"
+                        android:layout_width="0dp"
                         android:layout_height="wrap_content"
                         android:layout_rowWeight="1"
                         android:layout_columnWeight="1"
@@ -438,7 +446,8 @@
                             android:contentDescription="@string/ultraviolet"
                             android:src="@drawable/ic_ultraviolet" />
 
-                        <TextView
+                        <com.abdelrahman.raafat.climateClue.ui.MarqueeTextView
+                            android:id="@+id/ultraviolet"
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
                             android:text="@string/ultraviolet"

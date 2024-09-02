@@ -20,3 +20,9 @@ app/src/main/res/drawable/bg_gradient.xml
 .idea/misc.xml
 .idea/other.xml
 .idea/vcs.xml
+app/google-services.json
+app/.idea/vcs.xml
+app/.idea/other.xml
+app/.idea/misc.xml
+app/.idea/migrations.xml
+app/.idea/gradle.xml
