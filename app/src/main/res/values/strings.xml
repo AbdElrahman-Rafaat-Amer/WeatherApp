@@ -1,5 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
+    <string name="_24h_off">All the time now will be 12H format\\nex:8:27 PM or 8:27 AM</string>
+    <string name="_24h_on">All the time now will be 24H format\\nex:20:27</string>
     <string name="action_settings">Settings</string>
     <string name="add_favorite_place">add favorite place</string>
     <string name="add_new_alert">add new alert</string>
@@ -15,10 +17,14 @@
     <string name="avalanches_alert">Avalanches</string>
     <string name="cancel">Cancel</string>
     <string name="cloud">Cloud</string>
+    <string name="day_name_description">Name of the day</string>
     <string name="day_status">Clear</string>
+    <string name="day_status_description">Weather status of the day</string>
+    <string name="day_temperature_description">Temperature of the day</string>
     <string name="delete_alert">Are you sure you want delete this Alert?</string>
     <string name="delete_place">Are you sure you want delete this Place?</string>
     <string name="enable">Enable</string>
+    <string name="enable_24h">Enable 24 hours</string>
     <string name="enable_gps">Please Enable GPS</string>
     <string name="enable_internet">enable Internet at your first time</string>
     <string name="end_date">1 Nov 202</string>
@@ -31,8 +37,8 @@
     <string name="humidity_cardView">Humidity</string>
     <string name="language">Language</string>
     <string name="language_arabic">العربية</string>
-    <string name="language_english">English</string>
     <string name="language_dutch">Deutsche</string>
+    <string name="language_english">English</string>
     <string name="language_spanish">Español</string>
     <string name="last_quarter">Last Quarter</string>
     <string name="loading_bar">loading bar</string>

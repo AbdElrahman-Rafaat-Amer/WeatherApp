@@ -1,5 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
+    <string name="_24h_off">Ahora todo el tiempo tendrá formato 12H\\nex:8:27 PM o 8:27 AM</string>
+    <string name="_24h_on">Todo el tiempo ahora estará en formato 24H\\nex:20:27</string>
     <string name="action_settings">Ajustes</string>
     <string name="add_favorite_place">añadir lugar favorito</string>
     <string name="add_new_alert">añadir nueva alerta</string>
@@ -15,10 +17,14 @@
     <string name="avalanches_alert">Avalanchas</string>
     <string name="cancel">Cancelar</string>
     <string name="cloud">Nube</string>
+    <string name="day_name_description">Nombre del día</string>
     <string name="day_status">Claro</string>
+    <string name="day_status_description">Estado meteorológico del día</string>
+    <string name="day_temperature_description">Temperatura del día</string>
     <string name="delete_alert">¿Estás seguro de que quieres borrar esta Alerta?</string>
     <string name="delete_place">¿Seguro que quieres borrar este Lugar?</string>
     <string name="enable">Activar</string>
+    <string name="enable_24h">Habilitar 24 horas</string>
     <string name="enable_gps">Por favor, active el GPS</string>
     <string name="enable_internet">activar Internet por primera vez</string>
     <string name="end_date">1 de noviembre de 202</string>
@@ -31,8 +37,8 @@
     <string name="humidity_cardView">Humedad</string>
     <string name="language">Idioma</string>
     <string name="language_arabic">العربية</string>
-    <string name="language_english">English</string>
     <string name="language_dutch">Deutsche</string>
+    <string name="language_english">English</string>
     <string name="language_spanish">Español</string>
     <string name="last_quarter">Último trimestre</string>
     <string name="loading_bar">barra de carga</string>
