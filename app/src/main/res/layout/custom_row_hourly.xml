@@ -1,26 +1,23 @@
 <?xml version="1.0" encoding="utf-8"?>
 <androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="wrap_content"
     android:layout_height="wrap_content"
     android:layout_gravity="center_horizontal"
-    android:layout_margin="@dimen/_5sdp"
     android:background="@drawable/hourly_custom_row_background"
-    android:paddingStart="@dimen/_7sdp"
-    android:paddingTop="@dimen/_10sdp"
-    android:paddingEnd="@dimen/_7sdp"
-    android:paddingBottom="@dimen/_10sdp">
+    android:padding="10dp">
 
     <TextView
         android:id="@+id/hour_hourlyCustomRow"
+        style="@style/ClimateClue.Theme.Text.Small"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="1"
         android:textColor="@color/white"
-        android:textSize="@dimen/_15sdp"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent" />
+        app:layout_constraintTop_toTopOf="parent"
+        tools:text="1" />
 
     <ImageView
         android:id="@+id/status_image_hourlyCustomRow"
@@ -36,14 +33,13 @@
 
     <TextView
         android:id="@+id/temperature_hourlyCustomRow"
+        style="@style/ClimateClue.Theme.Text.Small"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginStart="@dimen/_10sdp"
-        android:layout_marginTop="@dimen/_7sdp"
-        android:text="125"
         android:textColor="@color/white"
-        android:textSize="@dimen/_15sdp"
+        app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/status_image_hourlyCustomRow" />
+        app:layout_constraintTop_toBottomOf="@+id/status_image_hourlyCustomRow"
+        tools:text="125" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>

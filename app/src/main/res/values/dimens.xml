@@ -1,0 +1,11 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <dimen name="vertical_space">6dp</dimen>
+    <dimen name="horizontal_space">15dp</dimen>
+    <dimen name="horizontal_space_small">3dp</dimen>
+
+    //CardView
+    <dimen name="card_corner_radius">20dp</dimen>
+    <dimen name="card_corner_radius_small">10dp</dimen>
+    <dimen name="card_elevation">20dp</dimen>
+</resources>
