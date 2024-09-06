@@ -7,17 +7,17 @@
 
     <fragment
         android:id="@+id/home_fragment"
-        android:name="com.abdelrahman.raafat.climateClue.homeplaces.view.HomeFragment"
+        android:name="com.abdelrahman.raafat.climateClue.ui.home.view.HomeFragment"
         tools:layout="@layout/fragment_home" />
 
     <fragment
         android:id="@+id/timetable_fragment"
-        android:name="com.abdelrahman.raafat.climateClue.timetable.TimeTableFragment"
+        android:name="com.abdelrahman.raafat.climateClue.ui.timetable.TimeTableFragment"
         tools:layout="@layout/fragment_time_table" />
 
     <fragment
         android:id="@+id/setting_fragment"
-        android:name="com.abdelrahman.raafat.climateClue.setting.SettingFragment" />
+        android:name="com.abdelrahman.raafat.climateClue.ui.setting.SettingFragment" />
 
     <fragment
         android:id="@+id/alert_Fragment"
@@ -26,11 +26,11 @@
 
     <fragment
         android:id="@+id/favorite_Fragment"
-        android:name="com.abdelrahman.raafat.climateClue.favoriteplaces.view.FavoriteFragment"
+        android:name="com.abdelrahman.raafat.climateClue.favorite.view.FavoriteFragment"
         tools:layout="@layout/fragment_favorite" />
 
     <fragment
         android:id="@+id/favoriteDetails_Fragment"
-        android:name="com.abdelrahman.raafat.climateClue.favoriteplaces.view.FavoriteDetailsFragment"
+        android:name="com.abdelrahman.raafat.climateClue.favorite.view.FavoriteDetailsFragment"
         tools:layout="@layout/fragment_home" />
 </navigation>

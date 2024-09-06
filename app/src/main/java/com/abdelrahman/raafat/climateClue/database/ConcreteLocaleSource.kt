@@ -22,12 +22,12 @@ class ConcreteLocaleSource(context: Context) : LocaleSource {
         }
     }
 
-    override suspend fun getWeatherFromDataBase(): WeatherResponse {
-        return weatherDao?.getStoredWeather()!!
+    override suspend fun getWeatherFromDataBase(): WeatherResponse? {
+        return weatherDao?.getStoredWeather()
     }
 
-    override suspend fun getStoredPlace(): SavedAddress {
-        return weatherDao?.getStoredPlace(ConstantsValue.language)!!
+    override suspend fun getStoredPlace(): SavedAddress? {
+        return weatherDao?.getStoredPlace(ConstantsValue.language)
     }
 
     override suspend fun insertAddressToRoom(address: SavedAddress) {

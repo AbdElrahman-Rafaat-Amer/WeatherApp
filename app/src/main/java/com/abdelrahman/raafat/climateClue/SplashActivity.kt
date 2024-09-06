@@ -1,5 +1,7 @@
 package com.abdelrahman.raafat.climateClue
 
+import android.animation.Animator.AnimatorListener
+import android.animation.Animator
 import android.annotation.SuppressLint
 import android.content.Intent
 import android.content.res.Resources
@@ -8,10 +10,6 @@ import androidx.appcompat.app.AppCompatActivity
 import androidx.preference.PreferenceManager
 import com.abdelrahman.raafat.climateClue.databinding.ActivitySplashBinding
 import com.abdelrahman.raafat.climateClue.utils.ConstantsValue
-import kotlinx.coroutines.CoroutineScope
-import kotlinx.coroutines.Dispatchers
-import kotlinx.coroutines.delay
-import kotlinx.coroutines.launch
 
 @SuppressLint("CustomSplashScreen")
 class SplashActivity : AppCompatActivity() {
@@ -23,11 +21,18 @@ class SplashActivity : AppCompatActivity() {
         binding = ActivitySplashBinding.inflate(layoutInflater)
         setContentView(binding.root)
         getDefaultValues()
-        CoroutineScope(Dispatchers.Main).launch {
-            delay(4000)
-            startActivity(Intent(this@SplashActivity, InitializationScreenActivity::class.java))
-            finish()
-        }
+        binding.splashAnimation.addAnimatorListener(object : AnimatorListener {
+            override fun onAnimationStart(animation: Animator) {}
+
+            override fun onAnimationEnd(animation: Animator) {
+                startActivity(Intent(this@SplashActivity, InitializationScreenActivity::class.java))
+                finish()
+            }
+
+            override fun onAnimationCancel(animation: Animator) {}
+
+            override fun onAnimationRepeat(animation: Animator) {}
+        })
 
     }
 
@@ -48,6 +53,10 @@ class SplashActivity : AppCompatActivity() {
         
         ConstantsValue.notificationMethod =
             PreferenceManager.getDefaultSharedPreferences(application.applicationContext)
-                .getBoolean("toggle_notification", true)
+                .getBoolean("toggle_notification", false)
+
+        ConstantsValue.is24HoursEnabled =
+            PreferenceManager.getDefaultSharedPreferences(application.applicationContext)
+                .getBoolean("IS_24HOURS_ENABLED", true)
     }
 }

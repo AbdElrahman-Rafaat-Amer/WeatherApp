@@ -1,0 +1,8 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="contact_us">تواصل معنا</string>
+    <string name="get_in_touch">ابقى على تواصل</string>
+    <string name="get_in_touch_desc">إذا كان لديك أي استفسارات، تواصل معنا.\nسنكون سعداء بمساعدتك.</string>
+    <string name="social_media">وسائل التواصل الاجتماعي</string>
+    <string name="web_site">موقعنا</string>
+</resources>
