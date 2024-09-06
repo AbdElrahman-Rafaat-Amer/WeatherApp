@@ -24,4 +24,8 @@ app/google-services.json
 app/.idea/workspace.xml
 app/.idea/misc.xml
 app/.idea/gradle.xml
+app/.idea/vcs.xml
+app/.idea/other.xml
+app/.idea/migrations.xml
 app/release/app-release.aab
+app/src/main/res/values/google_maps_api.xml
