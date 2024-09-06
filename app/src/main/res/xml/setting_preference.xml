@@ -58,7 +58,7 @@
     <PreferenceCategory app:title="@string/contact_us">
         <Preference
             android:key="contact_us"
-            android:icon="@drawable/ic_24_hours"
+            android:icon="@drawable/ic_contact_us"
             app:title="@string/contact_us" />
     </PreferenceCategory>
 

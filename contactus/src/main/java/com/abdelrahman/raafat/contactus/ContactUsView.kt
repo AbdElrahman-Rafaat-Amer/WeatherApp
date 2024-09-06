@@ -86,7 +86,7 @@ fun ContactUsView() {
         val socialItems = listOf(
             SocialItem(
                 stringResource(id = R.string.web_site),
-                R.drawable.ic_telegram,
+                R.drawable.ic_website,
                 stringResource(id = R.string.website_link)
             ),
             SocialItem(
