@@ -55,4 +55,11 @@
             app:title="@string/enable_24h" />
     </PreferenceCategory>
 
+    <PreferenceCategory app:title="@string/contact_us">
+        <Preference
+            android:key="contact_us"
+            android:icon="@drawable/ic_contact_us"
+            app:title="@string/contact_us" />
+    </PreferenceCategory>
+
 </PreferenceScreen>

@@ -27,3 +27,5 @@ app/.idea/misc.xml
 app/.idea/migrations.xml
 app/.idea/gradle.xml
 app/release/app-release.aab
+app/.idea/workspace.xml
+app/src/main/res/values/google_maps_api.xml

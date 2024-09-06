@@ -97,4 +97,5 @@
     <string name="enable_24h">Enable 24 hours</string>
     <string name="_24h_on">All the time now will be 24H format\nex:20:27</string>
     <string name="_24h_off">Alll the time now will be 12H format\nex:8:27 PM or 8:27 AM</string>
+    <string name="contact_us">Contact US</string>
 </resources>
