@@ -21,11 +21,11 @@ app/src/main/res/drawable/bg_gradient.xml
 .idea/other.xml
 .idea/vcs.xml
 app/google-services.json
+app/.idea/workspace.xml
+app/.idea/misc.xml
+app/.idea/gradle.xml
 app/.idea/vcs.xml
 app/.idea/other.xml
-app/.idea/misc.xml
 app/.idea/migrations.xml
-app/.idea/gradle.xml
 app/release/app-release.aab
-app/.idea/workspace.xml
 app/src/main/res/values/google_maps_api.xml
